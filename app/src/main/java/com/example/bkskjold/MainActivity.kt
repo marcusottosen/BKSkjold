@@ -9,6 +9,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.bkskjold.ui.theme.BKSkjoldTheme
+import com.example.bkskjold.ui.view.NewsCard
+import com.example.bkskjold.ui.view.TrainingCard
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +19,7 @@ class MainActivity : ComponentActivity() {
             BKSkjoldTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    DefaultPreview()
                 }
             }
         }
@@ -33,6 +35,7 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     BKSkjoldTheme {
-        Greeting("Android")
+        //NewsCard()
+        TrainingCard()
     }
 }
