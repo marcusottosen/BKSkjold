@@ -28,6 +28,8 @@ import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 
 class TrainingOverviewPage {
+    var showOverviewActive = true
+
     @Preview(showBackground = true)
     @Composable
     fun trainingOverview() {
@@ -60,14 +62,14 @@ class TrainingOverviewPage {
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ){
                     Button(
-                        onClick = { /*TODO*/ },
+                        onClick = { /* TODO */ },
                         colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.top_header)),
 
                         ){
                         Text(text = "Alle Træninger", color = colorResource(id = R.color.main_background))
                     }
                     Button(
-                        onClick = { /*TODO*/ },
+                        onClick = { /* TODO */ },
                         colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.top_header_light)),
                         ) {
                         Text(text = "Tilmeldte Træninger", color = colorResource(id = R.color.main_background))
@@ -75,7 +77,42 @@ class TrainingOverviewPage {
                 }
 
 
-            showOverview()
+            showOverview() /*
+            TODO : Der skal laves en bedre måde at vise kortene på.
+             (brug stadig LazyColumn, men der skal kunne skiftes imellem 2 lister.
+             */
+        }
+    }
+
+    @Composable
+    fun changeContent(){
+    /*
+        TODO : Lav logik, så de relevante kort bliver vist til hver side.
+         (skal logikken være herinde eller et andet sted?)
+         Det kan meget vel være at man slet ikke kan bruge sådanne metode til at håndtere det.
+         Man kan ikke kalde metoder i onClick clickables.
+    */
+        var Overview = LazyColumn{}
+        var SignedUp = LazyColumn{}
+
+        if (showOverviewActive == true) {
+            SignedUp = LazyColumn {
+                // Add 15 items
+                items(3) { index ->
+                    TrainingCard()
+                }
+            }
+            Overview = LazyColumn{}
+            showOverviewActive = false
+        }else {
+            Overview = LazyColumn {
+                // Add 15 items
+                items(15) { index ->
+                    TrainingCard()
+                }
+            }
+            SignedUp = LazyColumn{}
+            showOverviewActive = true
         }
     }
 
@@ -91,11 +128,6 @@ class TrainingOverviewPage {
 
     @Composable
     fun showSignedUp(){
-        LazyColumn {
-            // Add 15 items
-            items(5) { index ->
-                TrainingCard()
-            }
-        }
+
     }
 }
