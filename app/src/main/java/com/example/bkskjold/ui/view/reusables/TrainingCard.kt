@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view
+package com.example.bkskjold.ui.view.reusables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -45,6 +45,7 @@ fun TrainingCard() { //TODO:
                     color = Color.DarkGray
                 )
             }
+
             Column {
                 Row() {
                     Column() {
@@ -77,7 +78,14 @@ fun TrainingCard() { //TODO:
                     }
 
                 }
-                DefaultButton(text = "Deltag", checked = true, onClick = { /*TODO*/ })
+
+                //TODO: Undersøg om man kan bruge DefaultButton her
+                DefaultButton(text = "Deltag",
+                    checked = true,
+                    onClick = { /*TODO*/},
+                    modifier = Modifier.padding(10.dp,2.dp,10.dp,2.dp)
+                )
+
             }
             Box(
                 modifier = Modifier
@@ -86,8 +94,10 @@ fun TrainingCard() { //TODO:
                     .fillMaxHeight()
                     .background(Color.Red)
             ){
-                Text(text = "hello")
+                Text(text = "2")
             }
+
         }
+
     }
 }

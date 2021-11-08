@@ -9,8 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.bkskjold.ui.theme.BKSkjoldTheme
-import com.example.bkskjold.ui.view.NewsCard
-import com.example.bkskjold.ui.view.TrainingCard
+import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

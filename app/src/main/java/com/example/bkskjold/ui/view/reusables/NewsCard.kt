@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view
+package com.example.bkskjold.ui.view.reusables
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
