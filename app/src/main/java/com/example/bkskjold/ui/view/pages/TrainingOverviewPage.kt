@@ -7,4 +7,5 @@ import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 class TrainingOverviewPage {
     //Training overView Page - first merge
+    //test
 }
