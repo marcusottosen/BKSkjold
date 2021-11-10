@@ -97,15 +97,17 @@ class TrainingOverviewPage {
                 showSignedUp()
             }
              /*
-            TODO : Appen bør ikke vise en lazy column, som hardcodes på denne måde
-                Ideelt bør vi nok hente en liste fra modellen(data) og fylde den ind
-                i en LazyColumn
+            TODO : This is a simplistic way of displaying an example view
+                   Eventually this shoould get the viewmodel from TrainingOverviewViewModel
+                   which in turn fetches data from BookingData in model.
+
              */
         }
     }
 
 
-
+/* TODO These clases should eventually be either removed or altered,
+    to fetch the ViewModel with the correct data */
     @Composable
     fun showOverview(){
         LazyColumn {
