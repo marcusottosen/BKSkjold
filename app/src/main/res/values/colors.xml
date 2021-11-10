@@ -13,6 +13,7 @@
     <color name="main_background">#FFFFFFFF</color>
     <color name="top_header">#FF6A89CC</color>
     <color name="top_header_light">#FF9CB9F7</color>
+    <color name="default_button_background">#FFB4E0EB</color>
 
 
     <!-- default android studios colors

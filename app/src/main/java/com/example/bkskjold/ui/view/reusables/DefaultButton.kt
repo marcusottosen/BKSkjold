@@ -12,7 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import com.example.bkskjold.R
 
 @Composable
 fun DefaultButton (
@@ -26,11 +28,12 @@ fun DefaultButton (
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Button(
-            modifier = Modifier.padding(vertical = 4.dp).
-            fillMaxWidth(),
+            modifier = Modifier
+                .padding(vertical = 4.dp)
+                .fillMaxWidth(),
             onClick = {onClick},
             shape = RoundedCornerShape(12.dp),
-            colors= ButtonDefaults.buttonColors(backgroundColor = Color(180, 224, 235))
+            colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.default_button_background))
         ) {
             Text(text)
         }
