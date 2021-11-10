@@ -6,6 +6,7 @@ import androidx.compose.ui.*
 import androidx.compose.ui.unit.*
 
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,6 +15,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.graphics.Color
@@ -28,11 +31,12 @@ import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 
 class TrainingOverviewPage {
-    var showOverviewActive = true
-
     @Preview(showBackground = true)
     @Composable
     fun trainingOverview() {
+        val shouldShowDialog = remember { mutableStateOf(true) }
+        val selected = remember { mutableStateOf( true) }
+
         Column (verticalArrangement = Arrangement.spacedBy(30.dp)){
             Box(
                 modifier = Modifier
@@ -61,60 +65,46 @@ class TrainingOverviewPage {
                     ,
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ){
-                    Button(
-                        onClick = { /* TODO */ },
-                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.top_header)),
+                    val overViewButton = Button(
+                        onClick = {
+                            shouldShowDialog.value = true
+                            selected.value = !selected.value
+                                  },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor =
+                                if(selected.value) colorResource(R.color.top_header)
+                                else colorResource(R.color.top_header_light)),
 
                         ){
                         Text(text = "Alle Træninger", color = colorResource(id = R.color.main_background))
                     }
-                    Button(
-                        onClick = { /* TODO */ },
-                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.top_header_light)),
+                    val signedUpButton = Button(
+                        onClick = { 
+                            shouldShowDialog.value = false 
+                            selected.value = !selected.value
+                                  },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor =
+                                if(selected.value) colorResource(R.color.top_header_light)
+                                else colorResource(R.color.top_header)),
                         ) {
                         Text(text = "Tilmeldte Træninger", color = colorResource(id = R.color.main_background))
                     }
                 }
-
-
-            showOverview() /*
-            TODO : Der skal laves en bedre måde at vise kortene på.
-             (brug stadig LazyColumn, men der skal kunne skiftes imellem 2 lister.
+            if(shouldShowDialog.value){
+                showOverview()
+            }else{
+                showSignedUp()
+            }
+             /*
+            TODO : Appen bør ikke vise en lazy column, som hardcodes på denne måde
+                Ideelt bør vi nok hente en liste fra modellen(data) og fylde den ind
+                i en LazyColumn
              */
         }
     }
 
-    @Composable
-    fun changeContent(){
-    /*
-        TODO : Lav logik, så de relevante kort bliver vist til hver side.
-         (skal logikken være herinde eller et andet sted?)
-         Det kan meget vel være at man slet ikke kan bruge sådanne metode til at håndtere det.
-         Man kan ikke kalde metoder i onClick clickables.
-    */
-        var Overview = LazyColumn{}
-        var SignedUp = LazyColumn{}
 
-        if (showOverviewActive == true) {
-            SignedUp = LazyColumn {
-                // Add 15 items
-                items(3) { index ->
-                    TrainingCard()
-                }
-            }
-            Overview = LazyColumn{}
-            showOverviewActive = false
-        }else {
-            Overview = LazyColumn {
-                // Add 15 items
-                items(15) { index ->
-                    TrainingCard()
-                }
-            }
-            SignedUp = LazyColumn{}
-            showOverviewActive = true
-        }
-    }
 
     @Composable
     fun showOverview(){
@@ -125,9 +115,13 @@ class TrainingOverviewPage {
             }
         }
     }
-
     @Composable
     fun showSignedUp(){
-
+        LazyColumn {
+            // Add 15 items
+            items(3) { index ->
+                TrainingCard()
+            }
+        }
     }
 }
