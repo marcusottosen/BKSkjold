@@ -35,6 +35,6 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     BKSkjoldTheme {
         //NewsCard()
-        TrainingCard()
+        //TrainingCard()
     }
 }

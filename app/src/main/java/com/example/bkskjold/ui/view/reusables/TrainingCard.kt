@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TrainingCard() { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
+fun TrainingCard(time: String, daysTillTraining: String, date: String, participants: String, location: String, league: String, trainer: String, button: String) { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
     Card(
         modifier = Modifier
             .padding(30.dp, 10.dp, 30.dp, 20.dp)
@@ -26,20 +26,20 @@ fun TrainingCard() { //TODO Gør så der kan skiftes mellem deltager/deltager ik
         Row {
             Column {
                 Text( //Time
-                    text = "17:47",
+                    text = time,
                     fontWeight = FontWeight.Bold,
                     fontSize = 24.sp,
                     modifier = Modifier.padding(10.dp, 10.dp, 5.dp)
                 )
                 //Spacer(modifier = Modifier.height(8.dp))
                 Text( //Days to Training
-                    text = "I dag",
+                    text = daysTillTraining,
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                     fontSize = 10.sp,
                     color = Color.DarkGray
                 )
                 Text( //Date
-                    text = "25 Oktober 2021",
+                    text = date,
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                     fontSize = 10.sp,
                     color = Color.DarkGray
@@ -61,13 +61,13 @@ fun TrainingCard() { //TODO Gør så der kan skiftes mellem deltager/deltager ik
                 Row {
                     Column() {
                         Text(
-                            text = "8/12",
+                            text = participants,
                             modifier = Modifier.padding(10.dp, 10.dp, 0.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
                         )
                         Text(
-                            text = "Bane C",
+                            text = location,
                             modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
@@ -75,13 +75,13 @@ fun TrainingCard() { //TODO Gør så der kan skiftes mellem deltager/deltager ik
                     }
                     Column() {
                         Text(
-                            text = "U12",
+                            text = league,
                             modifier = Modifier.padding(10.dp, 10.dp, 10.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
                         )
                         Text(
-                            text = "Træner: Ekkart",
+                            text = trainer,
                             modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
@@ -90,7 +90,7 @@ fun TrainingCard() { //TODO Gør så der kan skiftes mellem deltager/deltager ik
 
                 }
 
-                DefaultButton(text = "Deltag",
+                DefaultButton(text = button,
                     checked = true,
                     onClick = { /*TODO*/},
                     modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)
