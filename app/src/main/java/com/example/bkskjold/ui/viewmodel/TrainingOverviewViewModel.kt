@@ -28,7 +28,7 @@ class TrainingOverviewViewModel {
     fun getOverview(){
         LazyColumn {
             // Add 15 items
-            items(15) { index ->
+            items(15) { i ->
                 TrainingCard(time, daysTillTraining, date, participants, location, league, trainer, button)
             }
         }
@@ -37,7 +37,7 @@ class TrainingOverviewViewModel {
     fun getSignedUp(){
         LazyColumn {
             // Add 15 items
-            items(3) { index ->
+            items(3) { i ->
                 TrainingCard(time, daysTillTraining, date, participants, location, league, trainer, button)
             }
         }
