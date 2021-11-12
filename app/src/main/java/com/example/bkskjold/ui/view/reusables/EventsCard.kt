@@ -13,9 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bkskjold.R
 
-@Preview
+
 @Composable
-fun EventsCard() {
+fun EventsCard(header: String, description: String, time: String, location: String) {
     Card(
         modifier = Modifier
             .padding(15.dp),
@@ -28,13 +28,13 @@ fun EventsCard() {
                 .padding(20.dp, 15.dp, 20.dp, 15.dp)
         ) {
             Text(
-                text = "Hygge i klubhuset",
+                text = header,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(0.dp,0.dp,0.dp, 15.dp)
             )
             //Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene.",
+                text = description,
                 modifier = Modifier.padding(0.dp,0.dp,0.dp, 5.dp),
                 color = Color.DarkGray
             )
@@ -45,8 +45,8 @@ fun EventsCard() {
                 ,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Text(text = "29/09 kl. 13:00", fontWeight = FontWeight.Bold)
-                Text(text = "Klubhuset", fontWeight = FontWeight.Bold)
+                Text(text = time, fontWeight = FontWeight.Bold)
+                Text(text = location, fontWeight = FontWeight.Bold)
             }
         }
     }

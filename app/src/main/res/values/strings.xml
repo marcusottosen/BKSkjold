@@ -3,4 +3,7 @@
 
     <!-- Headers -->
     <string name="TrainingOverviewPageHeader">Træninger</string>
+    <string name="EventOverviewPageHeader">Events</string>
+
+
 </resources>
