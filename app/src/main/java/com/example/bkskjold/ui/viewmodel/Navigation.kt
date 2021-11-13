@@ -18,7 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
-import com.example.bkskjold.ui.view.reusables.TrainingCard
+import com.example.bkskjold.ui.view.pages.TrainingOverviewPage
 
 /**
  * Inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
@@ -31,7 +31,7 @@ fun Navigation(navController: NavHostController) {
             DefaultScreen()
         }
         composable(NavigationItem.Trainings.route) {
-            TrainingCard()
+            TrainingOverviewPage()
         }
         composable(NavigationItem.Events.route) {
             DefaultScreen()
@@ -51,7 +51,7 @@ fun BottomNavigationBar(navController: NavController) {
         NavigationItem.Profile
     )
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.white),
+        backgroundColor = colorResource(id = R.color.main_background),
         elevation = 12.dp
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
