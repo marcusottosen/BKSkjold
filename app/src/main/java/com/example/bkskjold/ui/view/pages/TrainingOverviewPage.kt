@@ -38,9 +38,7 @@ import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ){
                     val overViewButton = Button(
-                        onClick = {
-                            shouldShowOverview.value = true
-                                  },
+                        onClick = { shouldShowOverview.value = true },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor =
                                 if(shouldShowOverview.value) colorResource(R.color.top_header)
@@ -50,9 +48,7 @@ import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
                         Text(text = "Alle Træninger", color = colorResource(id = R.color.main_background))
                     }
                     val signedUpButton = Button(
-                        onClick = {
-                            shouldShowOverview.value = false
-                                  },
+                        onClick = { shouldShowOverview.value = false },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor =
                                 if(shouldShowOverview.value) colorResource(R.color.top_header_light)

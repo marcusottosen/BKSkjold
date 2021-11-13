@@ -2,17 +2,17 @@ package com.example.bkskjold.data.model
 
 class BookingData {
     var training1 = listOf("21:00", "I dag", "14/11/2021", "8/12", "Bane C", "Senior", "Træner: Ekkart", "Deltag")
-    var training2 = listOf("17:00", "Om 1 dag", "15/11/2021", "6/12", "Bane C", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
-    var training3 = listOf("17:00", "Om 2 dage", "16/11/2021", "11/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
+    var training2 = listOf("17:00", "Om 1 dag", "15/11/2021", "6/12", "Bane A", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
+    var training3 = listOf("17:00", "Om 2 dage", "16/11/2021", "11/12", "Bane B", "U20", "Træner: Ekkart", "Deltag")
     var training4 = listOf("17:00", "Om 3 dage", "17/11/2021", "12/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
-    var training5 = listOf("17:00", "Om 4 dage", "18/11/2021", "4/12", "Bane C", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
-    var training6 = listOf("17:00", "Om 5 dage", "19/11/2021", "8/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
+    var training5 = listOf("18:00", "Om 4 dage", "18/11/2021", "4/12", "Bane C", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
+    var training6 = listOf("17:00", "Om 5 dage", "19/11/2021", "8/12", "Bane D", "U20", "Træner: Ekkart", "Deltag")
     var training7 = listOf("17:00", "Om 6 dage", "20/11/2021", "8/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
-    var training8 = listOf("17:00", "Om 7 dage", "21/11/2021", "8/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
+    var training8 = listOf("17:00", "Om 7 dage", "21/11/2021", "8/12", "Bane F", "U20", "Træner: Ekkart", "Deltag")
     var training9 = listOf("17:00", "Om 8 dage", "22/11/2021", "16/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
-    var training10 = listOf("17:00", "Om 9 dage", "23/11/2021", "8/12", "Bane C", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
+    var training10 = listOf("16:30", "Om 9 dage", "23/11/2021", "8/12", "Bane A", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
     var training11 = listOf("17:00", "Om 10 dage", "24/11/2021", "8/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
-    var training12 = listOf("17:00", "Om 11 dage", "25/11/2021", "8/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
+    var training12 = listOf("17:00", "Om 11 dage", "25/11/2021", "8/12", "Bane D", "U20", "Træner: Ekkart", "Deltag")
 
     fun getAllTraining(): List<List<String>> {
         /* TODO This should eventually fetch the data from a database.
@@ -24,18 +24,18 @@ class BookingData {
         return allTrainings
     }
 
-    fun getSignedUpTrainings(): List<List<String>> { //
+    fun getSignedUpTrainings(): MutableList<List<String>>? { //
     /* TODO This should eventually fetch the data from a database.
             Data should include all the current trainings a user has signed up for.
             This method should probably take a parameter, to find the correct user and data */
         var allTrainings = getAllTraining()
-        var signedUpTrainings: List<List<String>> = emptyList()
+        var signedUpTrainings: MutableList<List<String>> = mutableListOf()
 
         for (i in allTrainings.indices){
             var current = allTrainings[i]
 
             if(current[7] == "Afmeld Deltagelse"){
-                signedUpTrainings = listOf(signedUpTrainings + current) as List<List<String>>
+                signedUpTrainings?.add(current)
             }
         }
         return signedUpTrainings

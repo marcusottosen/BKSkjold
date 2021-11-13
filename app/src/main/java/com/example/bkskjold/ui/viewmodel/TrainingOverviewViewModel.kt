@@ -57,20 +57,22 @@ class TrainingOverviewViewModel {
         val signedUpTrainings = BookingData().getSignedUpTrainings()
 
         LazyColumn {
-            items(signedUpTrainings.size) { i ->
-                //TrainingCard(time, daysTillTraining, date, participants, location, league, trainer, button, colorResource(color))
-                TrainingCard( //create the cards
-                    time = signedUpTrainings[i][0],
-                    daysTillTraining = signedUpTrainings[i][1],
-                    date = signedUpTrainings[i][2],
-                    participants = signedUpTrainings[i][3],
-                    location = signedUpTrainings[i][4],
-                    league = signedUpTrainings[i][5],
-                    trainer = signedUpTrainings[i][6],
-                    button = signedUpTrainings[i][7],
-                    color = colorResource(id = getColor(signedUpTrainings, i))
-                )
-            }
+            if (signedUpTrainings != null) {
+                items(signedUpTrainings.size) { i ->
+                    //TrainingCard(time, daysTillTraining, date, participants, location, league, trainer, button, colorResource(color))
+                    TrainingCard( //create the cards
+                        time = signedUpTrainings[i][0],
+                        daysTillTraining = signedUpTrainings[i][1],
+                        date = signedUpTrainings[i][2],
+                        participants = signedUpTrainings[i][3],
+                        location = signedUpTrainings[i][4],
+                        league = signedUpTrainings[i][5],
+                        trainer = signedUpTrainings[i][6],
+                        button = signedUpTrainings[i][7],
+                        color = colorResource(id = getColor(signedUpTrainings, i))
+                    )
+                }
+            }/* TODO handle null exception */
         }
     }
 }
