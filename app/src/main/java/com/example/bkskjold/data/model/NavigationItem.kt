@@ -1,5 +1,8 @@
 package com.example.bkskjold.data.model
-
+import android.graphics.drawable.Icon
+import androidx.compose.foundation.layout.Row
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 import com.example.bkskjold.R
 
 sealed class NavigationItem(var route: String, var icon: Int, var title: String) {
@@ -8,3 +11,5 @@ sealed class NavigationItem(var route: String, var icon: Int, var title: String)
     object Events : NavigationItem("Events", R.drawable.icon_events, "Events")
     object Profile : NavigationItem("Profil", R.drawable.icon_profile, "Profil")
 }
+
+

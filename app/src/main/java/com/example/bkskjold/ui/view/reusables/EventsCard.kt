@@ -49,11 +49,11 @@ fun EventsCard(header: String, description: String, time: String, location: Stri
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Row() { //time
-                    Image(painter = painterResource(id = R.drawable.calendar_icon), contentDescription = null)
+                    Image(painter = painterResource(id = R.drawable.icon_calendar), contentDescription = null)
                     Text(text = time, fontWeight = FontWeight.Bold, modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
                 }
                 Row() { //location
-                    Image(painter = painterResource(id = R.drawable.location_icon), contentDescription = null)
+                    Image(painter = painterResource(id = R.drawable.icon_location), contentDescription = null)
                     Text(text = location, fontWeight = FontWeight.Bold, modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
                 }
             }
