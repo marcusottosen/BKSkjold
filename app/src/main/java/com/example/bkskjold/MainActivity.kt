@@ -58,7 +58,7 @@ fun DefaultScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.main_background))
+            .background(colorResource(id = R.color.notParticipating))
             .wrapContentSize(Alignment.Center)
     ) {
         Text(

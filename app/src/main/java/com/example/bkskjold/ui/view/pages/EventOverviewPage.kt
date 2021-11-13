@@ -12,7 +12,7 @@ import com.example.bkskjold.ui.view.reusables.DefaultHeader
 import com.example.bkskjold.ui.viewmodel.EventOverviewViewModel
 
 
-class EventOverviewPage {
+//class EventOverviewPage {
     @Preview
     @Composable
     fun eventOverview(){
@@ -27,4 +27,4 @@ class EventOverviewPage {
         }
 
         }
-    }
+//    }

@@ -21,7 +21,7 @@ import com.example.bkskjold.ui.view.reusables.DefaultHeader
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
 
-class TrainingOverviewPage {
+//class TrainingOverviewPage {
     @Preview(showBackground = true)
     @Composable
     fun trainingOverview() {
@@ -68,4 +68,4 @@ class TrainingOverviewPage {
             }
         }
     }
-}
+//}
