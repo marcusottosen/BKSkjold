@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TrainingCard(time: String, daysTillTraining: String, date: String, participants: String, location: String, league: String, trainer: String, button: String) { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
+fun TrainingCard(time: String, daysTillTraining: String, date: String, participants: String, location: String, league: String, trainer: String, button: String, color: Color) { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
     Card(
         modifier = Modifier
             .padding(30.dp, 10.dp, 30.dp, 20.dp)
@@ -106,7 +106,7 @@ fun TrainingCard(time: String, daysTillTraining: String, date: String, participa
                     .padding(0.dp, 0.dp, 0.dp, 0.dp)
                     .width(20.dp)
                     .fillMaxHeight()
-                    .background(Color(247, 172, 155))
+                    .background(color)
             )
         }
     }

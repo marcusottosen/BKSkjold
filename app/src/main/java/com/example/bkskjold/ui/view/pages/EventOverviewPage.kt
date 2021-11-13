@@ -22,7 +22,7 @@ class EventOverviewPage {
         )
         {
             DefaultHeader(header = stringResource(id = R.string.EventOverviewPageHeader))
-            EventOverviewViewModel().getEventsList()
+            EventOverviewViewModel().getEventsView()
 
         }
 

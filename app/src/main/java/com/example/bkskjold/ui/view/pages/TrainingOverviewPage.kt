@@ -62,9 +62,9 @@ class TrainingOverviewPage {
                     }
                 }
             if(shouldShowOverview.value){
-                viewModel.getOverview()
+                viewModel.getOverviewView()
             }else {
-                viewModel.getSignedUp()
+                viewModel.getSignedUpView()
             }
         }
     }

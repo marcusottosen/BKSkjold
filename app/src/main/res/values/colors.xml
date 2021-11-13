@@ -16,6 +16,24 @@
     <color name="default_button_background">#FFB4E0EB</color>
 
 
+    <!-- TrainingOverviewPage -->
+    <color name="participating">#FFD4F2BF</color>
+    <color name="notParticipating">#FFF7AC9B</color>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- default android studios colors
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
