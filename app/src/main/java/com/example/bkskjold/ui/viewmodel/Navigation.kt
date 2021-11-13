@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -18,6 +19,10 @@ import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.ui.view.reusables.TrainingCard
+
+/**
+ * Inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
+ */
 
 @Composable
 fun Navigation(navController: NavHostController) {
@@ -46,8 +51,8 @@ fun BottomNavigationBar(navController: NavController) {
         NavigationItem.Profile
     )
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.purple_700),
-        contentColor = Color.White
+        backgroundColor = colorResource(id = R.color.white),
+        elevation = 12.dp
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -55,8 +60,8 @@ fun BottomNavigationBar(navController: NavController) {
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                 label = { Text(text = item.title) },
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.White.copy(0.4f),
+                selectedContentColor = Color.Black,
+                unselectedContentColor = Color.Black.copy(0.4f),
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {
