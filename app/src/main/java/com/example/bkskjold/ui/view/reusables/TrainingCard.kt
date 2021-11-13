@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +20,6 @@ fun TrainingCard(time: String, daysTillTraining: String, date: String, participa
             .padding(30.dp, 10.dp, 30.dp, 20.dp)
             .height(85.dp)
             .fillMaxWidth(),
-        //backgroundColor = Color(212, 242, 191),
         shape = RoundedCornerShape(9.dp),
         elevation = 12.dp
     ) {

@@ -3,38 +3,71 @@ package com.example.bkskjold
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.bkskjold.ui.theme.BKSkjoldTheme
-import com.example.bkskjold.ui.view.reusables.TrainingCard
+import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.*
+import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
+import com.example.bkskjold.ui.viewmodel.Navigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            BKSkjoldTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    DefaultPreview()
-                }
-            }
+            MainScreen()
         }
     }
 }
 
+
+
+
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MainScreen() {
+    val navController = rememberNavController()
+    Scaffold(
+        bottomBar = { BottomNavigationBar(navController) }
+    ) {
+        Navigation(navController = navController)
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    BKSkjoldTheme {
-        //NewsCard()
-        //TrainingCard()
+fun MainScreenPreview() {
+    MainScreen()
+    //NewsCard()
+    //TrainingCard()
+}
+
+
+//TODO fjern når siderne er blevet oprettet!
+@Composable
+fun DefaultScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.purple_700))
+            .wrapContentSize(Alignment.Center)
+    ) {
+        Text(
+            text = "Todo",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            textAlign = TextAlign.Center,
+            fontSize = 25.sp
+        )
     }
 }
