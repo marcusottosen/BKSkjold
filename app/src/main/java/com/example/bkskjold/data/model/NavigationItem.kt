@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.viewmodel
+package com.example.bkskjold.data.model
 
 import com.example.bkskjold.R
 
