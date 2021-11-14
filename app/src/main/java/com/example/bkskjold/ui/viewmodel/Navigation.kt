@@ -18,8 +18,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
+import com.example.bkskjold.ui.view.pages.HomeScreenPage
 import com.example.bkskjold.ui.view.pages.eventOverview
 import com.example.bkskjold.ui.view.pages.trainingOverview
+
 
 /**
  * Inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
@@ -29,7 +31,7 @@ import com.example.bkskjold.ui.view.pages.trainingOverview
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
-            DefaultScreen()
+            HomeScreenPage()
         }
         composable(NavigationItem.Trainings.route) {
             trainingOverview()
