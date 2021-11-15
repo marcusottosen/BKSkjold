@@ -32,7 +32,7 @@ fun NextTrainingCard(header: String, description: String, date: String, time: St
         shape = RoundedCornerShape(22.dp),
     ) {
         Image(
-            painter = painterResource(id = R.drawable.image_nexttrainingcard),
+            painter = painterResource(id = R.drawable.img_nexttrainingcard),
             contentDescription = null,
             contentScale = ContentScale.Fit,
             modifier = Modifier.alpha(0.6F).padding(190.dp,10.dp,0.dp,0.dp).width(160.dp),
