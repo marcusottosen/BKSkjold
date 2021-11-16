@@ -20,6 +20,7 @@ import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.ui.view.pages.HomeScreenPage
 import com.example.bkskjold.ui.view.pages.eventOverview
+import com.example.bkskjold.ui.view.pages.profileOverview
 import com.example.bkskjold.ui.view.pages.trainingOverview
 
 
@@ -40,7 +41,9 @@ fun Navigation(navController: NavHostController) {
             eventOverview()
         }
         composable(NavigationItem.Profile.route) {
-            DefaultScreen()
+            profileOverview()
+
+
         }
     }
 }
