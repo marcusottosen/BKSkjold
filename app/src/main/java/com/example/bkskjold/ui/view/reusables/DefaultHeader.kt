@@ -11,16 +11,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.material.Typography
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.BlendMode.Companion.Color as Color
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -86,9 +87,13 @@ fun DefaultProfileHeader(){
         Image(painter = painterResource(id = R.drawable.profile_picture),
             contentDescription = null,
             modifier = Modifier
-                .padding(0.dp,10.dp,0.dp,0.dp)
+                .padding(0.dp, 2.dp, 0.dp, 0.dp)
                 .size(100.dp)
-                .border(4.dp, color = androidx.compose.ui.graphics.Color.Black, shape = CircleShape, )
+                .border(
+                    4.dp,
+                    color = androidx.compose.ui.graphics.Color.Black,
+                    shape = CircleShape,
+                )
                 .align(Alignment.TopCenter)
                 .clip(CircleShape)
 
@@ -99,7 +104,7 @@ fun DefaultProfileHeader(){
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(0.dp, 105.dp, 0.dp, 0.dp),
+                .padding(0.dp, 100.dp, 0.dp, 0.dp),
             text = ( ProfileInfo().testProfile[5] + ", " +
             ProfileInfo().testProfile[4] + "\n " +
             ProfileInfo().testProfile[6] ),
@@ -110,9 +115,7 @@ fun DefaultProfileHeader(){
         )
 
 TextButton(
-    onClick = {/* TODO */
-
-    },
+    onClick = {/* TODO */ },
     modifier = Modifier
         .padding(0.dp, 15.dp, 10.dp, 0.dp)
         .align(Alignment.TopEnd)) {
@@ -121,6 +124,28 @@ TextButton(
                 color = androidx.compose.ui.graphics.Color.Black)
 
         }
+        
+IconButton(onClick = { /*TODO*/ },
+modifier = Modifier
+    .align(Alignment.BottomStart)
+    .padding(50.dp,0.dp,0.dp,20.dp)) {
+    Icon(painterResource(id = R.drawable.icon_settings),
+        contentDescription = null,
+        )}
+
+    IconButton(onClick = { /*TODO*/ },
+modifier = Modifier
+    .align(Alignment.BottomEnd)
+    .padding(0.dp,0.dp,50.dp,20.dp)) {
+    Icon(painterResource(id = R.drawable.icon_edit_pencil),
+        contentDescription = null,
+        )
+}
+    
+         
+    
+        
+
 
            /* text = "Log ud",
     fontSize = 15.sp,
@@ -143,5 +168,5 @@ TextButton(
                 )*/
 
 
-        }
-    }
+
+    }}
