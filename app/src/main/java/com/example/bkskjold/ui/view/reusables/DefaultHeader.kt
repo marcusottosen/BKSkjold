@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -17,6 +18,7 @@ import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.BlendMode.Companion.Color as Color
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.colorResource
@@ -27,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.ProfileInfo
@@ -62,6 +65,8 @@ fun DefaultHeader(header: String){
         )
     }
 }
+
+
 @Composable
 fun DefaultProfileHeader(){
     //var color = colorResource(id = R.color.main_background)
@@ -78,31 +83,36 @@ fun DefaultProfileHeader(){
         )*/
     ) {
         Image(painter = painterResource(id = R.drawable.header_background), contentDescription = null)
-        Image(painter = painterResource(id = R.drawable.icon_profile),
+        Image(painter = painterResource(id = R.drawable.profile_picture),
             contentDescription = null,
             modifier = Modifier
-                .size(70.dp)
-                .border(4.dp, color = androidx.compose.ui.graphics.Color.Black, shape = Shapes.small, )
+                .padding(0.dp,10.dp,0.dp,0.dp)
+                .size(100.dp)
+                .border(4.dp, color = androidx.compose.ui.graphics.Color.Black, shape = CircleShape, )
                 .align(Alignment.TopCenter)
-                .padding(0.dp,0.dp,0.dp,0.dp)
+                .clip(CircleShape)
+
+
 
 
         )
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(0.dp, 90.dp, 20.dp, 0.dp),
+                .padding(0.dp, 105.dp, 0.dp, 0.dp),
             text = ( ProfileInfo().testProfile[5] + ", " +
             ProfileInfo().testProfile[4] + "\n " +
             ProfileInfo().testProfile[6] ),
-            fontSize = 25.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             color = colorResource(R.color.cardview_dark_background)
         )
 
 TextButton(
-    onClick = { /* TODO */},
+    onClick = {/* TODO */
+
+    },
     modifier = Modifier
         .padding(0.dp, 15.dp, 10.dp, 0.dp)
         .align(Alignment.TopEnd)) {
