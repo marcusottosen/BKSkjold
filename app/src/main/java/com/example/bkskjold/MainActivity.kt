@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.*
+import com.example.bkskjold.ui.view.pages.LoginPage
 import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
 import com.example.bkskjold.ui.viewmodel.Navigation
 
@@ -25,10 +26,45 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            // todo MainScreen()
+            Login()
+
         }
     }
+    @Composable
+    fun Login(){
+        LoginPage()
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
