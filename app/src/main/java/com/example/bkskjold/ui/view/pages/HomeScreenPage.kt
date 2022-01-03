@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.app.NotificationCompat.getColor
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.NewsData
 import com.example.bkskjold.ui.view.reusables.DefaultHeader
 import com.example.bkskjold.ui.view.reusables.HomePageCategories
 import com.example.bkskjold.ui.view.reusables.NewsCard
@@ -54,7 +55,7 @@ fun HomeScreenPage() {
                     )
                 )*/
                 ) {
-                    Column(Modifier.padding(start = 21.dp, top = 36.dp)) {
+                    Column(Modifier.padding(start = 15.dp, top = 36.dp)) {
                         Text(//Card title
                             text = "NemSport",
                             fontSize = 36.sp,
@@ -91,13 +92,10 @@ fun HomeScreenPage() {
         }
 
 
-            //Spacer(modifier = Modifier.height(200.dp))
-
-
         item {
             Row(modifier = Modifier
                 .fillMaxWidth()
-                .padding(21.dp, 36.dp, 21.dp, 0.dp),
+                .padding(15.dp, 35.dp, 15.dp, 0.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 HomePageCategories(R.drawable.icon_field, "Book Bane")
@@ -108,9 +106,36 @@ fun HomeScreenPage() {
         }
 
         item {
-            NewsCard()
-            NewsCard()
-            NewsCard()
+            Spacer(modifier = Modifier.height(35.dp))
+            Text(//Card title
+                text = "Nyheder",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Gray,
+                modifier = Modifier.padding(start = 25.dp)
+            )
+
         }
+        val allNews = NewsData().getNews()
+        items(allNews.size) { i ->
+            NewsCard(
+                allNews[i][0],
+                allNews[i][1])
+        }
+        item { Spacer(modifier = Modifier.height(100.dp)) }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
