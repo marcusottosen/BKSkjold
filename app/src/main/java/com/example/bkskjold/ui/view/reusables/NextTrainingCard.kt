@@ -26,8 +26,8 @@ import com.example.bkskjold.R
 fun NextTrainingCard(header: String, description: String, date: String, time: String, location: String) {
     Card( //event card
         modifier = Modifier
-            .padding(15.dp)
-        .height(200.dp),
+            .padding(15.dp,0.dp,15.dp,0.dp)
+            .height(200.dp),
         backgroundColor = colorResource(R.color.primary),
         shape = RoundedCornerShape(22.dp),
     ) {
