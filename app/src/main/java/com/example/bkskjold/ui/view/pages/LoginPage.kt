@@ -61,6 +61,7 @@ fun LoginPage() {
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .size(300.dp, 300.dp))
+
         }
 
         Column(
@@ -83,8 +84,8 @@ fun LoginPage() {
 
             OutlinedTextField(
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .fillMaxHeight(0.13f)
+                    .width(300.dp)
+                    .height(60.dp)
                     .background(Color.White, RoundedCornerShape(50)),
                 value = emailValue,
                 onValueChange = {emailValue = it},
@@ -95,8 +96,8 @@ fun LoginPage() {
             )
             OutlinedTextField(
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .fillMaxHeight(0.13f)
+                    .width(300.dp)
+                    .height(60.dp)
                     .background(Color.White, RoundedCornerShape(50)),
                 value = passwordValue,
                 onValueChange = {passwordValue = it},
@@ -108,10 +109,13 @@ fun LoginPage() {
 
             Button(onClick = {},
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .fillMaxHeight(0.13f)
-                    .background(Color.Transparent, RoundedCornerShape(50))
+                    .width(300.dp)
+                    .height(60.dp)
                     .border(2.dp, Color.White, RoundedCornerShape(50)),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Transparent
+
+                )
 
 
             ) {
