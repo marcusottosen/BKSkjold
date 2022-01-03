@@ -42,18 +42,16 @@ fun HomeScreenPage() {
                     modifier = Modifier
                         .padding(0.dp)
                         .fillMaxWidth()
-                        .height(180.dp)
-                        //.background(color = Color(R.color.primary))
-                        .background(Color(0xFF448C8B))
+                        .height(160.dp)
                         .background(colorResource(id = R.color.primary))
-                    /*.background(
-                    Brush.linearGradient(
+                    .background(
+                    Brush.verticalGradient(
                         listOf(
-                            Color(R.color.primary),
-                            Color(R.color.primary)
+                            colorResource(id = R.color.primary),
+                            colorResource(id = R.color.home_header_secondary)
                         )
                     )
-                )*/
+                )
                 ) {
                     Column(Modifier.padding(start = 15.dp, top = 36.dp)) {
                         Text(//Card title
@@ -84,12 +82,17 @@ fun HomeScreenPage() {
         item {
             NextTrainingCard(
                 header = "Træning for seniorer",
-                description = "Holdtræning",
-                date = "25. Oktober 2021",
-                time = "17:45",
-                location = "Bane C"
+                date = "25. oktober",
+                timeStart = "16:00",
+                timeEnd = "17:30",
+                day = "mandag",
+                location = "Bane C",
+                attending = 8,
+                spots = 12,
+                trainer = "Bjarne Andersen"
             )
         }
+
 
 
         item {
@@ -120,7 +123,8 @@ fun HomeScreenPage() {
         items(allNews.size) { i ->
             NewsCard(
                 allNews[i][0],
-                allNews[i][1])
+                allNews[i][1],
+                allNews[i][2])
         }
         item { Spacer(modifier = Modifier.height(100.dp)) }
     }

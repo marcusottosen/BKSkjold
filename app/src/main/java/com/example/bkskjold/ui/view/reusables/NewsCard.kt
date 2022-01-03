@@ -13,12 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
 
 
 @Composable
-fun NewsCard(headerText: String, descriptionText: String) {
+fun NewsCard(date: String, headerText: String, descriptionText: String) {
     Card(
         modifier = Modifier
             .padding(15.dp)
@@ -29,16 +31,23 @@ fun NewsCard(headerText: String, descriptionText: String) {
         elevation = 0.dp
     ) {
         Column(Modifier.fillMaxSize()) {
+            Text(
+                text = date,
+                textAlign = TextAlign.Right,
+                modifier = Modifier.padding(0.dp, 5.dp, 20.dp, 0.dp).fillMaxWidth(),
+                color = Color.Gray,
+                fontSize = 10.sp
+            )
 
                 Text(
                     text = headerText,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(10.dp, 10.dp, 5.dp)
+                    modifier = Modifier.padding(10.dp, 0.dp, 5.dp, 0.dp)
                 )
                 //Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = descriptionText,
-                    modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
+                    modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp),
                     color = Color.DarkGray
                 )
             Box(modifier = Modifier.fillMaxSize()) {
