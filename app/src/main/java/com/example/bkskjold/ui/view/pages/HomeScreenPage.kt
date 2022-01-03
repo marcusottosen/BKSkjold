@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.app.NotificationCompat.getColor
 import com.example.bkskjold.R
 import com.example.bkskjold.ui.view.reusables.DefaultHeader
+import com.example.bkskjold.ui.view.reusables.HomePageCategories
 import com.example.bkskjold.ui.view.reusables.NewsCard
 import com.example.bkskjold.ui.view.reusables.NextTrainingCard
 
@@ -87,9 +88,25 @@ fun HomeScreenPage() {
                 time = "17:45",
                 location = "Bane C"
             )
-            Text(text = "Kategorier")
-            Spacer(modifier = Modifier.height(200.dp))
         }
+
+
+            //Spacer(modifier = Modifier.height(200.dp))
+
+
+        item {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(21.dp, 36.dp, 21.dp, 0.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                HomePageCategories(R.drawable.icon_field, "Book Bane")
+                HomePageCategories(R.drawable.icon_calendarhome, "Kalender")
+                HomePageCategories(R.drawable.icon_map, "Kort")
+                HomePageCategories(R.drawable.icon_forum, "Diskussions \n -forum")
+            }
+        }
+
         item {
             NewsCard()
             NewsCard()
