@@ -1,7 +1,6 @@
 package com.example.bkskjold.ui.view.reusables
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -31,6 +30,7 @@ fun NextTrainingCard(
     timeStart: String,
     timeEnd: String,
     day: String,
+    team: String,
     location: String,
     attending: Int,
     spots: Int,
@@ -96,16 +96,11 @@ fun NextTrainingCard(
                                 fontSize = 10.sp,
                                 color = Color.White
                             )
-
                         }
-
 
                         Column(modifier = Modifier.fillMaxSize()) {
                             Box(modifier = Modifier.fillMaxSize()) {
-
-
-                                Row(
-//team
+                                Row( //team
                                     modifier = Modifier
                                         .padding(20.dp, 0.dp, 0.dp, 20.dp)
                                         .align(alignment = Alignment.BottomStart),
@@ -116,7 +111,7 @@ fun NextTrainingCard(
                                         modifier = Modifier.size(15.dp),
                                     )
                                     Text(
-                                        text = location,
+                                        text = team,
                                         fontSize = 10.sp,
                                         modifier = Modifier
                                             .padding(start = 5.dp)
@@ -125,8 +120,7 @@ fun NextTrainingCard(
                                     )
                                 }
 
-                                Row(
-//location
+                                Row( //location
                                     modifier = Modifier
                                         .padding(start = 20.dp)
                                         .align(alignment = Alignment.BottomStart),
@@ -156,7 +150,6 @@ fun NextTrainingCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
-                //.padding(15.dp, 35.dp, 15.dp, 0.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(
@@ -168,8 +161,7 @@ fun NextTrainingCard(
 
                         Row( //number of players
                             modifier = Modifier
-                                .padding(top = 40.dp)
-                            //.align(alignment = Alignment.BottomStart),
+                                .padding(top = 15.dp)
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.icon_person),
@@ -187,8 +179,7 @@ fun NextTrainingCard(
 
                         Row( //trainer
                             modifier = Modifier
-                                .padding(top = 15.dp)
-                            //.align(alignment = Alignment.BottomStart),
+                                .padding(top = 40.dp)
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.icon_whistle),
@@ -205,8 +196,6 @@ fun NextTrainingCard(
                         }
                     }
                 }
-
-
 
                 Column( //Invite
                     modifier = Modifier
@@ -228,7 +217,6 @@ fun NextTrainingCard(
                     )
                 }
 
-
                 Column( //Cancel
                     modifier = Modifier
                         .fillMaxHeight()
@@ -249,8 +237,6 @@ fun NextTrainingCard(
                             .padding(start = 5.dp)
                     )
                 }
-
-
             }
         }
     }

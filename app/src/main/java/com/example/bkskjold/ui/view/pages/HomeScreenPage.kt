@@ -86,6 +86,7 @@ fun HomeScreenPage() {
                 timeStart = "16:00",
                 timeEnd = "17:30",
                 day = "mandag",
+                team = "U12",
                 location = "Bane C",
                 attending = 8,
                 spots = 12,
