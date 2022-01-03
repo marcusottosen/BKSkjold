@@ -23,7 +23,7 @@ import com.example.bkskjold.R
 @Composable
 fun LoginPage() {
 
-    val image = painterResource(id = R.drawable.login_image)
+    val image = painterResource(id = R.drawable.login_image2)
 
     var emailValue by remember {mutableStateOf("")}
     var passwordValue by remember { mutableStateOf("")}
@@ -77,6 +77,7 @@ fun LoginPage() {
                 label = null,
                 placeholder = { Text(text = "Adgangskode")},
                 shape = RoundedCornerShape(50)
+
             )
 
             Button(onClick = {},
@@ -86,20 +87,7 @@ fun LoginPage() {
                 shape = RoundedCornerShape(50)
 
             ) {
-               Text(text = "Log ind")
-
-            }
-            Text(
-                text = "------------------------- Eller -------------------------",
-            )
-            Button(onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .fillMaxHeight(0.13f),
-                shape = RoundedCornerShape(50)
-
-            ) {
-                Text(text = "Registrér dig")
+               Text(text = "Fortsæt >")
 
             }
 
