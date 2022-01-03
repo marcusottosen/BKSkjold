@@ -18,7 +18,7 @@
 
 
 
-    <!-- OBS! Old Background Colors. Should be safely removed -->
+    <!-- OBS! Old Background Colors. Should be safely removed! -->
     <color name="top_header">#FF6A89CC</color>
     <color name="top_header_light">#FF9CB9F7</color>
     <color name="default_button_background">#FFB4E0EB</color>
