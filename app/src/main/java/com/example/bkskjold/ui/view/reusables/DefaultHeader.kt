@@ -170,3 +170,33 @@ modifier = Modifier
 
 
     }}
+
+
+         
+    
+        
+
+
+           /* text = "Log ud",
+    fontSize = 15.sp,
+    fontWeight = FontWeight.Black,
+    textAlign = TextAlign.Right,
+    color = colorResource(R.color.cardview_dark_background),
+)
+       Text(
+            modifier = Modifier
+                .padding(0.dp, 25.dp, 20.dp, 0.dp)
+                .height(25.dp),
+                text = "Log ud",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Black,
+                textAlign = TextAlign.Right,
+                color = colorResource(R.color.cardview_dark_background),
+
+
+
+                )*/
+
+
+
+
