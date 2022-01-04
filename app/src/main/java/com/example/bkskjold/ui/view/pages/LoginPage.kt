@@ -57,7 +57,7 @@ fun LoginPage() {
                 contentDescription = "login_image",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .size(300.dp, 300.dp))
+                    .size(300.dp, 250.dp))
             Text(
                 text = "Velkommen tilbage!",
                 fontSize = 18.sp,
