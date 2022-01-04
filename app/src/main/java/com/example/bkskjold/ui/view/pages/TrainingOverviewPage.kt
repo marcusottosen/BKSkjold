@@ -1,6 +1,7 @@
 package com.example.bkskjold.ui.view.pages
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.unit.*
 
 import androidx.compose.material.Button
