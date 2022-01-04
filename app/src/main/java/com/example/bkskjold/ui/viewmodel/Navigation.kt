@@ -34,8 +34,7 @@ import com.example.bkskjold.ui.view.pages.trainingOverview
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
-            //HomeScreenPage()
-            EventInfo(eventNum = 1)
+            HomeScreenPage()
         }
         composable(NavigationItem.Trainings.route) {
             trainingOverview()
