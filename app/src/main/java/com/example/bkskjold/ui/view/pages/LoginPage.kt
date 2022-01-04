@@ -32,10 +32,6 @@ fun LoginPage() {
     var emailValue by remember {mutableStateOf("")}
     var passwordValue by remember { mutableStateOf("")}
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize(),
-        contentAlignment = Alignment.BottomCenter) {
 
         Box(
             modifier = Modifier
@@ -48,12 +44,13 @@ fun LoginPage() {
         )
         }
 
-        Box(
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Transparent),
-            contentAlignment = Alignment.TopCenter
-        ) {
+                .fillMaxWidth()
+                .fillMaxHeight(0.80f)
+                .background(Color.Transparent))
+        {
 
             Image(
                 loginImage,
@@ -61,16 +58,6 @@ fun LoginPage() {
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .size(300.dp, 300.dp))
-
-        }
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.80f)
-                .background(Color.Transparent)
-        ) {
             Text(
                 text = "Velkommen tilbage!",
                 fontSize = 18.sp,
@@ -119,10 +106,14 @@ fun LoginPage() {
 
 
             ) {
-               Text(text = "Fortsæt >")
+                Text(text = "Fortsæt >")
 
             }
 
+
         }
-    }
-}
+
+
+
+        }
+
