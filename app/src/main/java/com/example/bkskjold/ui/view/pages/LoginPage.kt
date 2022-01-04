@@ -86,6 +86,8 @@ fun LoginPage() {
                 shape = RoundedCornerShape(50)
 
             )
+            Spacer(modifier = Modifier.height(8.dp))
+
             OutlinedTextField(
                 modifier = Modifier
                     .width(300.dp)
