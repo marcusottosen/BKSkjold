@@ -72,6 +72,7 @@ fun LoginPage() {
                 color = Color.White
             )
 
+            Spacer(modifier = Modifier.height(18.dp))
 
             OutlinedTextField(
                 modifier = Modifier
