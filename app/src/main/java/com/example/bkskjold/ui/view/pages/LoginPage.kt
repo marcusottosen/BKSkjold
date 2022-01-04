@@ -113,7 +113,10 @@ fun LoginPage() {
 
 
             ) {
-                Text(text = "Fortsæt >")
+                Text(
+                    text = "Fortsæt >",
+                    color = Color.White)
+
 
             }
 
