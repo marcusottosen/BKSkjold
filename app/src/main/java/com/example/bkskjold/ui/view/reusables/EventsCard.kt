@@ -1,6 +1,7 @@
 package com.example.bkskjold.ui.view.reusables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -15,13 +16,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bkskjold.R
 
+fun navigateToEvent(num: Int){
+
+}
 
 @Composable
-fun EventsCard(header: String, description: String, time: String, location: String) {
+fun EventsCard(num: Int, header: String, description: String, time: String, location: String) {
     Card( //event card
         modifier = Modifier
-            .padding(15.dp),
-            //.height(200.dp),
+            .padding(15.dp)
+            .clickable { navigateToEvent(num)},
         backgroundColor = colorResource(R.color.default_button_background),
         shape = RoundedCornerShape(22.dp),
     ) {
@@ -29,6 +33,11 @@ fun EventsCard(header: String, description: String, time: String, location: Stri
             modifier = Modifier
                 .padding(20.dp, 15.dp, 20.dp, 15.dp)
         ) {
+            Text(// TEST
+                text = num.toString(),
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(0.dp,0.dp,0.dp, 15.dp)
+            )
             Text(// event header
                 text = header,
                 fontWeight = FontWeight.Bold,

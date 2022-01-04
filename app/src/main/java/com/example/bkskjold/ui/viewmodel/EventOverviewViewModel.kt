@@ -16,7 +16,7 @@ open class EventOverviewViewModel {
 
         LazyColumn(){
             items(numberOfItems) { i ->
-                EventsCard(header = events[i][0], description = events[i][1], time = events[i][2], location = events[i][3])
+                EventsCard(num = i, header = events[i][0], description = events[i][1], time = events[i][2], location = events[i][3])
 
             }
         }

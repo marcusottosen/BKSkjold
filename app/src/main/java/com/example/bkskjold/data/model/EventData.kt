@@ -21,4 +21,11 @@ class EventData {
     fun getEvents(): List<List<String>> {
         return events
     }
+
+    fun getEvent(eventNum: Int): List<String> {
+        if (eventNum >=0 && eventNum <= events.size){
+            return events[eventNum]
+        } else
+            return event1
+    }
 }
