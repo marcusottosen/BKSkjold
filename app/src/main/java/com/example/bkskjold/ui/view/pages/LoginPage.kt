@@ -48,7 +48,7 @@ fun LoginPage() {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.80f)
+                .fillMaxHeight(1.0f)
                 .background(Color.Transparent))
         {
 
@@ -100,6 +100,7 @@ fun LoginPage() {
                 shape = RoundedCornerShape(50)
 
             )
+            Spacer(modifier = Modifier.height(8.dp))
 
             Button(onClick = {},
                 modifier = Modifier
