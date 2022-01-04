@@ -58,6 +58,9 @@ fun LoginPage() {
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .size(300.dp, 250.dp))
+            
+            Spacer(modifier = Modifier.height(36.dp))
+
             Text(
                 text = "Velkommen tilbage!",
                 fontSize = 18.sp,
@@ -68,6 +71,7 @@ fun LoginPage() {
                 fontSize = 32.sp,
                 color = Color.White
             )
+
 
             OutlinedTextField(
                 modifier = Modifier
