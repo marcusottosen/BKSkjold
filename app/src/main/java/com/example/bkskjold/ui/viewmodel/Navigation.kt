@@ -56,13 +56,6 @@ fun Navigation(navController: NavHostController) {
                 DefaultDetails(training = it, navController = navController)
             }
         }
-        /*composable(
-            "eventInfo/{eventNum}",
-            arguments = listOf(
-                navArgument("eventNum") {type = NavType.IntType})
-        ) {
-            EventInfo(eventNum = )
-        }*/
     }
 }
 
