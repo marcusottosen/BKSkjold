@@ -6,19 +6,31 @@
     xxxxxxxxxxxxxxxxxx
     -->
     <!-- Colors -->
-    <color name="primary">#FFD4F2BF</color>
+    <color name="primary">#FF448C8B</color>
+    <color name="primary_light">#FF8FBAB9</color>
+    <color name="green">#FF698C44</color>
+    <color name="red">#FF8C4445</color>
+    <color name="home_header_secondary">#FF84B5B4</color>
 
 
     <!-- Background Colors -->
     <color name="main_background">#FFFFFFFF</color>
+    <color name="border">#FFD9D9D9</color>
+
+    <!-- Border color -->
+    <color name="main_border">#FFE7E7E7</color>
+
+
+
+    <!-- OBS! Old Background Colors. Should be safely removed! -->
     <color name="top_header">#FF6A89CC</color>
     <color name="top_header_light">#FF9CB9F7</color>
     <color name="default_button_background">#FFB4E0EB</color>
 
 
     <!-- TrainingOverviewPage -->
-    <color name="participating">#FFD4F2BF</color>
-    <color name="notParticipating">#FFF7AC9B</color>
+    <color name="participating">#FF698C44</color>
+    <color name="notParticipating">#FF8C4445</color>
 
 
 

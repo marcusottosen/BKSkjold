@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -28,28 +30,26 @@ import com.example.bkskjold.R
 fun LoginPage() {
 
     val loginImage = painterResource(id = R.drawable.login_image2)
+    val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary_light), colorResource(R.color.green)))
 
-    var emailValue by remember {mutableStateOf("")}
-    var passwordValue by remember { mutableStateOf("")}
+    var emailValue by remember { mutableStateOf("") }
+    var passwordValue by remember { mutableStateOf("") }
 
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Transparent), contentAlignment = Alignment.TopCenter
-        ) {Image(painter = painterResource(id = R.drawable.login_bg_gradient),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds
-        )
-        }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(bgColor)
+    ) {
+
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(1.0f)
-                .background(Color.Transparent))
+                .background(Color.Transparent)
+        )
         {
 
             Image(
@@ -57,8 +57,9 @@ fun LoginPage() {
                 contentDescription = "login_image",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .size(300.dp, 250.dp))
-            
+                    .size(300.dp, 250.dp)
+            )
+
             Spacer(modifier = Modifier.height(36.dp))
 
             Text(
@@ -80,9 +81,9 @@ fun LoginPage() {
                     .height(60.dp)
                     .background(Color.White, RoundedCornerShape(50)),
                 value = emailValue,
-                onValueChange = {emailValue = it},
+                onValueChange = { emailValue = it },
                 label = null,
-                placeholder = { Text(text = "Email")},
+                placeholder = { Text(text = "Email") },
                 shape = RoundedCornerShape(50)
 
             )
@@ -94,15 +95,16 @@ fun LoginPage() {
                     .height(60.dp)
                     .background(Color.White, RoundedCornerShape(50)),
                 value = passwordValue,
-                onValueChange = {passwordValue = it},
+                onValueChange = { passwordValue = it },
                 label = null,
-                placeholder = { Text(text = "Adgangskode")},
+                placeholder = { Text(text = "Adgangskode") },
                 shape = RoundedCornerShape(50)
 
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            Button(onClick = {},
+            Button(
+                onClick = {},
                 modifier = Modifier
                     .width(300.dp)
                     .height(60.dp)
@@ -113,11 +115,11 @@ fun LoginPage() {
                 )
 
 
-
             ) {
                 Text(
                     text = "Fortsæt >",
-                    color = Color.White)
+                    color = Color.White
+                )
 
 
             }
@@ -125,5 +127,6 @@ fun LoginPage() {
 
         }
 
-}
+    }
 
+}
