@@ -106,11 +106,12 @@ fun LoginPage() {
                 modifier = Modifier
                     .width(300.dp)
                     .height(60.dp)
-                    .border(2.dp, Color.White, RoundedCornerShape(50)),
+                    .border(1.dp, Color.White, RoundedCornerShape(50)),
+                elevation = null,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.Transparent
-
                 )
+
 
 
             ) {
@@ -124,7 +125,5 @@ fun LoginPage() {
 
         }
 
-
-
-        }
+}
 
