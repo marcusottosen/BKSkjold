@@ -12,12 +12,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.navArgument
 import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
+import com.example.bkskjold.ui.view.pages.EventInfo
 import com.example.bkskjold.ui.view.pages.HomeScreenPage
 import com.example.bkskjold.ui.view.pages.eventOverview
 import com.example.bkskjold.ui.view.pages.trainingOverview
@@ -42,6 +45,13 @@ fun Navigation(navController: NavHostController) {
         composable(NavigationItem.Profile.route) {
             DefaultScreen()
         }
+        /*composable(
+            "eventInfo/{eventNum}",
+            arguments = listOf(
+                navArgument("eventNum") {type = NavType.IntType})
+        ) {
+            EventInfo(eventNum = )
+        }*/
     }
 }
 

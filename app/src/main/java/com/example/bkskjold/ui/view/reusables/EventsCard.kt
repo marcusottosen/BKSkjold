@@ -1,6 +1,7 @@
 package com.example.bkskjold.ui.view.reusables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -19,10 +20,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bkskjold.R
 
+fun navigateToEvent(num: Int){
+
+}
+
 @Composable
-fun EventsCard(header: String, description: String, time: String, location: String) {
+fun EventsCard(num: Int, header: String, description: String, time: String, location: String) {
     Card( //event card
         modifier = Modifier
+            .padding(15.dp)
+            .clickable { navigateToEvent(num)},
+        backgroundColor = colorResource(R.color.default_button_background),
+        shape = RoundedCornerShape(22.dp),
             .padding(15.dp)
             .border(1.dp, colorResource(R.color.main_border)),
             //.height(200.dp),
