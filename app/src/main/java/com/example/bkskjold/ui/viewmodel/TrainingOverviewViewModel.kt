@@ -2,6 +2,7 @@ package com.example.bkskjold.ui.viewmodel
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.BookingData
 import com.example.bkskjold.ui.view.reusables.TrainingCard
@@ -22,11 +23,11 @@ class TrainingOverviewViewModel {
         it should be fetched from the model
     */
     @Composable
-    fun GetOverviewView(){
+    fun GetOverviewView(navController: NavController){
         val trainings = BookingData().bookings
         LazyColumn {
             items(trainings.size) { i ->
-                TrainingCard(training = trainings[i])
+                TrainingCard(training = trainings[i], navController)
             }
         }
 /*
@@ -50,11 +51,11 @@ class TrainingOverviewViewModel {
         }*/
     }
     @Composable
-    fun GetSignedUpView(){
+    fun GetSignedUpView(navController: NavController){
         val trainings = BookingData().getSignedUpTrainings()
         LazyColumn {
             items(trainings.size) { i ->
-                TrainingCard(training = trainings[i])
+                TrainingCard(training = trainings[i], navController)
             }
         }
 

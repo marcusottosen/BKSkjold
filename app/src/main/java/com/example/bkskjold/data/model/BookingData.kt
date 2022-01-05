@@ -1,4 +1,6 @@
 package com.example.bkskjold.data.model
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 class BookingData {
     /*
@@ -44,23 +46,23 @@ class BookingData {
 
     //TODO Fetch from database instead
     val bookings = listOf(
-        Trainings(1 , "21:00", "22:00", "mandag", "25 oktober", "Bane C", "Senior", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(2 , "17:00", "22:00", "mandag", "25 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(3 , "17:00", "22:00", "mandag", "25 oktober", "Bane B", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(4 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(5 , "18:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(6 , "17:00", "22:00", "mandag", "25 oktober", "Bane D", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(7 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(8 , "17:00", "22:00", "mandag", "25 oktober", "Bane F", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(9 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(10, "16:30", "22:00", "mandag", "26 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(11, "17:00", "22:00", "mandag", "26 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Trainings(12, "17:00", "22:00", "mandag", "26 oktober", "Bane D", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+        Training(1 , "21:00", "22:00", "mandag", "25 oktober", "Bane C", "Senior", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(2 , "17:00", "22:00", "mandag", "25 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(3 , "17:00", "22:00", "mandag", "25 oktober", "Bane B", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(4 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(5 , "18:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(6 , "17:00", "22:00", "mandag", "25 oktober", "Bane D", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(7 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(8 , "17:00", "22:00", "mandag", "25 oktober", "Bane F", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(9 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(10, "16:30", "22:00", "mandag", "26 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(11, "17:00", "22:00", "mandag", "26 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(12, "17:00", "22:00", "mandag", "26 oktober", "Bane D", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
     )
 
-    fun getSignedUpTrainings(): MutableList<Trainings> {
+    fun getSignedUpTrainings(): MutableList<Training> {
         var bookings = bookings
-        var signedUpTrainings: MutableList<Trainings> = mutableListOf()
+        var signedUpTrainings: MutableList<Training> = mutableListOf()
 
         for (training in bookings){
             if (training.isAttending){
@@ -71,7 +73,9 @@ class BookingData {
     }
 }
 
-data class Trainings(
+
+@Parcelize
+data class Training(
     val id: Int,
     val timeStart: String,
     val timeEnd: String,
@@ -86,5 +90,4 @@ data class Trainings(
     val maxParticipants: Int,
     val team1: Int,
     val team2: Int
-    ){
-}
+    ): Parcelable

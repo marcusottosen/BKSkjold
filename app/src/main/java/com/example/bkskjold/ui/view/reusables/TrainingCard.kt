@@ -1,6 +1,7 @@
 package com.example.bkskjold.ui.view.reusables
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -12,11 +13,13 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.Trainings
+import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
-fun TrainingCard(training: Trainings
+fun TrainingCard(training: Training, navController: NavController
 
     /*
     id: String,
@@ -47,7 +50,8 @@ fun TrainingCard(training: Trainings
         modifier = Modifier
             .padding(30.dp, 10.dp, 30.dp, 20.dp)
             .height(85.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { gotoTrainingDetails(training, navController) },
         shape = RoundedCornerShape(9.dp),
         elevation = 12.dp
     ) {
