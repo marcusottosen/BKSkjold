@@ -27,12 +27,11 @@ fun navigateToEvent(num: Int){
 @Composable
 fun EventsCard(num: Int, header: String, description: String, time: String, location: String) {
     Card( //event card
+        shape = RoundedCornerShape(22.dp),
         modifier = Modifier
             .padding(15.dp)
-            .border(1.dp, colorResource(R.color.main_border))
             .clickable { navigateToEvent(num)},
-        backgroundColor = colorResource(R.color.default_button_background),
-        shape = RoundedCornerShape(22.dp),
+        backgroundColor = colorResource(R.color.main_background),
         elevation = 12.dp,
 
     ) {
