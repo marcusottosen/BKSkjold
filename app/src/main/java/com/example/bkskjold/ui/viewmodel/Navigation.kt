@@ -1,14 +1,12 @@
 package com.example.bkskjold.ui.viewmodel
 
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -26,6 +24,7 @@ import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.ui.view.pages.EventInfo
 import com.example.bkskjold.ui.view.pages.HomeScreenPage
 import com.example.bkskjold.ui.view.pages.eventOverview
+import com.example.bkskjold.ui.view.pages.ProfileOverview
 import com.example.bkskjold.ui.view.pages.trainingOverview
 
 
@@ -33,6 +32,7 @@ import com.example.bkskjold.ui.view.pages.trainingOverview
  * Inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
  */
 
+@ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
@@ -46,7 +46,9 @@ fun Navigation(navController: NavHostController) {
             eventOverview()
         }
         composable(NavigationItem.Profile.route) {
-            DefaultScreen()
+            ProfileOverview()
+
+
         }
         /*composable(
             "eventInfo/{eventNum}",
@@ -74,7 +76,7 @@ fun BottomNavigationBar(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
-                icon = { Icon(painterResource(id = item.icon), contentDescription = item.title, modifier = Modifier.size(25.dp,25.dp)) },
+                icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                 label = { Text(text = item.title) },
                 selectedContentColor = Color.Black,
                 unselectedContentColor = Color.Black.copy(0.4f),

@@ -5,6 +5,8 @@
     <string name="TrainingOverviewPageHeader">Træninger</string>
     <string name="EventOverviewPageHeader">Events</string>
     <string name="NemSportHeader">NemSport</string>
+    <string name="ProfileHeader">Profil</string>
+
 
 
 </resources>
