@@ -23,8 +23,8 @@ import com.example.bkskjold.R
 fun navigateToEvent(num: Int){
 
 }
-
 @Composable
+
 fun EventsCard(num: Int, header: String, description: String, time: String, location: String) {
     Card( //event card
         shape = RoundedCornerShape(22.dp),
