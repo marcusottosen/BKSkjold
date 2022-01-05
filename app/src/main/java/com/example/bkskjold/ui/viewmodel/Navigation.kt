@@ -62,7 +62,40 @@ fun Navigation(navController: NavHostController) {
             }
         }
     }
-}
+} //Læs guide nedenfor til navigation!
+
+/**
+ * GUIDE TIL SUB-NAVIGATION
+ * 1.
+ *   Ovenfor copypaste den nederste composable og ret den til. Der er 6 steder der skal ændres til den ønskede side.
+ *      "route" er stien den leder efter, så dette skal skrives ved punkt 2.
+ *      den val der oprettes skal rettes til hvor .getParcelable<###> indeholder det objekt der parses. key bruges også ved punkt 2.
+ *      Den nederste metode er sidens function. Skal indeholde navController hvis der skal navigeres fra den (DVS. ALTID!)
+ *
+ *  2.
+ *      På siden der navigeres FRA (fx EventOverviewPage) copy/pastes nedenstående
+                fun gotoEventDetails(event: Event, navController: NavController){
+                navController.currentBackStackEntry?.arguments?.putParcelable("event", event)
+                navController.navigate("eventDetails")
+                }
+ *      Hvor første parameter er variablen den skal overføre. Husk at ændre navnet på funktionen
+ *      Linje 2 bør være sigende hvor "event" svarer til key fra punkt 1.
+ *      Linje 3 skal "route" indsættes fra den oprettede composable i Navigation.
+ *
+ *  3.
+ *      På knappen på siden der navigeres FRA (fx et card/button) skal der i modifier stå .clickable {navn på funktion fra punkt 2(variable/object, navController)}
+ *      fx ved Card: modifier = Modifier.clickable { gotoEventDetails(event, navController)}
+ *      Hvis en knap: onClick = {gotoEventDetails(event, navController)}
+ *
+ * 4.
+ *      For at returnere fra den nye side skrives onClick = { navController.navigateUp() ved en knap
+ *
+ *
+ * ps. Lidt anderledes ved overførsel af andre types
+ *
+ *
+ * Spørgsmål spørg Marcus
+ */
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
