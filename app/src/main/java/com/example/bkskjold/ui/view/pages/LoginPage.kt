@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
@@ -30,7 +31,9 @@ import com.example.bkskjold.R
 fun LoginPage() {
 
     val loginImage = painterResource(id = R.drawable.login_image2)
-    val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary_light), colorResource(R.color.green)))
+    val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary), colorResource(R.color.login_green)),
+    startY = 0.0f,
+    endY = 1000.0f)
 
     var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
@@ -40,7 +43,15 @@ fun LoginPage() {
         modifier = Modifier
             .fillMaxSize()
             .background(bgColor)
+
     ) {
+
+        Row(modifier = Modifier.padding(40.dp), horizontalArrangement = Arrangement.Start){
+            Text(
+                text = "<",
+                fontSize =28.sp,
+                color = Color.Black)
+        }
 
 
         Column(
