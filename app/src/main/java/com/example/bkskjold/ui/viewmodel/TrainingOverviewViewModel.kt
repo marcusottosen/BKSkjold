@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.BookingData
+import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 class TrainingOverviewViewModel {
@@ -83,5 +84,40 @@ class TrainingOverviewViewModel {
             /* TODO handle null exception */
             }
         }*/
+    }
+
+    @Composable
+    fun filterAndSort(navController: NavController, date: Int? = null, timeStart: Int? = null, overviewOrSignedUp: Boolean = false){
+
+
+        //First decide which list of practices to filter through
+        var practices = if (overviewOrSignedUp == true){
+            BookingData().getSignedUpTrainings()
+        } else{
+            BookingData().bookings
+        }
+
+        var filteredPractices: MutableList<Training> = mutableListOf()
+        var date = date.toString()
+        var timestamp = timeStart.toString()
+
+
+        try {
+            for (i in practices){
+                if(i.date == date!! && i.timeStart == timestamp!!){
+                    filteredPractices.add(i)
+                }
+            }
+        } catch (e: Exception){
+
+        }
+
+        //Finally create the view with the right practices.
+        LazyColumn {
+            items(practices.size) { i ->
+                TrainingCard(training = practices[i], navController)
+            }
+        }
+
     }
 }
