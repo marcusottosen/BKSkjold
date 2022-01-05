@@ -21,11 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
-import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.ui.view.pages.gotoEventDetails
 
-fun navigateToEvent(num: Int){
-
-}
 
 @Composable
 fun EventsCard(event: Event, navController: NavController) {
@@ -33,7 +30,7 @@ fun EventsCard(event: Event, navController: NavController) {
         shape = RoundedCornerShape(22.dp),
         modifier = Modifier
             .padding(15.dp)
-            .clickable {},
+            .clickable { gotoEventDetails(event, navController)},
         backgroundColor = colorResource(R.color.main_background),
         elevation = 12.dp,
 

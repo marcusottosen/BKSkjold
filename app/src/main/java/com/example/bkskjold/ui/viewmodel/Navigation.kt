@@ -21,17 +21,14 @@ import androidx.navigation.navArgument
 import com.example.bkskjold.DefaultDetails
 import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.Event
 import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.ui.view.pages.EventInfo
-import com.example.bkskjold.ui.view.pages.HomeScreenPage
-import com.example.bkskjold.ui.view.pages.eventOverview
-import com.example.bkskjold.ui.view.pages.ProfileOverview
-import com.example.bkskjold.ui.view.pages.trainingOverview
+import com.example.bkskjold.ui.view.pages.*
 
 
 /**
- * Inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
+ * NavBar inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
  */
 
 @ExperimentalFoundationApi
@@ -50,10 +47,18 @@ fun Navigation(navController: NavHostController) {
         composable(NavigationItem.Profile.route) {
             ProfileOverview()
         }
+
+        //Subpages
         composable("trainingDetails"){
-            var trainingModel = navController.previousBackStackEntry?.arguments?.getParcelable<Training>("training")
+            val trainingModel = navController.previousBackStackEntry?.arguments?.getParcelable<Training>("training")
             trainingModel?.let { 
                 DefaultDetails(training = it, navController = navController)
+            }
+        }
+        composable("eventDetails"){
+            val eventModel = navController.previousBackStackEntry?.arguments?.getParcelable<Event>("event")
+            eventModel?.let {
+                EventInfoPage(event = it, navController = navController)
             }
         }
     }
