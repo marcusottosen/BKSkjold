@@ -1,6 +1,6 @@
 package com.example.bkskjold.data.model
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 class BookingData {
     /*

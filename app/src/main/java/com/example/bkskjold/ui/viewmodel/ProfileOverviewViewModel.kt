@@ -33,12 +33,12 @@ class ProfileOverviewViewModel {
     @Preview
     @Composable
     fun getProfileInvitationView() {
-        var events = EventData().getEvents()
+        var events = EventData().events
         var numberOfItems = events.size
 
         LazyColumn(){
             items(numberOfItems) { i ->
-                InvitationCard(name = events[i][0], date = events[i][1], location = events[i][2])
+                InvitationCard(name = events[i].header, date = events[i].date, location = events[i].location)
 
             }
         }

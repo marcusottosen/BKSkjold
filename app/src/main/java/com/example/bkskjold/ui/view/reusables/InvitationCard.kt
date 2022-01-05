@@ -21,7 +21,7 @@ fun InvitationCard(name: String, date: String, location: String) {
     modifier = Modifier
     .padding(15.dp)
         .width(300.dp),
-    backgroundColor = colorResource(R.color.participating),
+    backgroundColor = colorResource(R.color.green),
     shape = RoundedCornerShape(22.dp),
     ) {
         Column(
@@ -31,19 +31,20 @@ fun InvitationCard(name: String, date: String, location: String) {
             Text(// event header
                 text = name,
                 fontWeight = FontWeight.Bold,
+                color = Color.White,
                 modifier = Modifier.padding(0.dp,0.dp,0.dp, 15.dp)
             )
             //Spacer(modifier = Modifier.height(8.dp))
             Text( // event description
                 text = date,
                 modifier = Modifier.padding(0.dp,0.dp,0.dp, 5.dp),
-                color = Color.DarkGray
+                color = Color.White
             )
 
             Text( // event description
                 text = location,
                 modifier = Modifier.padding(0.dp,0.dp,0.dp, 5.dp),
-                color = Color.DarkGray
+                color = Color.White
             )
 
 

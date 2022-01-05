@@ -45,7 +45,7 @@ fun Navigation(navController: NavHostController) {
             trainingOverview(navController)
         }
         composable(NavigationItem.Events.route) {
-            eventOverview()
+            eventOverview(navController)
         }
         composable(NavigationItem.Profile.route) {
             ProfileOverview()

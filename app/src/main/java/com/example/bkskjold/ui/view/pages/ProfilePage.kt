@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.InvitationData
@@ -34,28 +35,30 @@ import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
 @Composable
 fun ProfileOverview() {
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(30.dp)
-
+        //verticalArrangement = Arrangement.spacedBy(30.dp)
 
     ) {
         item {
             DefaultProfileHeader()
+            Spacer(modifier = Modifier.height(30.dp))
         }
-        item { ProfileOverviewViewModel().getProfileView() }
+        item { ProfileOverviewViewModel().getProfileView()
+            Spacer(modifier = Modifier.height(30.dp))}
         // item {ProfileOverviewViewModel().getProfileInvitationView()}
         val inviInfo = InvitationData().getInvitations()
 
        item { Text(modifier = Modifier
            .fillMaxWidth(),
                text = "Invitationer",
-            fontSize = 20.sp,
+            fontSize = 16.sp,
             textAlign = TextAlign.Center,
+           fontWeight = FontWeight.Bold
         ) }
 
-        //PaddingValues(50.dp)
         item {
             LazyColumn(
-                modifier = Modifier.height(280.dp)
+                modifier = Modifier
+                    .height(280.dp)
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.Center)
                 ) {
@@ -68,7 +71,9 @@ fun ProfileOverview() {
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(30.dp))
         }
+
         item {
             NextTrainingCard(
                 header = "Træning for seniorer",
@@ -82,6 +87,7 @@ fun ProfileOverview() {
                 spots = 12,
                 trainer = "Bjarne Andersen"
             )
+            Spacer(modifier = Modifier.height(30.dp))
         }
 
     }
