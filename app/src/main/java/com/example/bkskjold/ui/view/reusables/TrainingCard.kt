@@ -4,18 +4,45 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview as Preview1
+import com.example.bkskjold.R
+import com.example.bkskjold.data.model.Trainings
 
 @Composable
-fun TrainingCard(time: String, daysTillTraining: String, date: String, participants: String, location: String, league: String, trainer: String, button: String, color: Color) { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
+fun TrainingCard(training: Trainings
+
+    /*
+    id: String,
+    timeStart: String,
+    timeEnd: String,
+    date: String,
+    weekday: String,
+    participants: String,
+    location: String,
+    league: String,
+    trainer: String,
+    attending: String,
+    color: Color
+*/
+) { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
+    var isAttending = ""
+    val color: Color
+
+    if (training.isAttending ){
+        isAttending = "Afmeld Deltagelse"
+        color = colorResource(R.color.green)
+    } else {
+        isAttending = "Deltag"
+        color = colorResource(R.color.red)
+    }
+
     Card(
         modifier = Modifier
             .padding(30.dp, 10.dp, 30.dp, 20.dp)
@@ -26,21 +53,21 @@ fun TrainingCard(time: String, daysTillTraining: String, date: String, participa
     ) {
         Row {
             Column {
-                Text( //Time
-                    text = time,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    modifier = Modifier.padding(10.dp, 10.dp, 5.dp)
-                )
-                //Spacer(modifier = Modifier.height(8.dp))
-                Text( //Days to Training
-                    text = daysTillTraining,
-                    modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
+                Text( //date
+                    text = training.date,
                     fontSize = 10.sp,
+                    modifier = Modifier.padding(10.dp, 18.dp, 5.dp),
                     color = Color.DarkGray
                 )
-                Text( //Date
-                    text = date,
+                //Spacer(modifier = Modifier.height(8.dp))
+                Text( //day
+                    text = training.weekday,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
+                    fontSize = 20.sp,
+                )
+                Text( //time
+                    text = "${training.timeStart} - ${training.timeEnd}",
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                     fontSize = 10.sp,
                     color = Color.DarkGray
@@ -64,13 +91,13 @@ fun TrainingCard(time: String, daysTillTraining: String, date: String, participa
                         ) {
                     Column() {
                         Text(
-                            text = participants,
+                            text = training.maxParticipants.toString(),
                             modifier = Modifier.padding(10.dp, 10.dp, 0.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
                         )
                         Text(
-                            text = location,
+                            text = training.location,
                             modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
@@ -78,22 +105,21 @@ fun TrainingCard(time: String, daysTillTraining: String, date: String, participa
                     }
                     Column() {
                         Text(
-                            text = league,
+                            text = training.league,
                             modifier = Modifier.padding(10.dp, 10.dp, 10.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
                         )
                         Text(
-                            text = trainer,
+                            text = training.trainer,
                             modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
                         )
                     }
-
                 }
 
-                DefaultButton(text = button,
+                DefaultButton(text = isAttending,
                     checked = true,
                     onClick = { /*TODO*/},
                     modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)

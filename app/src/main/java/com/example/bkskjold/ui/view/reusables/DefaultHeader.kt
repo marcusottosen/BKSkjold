@@ -30,12 +30,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.ProfileInfo
-import com.example.bkskjold.ui.theme.Shapes
-import com.example.bkskjold.ui.theme.Typography
 import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
 
 @Composable

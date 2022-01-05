@@ -1,20 +1,21 @@
 package com.example.bkskjold.data.model
 
 class BookingData {
-    var training1 = listOf("21:00", "I dag", "14/11/2021", "8/12", "Bane C", "Senior", "Træner: Ekkart", "Deltag")
-    var training2 = listOf("17:00", "Om 1 dag", "15/11/2021", "6/12", "Bane A", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
-    var training3 = listOf("17:00", "Om 2 dage", "16/11/2021", "11/12", "Bane B", "U20", "Træner: Ekkart", "Deltag")
-    var training4 = listOf("17:00", "Om 3 dage", "17/11/2021", "12/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
-    var training5 = listOf("18:00", "Om 4 dage", "18/11/2021", "4/12", "Bane C", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
-    var training6 = listOf("17:00", "Om 5 dage", "19/11/2021", "8/12", "Bane D", "U20", "Træner: Ekkart", "Deltag")
-    var training7 = listOf("17:00", "Om 6 dage", "20/11/2021", "8/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
-    var training8 = listOf("17:00", "Om 7 dage", "21/11/2021", "8/12", "Bane F", "U20", "Træner: Ekkart", "Deltag")
-    var training9 = listOf("17:00", "Om 8 dage", "22/11/2021", "16/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
-    var training10 = listOf("16:30", "Om 9 dage", "23/11/2021", "8/12", "Bane A", "U20", "Træner: Ekkart", "Afmeld Deltagelse")
-    var training11 = listOf("17:00", "Om 10 dage", "24/11/2021", "8/12", "Bane C", "U20", "Træner: Ekkart", "Deltag")
-    var training12 = listOf("17:00", "Om 11 dage", "25/11/2021", "8/12", "Bane D", "U20", "Træner: Ekkart", "Deltag")
+    /*
+    var training1  = listOf(1 , "21:00", "22:00", "mandag", "25 oktober", "Bane C", "Senior", "Træner: Ekkart", 0, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training2  = listOf(2 , "17:00", "22:00", "mandag", "25 oktober", "Bane A", "U20", "Træner: Ekkart", 1, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training3  = listOf(3 , "17:00", "22:00", "mandag", "25 oktober", "Bane B", "U20", "Træner: Ekkart", 0, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training4  = listOf(4 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", 1, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training5  = listOf(5 , "18:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", 1, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training6  = listOf(6 , "17:00", "22:00", "mandag", "25 oktober", "Bane D", "U20", "Træner: Ekkart", 1, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training7  = listOf(7 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", 0, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training8  = listOf(8 , "17:00", "22:00", "mandag", "25 oktober", "Bane F", "U20", "Træner: Ekkart", 0, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training9  = listOf(9 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", 0, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training10 = listOf(10, "16:30", "22:00", "mandag", "26 oktober", "Bane A", "U20", "Træner: Ekkart", 1, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training11 = listOf(11, "17:00", "22:00", "mandag", "26 oktober", "Bane C", "U20", "Træner: Ekkart", 0, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    var training12 = listOf(12, "17:00", "22:00", "mandag", "26 oktober", "Bane D", "U20", "Træner: Ekkart", 0, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
 
-    fun getAllTraining(): List<List<String>> {
+    fun getAllTraining(): List<List<Any>> {
         /* TODO This should eventually fetch the data from a database.
             This should be all available training, including the ones
              already signed up for. This should take a parameter,
@@ -24,22 +25,66 @@ class BookingData {
         return allTrainings
     }
 
-    fun getSignedUpTrainings(): MutableList<List<String>>? { //
+    fun getSignedUpTrainings(): MutableList<List<Any>>? { //
     /* TODO This should eventually fetch the data from a database.
             Data should include all the current trainings a user has signed up for.
             This method should probably take a parameter, to find the correct user and data */
         var allTrainings = getAllTraining()
-        var signedUpTrainings: MutableList<List<String>> = mutableListOf()
+        var signedUpTrainings: MutableList<List<Any>> = mutableListOf()
 
         for (i in allTrainings.indices){
             var current = allTrainings[i]
 
-            if(current[7] == "Afmeld Deltagelse"){
+            if(current[7] == 0){
                 signedUpTrainings?.add(current)
             }
         }
         return signedUpTrainings
+    }*/
 
+    //TODO Fetch from database instead
+    val bookings = listOf(
+        Trainings(1 , "21:00", "22:00", "mandag", "25 oktober", "Bane C", "Senior", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(2 , "17:00", "22:00", "mandag", "25 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(3 , "17:00", "22:00", "mandag", "25 oktober", "Bane B", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(4 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(5 , "18:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(6 , "17:00", "22:00", "mandag", "25 oktober", "Bane D", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(7 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(8 , "17:00", "22:00", "mandag", "25 oktober", "Bane F", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(9 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(10, "16:30", "22:00", "mandag", "26 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(11, "17:00", "22:00", "mandag", "26 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Trainings(12, "17:00", "22:00", "mandag", "26 oktober", "Bane D", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
+    )
+
+    fun getSignedUpTrainings(): MutableList<Trainings> {
+        var bookings = bookings
+        var signedUpTrainings: MutableList<Trainings> = mutableListOf()
+
+        for (training in bookings){
+            if (training.isAttending){
+                signedUpTrainings.add(training)
+            }
+        }
+        return signedUpTrainings
     }
 }
 
+data class Trainings(
+    val id: Int,
+    val timeStart: String,
+    val timeEnd: String,
+    val weekday: String,
+    val date: String,
+    val location: String,
+    val league: String,
+    val trainer: String,
+    val isAttending: Boolean,
+    val price: Int,
+    val description: String,
+    val maxParticipants: Int,
+    val team1: Int,
+    val team2: Int
+    ){
+}

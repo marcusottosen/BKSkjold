@@ -2,12 +2,8 @@ package com.example.bkskjold.ui.viewmodel
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.BookingData
-import com.example.bkskjold.ui.view.reusables.DefaultHeader
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 class TrainingOverviewViewModel {
@@ -17,48 +13,67 @@ class TrainingOverviewViewModel {
         } else {
             return R.color.participating
         }
+
     }
+
+
     /* TODO These functions should eventually be altered
         The idea is that instead of hardcoding the data,
         it should be fetched from the model
     */
     @Composable
-    fun getOverviewView(){
+    fun GetOverviewView(){
+        val trainings = BookingData().bookings
+        LazyColumn {
+            items(trainings.size) { i ->
+                TrainingCard(training = trainings[i])
+            }
+        }
+/*
         val allTrainings = BookingData().getAllTraining()
-
         LazyColumn {
             items(allTrainings.size) { i ->
                 TrainingCard( //create the cards
-                    time = allTrainings[i][0],
-                    daysTillTraining = allTrainings[i][1],
-                    date = allTrainings[i][2],
-                    participants = allTrainings[i][3],
-                    location = allTrainings[i][4],
-                    league = allTrainings[i][5],
-                    trainer = allTrainings[i][6],
-                    button = allTrainings[i][7],
-                    color = colorResource(id = getColor(allTrainings, i))
+                    id          = allTrainings[i][0],
+                    timeStart   = allTrainings[i][1],
+                    timeEnd     = allTrainings[i][2],
+                    weekday     = allTrainings[i][3],
+                    date        = allTrainings[i][4],
+                    participants= allTrainings[i][5],
+                    location    = allTrainings[i][6],
+                    league      = allTrainings[i][7],
+                    trainer     = allTrainings[i][8],
+                    attending      = allTrainings[i][9],
+                    color       = colorResource(id = getColor(allTrainings, i))
                 )
             }
-        }
+        }*/
     }
     @Composable
-    fun getSignedUpView(){
-        val signedUpTrainings = BookingData().getSignedUpTrainings()
+    fun GetSignedUpView(){
+        val trainings = BookingData().getSignedUpTrainings()
+        LazyColumn {
+            items(trainings.size) { i ->
+                TrainingCard(training = trainings[i])
+            }
+        }
 
+/*        val signedUpTrainings = BookingData().getSignedUpTrainings()
         LazyColumn {
             if (signedUpTrainings != null) {
                 items(signedUpTrainings.size) { i ->
                     //TrainingCard(time, daysTillTraining, date, participants, location, league, trainer, button, colorResource(color))
                     TrainingCard( //create the cards
-                        time = signedUpTrainings[i][0],
-                        daysTillTraining = signedUpTrainings[i][1],
-                        date = signedUpTrainings[i][2],
-                        participants = signedUpTrainings[i][3],
-                        location = signedUpTrainings[i][4],
-                        league = signedUpTrainings[i][5],
-                        trainer = signedUpTrainings[i][6],
-                        button = signedUpTrainings[i][7],
+                        id          = signedUpTrainings[i][0],
+                        timeStart   = signedUpTrainings[i][1],
+                        timeEnd     = signedUpTrainings[i][2],
+                        weekday     = signedUpTrainings[i][3],
+                        date        = signedUpTrainings[i][4],
+                        participants= signedUpTrainings[i][5],
+                        location    = signedUpTrainings[i][6],
+                        league      = signedUpTrainings[i][7],
+                        trainer     = signedUpTrainings[i][8],
+                        attending      = signedUpTrainings[i][9],
                         color = colorResource(id = getColor(signedUpTrainings, i))
                     )
                 }
@@ -66,6 +81,6 @@ class TrainingOverviewViewModel {
                 print("$signedUpTrainings was null")
             /* TODO handle null exception */
             }
-        }
+        }*/
     }
 }

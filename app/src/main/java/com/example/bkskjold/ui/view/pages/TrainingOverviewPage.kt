@@ -1,7 +1,6 @@
 package com.example.bkskjold.ui.view.pages
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.*
 
@@ -12,14 +11,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 
 
 //resources and files
 import com.example.bkskjold.R
-import com.example.bkskjold.ui.view.reusables.DefaultHeader
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
 
@@ -64,9 +61,9 @@ import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
                     }
                 }
             if(shouldShowOverview.value){
-                viewModel.getOverviewView()
+                viewModel.GetOverviewView()
             }else {
-                viewModel.getSignedUpView()
+                viewModel.GetSignedUpView()
             }
         }
     }
