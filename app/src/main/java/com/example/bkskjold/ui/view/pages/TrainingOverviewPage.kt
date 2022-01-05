@@ -1,5 +1,6 @@
 package com.example.bkskjold.ui.view.pages
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.*
@@ -7,12 +8,14 @@ import androidx.compose.ui.unit.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview as p
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 
 
@@ -23,6 +26,7 @@ import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
 
 //class TrainingOverviewPage {
+@p
 @Composable
 fun trainingOverview(navController: NavController) {
     val shouldShowOverview = remember { mutableStateOf(true) }
@@ -59,6 +63,30 @@ fun trainingOverview(navController: NavController) {
                     else colorResource(R.color.primary)),
             ) {
                 Text(text = "Tilmeldte Træninger", color = colorResource(id = R.color.main_background))
+            }
+        }
+        Column(
+            modifier = Modifier
+                .height(30.dp)
+                .fillMaxWidth()
+                .padding(end = 20.dp)
+            , verticalArrangement = Arrangement.Center
+            , horizontalAlignment = Alignment.End
+
+        ) {
+            Button(
+                onClick = {}
+                , colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.main_background))
+                , modifier = Modifier
+                    .height(30.dp)
+                    .width(30.dp)
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.icon_filter)
+                    , contentDescription = null
+                    , modifier = Modifier.height(30.dp).width(30.dp)
+                )
+
             }
         }
         if(shouldShowOverview.value){
