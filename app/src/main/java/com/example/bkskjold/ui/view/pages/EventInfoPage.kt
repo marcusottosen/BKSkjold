@@ -76,12 +76,13 @@ fun EventInfoPage(event: Event, navController: NavController) {
 
             Spacer(modifier = Modifier.height(25.dp))
             Text(//Title
-                text = "Pølsehorn og snack ved klubhuset",
+                text = event.header,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Text(//Description
-                text = "Tag dine forældre med til pølsehorn og snacks ved klubhuset på onsdag!",
+                text = event.description,
                 fontSize = 14.sp,
                 color = Color.Gray
             )
@@ -94,8 +95,21 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     modifier = Modifier.height(20.dp),
                     contentDescription = null,
                 )
-                Text(//Description
-                    text = "Fælledparkens Klubhus",
+                Text(
+                    text = event.location,
+                    modifier = Modifier.padding(start = 10.dp)
+                )
+            }
+            //Date
+            Row(modifier = Modifier.padding(top = 10.dp)) {
+                Image(
+                    painter = painterResource(id = R.drawable.icon_calendar),
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier.height(20.dp),
+                    contentDescription = null,
+                )
+                Text(
+                    text = event.date,
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }
@@ -107,8 +121,8 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     modifier = Modifier.height(20.dp),
                     contentDescription = null,
                 )
-                Text(//Description
-                    text = "Kl. 13:00 - 21/09/2021",
+                Text(
+                    text = "${event.timeStart} - ${event.timeEnd}",
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }
@@ -120,8 +134,8 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     modifier = Modifier.height(20.dp),
                     contentDescription = null,
                 )
-                Text(//Description
-                    text = "Pris: 0 kr. (Medlemspris)",
+                Text(
+                    text = "Pris: ${event.price} kr. (Medlemspris)",
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }

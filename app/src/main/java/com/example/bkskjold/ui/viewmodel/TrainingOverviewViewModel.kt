@@ -1,7 +1,11 @@
 package com.example.bkskjold.ui.viewmodel
 
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.BookingData
@@ -29,6 +33,7 @@ class TrainingOverviewViewModel {
             items(trainings.size) { i ->
                 TrainingCard(training = trainings[i], navController)
             }
+            item { Spacer(modifier = Modifier.height(80.dp)) }
         }
 /*
         val allTrainings = BookingData().getAllTraining()
@@ -57,6 +62,7 @@ class TrainingOverviewViewModel {
             items(trainings.size) { i ->
                 TrainingCard(training = trainings[i], navController)
             }
+            item {Spacer(modifier = Modifier.height(80.dp))}
         }
 
 /*        val signedUpTrainings = BookingData().getSignedUpTrainings()
