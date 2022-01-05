@@ -19,8 +19,8 @@ import com.example.bkskjold.R
 fun InvitationCard(name: String, date: String, location: String) {
     Card( //event card
     modifier = Modifier
-    .padding(15.dp),
-    //.height(200.dp),
+    .padding(15.dp)
+        .width(300.dp),
     backgroundColor = colorResource(R.color.participating),
     shape = RoundedCornerShape(22.dp),
     ) {

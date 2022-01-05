@@ -1,5 +1,6 @@
 package com.example.bkskjold.ui.viewmodel
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -20,7 +21,7 @@ import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.ui.view.pages.HomeScreenPage
 import com.example.bkskjold.ui.view.pages.eventOverview
-import com.example.bkskjold.ui.view.pages.profileOverview
+import com.example.bkskjold.ui.view.pages.ProfileOverview
 import com.example.bkskjold.ui.view.pages.trainingOverview
 
 
@@ -28,6 +29,7 @@ import com.example.bkskjold.ui.view.pages.trainingOverview
  * Inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
  */
 
+@ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
@@ -41,7 +43,7 @@ fun Navigation(navController: NavHostController) {
             eventOverview()
         }
         composable(NavigationItem.Profile.route) {
-            profileOverview()
+            ProfileOverview()
 
 
         }
