@@ -88,7 +88,7 @@ fun LoginPage() {
 
             OutlinedTextField(
                 modifier = Modifier
-                    .width(300.dp)
+                    .width(340.dp)
                     .height(60.dp)
                     .background(Color.White, RoundedCornerShape(50)),
                 value = emailValue,
@@ -102,7 +102,7 @@ fun LoginPage() {
 
             OutlinedTextField(
                 modifier = Modifier
-                    .width(300.dp)
+                    .width(340.dp)
                     .height(60.dp)
                     .background(Color.White, RoundedCornerShape(50)),
                 value = passwordValue,
@@ -117,7 +117,7 @@ fun LoginPage() {
             Button(
                 onClick = {},
                 modifier = Modifier
-                    .width(300.dp)
+                    .width(340.dp)
                     .height(60.dp)
                     .border(1.dp, Color.White, RoundedCornerShape(50)),
                 elevation = null,
