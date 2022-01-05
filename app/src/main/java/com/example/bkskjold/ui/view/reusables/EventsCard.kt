@@ -29,14 +29,10 @@ fun EventsCard(num: Int, header: String, description: String, time: String, loca
     Card( //event card
         modifier = Modifier
             .padding(15.dp)
+            .border(1.dp, colorResource(R.color.main_border))
             .clickable { navigateToEvent(num)},
         backgroundColor = colorResource(R.color.default_button_background),
         shape = RoundedCornerShape(22.dp),
-            .padding(15.dp)
-            .border(1.dp, colorResource(R.color.main_border)),
-            //.height(200.dp),
-        backgroundColor = colorResource(R.color.main_background),
-        shape = RoundedCornerShape(18.dp),
         elevation = 12.dp,
 
     ) {
