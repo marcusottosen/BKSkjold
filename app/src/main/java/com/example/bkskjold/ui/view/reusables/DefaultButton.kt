@@ -29,13 +29,16 @@ fun DefaultButton (
     ){
         Button(
             modifier = Modifier
-                .padding(vertical = 4.dp)
+                .padding(0.dp)
                 .fillMaxWidth(),
             onClick = {onClick},
-            shape = RoundedCornerShape(12.dp),
-            colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.default_button_background))
+            shape = RoundedCornerShape(18.dp),
+            colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary))
         ) {
-            Text(text)
+            Text(
+                text = text,
+                color = colorResource(id = R.color.main_background)
+            )
         }
     }
 }

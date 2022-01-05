@@ -4,23 +4,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.BookingData
+import com.example.bkskjold.ui.view.reusables.DefaultHeader
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 class TrainingOverviewViewModel {
-/*
-    var time = "17:47"
-    var daysTillTraining = "I dag"
-    var date = "25 Oktober 2021"
-    var participants = "8/12"
-    var location = "Bane C"
-    var league = "U12"
-    var trainer = "Træner: Ekkart"
-    var button = "Deltag"
-    //var color = R.color.notParticipating*/
-
-
     fun getColor(cards: List<List<String>>, i: Int): Int { //Used to fetch the correct color corresponding to participating status
         if (cards[i][7] == "Deltag") {
             return R.color.notParticipating
@@ -72,7 +62,10 @@ class TrainingOverviewViewModel {
                         color = colorResource(id = getColor(signedUpTrainings, i))
                     )
                 }
-            }/* TODO handle null exception */
+            }else{
+                print("$signedUpTrainings was null")
+            /* TODO handle null exception */
+            }
         }
     }
 }

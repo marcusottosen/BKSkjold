@@ -1,6 +1,8 @@
 package com.example.bkskjold.ui.view.pages
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.*
 
 import androidx.compose.material.Button
@@ -29,30 +31,34 @@ import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
         val viewModel = TrainingOverviewViewModel()
 
-        Column (verticalArrangement = Arrangement.spacedBy(30.dp)){
-            DefaultHeader(header = stringResource(id = R.string.TrainingOverviewPageHeader))
+        Column (
+            verticalArrangement = Arrangement.spacedBy(30.dp)
+        ){
             Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .padding(top = 50.dp)
                     ,
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ){
                     val overViewButton = Button(
                         onClick = { shouldShowOverview.value = true },
+                        shape = RoundedCornerShape(14.dp),
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor =
-                                if(shouldShowOverview.value) colorResource(R.color.top_header)
-                                else colorResource(R.color.top_header_light)),
+                                if(shouldShowOverview.value) colorResource(R.color.primary)
+                                else colorResource(R.color.primary_light)),
 
                         ){
                         Text(text = "Alle Træninger", color = colorResource(id = R.color.main_background))
                     }
                     val signedUpButton = Button(
                         onClick = { shouldShowOverview.value = false },
+                        shape = RoundedCornerShape(14.dp),
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor =
-                                if(shouldShowOverview.value) colorResource(R.color.top_header_light)
-                                else colorResource(R.color.top_header)),
+                                if(shouldShowOverview.value) colorResource(R.color.primary_light)
+                                else colorResource(R.color.primary)),
                         ) {
                         Text(text = "Tilmeldte Træninger", color = colorResource(id = R.color.main_background))
                     }

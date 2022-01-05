@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview as Preview1
 
 @Composable
 fun TrainingCard(time: String, daysTillTraining: String, date: String, participants: String, location: String, league: String, trainer: String, button: String, color: Color) { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
@@ -58,7 +59,9 @@ fun TrainingCard(time: String, daysTillTraining: String, date: String, participa
             }
 
             Column {
-                Row {
+                Row (
+                    modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)
+                        ) {
                     Column() {
                         Text(
                             text = participants,

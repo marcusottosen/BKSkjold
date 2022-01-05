@@ -7,6 +7,7 @@
     -->
     <!-- Colors -->
     <color name="primary">#FF448C8B</color>
+    <color name="primary_light">#FF8FBAB9</color>
     <color name="green">#FF698C44</color>
     <color name="red">#FF8C4445</color>
     <color name="home_header_secondary">#FF84B5B4</color>
@@ -15,6 +16,9 @@
     <!-- Background Colors -->
     <color name="main_background">#FFFFFFFF</color>
     <color name="border">#FFD9D9D9</color>
+
+    <!-- Border color -->
+    <color name="main_border">#FFE7E7E7</color>
 
 
 

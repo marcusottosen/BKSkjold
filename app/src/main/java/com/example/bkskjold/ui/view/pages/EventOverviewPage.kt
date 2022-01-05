@@ -21,7 +21,6 @@ import com.example.bkskjold.ui.viewmodel.EventOverviewViewModel
                 .background(color = colorResource(R.color.main_background)),
         )
         {
-            DefaultHeader(header = stringResource(id = R.string.EventOverviewPageHeader))
             EventOverviewViewModel().getEventsView()
 
         }
