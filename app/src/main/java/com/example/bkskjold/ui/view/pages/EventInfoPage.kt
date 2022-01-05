@@ -46,7 +46,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     elevation = ButtonDefaults.elevation(
                         defaultElevation = 0.dp
                     ),
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigateUp() },
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.icon_back_arrow),
