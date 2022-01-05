@@ -1,4 +1,6 @@
 package com.example.bkskjold.ui.view.pages
+import android.graphics.Paint
+import android.text.Layout
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextAlign
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.InvitationData
 import com.example.bkskjold.ui.view.reusables.DefaultHeader
@@ -41,11 +44,23 @@ fun ProfileOverview() {
         item { ProfileOverviewViewModel().getProfileView() }
         // item {ProfileOverviewViewModel().getProfileInvitationView()}
         val inviInfo = InvitationData().getInvitations()
+
+       item { Text(modifier = Modifier
+           .fillMaxWidth(),
+               text = "Invitationer",
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+        ) }
+
+        //PaddingValues(50.dp)
         item {
-            LazyColumn(modifier = Modifier.height(280.dp)
-                          ) {
-                stickyHeader { Text(text = "Invitations") }
-                items(inviInfo.size) { i ->
+            LazyColumn(
+                modifier = Modifier.height(280.dp)
+                    .fillMaxWidth()
+                    .wrapContentSize(Alignment.Center)
+                ) {
+
+                items(inviInfo.size)  { i ->
                     InvitationCard(
                         inviInfo[i][0],
                         inviInfo[i][1],
@@ -53,24 +68,6 @@ fun ProfileOverview() {
                     )
                 }
             }
-        }
-        item {
-            NextTrainingCard(
-                header = "Træning for seniorer",
-                description = "Holdtræning",
-                date = "25. Oktober 2021",
-                time = "17:45",
-                location = "Bane C"
-            )
-        }
-        item {
-            NextTrainingCard(
-                header = "Træning for seniorer",
-                description = "Holdtræning",
-                date = "25. Oktober 2021",
-                time = "17:45",
-                location = "Bane C"
-            )
         }
         item {
             NextTrainingCard(
