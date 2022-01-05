@@ -58,65 +58,39 @@ fun SettingsPage() {
             )
         }}
 
-        OutlinedButton(modifier = Modifier
-            .fillMaxWidth()
-            .height(55.dp),
-            onClick = { /*TODO*/ }) {
-            Text(modifier = Modifier
-                .fillMaxWidth(),
-                text = "Abonnement",
-                textAlign = TextAlign.Start ,
-            color = colorResource(id =R.color.primary_light))
-        }
-        OutlinedButton(modifier = Modifier
-            .fillMaxWidth()
-            .height(55.dp),
-            onClick = { /*TODO*/ }) {
-            Text(modifier = Modifier
-                .fillMaxWidth(),
-                text = "Notifikationer",
-                textAlign = TextAlign.Start ,
-            color = colorResource(id =R.color.primary_light))
-        }
+        SettingsButton(description = "Abonnement",
+            image = R.drawable.icon_subscription,
+            onClick = { /*TODO*/},
 
-        OutlinedButton(modifier = Modifier
-            .fillMaxWidth()
-            .height(55.dp),
-            onClick = { /*TODO*/ }) {
-            Text(modifier = Modifier
-                .fillMaxWidth(),
-                text = "Privatliv og Sikkerhed",
-                textAlign = TextAlign.Start ,
-            color = colorResource(id =R.color.primary_light))
-        }
 
-        OutlinedButton(modifier = Modifier
-            .fillMaxWidth()
-            .height(55.dp),
-            onClick = { /*TODO*/ }) {
-            Text(modifier = Modifier
-                .fillMaxWidth(),
-                text = "Omkring BKSkjold",
-                textAlign = TextAlign.Start ,
-                color = colorResource(id =R.color.primary_light))
-        }
-
-        OutlinedButton(modifier = Modifier
-            .fillMaxWidth()
-            .height(55.dp),
-            onClick = { /*TODO*/ }) {
-            Text(
-                text = "Kontakt Os",
-                textAlign = TextAlign.Start ,
-                color = colorResource(id =R.color.primary_light))
-            Icon(painterResource(id = R.drawable.icon_edit_pencil),
-                  contentDescription = null, )
-        }
-        SettingsButton(description = "boingboing",
+            )
+        SettingsButton(description = "Notifikationer",
             image = R.drawable.icon_notification_bell,
             onClick = { /*TODO*/},
 
 
-        )
+            )
+
+        SettingsButton(description = "Privatliv og Sikkerhed",
+            image = R.drawable.icon_privacy,
+            onClick = { /*TODO*/},
+
+
+            )
+
+        SettingsButton(description = "Omkring BKSkjold",
+            image = R.drawable.icon_about_us,
+            onClick = { /*TODO*/},
+
+
+            )
+
+        SettingsButton(description = "Kontakt Os",
+            image = R.drawable.icon_contact_us,
+            onClick = { /*TODO*/},
+
+
+            )
+
     }
 }

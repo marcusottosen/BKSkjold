@@ -1,14 +1,13 @@
 package com.example.bkskjold.ui.view.reusables
 
+import android.graphics.Paint
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -23,11 +22,9 @@ fun SettingsButton (
     description: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
-){
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
+)
+
+    {
         OutlinedButton(
             modifier = Modifier
                 .fillMaxWidth()
@@ -36,20 +33,25 @@ fun SettingsButton (
            // shape = RoundedCornerShape(18.dp),
 
         ) {
-            Icon(
-                painterResource(id = image),
-                contentDescription = null,
-
-            )
-            Text( modifier = Modifier
-                .align(Alignment.CenterVertically),
-                text = description,
-                color = colorResource(id =R.color.primary_light))
+            Box(modifier = Modifier.align(CenterVertically)){
 
 
-                    // Icon(painterResource(id = R.drawable.icon_forward_arrow_head),
-                  //  contentDescription = null, )
-        }
+                Icon(
+                    painterResource(id = image),
+                    contentDescription = null
+                )}
+
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp),
+                    text = description,
+                    color = colorResource(id = R.color.primary_light)
+                )
+
+
+
+
 
         }
     }
