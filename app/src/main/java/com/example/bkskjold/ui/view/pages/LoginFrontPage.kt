@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
@@ -52,6 +53,13 @@ fun LoginFrontPage() {
                 text = "NemSport",
                 fontSize = 32.sp,
                 color = Color.White
+            )
+
+            Text(
+                text = "Den nemmeste måde at holde styr på dine træninger!",
+                fontSize = 18.sp,
+                color = Color.White,
+                textAlign = TextAlign.Center
             )
 
         }
