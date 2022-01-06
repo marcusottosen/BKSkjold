@@ -2,7 +2,9 @@ package com.example.bkskjold.ui.view.pages
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -73,7 +75,7 @@ fun LoginFrontPage() {
             Button(
                 onClick = {},
                 modifier = Modifier
-                    .width(200.dp)
+                    .wrapContentWidth()
                     .height(48.dp),
                 elevation = null,
                 colors = ButtonDefaults.buttonColors(
@@ -88,6 +90,50 @@ fun LoginFrontPage() {
                 )
             }
 
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp),
+                shape = RoundedCornerShape(50),
+                elevation = null,
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.White
+                )
+
+
+            ) {
+                Text(
+                    text = "Opret bruger",
+                    color = colorResource(R.color.primary)
+                )
+
+
+            }
+
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp)
+                    .border(1.dp, Color.White, RoundedCornerShape(50)),
+                elevation = null,
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Transparent
+                )
+
+
+            ) {
+                Text(
+                    text = "Log ind",
+                    color = Color.White
+                )
+
+
+            }
+
         }
+
+
     }
 }
