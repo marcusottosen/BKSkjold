@@ -73,7 +73,7 @@ fun LoginFrontPage() {
             Button(
                 onClick = {},
                 modifier = Modifier
-                    .width(340.dp)
+                    .width(200.dp)
                     .height(48.dp),
                 elevation = null,
                 colors = ButtonDefaults.buttonColors(
@@ -81,7 +81,7 @@ fun LoginFrontPage() {
                 )) {
                 Text(
                     text = "Tilmeld dig klubben her",
-                    fontSize = 14.sp,
+                    fontSize = 12.sp,
                     color = Color.White,
                     textAlign = TextAlign.Center
 
