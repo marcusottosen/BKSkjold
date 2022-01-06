@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.ui.view.pages.trainingInfoPage
 import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
 import com.example.bkskjold.ui.viewmodel.Navigation
 
@@ -30,7 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            trainingInfoPage(navController = rememberNavController())
+            MainScreen()
         }
     }
 }

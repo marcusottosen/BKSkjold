@@ -54,7 +54,7 @@ fun Navigation(navController: NavHostController) {
         composable("trainingDetails"){
             val trainingModel = navController.previousBackStackEntry?.arguments?.getParcelable<Training>("training")
             trainingModel?.let { 
-                DefaultDetails(training = it, navController = navController)
+                trainingInfoPage(training = it, navController = navController)
             }
         }
         composable("eventDetails"){

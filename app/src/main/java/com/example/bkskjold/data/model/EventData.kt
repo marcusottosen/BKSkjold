@@ -33,18 +33,18 @@ class EventData {
 
     //TODO Fetch from database instead
     val events = listOf(
-        Event(1 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(2 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(3 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(4 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(5 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(6 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(7 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(8 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(9 , "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(10, "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(11, "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(12, "21:00", "22:00", "26 oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(1 , "21:00", "22:00", "2. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(2 , "11:00", "22:00", "3. oktober", "Et andet klubhus", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(3 , "23:00", "22:00", "4. oktober", "Det hemmelige klubhus", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(4 , "18:00", "22:00", "5. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(5 , "13:50", "22:00", "6. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(6 , "21:00", "22:00", "7. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(7 , "21:00", "22:00", "8. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(8 , "21:00", "22:00", "9. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(9 , "21:00", "22:00", "10. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(10, "21:00", "22:00", "11. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(11, "21:00", "22:00", "12. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
+        Event(12, "21:00", "22:00", "13. oktober", "Klubhuset", true, 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
     )
 }
 

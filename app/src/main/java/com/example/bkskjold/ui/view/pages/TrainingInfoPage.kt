@@ -23,18 +23,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.BookingData
 import com.example.bkskjold.data.model.PeopleSource
+import com.example.bkskjold.data.model.Training
 
 
 @Preview()
 @Composable
-fun trainingInfoPage(navController: NavController) {
-    val trainingInfo = BookingData().getSignedUpTrainings()!![1]
+fun trainingInfoPage(training: Training, navController: NavController) {
 
     Column(verticalArrangement = Arrangement.spacedBy(30.dp), modifier = Modifier.padding(horizontal = 30.dp)) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
             .fillMaxWidth()
             .padding(top = 30.dp)) {
-            Text(text = stringResource(id = R.string.TrainingInfoPageHeader) + " d. " + trainingInfo.date)
+            Text(text = stringResource(id = R.string.TrainingInfoPageHeader) + " d. " + training.date)
         }
 
         Column() {
@@ -52,7 +52,7 @@ fun trainingInfoPage(navController: NavController) {
                     contentDescription = "lokation",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = trainingInfo.location)
+                Text(text = training.location)
             }
             Row(Modifier.padding(bottom = 10.dp)) {
                 Icon(
@@ -60,7 +60,7 @@ fun trainingInfoPage(navController: NavController) {
                     contentDescription = "tidspunkt",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = trainingInfo.timeStart + " - " + trainingInfo.date)
+                Text(text = training.timeStart + " - " + training.date)
             }
             Row() {
                 Icon(
