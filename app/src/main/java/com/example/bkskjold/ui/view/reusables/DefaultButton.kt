@@ -37,8 +37,8 @@ fun DefaultButton (
         ) {
             Text(
                 text = text,
-                color = colorResource(id = R.color.main_background)
-            )
+                color = colorResource(id =R.color.primary_light))
+
         }
     }
 }
