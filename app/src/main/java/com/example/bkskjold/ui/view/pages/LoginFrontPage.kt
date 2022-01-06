@@ -34,6 +34,7 @@ fun LoginFrontPage() {
         modifier = Modifier
             .fillMaxSize()
             .background(frontBgColor)
+            .padding(20.dp)
 
     ) {
         Column(
@@ -53,6 +54,8 @@ fun LoginFrontPage() {
                     .size(250.dp, 250.dp)
             )
 
+            Spacer(modifier = Modifier.height(20.dp))
+
             Text(
                 text = "NemSport",
                 fontSize = 32.sp,
@@ -71,6 +74,8 @@ fun LoginFrontPage() {
                 color = Color.White,
                 textAlign = TextAlign.Center
             )
+
+            Spacer(modifier = Modifier.height(42.dp))
 
             Button(
                 onClick = {},
@@ -105,11 +110,14 @@ fun LoginFrontPage() {
             ) {
                 Text(
                     text = "Opret bruger",
-                    color = colorResource(R.color.primary)
+                    color = colorResource(R.color.primary),
+                    fontSize = 14.sp
                 )
 
 
             }
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             Button(
                 onClick = {},
@@ -117,6 +125,7 @@ fun LoginFrontPage() {
                     .width(340.dp)
                     .height(60.dp)
                     .border(1.dp, Color.White, RoundedCornerShape(50)),
+                shape = RoundedCornerShape(50),
                 elevation = null,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.Transparent
@@ -126,7 +135,8 @@ fun LoginFrontPage() {
             ) {
                 Text(
                     text = "Log ind",
-                    color = Color.White
+                    color = Color.White,
+                    fontSize = 14.sp
                 )
 
 

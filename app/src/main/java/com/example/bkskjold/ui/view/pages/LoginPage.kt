@@ -22,6 +22,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,7 +32,7 @@ import com.example.bkskjold.R
 fun LoginPage() {
 
     val loginImage = painterResource(id = R.drawable.login_image2)
-    val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary), colorResource(R.color.login_green)),
+    val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary), colorResource(R.color.light_green)),
     startY = 0.0f,
     endY = 1000.0f)
 
@@ -43,16 +44,32 @@ fun LoginPage() {
         modifier = Modifier
             .fillMaxSize()
             .background(bgColor)
+            .padding(20.dp)
 
     ) {
 
-        Row(modifier = Modifier.padding(40.dp), horizontalArrangement = Arrangement.Start){
+        Row(modifier = Modifier.padding(24.dp), horizontalArrangement = Arrangement.Start) {
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .width(48.dp)
+                    .height(48.dp),
+                elevation = null,
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Transparent
+                )
+
+
+            ) {
             Text(
                 text = "<",
-                fontSize =28.sp,
-                color = Color.Black)
-        }
+                fontSize = 28.sp,
+                color = Color.Black,
+                textAlign = TextAlign.Center
 
+            )
+        }
+    }
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -120,6 +137,7 @@ fun LoginPage() {
                     .width(340.dp)
                     .height(60.dp)
                     .border(1.dp, Color.White, RoundedCornerShape(50)),
+                shape = RoundedCornerShape(50),
                 elevation = null,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.Transparent
@@ -129,7 +147,8 @@ fun LoginPage() {
             ) {
                 Text(
                     text = "Fortsæt >",
-                    color = Color.White
+                    color = Color.White,
+                    fontSize = 14.sp
                 )
 
 
