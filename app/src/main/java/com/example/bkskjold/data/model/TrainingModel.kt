@@ -1,5 +1,13 @@
 package com.example.bkskjold.data.model
+import android.content.ContentValues.TAG
 import android.os.Parcelable
+import android.util.Log
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
 
 class BookingData {
@@ -45,7 +53,7 @@ class BookingData {
     }*/
 
     //TODO Fetch from database instead
-    val bookings = listOf(
+    /*val bookings = listOf(
         Training(1 , "21:00", "22:00", "mandag", "25 oktober", "Bane C", "Senior", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
         Training(2 , "17:00", "22:00", "mandag", "25 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
         Training(3 , "17:00", "22:00", "mandag", "25 oktober", "Bane B", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
@@ -58,9 +66,42 @@ class BookingData {
         Training(10, "16:30", "22:00", "mandag", "26 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
         Training(11, "17:00", "22:00", "mandag", "26 oktober", "Bane C", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
         Training(12, "17:00", "22:00", "mandag", "26 oktober", "Bane D", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3)
-    )
+    )*/
+    val bookings = mutableListOf<Training>()
+
+    /*fun loadTrainingsFromDB(){
+        val db = Firebase.firestore
+        db.collection("trainings")
+            .get()
+            .addOnSuccessListener { result ->
+                for (training in result){
+                    bookings.updateList(result.toObjects(Training::class.java))
+                }
+            }
+
+    }*/
+
+    fun loadTrainingsFromDB() {
+        FirebaseFirestore
+            .getInstance()
+            .collection("trainings")
+            .addSnapshotListener(this,
+                { querySnapshot: QuerySnapshot?, e: FirebaseFirestoreException? ->
+                    for (instance in querySnapshot.documents){
+                        val Training = document.toObject(Training::class.java)
+                    }
+
+
+                })
+
+
+
+        fun getAllTrainings(){
+
+    }
 
     fun getSignedUpTrainings(): MutableList<Training> {
+        loadTrainingsFromDB()
         var bookings = bookings
         var signedUpTrainings: MutableList<Training> = mutableListOf()
 
@@ -70,8 +111,10 @@ class BookingData {
             }
         }
         return signedUpTrainings
-    }
+
 }
+
+
 
 
 @Parcelize
@@ -90,4 +133,9 @@ data class Training(
     val maxParticipants: Int,
     val team1: Int,
     val team2: Int
-    ): Parcelable
+    ): Parcelable{
+        fun <T> SnapshotStateList<T>.updateList(newData: List<T>){
+            clear()
+            addAll(newData)
+        }
+    }

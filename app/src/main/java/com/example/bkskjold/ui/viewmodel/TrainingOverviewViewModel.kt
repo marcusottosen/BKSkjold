@@ -1,5 +1,7 @@
 package com.example.bkskjold.ui.viewmodel
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,6 +12,8 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.BookingData
 import com.example.bkskjold.ui.view.reusables.TrainingCard
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class TrainingOverviewViewModel {
     fun getColor(cards: List<List<String>>, i: Int): Int { //Used to fetch the correct color corresponding to participating status
@@ -29,6 +33,27 @@ class TrainingOverviewViewModel {
     @Composable
     fun GetOverviewView(navController: NavController){
         val trainings = BookingData().bookings
+
+        fun writeToDB() {
+            val db = Firebase.firestore
+
+
+            for (i in 1..trainings.size) {
+                db.collection("trainings")
+                    .add(trainings[i-1])
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(
+                            ContentValues.TAG,
+                            "DocumentSnapshot added with ID: ${documentReference.id}"
+                        )
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(ContentValues.TAG, "Error adding document", e)
+                    }
+            }
+        }
+
+
         LazyColumn {
             items(trainings.size) { i ->
                 TrainingCard(training = trainings[i], navController)
@@ -54,6 +79,7 @@ class TrainingOverviewViewModel {
                 )
             }
         }*/
+        writeToDB()
     }
     @Composable
     fun GetSignedUpView(navController: NavController){
@@ -90,4 +116,23 @@ class TrainingOverviewViewModel {
             }
         }*/
     }
+
+    val user = hashMapOf(
+        "first" to "Ada",
+        "last" to "Lovelace",
+        "born" to 1815
+    )
+
+    /*fun writeToDB() {
+        val db = Firebase.firestore
+
+        db.collection("trainings")
+            .add(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error adding document", e)
+            }
+    }*/
 }

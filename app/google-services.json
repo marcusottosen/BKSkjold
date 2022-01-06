@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "320423115835",
+    "project_id": "nemsport-2ec8f",
+    "storage_bucket": "nemsport-2ec8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320423115835:android:567ef8b9518b2b5831b01e",
+        "android_client_info": {
+          "package_name": "com.example.bkskjold"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320423115835-i2f3ml6pt4r4108vs66tjjtdd4pkct5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtifNEHR22rVIa_UZ66pQZHPAmsxaGg20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320423115835-i2f3ml6pt4r4108vs66tjjtdd4pkct5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
