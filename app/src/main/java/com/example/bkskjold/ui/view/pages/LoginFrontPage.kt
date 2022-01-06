@@ -3,6 +3,8 @@ package com.example.bkskjold.ui.view.pages
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -56,11 +58,35 @@ fun LoginFrontPage() {
             )
 
             Text(
-                text = "Den nemmeste måde at holde styr på dine træninger!",
+                text = "Den nemmeste måde at holde styr",
                 fontSize = 18.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center
             )
+            Text(
+                text = "på dine træninger",
+                fontSize = 18.sp,
+                color = Color.White,
+                textAlign = TextAlign.Center
+            )
+
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(48.dp),
+                elevation = null,
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Transparent
+                )) {
+                Text(
+                    text = "Tilmeld dig klubben her",
+                    fontSize = 14.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+
+                )
+            }
 
         }
     }
