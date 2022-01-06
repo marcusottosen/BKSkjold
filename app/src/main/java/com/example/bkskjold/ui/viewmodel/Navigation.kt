@@ -1,12 +1,14 @@
 package com.example.bkskjold.ui.viewmodel
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -66,6 +68,7 @@ fun Navigation(navController: NavHostController) {
 
 /**
  * GUIDE TIL SUB-NAVIGATION
+ * (ved objekt i parameter)
  * 1.
  *   Ovenfor copypaste den nederste composable og ret den til. Der er 6 steder der skal ændres til den ønskede side.
  *      "route" er stien den leder efter, så dette skal skrives ved punkt 2.
@@ -113,7 +116,7 @@ fun BottomNavigationBar(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
-                icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
+                icon = { Icon(painterResource(id = item.icon), contentDescription = item.title, modifier = Modifier.size(25.dp)) },
                 label = { Text(text = item.title) },
                 selectedContentColor = Color.Black,
                 unselectedContentColor = Color.Black.copy(0.4f),
