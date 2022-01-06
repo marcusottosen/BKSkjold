@@ -16,5 +16,36 @@ import com.example.bkskjold.R
 
 @Composable
 fun LoginFrontPage() {
+    val frontLoginImage = painterResource(id = R.drawable.login_image)
+    val frontBgColor = Brush.verticalGradient(
+        listOf(colorResource(R.color.light_green), colorResource(R.color.primary)),
+        startY = 300.0f,
+        endY = 1500.0f
+    )
 
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(frontBgColor)
+
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(1.0f)
+                .background(Color.Transparent)
+        )
+        {
+
+            Image(
+                frontLoginImage,
+                contentDescription = "login_image",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .size(250.dp, 250.dp)
+            )
+
+        }
+    }
 }
