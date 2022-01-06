@@ -6,6 +6,9 @@
     <string name="EventOverviewPageHeader">Events</string>
     <string name="NemSportHeader">NemSport</string>
     <string name="ProfileHeader">Profil</string>
+    <string name="TrainingInfoPageHeader">Træning</string>
+    <string name="TeamTraining">holdtræning</string>
+    <string name="TrainingPrice">Pris: %1$s kr. (Medlemspris: %2$s kr.)</string>
 
 
 
