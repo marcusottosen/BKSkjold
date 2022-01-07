@@ -1,8 +1,13 @@
 package com.example.bkskjold.data.util
 
-import com.example.bkskjold.data.model.loadTrainingsFromDB
+import com.example.bkskjold.data.model.*
 
 fun preloadDB(){
-    //writeToDB()
+    //userWriteToDB()
+    //trainingsWriteToDB()
+    eventWriteToDB()
+
+    loadUsersFromDB()
     loadTrainingsFromDB()
+    loadEventsFromDB()
 }

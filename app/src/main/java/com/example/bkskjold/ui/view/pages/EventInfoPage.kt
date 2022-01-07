@@ -111,7 +111,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     contentDescription = null,
                 )
                 Text(
-                    text = event.date,
+                    text = event.timeStart.toString(),
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }
@@ -137,7 +137,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     contentDescription = null,
                 )
                 Text(
-                    text = "Pris: ${event.price} kr. (Medlemspris)",
+                    text = "Pris: ${event.price} kr.",
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }

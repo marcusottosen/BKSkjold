@@ -6,7 +6,7 @@ import androidx.compose.material.Text
 import com.example.bkskjold.data.model.ProfileInfo;
 import androidx.compose.runtime.Composable;
 import androidx.compose.ui.tooling.preview.Preview;
-import com.example.bkskjold.data.model.EventData
+import com.example.bkskjold.data.model.events
 import com.example.bkskjold.ui.view.reusables.EventsCard
 import com.example.bkskjold.ui.view.reusables.InvitationCard
 
@@ -33,12 +33,11 @@ class ProfileOverviewViewModel {
     @Preview
     @Composable
     fun getProfileInvitationView() {
-        var events = EventData().events
         var numberOfItems = events.size
 
         LazyColumn(){
             items(numberOfItems) { i ->
-                InvitationCard(name = events[i].header, date = events[i].date, location = events[i].location)
+                InvitationCard(name = events[i].header, date = events[i].timeStart.toString(), location = events[i].location)
 
             }
         }

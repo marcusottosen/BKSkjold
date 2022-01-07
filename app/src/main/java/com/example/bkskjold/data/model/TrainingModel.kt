@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 /*
 // *** Uncomment hvis dataen skal tilføjes. (Uncomment også i PreloadDB.kt ***
-fun writeToDB() {
+fun trainingsWriteToDB() {
     val bookings = listOf(
         Training("21:00", "22:00", "mandag", "10 januar", "Bane C", "Senior", "Ekkart", false, 10, "Normal træning for u13. Kom i god tid!", 6, 3, 2),
         Training("14:30", "18:30", "tirsdag", "11 januar", "Bane A", "U21", "Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 5, 6),
@@ -38,20 +38,6 @@ fun writeToDB() {
                 Log.w(ContentValues.TAG, "Error adding document", e)
             }
     }
-
-    firstname: String
-    surname: String
-    Email: String
-    Hold: String
-    medlemType: Int
-    Medlem siden: Date
-    Gennemførte træninger: Int
-    Tlfnr: Int?
-    fødselsdato: Date?
-    adresse: String?
-
-    Local: loggedIn: Boolean
-
 }*/
 
 

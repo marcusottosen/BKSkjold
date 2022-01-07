@@ -6,53 +6,37 @@ import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
+import java.sql.Timestamp
+import java.time.LocalDateTime.now
 
-/*
 // *** Uncomment hvis dataen skal tilføjes. (Uncomment også i PreloadDB.kt ***
-fun writeToDB() {
-val bookings = listOf(
-    Training(1 , "21:00", "22:00", "mandag", "10 januar", "Bane C", "Senior", "Ekkart", false, 10, "Normal træning for u13. Kom i god tid!", 6, 3, 2),
-    Training(2 , "14:30", "18:30", "tirsdag", "11 januar", "Bane A", "U21", "Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 5, 6),
-    Training(3 , "19:45", "22:00", "onsdag", "12 januar", "Bane B", "U20", "Ian", false, 21, "Kom glad. Husk vand", 12, 5, 3),
-    Training(4 , "17:00", "18:30", "onsdag", "12 januar", "Bane C", "U20", "Kasper", true, 20, "Normal træning for u13. Kom i god tid!", 24, 10, 9),
-    Training(5 , "18:00", "22:00", "torsdag", "13 januar", "Bane E", "U22", "Ekkart", true, 25, "Kom glad. Husk vand", 12, 2, 3),
-    Training(6 , "14:30", "15:30", "tirsdag", "13 januar", "Bane D", "U20", "Ian", true, 20, "Ekkart tager mad med", 10, 2, 3),
-    Training(7 , "19:45", "22:00", "mandag", "10 januar", "Bane C", "U14", "Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-    Training(8 , "17:00", "18:30", "fredag", "14 januar", "Bane F", "U14", "Peter", true, 25, "Ekkart tager mad med", 12, 2, 3),
-    Training(9 , "14:30", "22:00", "mandag", "10 januar", "Bane Y", "U20", "Ian", false, 10, "Ian tager mad med", 12, 2, 3),
-    Training(10, "16:30", "18:30", "mandag", "10 januar", "Bane A", "U26", "Peter", true, 20, "Peter kom til tiden denne gang! Tak!!", 12, 7, 3),
-    Training(11, "19:45", "22:00", "fredag", "14 januar", "Bane C", "Senior", "Ekkarts far", false, 20, "Ældre mennesker der spiller fodbold", 12, 6, 5),
-    Training(12, "17:00", "19:45", "mandag", "10 januar", "Bane D", "U20", "Ian", false, 20, "Peter kom til tiden denne gang! Tak!!", 12, 3, 4)
-)
+fun userWriteToDB() {
+    val createUers = listOf(
+        User("Ekkart", "Kindler", "ekkart@dtu.dk", "DTU Compute Secret HQ, Danmark", 11223344, com.google.firebase.Timestamp.now(),"Senior", 2, 26, com.google.firebase.Timestamp.now(),null),
+        User("Ian", "Kindlerine", "Ian@dtu.dk", "Rådmandsgade 12, 2200 København N", 56156476, com.google.firebase.Timestamp.now(),"U12", 1, 52, com.google.firebase.Timestamp.now(),null),
+        User("Thomas", "Berg", "ThomasB@dtu.dk", "Eddagården 6, 2200 København N", 74885216, com.google.firebase.Timestamp.now(),"U13", 1, 45, com.google.firebase.Timestamp.now(),null),
+        User("Bjarne", "Sørensen", "BarjneS@dtu.dk", "Bragesgade 35, 2200 København N", 69568515, com.google.firebase.Timestamp.now(),"U14", 1, 12, com.google.firebase.Timestamp.now(),null),
+        User("Tim", "Timeresn", "TimT@dtu.dk", "Titangade 2, 2200 København N", 12345655, com.google.firebase.Timestamp.now(),"U11", 1, 64, com.google.firebase.Timestamp.now(),null),
+        User("Kasper", "Kaspersen", "KasperK@dtu.dk", "Nørrebrogade 66C, 2200 København N", 12564896, com.google.firebase.Timestamp.now(),"U9", 1, 56, com.google.firebase.Timestamp.now(),null),
+        User("Søren", "Sørensen", "Sørensø@dtu.dk", "Nørre Allé 19E, 2200 København N", 48852645, com.google.firebase.Timestamp.now(),"U16", 1, 21, com.google.firebase.Timestamp.now(),null),
+        User("Thomas", "Kastrup", "Thomaskas@dtu.dk", "Kastrup Lufthavn", 48213654, com.google.firebase.Timestamp.now(),"U95", 1, 5, com.google.firebase.Timestamp.now(),null)
+    )
 
-val db = Firebase.firestore
-for (i in 1..bookings.size) {
-    db.collection("trainings")
-        .add(bookings[i-1])
-        .addOnSuccessListener { documentReference ->
-            Log.d(
-                ContentValues.TAG,
-                "DocumentSnapshot added with ID: ${documentReference.id}"
-            )
-        }
-        .addOnFailureListener { e ->
-            Log.w(ContentValues.TAG, "Error adding document", e)
-        }
+    val db = Firebase.firestore
+    for (i in 1..createUers.size) {
+        db.collection("users")
+            .add(createUers[i-1])
+            .addOnSuccessListener { documentReference ->
+                Log.d(
+                    ContentValues.TAG,
+                    "DocumentSnapshot added with ID: ${documentReference.id}"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error adding document", e)
+            }
+    }
 }
-
-Navn: String
-Email: String
-Hold: String
-medlemType: Int
-Medlem siden: Date
-Gennemførte træninger: Int
-Tlfnr: Int?
-fødselsdato: Date?
-adresse: String?
-
-Local: loggedIn: Boolean
-
-}*/
 
 
 val users: MutableList<User> = mutableListOf()
@@ -69,24 +53,19 @@ fun loadUsersFromDB(): MutableList<User>{
 
                 users.add(
                     User(
-                        //Telmeldte personer
-                        timeStart       = doc["timeStart"] as String,
-                        timeEnd         = doc["timeEnd"] as String,
-                        weekday         = doc["weekday"] as String,
-                        date            = doc["date"] as String,
-                        location        = doc["location"] as String,
-                        league          = doc["league"] as String,
-                        trainer         = doc["trainer"] as String,
-                        attending       = doc["attending"] as Boolean,
-                        price           = (doc["price"] as Number).toInt(),
-                        description     = doc["description"] as String,
-                        maxParticipants = (doc["maxParticipants"] as Number).toInt(),
-                        team1           = (doc["team1"] as Number).toInt(),
-                        team2           = (doc["team2"] as Number).toInt(),
-                        id              = (doc["id"] as Number).toInt()
+                        firstname = doc["firstname"] as String,
+                        surname = doc["surname"] as String,
+                        email = doc["email"] as String,
+                        address = doc["address"] as String,
+                        phoneNumber = (doc["phoneNumber"] as Number).toInt(),
+                        birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
+                        team = doc["team"] as String,
+                        userType = (doc["userType"] as Number).toInt(),
+                        finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
+                        memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
+                        loggedIn = doc["loggedIn"] as Boolean?
                     )
                 )
-                //println(trainings.size)
             }
         }
         .addOnFailureListener { exception ->
@@ -95,32 +74,19 @@ fun loadUsersFromDB(): MutableList<User>{
     return users
 }
 
-fun getSignedUpUsers(): MutableList<User> {
-    val signedUpTrainings: MutableList<User> = mutableListOf()
-
-    for (user in users){
-        if (user.attending){
-            signedUpTrainings.add(user)
-        }
-    }
-    return signedUpTrainings
-}
 
 @Parcelize
 data class User(
-    val id: Int = 0,
-    val timeStart: String = "",
-    val timeEnd: String= "",
-    val weekday: String= "",
-    val date: String= "",
-    val location: String= "",
-    val league: String= "",
-    val trainer: String= "",
-    val attending: Boolean = false,
-    val price: Int,
-    val description: String= "",
-    val maxParticipants: Int = 0,
-    val team1: Int = 0,
-    val team2: Int = 0
-): Parcelable
+    val firstname: String = "",
+    val surname: String = "",
+    val email: String = "",
+    val address: String = "",
+    val phoneNumber: Int = 1,
+    val birthdate: com.google.firebase.Timestamp,
+    val team: String = "",
+    val userType: Int = 1,
+    val finishedTrainings: Int = 0,
+    val memberSince: com.google.firebase.Timestamp,
+    val loggedIn: Boolean?
+    ): Parcelable
 
