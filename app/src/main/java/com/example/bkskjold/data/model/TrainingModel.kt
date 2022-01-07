@@ -72,7 +72,6 @@ fun loadTrainingsFromDB(): MutableList<Training>{
                         team2           = (doc["team2"] as Number).toInt()
                     )
                 )
-                println(trainings.size)
             }
         }
         .addOnFailureListener { exception ->
