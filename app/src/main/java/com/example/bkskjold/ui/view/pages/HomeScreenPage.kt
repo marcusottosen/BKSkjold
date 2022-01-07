@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.NewsModel
+import com.example.bkskjold.data.model.news
 import com.example.bkskjold.ui.view.reusables.HomePageCategories
 import com.example.bkskjold.ui.view.reusables.NewsCard
 import com.example.bkskjold.ui.view.reusables.NextTrainingCard
@@ -116,12 +116,9 @@ fun HomeScreenPage() {
             )
 
         }
-        val allNews = NewsModel().getNews()
-        items(allNews.size) { i ->
-            NewsCard(
-                allNews[i][0],
-                allNews[i][1],
-                allNews[i][2])
+        items(news.size) { i ->
+            NewsCard(news = news[i])
+            println("NEWS ADDED")
         }
         item { Spacer(modifier = Modifier.height(100.dp)) }
     }

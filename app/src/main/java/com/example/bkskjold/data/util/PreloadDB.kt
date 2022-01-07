@@ -6,8 +6,10 @@ fun preloadDB(){
     //userWriteToDB()
     //trainingsWriteToDB()
     //eventWriteToDB()
+    //newsWriteToDB()
 
     loadUsersFromDB()
+    loadNewsFromDB()
     loadTrainingsFromDB()
     loadEventsFromDB()
 }
