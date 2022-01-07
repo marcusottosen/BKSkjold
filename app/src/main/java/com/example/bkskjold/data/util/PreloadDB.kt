@@ -5,7 +5,7 @@ import com.example.bkskjold.data.model.*
 fun preloadDB(){
     //userWriteToDB()
     //trainingsWriteToDB()
-    eventWriteToDB()
+    //eventWriteToDB()
 
     loadUsersFromDB()
     loadTrainingsFromDB()

@@ -60,6 +60,11 @@ fun loadEventsFromDB(): MutableList<Event>{
         .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting documents: ", exception)
         }
+    println("")
+    println("date")
+    println(com.google.firebase.Timestamp.now().toDate())
+    println("date")
+    println("")
     return events
 }
 

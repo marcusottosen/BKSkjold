@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
+import com.example.bkskjold.data.util.getDate
+import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.ui.view.pages.gotoEventDetails
 
 
@@ -64,7 +66,7 @@ fun EventsCard(event: Event, navController: NavController) {
                 ) {
                     Row() { //time
                         Image(painter = painterResource(id = R.drawable.icon_calendar), contentDescription = null)
-                        Text(text = "${event.timeStart} - ${event.timeEnd}", fontWeight = FontWeight.Bold, modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
+                        Text(text = "${getDate(event.timeStart)}  kl. ${getTime(event.timeStart)}", fontWeight = FontWeight.Bold, modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
                     }
                     Row() { //location
                         Image(painter = painterResource(id = R.drawable.icon_location), contentDescription = null)
