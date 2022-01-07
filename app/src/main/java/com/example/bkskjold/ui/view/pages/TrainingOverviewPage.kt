@@ -39,8 +39,13 @@ fun trainingOverview(navController: NavController) {
     var expandedTidspunkt by remember { mutableStateOf(false) }
     val times = listOf("17:00", "18:00")
 
+    //date filter menu variables
+    var expandedDate by remember { mutableStateOf(false) }
+    val dates = listOf("")
+
     //passed filter values
-    var tidspunkt = remember { "0" }
+    var tidspunkt = remember { mutableStateOf("") }
+    var date = remember { "" }
 
     val viewModel = TrainingOverviewViewModel()
 
@@ -115,11 +120,9 @@ fun trainingOverview(navController: NavController) {
                                     if(t == "Tidspunkt"){expandedTidspunkt = !expandedTidspunkt}
                             }
                             , modifier = Modifier
-                                .width(150.dp)
+                                    .width(125.dp)
                         ) {
                             Text(text = t)
-                            if(t == "Tidspunkt"){
-                                }
                             }
                         }
                     }
@@ -132,8 +135,9 @@ fun trainingOverview(navController: NavController) {
                                 Text(
                                     text = time
                                     , modifier = Modifier
-                                        .clickable { tidspunkt = time }
+                                        .clickable { tidspunkt.value = time }
                                 )
+                                print("")
                             }
                         }
                     }
@@ -144,9 +148,9 @@ fun trainingOverview(navController: NavController) {
         //if(showFilterOptions.value){viewModel.filterMenu()} else{viewModel.filterMenu()}
 
         if(shouldShowOverview.value){
-            viewModel.GetOverviewView(navController)
+            viewModel.GetOverviewView(navController, date = date, timeStart = tidspunkt.value)
         }else {
-            viewModel.GetSignedUpView(navController)
+            viewModel.GetSignedUpView(navController, date = date, timeStart = tidspunkt.value)
         }
     }
 }
