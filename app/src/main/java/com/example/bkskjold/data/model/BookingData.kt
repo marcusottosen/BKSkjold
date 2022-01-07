@@ -46,7 +46,7 @@ class BookingData {
 
     //TODO Fetch from database instead
     val bookings = listOf(
-        Training(1 , "21:00", "22:00", "mandag", "25 oktober", "Bane C", "Senior", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
+        Training(1 , "21:00", "22:00", "mandag", "1 januar", "Bane C", "Senior", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
         Training(2 , "17:00", "22:00", "mandag", "25 oktober", "Bane A", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
         Training(3 , "17:00", "22:00", "mandag", "25 oktober", "Bane B", "U20", "Træner: Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
         Training(4 , "17:00", "22:00", "mandag", "25 oktober", "Bane C", "U20", "Træner: Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),

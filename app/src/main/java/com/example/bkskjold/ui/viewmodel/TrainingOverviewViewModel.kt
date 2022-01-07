@@ -1,23 +1,15 @@
 package com.example.bkskjold.ui.viewmodel
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Text
+
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.BookingData
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.ui.view.reusables.TrainingCard
+import java.lang.Exception
 
 class TrainingOverviewViewModel {
     fun getColor(cards: List<List<String>>, i: Int): Int { //Used to fetch the correct color corresponding to participating status
@@ -68,21 +60,24 @@ class TrainingOverviewViewModel {
 
     @Composable
     fun filterAndSort(navController: NavController, date: String, timeStart: String, practices: List<Training>){
-        //First decide which list of practices to filter through
-        /*var practices = if (overviewOrSignedUp == true){
-            BookingData().getSignedUpTrainings()
-        } else{
-            BookingData().bookings
-        }*/
-
         var filteredPractices: MutableList<Training> = mutableListOf()
 
-        for ( i in practices){
-            if (i.timeStart == timeStart){
-                filteredPractices.add(i)
-                print("")
+        try {
+            for ( i in practices){
+                if (date != "" && timeStart != ""){
+                    if (i.date == date && i.timeStart == timeStart){
+                        filteredPractices.add(i)
+                    }
+                }else if(date != "" || timeStart != ""){
+                    if (i.date == date || i.timeStart == timeStart){
+                        filteredPractices.add(i)
+                    }
+                }
             }
+        } catch (e: Exception){
+            print("Something went wrong, when trying to filter through practices. Method: filterAndSort in TrainingOverviewViewModel")
         }
+
         //Finally create the view with the right practices.
         LazyColumn {
             items(filteredPractices.size) { i ->

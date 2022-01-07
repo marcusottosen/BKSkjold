@@ -1,30 +1,30 @@
 package com.example.bkskjold.ui.view.pages
 
+import android.widget.CalendarView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.ui.unit.*
 
-import androidx.compose.ui.tooling.preview.Preview as p
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
-
 
 //resources and files
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.util.Util
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
 
 //class TrainingOverviewPage {
-@p
 @Composable
 fun trainingOverview(navController: NavController) {
     val shouldShowOverview = remember { mutableStateOf(true) }
@@ -37,15 +37,14 @@ fun trainingOverview(navController: NavController) {
 
     //Tidspunkt filter menu variables
     var expandedTidspunkt by remember { mutableStateOf(false) }
-    val times = listOf("17:00", "18:00")
+    val times = listOf("15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00")
 
     //date filter menu variables
-    var expandedDate by remember { mutableStateOf(false) }
-    val dates = listOf("")
+    //var expandedDate by remember { mutableStateOf(false) }
 
     //passed filter values
     var tidspunkt = remember { mutableStateOf("") }
-    var date = remember { "" }
+    var date = remember { mutableStateOf("") }
 
     val viewModel = TrainingOverviewViewModel()
 
@@ -86,7 +85,7 @@ fun trainingOverview(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(end = 20.dp)
+                .padding(end = 10.dp)
             , verticalArrangement = Arrangement.Center
             , horizontalAlignment = Alignment.End
 
@@ -118,6 +117,7 @@ fun trainingOverview(navController: NavController) {
                                     selectedIndex = index
                                     //expanded = false
                                     if(t == "Tidspunkt"){expandedTidspunkt = !expandedTidspunkt}
+                                    //else if(t == "Date"){expandedDate = !expandedDate}
                             }
                             , modifier = Modifier
                                     .width(125.dp)
@@ -126,31 +126,58 @@ fun trainingOverview(navController: NavController) {
                             }
                         }
                     }
-                    DropdownMenu(expanded = expandedTidspunkt, onDismissRequest = { expandedTidspunkt = false }) {
-                        DropdownMenuItem(
-                            onClick = { expandedTidspunkt = false }
-                            , modifier = Modifier
+                    DropdownMenu(
+                        expanded = expandedTidspunkt
+                        , onDismissRequest = { expandedTidspunkt = false }
+                        , modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .height(170.dp)
+                                .verticalScroll(rememberScrollState(), enabled = true)
+                            ,
                         ) {
                             times.forEachIndexed { index, time ->
-                                Text(
-                                    text = time
+                                DropdownMenuItem(
+                                    onClick = {
+                                        expandedTidspunkt = false
+                                        expanded = false
+                                        tidspunkt.value = time
+                                    }
                                     , modifier = Modifier
-                                        .clickable { tidspunkt.value = time }
-                                )
-                                print("")
+                                ) {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                        , horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        Text(
+                                            text = time
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
+                    AndroidView(
+                        { CalendarView(it) }
+                        , modifier = Modifier.wrapContentWidth()
+                        , update = { views ->
+                            views.setOnDateChangeListener { calendarView, year, month, day ->
+                                var monthShifted = month+1
+                                date.value = Util().dateFormatter(day, monthShifted)
+                            }
+                        }
+                    )
                 }
             }
         }
 
-        //if(showFilterOptions.value){viewModel.filterMenu()} else{viewModel.filterMenu()}
-
         if(shouldShowOverview.value){
-            viewModel.GetOverviewView(navController, date = date, timeStart = tidspunkt.value)
+            viewModel.GetOverviewView(navController, date = date.value, timeStart = tidspunkt.value)
         }else {
-            viewModel.GetSignedUpView(navController, date = date, timeStart = tidspunkt.value)
+            viewModel.GetSignedUpView(navController, date = date.value, timeStart = tidspunkt.value)
         }
     }
 }
