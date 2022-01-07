@@ -47,7 +47,7 @@ fun NewsCard(news: News) {
                 )
                 //Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = news.header,
+                    text = news.description,
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp),
                     color = Color.DarkGray
                 )
