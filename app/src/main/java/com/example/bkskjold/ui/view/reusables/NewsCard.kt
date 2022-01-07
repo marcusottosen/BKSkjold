@@ -2,7 +2,6 @@ package com.example.bkskjold.ui.view.reusables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -17,10 +16,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.News
+import com.example.bkskjold.data.util.getDate
 
 
 @Composable
-fun NewsCard(date: String, headerText: String, descriptionText: String) {
+fun NewsCard(news: News) {
     Card(
         modifier = Modifier
             .padding(15.dp)
@@ -32,7 +33,7 @@ fun NewsCard(date: String, headerText: String, descriptionText: String) {
     ) {
         Column(Modifier.fillMaxSize()) {
             Text(
-                text = date,
+                text = getDate(news.date),
                 textAlign = TextAlign.Right,
                 modifier = Modifier.padding(0.dp, 5.dp, 20.dp, 0.dp).fillMaxWidth(),
                 color = Color.Gray,
@@ -40,13 +41,13 @@ fun NewsCard(date: String, headerText: String, descriptionText: String) {
             )
 
                 Text(
-                    text = headerText,
+                    text = news.header,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(10.dp, 0.dp, 5.dp, 0.dp)
                 )
                 //Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = descriptionText,
+                    text = news.header,
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp),
                     color = Color.DarkGray
                 )

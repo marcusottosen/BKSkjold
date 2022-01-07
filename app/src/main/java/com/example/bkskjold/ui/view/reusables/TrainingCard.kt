@@ -38,7 +38,7 @@ fun TrainingCard(training: Training, navController: NavController
     var isAttending = ""
     val color: Color
 
-    if (training.isAttending ){
+    if (training.attending ){
         isAttending = "Afmeld Deltagelse"
         color = colorResource(R.color.green)
     } else {

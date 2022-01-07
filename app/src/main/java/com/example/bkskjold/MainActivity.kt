@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.util.preloadDB
 import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
 import com.example.bkskjold.ui.viewmodel.Navigation
 
@@ -29,13 +30,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            preloadDB()
             MainScreen()
         }
     }
 }
-
-
-
 
 @ExperimentalFoundationApi
 @Composable
@@ -48,14 +47,7 @@ fun MainScreen() {
     }
 }
 
-@ExperimentalFoundationApi
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview() {
-    MainScreen()
-    //NewsCard()
-    //TrainingCard()
-}
+
 
 
 //TODO fjern når siderne er blevet oprettet!

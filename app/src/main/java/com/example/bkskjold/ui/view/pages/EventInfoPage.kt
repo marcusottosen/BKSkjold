@@ -1,5 +1,7 @@
 package com.example.bkskjold.ui.view.pages
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -25,6 +27,8 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.util.getDate
+import com.example.bkskjold.data.util.getTime
 
 //TODO Alt tekst skal hentes fra database! Evt igennem et event objekt?
 @Composable
@@ -111,7 +115,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     contentDescription = null,
                 )
                 Text(
-                    text = event.date,
+                    text = getDate(event.timeStart),
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }
@@ -124,7 +128,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     contentDescription = null,
                 )
                 Text(
-                    text = "${event.timeStart} - ${event.timeEnd}",
+                    text = "${getTime(event.timeStart)} - ${getTime(event.timeEnd)}",
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }
@@ -137,7 +141,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     contentDescription = null,
                 )
                 Text(
-                    text = "Pris: ${event.price} kr. (Medlemspris)",
+                    text = "Pris: ${event.price} kr.",
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }
