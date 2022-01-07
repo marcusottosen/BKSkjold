@@ -23,6 +23,7 @@ import com.example.bkskjold.ui.view.reusables.HomePageCategories
 import com.example.bkskjold.ui.view.reusables.NewsCard
 import com.example.bkskjold.ui.view.reusables.NextTrainingCard
 
+//TODO Lav metode til at finde den næste tilmeldte træning
 @Preview
 @Composable
 fun HomeScreenPage() {
