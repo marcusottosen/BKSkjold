@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.BookingData
+import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 import java.lang.Exception
 
