@@ -9,7 +9,11 @@
     <string name="TrainingInfoPageHeader">Træning</string>
     <string name="TeamTraining">holdtræning</string>
     <string name="TrainingPrice">Pris: %1$s kr. (Medlemspris: %2$s kr.)</string>
-
+    <string name="participating">deltagende</string>
+    <string name="Unattend">Afmeld deltagelse</string>
+    <string name="Attend">Deltag</string>
+    <string name="Trainer">Træner</string>
+    <string name="TraningDescription">Træningsbeskrivelse:</string>
 
 
 </resources>

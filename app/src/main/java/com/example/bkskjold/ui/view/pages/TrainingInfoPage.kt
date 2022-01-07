@@ -16,6 +16,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bkskjold.R
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.PeopleSource
 import com.example.bkskjold.data.model.Training
@@ -38,7 +40,9 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     contentDescription = "hold",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = "U13" + "-" + stringResource(R.string.TeamTraining))
+                Text(text = training.league + "-" + stringResource(R.string.TeamTraining)
+                    + " (" + stringResource(R.string.Trainer) + " : " + training.trainer+ ")"
+                )
             }
             Row(Modifier.padding(bottom = 10.dp)) {
                 Icon(
@@ -54,7 +58,15 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     contentDescription = "tidspunkt",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = training.timeStart + " - " + training.date)
+                Text(text = training.timeStart + " - " + training.timeEnd + " d. " + training.date)
+            }
+            Row(Modifier.padding(bottom = 10.dp)) {
+                Icon(
+                    Icons.Outlined.Person,
+                    contentDescription = "deltagere",
+                    Modifier.padding(end = 10.dp)
+                )
+                Text(text = (training.team1 + training.team2).toString() + "/" + training.maxParticipants + " " + stringResource(R.string.participating))
             }
             Row() {
                 Icon(
@@ -62,15 +74,16 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     contentDescription = "pris",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = stringResource(R.string.TrainingPrice, "20", "0"))
+                Text(text = stringResource(R.string.TrainingPrice, training.price, "0"))
             }
         }
 
 
 
         Column() {
+            Text(text = stringResource(R.string.TraningDescription))
             // TODO data should be fetched from a database
-            Text(text = "*En lang og fyldig beskrivelse af træningen med lækre kampinformationer og sans for detaljen*")
+            Text(text = training.description)
         }
 
 
@@ -80,14 +93,19 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                 .fillMaxWidth()
         ) {
             Text(text = "Tilmeldte deltagere")
-            Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp), horizontalArrangement = Arrangement.SpaceBetween){
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 30.dp), horizontalArrangement = Arrangement.SpaceBetween){
                 Text(text = "Navn")
                 Text(text = "Tlfnr.")
             }
 
             LazyColumn(Modifier.height(200.dp)){
                 items(PeopleSource.peopleSource.size) { i ->
-                    Row(modifier = Modifier.fillMaxWidth().padding(vertical = 2.5.dp).padding(horizontal = 30.dp), Arrangement.SpaceBetween){
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 2.5.dp)
+                        .padding(horizontal = 30.dp), Arrangement.SpaceBetween){
                         if (PeopleSource.peopleSource[i].team != "guest"){
                             Text(
                                 text = PeopleSource.peopleSource[i].name,
@@ -100,7 +118,8 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                             )
                         }
                         Text(
-                            text = PeopleSource.peopleSource[i].phoneNumber.toString(),
+                            text = PeopleSource.peopleSource[i].phoneNumber.toString()
+                                .chunked(2).joinToString(separator = " "),
                             Modifier.padding(vertical = 2.5.dp)
                         )
 
@@ -114,23 +133,38 @@ fun trainingInfoPage(training: Training, navController: NavController) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .fillMaxWidth().padding(vertical = 30.dp)
+                    .fillMaxWidth()
+                    .padding(vertical = 30.dp)
             ) {
+
+                val buttonColor: Color
+                val buttonText: String
+                val buttonIcon: ImageVector
+                if (training.attending) {
+                    buttonColor = colorResource(R.color.red)
+                    buttonText = stringResource(R.string.Unattend)
+                    buttonIcon = Icons.Outlined.Clear
+                } else {
+                    buttonColor = colorResource(R.color.green)
+                    buttonText = stringResource(R.string.Attend)
+                    buttonIcon = Icons.Outlined.Check
+                }
+
                 Button(
                     onClick = { /*TODO*/ },
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = colorResource(R.color.red)
+                        backgroundColor = buttonColor
                     ),
                 ) {
                     Row() {
                         Icon(
-                            Icons.Outlined.Clear,
-                            contentDescription = "afmeld træning",
+                            buttonIcon,
+                            contentDescription = "tilmeld/afmeld træning",
                             Modifier.padding(end = 10.dp),
                             colorResource(id = R.color.main_background)
                         )
                         Text(
-                            text = "Afmeld Deltagelse",
+                            text = buttonText,
                             color = colorResource(id = R.color.main_background)
                         )
                     }
