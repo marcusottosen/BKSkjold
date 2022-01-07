@@ -1,6 +1,6 @@
 package com.example.bkskjold.data.model
 
-class NewsData {
+class NewsModel {
     /*
     TODO data should be fetched from a database.
     */

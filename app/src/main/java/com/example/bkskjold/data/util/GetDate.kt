@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi
 import java.text.DateFormat.getDateInstance
 
 //OBS Kun dag virker!
-@RequiresApi(Build.VERSION_CODES.N)
 fun getDate(timestamp: com.google.firebase.Timestamp): String{
     //return "${timestamp.toDate().day}/${timestamp.toDate().month}"
     val c: Calendar = Calendar.getInstance()
@@ -19,7 +18,6 @@ fun getTime(timestamp: com.google.firebase.Timestamp): String{
 }
 
 //OBS Virker ikke
-@RequiresApi(Build.VERSION_CODES.N)
 fun getWeekDay(timestamp: com.google.firebase.Timestamp): String{
     val c: Calendar = Calendar.getInstance()
     c.setTime(timestamp.toDate())
