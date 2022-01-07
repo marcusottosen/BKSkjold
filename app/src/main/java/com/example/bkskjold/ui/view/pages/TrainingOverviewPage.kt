@@ -98,6 +98,8 @@ fun trainingOverview(navController: NavController) {
                     .height(30.dp)
                     .clickable { expanded = true }
             )
+
+            //menu with filter options
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
@@ -126,6 +128,8 @@ fun trainingOverview(navController: NavController) {
                             }
                         }
                     }
+
+                    //dropdown menu for time filtering
                     DropdownMenu(
                         expanded = expandedTidspunkt
                         , onDismissRequest = { expandedTidspunkt = false }
@@ -160,6 +164,8 @@ fun trainingOverview(navController: NavController) {
                             }
                         }
                     }
+
+                    //Calendar shown as standard in filter menu, to filter by date.
                     AndroidView(
                         { CalendarView(it) }
                         , modifier = Modifier.wrapContentWidth()

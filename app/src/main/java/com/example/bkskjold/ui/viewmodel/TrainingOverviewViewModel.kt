@@ -26,7 +26,6 @@ class TrainingOverviewViewModel {
     fun GetOverviewView(navController: NavController, date: String, timeStart: String){
         val trainings = BookingData().bookings
 
-
         if(date == "" && timeStart == ""){
             LazyColumn {
                 items(trainings.size) { i ->
@@ -43,7 +42,6 @@ class TrainingOverviewViewModel {
     fun GetSignedUpView(navController: NavController, date: String, timeStart: String){
         val trainings = BookingData().getSignedUpTrainings()
 
-
         if (date == "" && timeStart == ""){
             LazyColumn {
                 items(trainings.size) { i ->
@@ -53,9 +51,6 @@ class TrainingOverviewViewModel {
         }else{
             filterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings)
         }
-
-
-
     }
 
     @Composable
