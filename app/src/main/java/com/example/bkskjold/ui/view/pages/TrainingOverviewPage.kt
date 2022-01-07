@@ -1,19 +1,17 @@
 package com.example.bkskjold.ui.view.pages
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.ui.unit.*
 
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview as p
-import androidx.compose.material.Text
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
@@ -30,6 +28,19 @@ import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 @Composable
 fun trainingOverview(navController: NavController) {
     val shouldShowOverview = remember { mutableStateOf(true) }
+    val showFilterOptions = remember { mutableStateOf(true) }
+
+    //main filter menu variables
+    var expanded by remember { mutableStateOf(false) }
+    val items = listOf("Dato", "Tidspunkt")
+    var selectedIndex by remember { mutableStateOf(0) }
+
+    //Tidspunkt filter menu variables
+    var expandedTidspunkt by remember { mutableStateOf(false) }
+    val times = listOf("17:00", "18:00")
+
+    //passed filter values
+    var tidspunkt = remember { "0" }
 
     val viewModel = TrainingOverviewViewModel()
 
@@ -65,30 +76,73 @@ fun trainingOverview(navController: NavController) {
                 Text(text = "Tilmeldte Træninger", color = colorResource(id = R.color.main_background))
             }
         }
+
+        //filter button
         Column(
             modifier = Modifier
-                .height(30.dp)
                 .fillMaxWidth()
                 .padding(end = 20.dp)
             , verticalArrangement = Arrangement.Center
             , horizontalAlignment = Alignment.End
 
         ) {
-            Button(
-                onClick = {}
-                , colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.main_background))
+            Image(
+                painter = painterResource(id = R.drawable.icon_filter)
+                , contentDescription = null
                 , modifier = Modifier
+                    .width(60.dp)
                     .height(30.dp)
-                    .width(30.dp)
-            ){
-                Image(
-                    painter = painterResource(id = R.drawable.icon_filter)
-                    , contentDescription = null
-                    , modifier = Modifier.height(30.dp).width(30.dp)
-                )
-
+                    .clickable { expanded = true }
+            )
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(colorResource(id = R.color.primary_light))
+            ) {
+                Column() {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                        , horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        items.forEachIndexed { index, t ->
+                            DropdownMenuItem(
+                                onClick = {
+                                    selectedIndex = index
+                                    //expanded = false
+                                    if(t == "Tidspunkt"){expandedTidspunkt = !expandedTidspunkt}
+                            }
+                            , modifier = Modifier
+                                .width(150.dp)
+                        ) {
+                            Text(text = t)
+                            if(t == "Tidspunkt"){
+                                }
+                            }
+                        }
+                    }
+                    DropdownMenu(expanded = expandedTidspunkt, onDismissRequest = { expandedTidspunkt = false }) {
+                        DropdownMenuItem(
+                            onClick = { expandedTidspunkt = false }
+                            , modifier = Modifier
+                        ) {
+                            times.forEachIndexed { index, time ->
+                                Text(
+                                    text = time
+                                    , modifier = Modifier
+                                        .clickable { tidspunkt = time }
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        //if(showFilterOptions.value){viewModel.filterMenu()} else{viewModel.filterMenu()}
+
         if(shouldShowOverview.value){
             viewModel.GetOverviewView(navController)
         }else {
