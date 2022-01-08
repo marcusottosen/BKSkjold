@@ -115,7 +115,7 @@ fun LoginPage() {
                 value = emailValue,
                 onValueChange = { emailValue = it },
                 label = null,
-                placeholder = { Text(text = "Email") },
+                placeholder = { Text(text = "  Email") },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
@@ -135,7 +135,7 @@ fun LoginPage() {
                 value = passwordValue,
                 onValueChange = { passwordValue = it },
                 label = null,
-                placeholder = { Text(text = "Adgangskode") },
+                placeholder = { Text(text = "  Adgangskode") },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
