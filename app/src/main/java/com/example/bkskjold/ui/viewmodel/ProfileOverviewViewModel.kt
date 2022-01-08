@@ -1,26 +1,37 @@
 package com.example.bkskjold.ui.viewmodel;
 
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import com.example.bkskjold.data.model.ProfileInfo;
 import androidx.compose.runtime.Composable;
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview;
+import androidx.compose.ui.unit.dp
+import com.example.bkskjold.data.model.User
 import com.example.bkskjold.data.model.events
+import com.example.bkskjold.data.util.getDate
+import com.example.bkskjold.data.util.getYear
 import com.example.bkskjold.ui.view.reusables.EventsCard
 import com.example.bkskjold.ui.view.reusables.InvitationCard
 
 class ProfileOverviewViewModel {
     var profile = ProfileInfo().testProfile
-    @Preview
-    @Composable
 
-    fun getProfileView() {
-        Text(text = profile[0])
-        Text(text = profile[1])
-        Text(text = profile[2])
-        Text(text = profile[3])
+    @Composable
+    fun GetProfileView(user: User) {
+        Column(modifier = Modifier.padding(start = 45.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Text(text = "Medlemsskab: ${translateMemberType(user.userType)}")
+            Text(text = "Træninger gennemført: ${user.finishedTrainings}")
+            Text(text = "Medlem siden: ${getDate(user.memberSince)} - ${getYear(user.memberSince)}")
+            Text(text = "Tilmeldt hold: ${user.team}")
         }
+    }
 
     @Preview
     @Composable
@@ -41,6 +52,16 @@ class ProfileOverviewViewModel {
 
             }
         }
+    }
+
+    fun translateMemberType(type: Int): String{
+        val translated = when(type){
+            1 -> "Gæstebruger"
+            2 -> "Standard medlem - 99 kr./md."
+            3 -> "Træner"
+            else -> {"Brugertype ikke fundet"}
+        }
+        return translated
     }
 }
 
