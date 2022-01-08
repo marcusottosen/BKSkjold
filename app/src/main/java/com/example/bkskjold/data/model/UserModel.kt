@@ -77,18 +77,23 @@ fun loadUsersFromDB(): MutableList<User>{
     return users
 }
 
-//############# GET LIST USERS FROM LIST OF USER IDS ###################
+//############# GET USERS FROM LIST OF USER IDS ###################
+var participants: MutableList<User> = mutableListOf()
 
-fun getUsersFromId(ids: List<String>): MutableList<User> {
+fun getUsersFromId(ids: List<String>, tmpUserList: MutableList<User>): MutableList<User> {
     val db = Firebase.firestore
-    val participants: MutableList<User> = mutableListOf()
+    //val participants: MutableList<User> = mutableListOf()
+    //val tmpList = participants
+    //var test = participants
+    //participants.clear()
 
     db.collection("users")
         .get()
         .addOnSuccessListener { result ->
+            participants.clear()
             for (id in ids) {
                 for (doc in result){
-                    var parID = id
+                    //var parID = id
                     if (doc.id == id){
                         var participant = User(
                             firstname = doc["firstname"] as String,
@@ -103,14 +108,24 @@ fun getUsersFromId(ids: List<String>): MutableList<User> {
                             memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
                             loggedIn = doc["loggedIn"] as Boolean?
                         )
-                        if (participant !in participants){
-                            participants.add(participant)
+                        if (participant !in tmpUserList){
+                            tmpUserList.add(participant)
+                            participants = tmpUserList
                         }
                     }
                 }
             }
         }
+        .addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting participants: ", exception)
+        }
+
+
+    //val passable = participants
+    //participants.clear()
     return participants
+    //participants.clear()
+    //participants.removeAll(User)
 }
 
 @Parcelize

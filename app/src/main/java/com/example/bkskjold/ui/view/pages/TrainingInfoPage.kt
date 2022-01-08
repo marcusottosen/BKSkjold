@@ -102,9 +102,9 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                 Text(text = "Tlfnr.")
             }
 
-
+            //val tmpUserList: MutableList<User> = mutableListOf()
             LazyColumn(Modifier.height(200.dp)){
-                var participants = getUsersFromId(training.participants)
+                val participants = getUsersFromId(training.participants, mutableListOf())
                 items(participants.size) { i ->
                     Row(modifier = Modifier
                         .fillMaxWidth()
@@ -129,6 +129,8 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     }
                 }
             }
+            //participants.clear()
+
 
 
 
