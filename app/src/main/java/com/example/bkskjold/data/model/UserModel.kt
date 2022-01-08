@@ -3,6 +3,9 @@ package com.example.bkskjold.data.model
 import android.content.ContentValues
 import android.os.Parcelable
 import android.util.Log
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
@@ -74,6 +77,37 @@ fun loadUsersFromDB(): MutableList<User>{
     return users
 }
 
+//############# GET LIST USERS FROM LIST OF USER IDS ###################
+var participants: MutableList<User> = mutableListOf()
+fun getUsersFromId(ids: List<String>): MutableList<User> {
+    val db = Firebase.firestore
+    db.collection("users")
+        .get()
+        .addOnSuccessListener { result ->
+            for (doc in result) {
+                for (id in ids){
+                    if (doc.id == id){
+                        participants.add(
+                            User(
+                                firstname = doc["firstname"] as String,
+                                surname = doc["surname"] as String,
+                                email = doc["email"] as String,
+                                address = doc["address"] as String,
+                                phoneNumber = (doc["phoneNumber"] as Number).toInt(),
+                                birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
+                                team = doc["team"] as String,
+                                userType = (doc["userType"] as Number).toInt(),
+                                finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
+                                memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
+                                loggedIn = doc["loggedIn"] as Boolean?
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    return participants
+}
 
 @Parcelize
 data class User(

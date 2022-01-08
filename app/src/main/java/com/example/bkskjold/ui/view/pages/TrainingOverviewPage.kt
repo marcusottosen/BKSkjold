@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 //resources and files
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.data.util.Util
+import com.example.bkskjold.data.util.*
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
 
@@ -171,7 +171,7 @@ fun trainingOverview(navController: NavController) {
                         , update = { views ->
                             views.setOnDateChangeListener { calendarView, year, month, day ->
                                 var monthShifted = month+1
-                                date.value = Util().dateFormatter(day, monthShifted)
+                                date.value = dateFormatter(day, monthShifted)
                             }
                         }
                     )

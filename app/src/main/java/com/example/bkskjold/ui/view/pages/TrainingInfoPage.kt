@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.PeopleSource
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.*
 
 
 @Composable
@@ -100,25 +101,27 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                 Text(text = "Tlfnr.")
             }
 
+
             LazyColumn(Modifier.height(200.dp)){
-                items(PeopleSource.peopleSource.size) { i ->
+                var participants = getUsersFromId(training.participants)
+                items(getUsersFromId(training.participants).size) { i ->
                     Row(modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 2.5.dp)
                         .padding(horizontal = 30.dp), Arrangement.SpaceBetween){
-                        if (PeopleSource.peopleSource[i].team != "guest"){
+                        if (participants[i].team != "guest"){
                             Text(
-                                text = PeopleSource.peopleSource[i].name,
+                                text = participants[i].surname,
                                 Modifier.padding(vertical = 2.5.dp)
                             )
                         } else {
                             Text(
-                                text = PeopleSource.peopleSource[i].name + " (Gæst)",
+                                text = participants[i].surname + " (Gæst)",
                                 Modifier.padding(vertical = 2.5.dp)
                             )
                         }
                         Text(
-                            text = PeopleSource.peopleSource[i].phoneNumber.toString()
+                            text = participants[i].phoneNumber.toString()
                                 .chunked(2).joinToString(separator = " "),
                             Modifier.padding(vertical = 2.5.dp)
                         )

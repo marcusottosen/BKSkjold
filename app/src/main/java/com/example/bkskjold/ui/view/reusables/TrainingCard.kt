@@ -122,10 +122,10 @@ fun TrainingCard(training: Training, navController: NavController
                         )
                     }
                 }
-
+                //var participants: List<String> = training.participants
                 DefaultButton(text = isAttending,
                     checked = true,
-                    onClick = { /*TODO*/},
+                    onClick = { /*TODO*/ },
                     modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)
                 )
             }
