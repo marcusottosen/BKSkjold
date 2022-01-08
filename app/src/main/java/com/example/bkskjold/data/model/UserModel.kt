@@ -108,9 +108,9 @@ fun getUsersFromId(ids: List<String>, tmpUserList: MutableList<User>): MutableLi
                             memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
                             loggedIn = doc["loggedIn"] as Boolean?
                         )
-                        if (participant !in tmpUserList){
-                            tmpUserList.add(participant)
-                            participants = tmpUserList
+                        if (participant !in participants){
+                            participants.add(participant)
+                            //participants = tmpUserList
                         }
                     }
                 }
