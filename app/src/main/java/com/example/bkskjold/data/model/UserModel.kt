@@ -82,10 +82,6 @@ var participants: MutableList<User> = mutableListOf()
 
 fun getUsersFromId(ids: List<String>, tmpUserList: MutableList<User>): MutableList<User> {
     val db = Firebase.firestore
-    //val participants: MutableList<User> = mutableListOf()
-    //val tmpList = participants
-    //var test = participants
-    //participants.clear()
 
     db.collection("users")
         .get()
@@ -93,7 +89,7 @@ fun getUsersFromId(ids: List<String>, tmpUserList: MutableList<User>): MutableLi
             participants.clear()
             for (id in ids) {
                 for (doc in result){
-                    //var parID = id
+
                     if (doc.id == id){
                         var participant = User(
                             firstname = doc["firstname"] as String,
@@ -110,7 +106,6 @@ fun getUsersFromId(ids: List<String>, tmpUserList: MutableList<User>): MutableLi
                         )
                         if (participant !in participants){
                             participants.add(participant)
-                            //participants = tmpUserList
                         }
                     }
                 }
@@ -120,12 +115,7 @@ fun getUsersFromId(ids: List<String>, tmpUserList: MutableList<User>): MutableLi
             Log.d(ContentValues.TAG, "Error getting participants: ", exception)
         }
 
-
-    //val passable = participants
-    //participants.clear()
     return participants
-    //participants.clear()
-    //participants.removeAll(User)
 }
 
 @Parcelize
