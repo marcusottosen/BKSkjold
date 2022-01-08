@@ -5,10 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +30,7 @@ import com.example.bkskjold.R
 fun LoginPage() {
 
     val loginImage = painterResource(id = R.drawable.login_image2)
+    val backButton = painterResource(id = R.drawable.back_white)
     val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary), colorResource(R.color.light_green)),
     startY = 0.0f,
     endY = 1000.0f)
@@ -52,8 +51,8 @@ fun LoginPage() {
             Button(
                 onClick = {},
                 modifier = Modifier
-                    .width(48.dp)
-                    .height(48.dp),
+                    .width(75.dp)
+                    .height(50.dp),
                 elevation = null,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.Transparent
@@ -61,13 +60,13 @@ fun LoginPage() {
 
 
             ) {
-            Text(
-                text = "<",
-                fontSize = 28.sp,
-                color = Color.Black,
-                textAlign = TextAlign.Center
-
-            )
+                Image(
+                    backButton,
+                    contentDescription = "backButton",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .size(100.dp, 100.dp)
+                )
         }
     }
 
@@ -98,7 +97,8 @@ fun LoginPage() {
             Text(
                 text = "log ind",
                 fontSize = 32.sp,
-                color = Color.White
+                color = Color.White,
+                fontWeight = FontWeight.Bold
             )
 
             Spacer(modifier = Modifier.height(18.dp))
