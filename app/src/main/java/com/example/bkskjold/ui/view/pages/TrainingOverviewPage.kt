@@ -10,10 +10,7 @@ import androidx.compose.ui.unit.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
@@ -22,7 +19,7 @@ import androidx.navigation.NavController
 //resources and files
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.util.Util
+import com.example.bkskjold.data.util.Util
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
 

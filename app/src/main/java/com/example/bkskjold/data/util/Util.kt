@@ -1,8 +1,8 @@
-package com.example.bkskjold.util
+package com.example.bkskjold.data.util
 
 class Util {
 
-    public fun dateFormatter(day: Int, month: Int): String {
+    fun dateFormatter(day: Int, month: Int): String {
         var finalDay = day.toString()
         var finalMonth: String
 
