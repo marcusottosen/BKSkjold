@@ -80,7 +80,7 @@ fun loadUsersFromDB(): MutableList<User>{
 //############# GET USERS FROM LIST OF USER IDS ###################
 var participants: MutableList<User> = mutableListOf()
 
-fun getUsersFromId(ids: List<String>, tmpUserList: MutableList<User>): MutableList<User> {
+fun getUsersFromId(ids: List<String>): MutableList<User> {
     val db = Firebase.firestore
 
     db.collection("users")

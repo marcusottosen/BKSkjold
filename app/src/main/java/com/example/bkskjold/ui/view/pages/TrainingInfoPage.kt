@@ -103,7 +103,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
             }
 
             LazyColumn(Modifier.height(200.dp)){
-                val participants = getUsersFromId(training.participants, tmpUserList = mutableListOf())
+                val participants = getUsersFromId(training.participants)
                 items(participants.size) { i ->
                     Row(modifier = Modifier
                         .fillMaxWidth()
