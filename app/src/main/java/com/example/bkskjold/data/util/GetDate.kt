@@ -41,4 +41,3 @@ fun getMonth(): String{
     // tror der er en SimpleDateFormat("??").format(date) der virker
     return month
 }
-

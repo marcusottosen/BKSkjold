@@ -68,6 +68,7 @@ fun loadTrainingsFromDB(): MutableList<Training>{
                         price           = (doc["price"] as Number).toInt(),
                         description     = doc["description"] as String,
                         maxParticipants = (doc["maxParticipants"] as Number).toInt(),
+                        participants    = (doc["participants"]) as List<String>,
                         team1           = (doc["team1"] as Number).toInt(),
                         team2           = (doc["team2"] as Number).toInt()
                     )
@@ -104,6 +105,7 @@ data class Training(
     val price: Int,
     val description: String= "",
     val maxParticipants: Int = 0,
+    val participants: List<String> = listOf(),
     val team1: Int = 0,
     val team2: Int = 0
 ): Parcelable
