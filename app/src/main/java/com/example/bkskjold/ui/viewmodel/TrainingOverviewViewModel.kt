@@ -35,6 +35,7 @@ class TrainingOverviewViewModel {
                 items(trainings.size) { i ->
                     TrainingCard(training = trainings[i], navController)
                 }
+                item{ Spacer(modifier = Modifier.height(80.dp))}
             }
         }else{
             filterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings)
@@ -50,6 +51,7 @@ class TrainingOverviewViewModel {
                 items(trainings.size) { i ->
                     TrainingCard(training = trainings[i], navController)
                 }
+                item{ Spacer(modifier = Modifier.height(80.dp))}
             }
         }else{
             filterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings)
@@ -81,6 +83,7 @@ class TrainingOverviewViewModel {
             items(filteredPractices.size) { i ->
                 TrainingCard(training = filteredPractices[i], navController)
             }
+            item{ Spacer(modifier = Modifier.height(80.dp))}
         }
     }
 }
