@@ -171,7 +171,7 @@ fun trainingOverview(navController: NavController) {
                         , update = { views ->
                             views.setOnDateChangeListener { calendarView, year, month, day ->
                                 var monthShifted = month+1
-                                date.value = dateFormatter(day, monthShifted)
+                                date.value = Util().dateFormatter(day, monthShifted)
                             }
                         }
                     )

@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import com.example.bkskjold.data.model.PeopleSource
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.*
+import com.example.bkskjold.data.util.Util
 
 
 @Composable
@@ -104,7 +105,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
 
             LazyColumn(Modifier.height(200.dp)){
                 var participants = getUsersFromId(training.participants)
-                items(getUsersFromId(training.participants).size) { i ->
+                items(participants.size) { i ->
                     Row(modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 2.5.dp)
@@ -125,8 +126,6 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                                 .chunked(2).joinToString(separator = " "),
                             Modifier.padding(vertical = 2.5.dp)
                         )
-
-
                     }
                 }
             }

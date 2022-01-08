@@ -78,30 +78,34 @@ fun loadUsersFromDB(): MutableList<User>{
 }
 
 //############# GET LIST USERS FROM LIST OF USER IDS ###################
-var participants: MutableList<User> = mutableListOf()
+
 fun getUsersFromId(ids: List<String>): MutableList<User> {
     val db = Firebase.firestore
+    val participants: MutableList<User> = mutableListOf()
+
     db.collection("users")
         .get()
         .addOnSuccessListener { result ->
-            for (doc in result) {
-                for (id in ids){
+            for (id in ids) {
+                for (doc in result){
+                    var parID = id
                     if (doc.id == id){
-                        participants.add(
-                            User(
-                                firstname = doc["firstname"] as String,
-                                surname = doc["surname"] as String,
-                                email = doc["email"] as String,
-                                address = doc["address"] as String,
-                                phoneNumber = (doc["phoneNumber"] as Number).toInt(),
-                                birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
-                                team = doc["team"] as String,
-                                userType = (doc["userType"] as Number).toInt(),
-                                finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
-                                memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
-                                loggedIn = doc["loggedIn"] as Boolean?
-                            )
+                        var participant = User(
+                            firstname = doc["firstname"] as String,
+                            surname = doc["surname"] as String,
+                            email = doc["email"] as String,
+                            address = doc["address"] as String,
+                            phoneNumber = (doc["phoneNumber"] as Number).toInt(),
+                            birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
+                            team = doc["team"] as String,
+                            userType = (doc["userType"] as Number).toInt(),
+                            finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
+                            memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
+                            loggedIn = doc["loggedIn"] as Boolean?
                         )
+                        if (participant !in participants){
+                            participants.add(participant)
+                        }
                     }
                 }
             }
