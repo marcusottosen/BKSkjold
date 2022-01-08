@@ -11,10 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.*
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.getSignedUpTrainings
-import com.example.bkskjold.data.model.trainings
-import com.example.bkskjold.data.model.BookingData
-import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.*
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 import java.lang.Exception
 
@@ -31,7 +28,7 @@ class TrainingOverviewViewModel {
 
     @Composable
     fun GetOverviewView(navController: NavController, date: String, timeStart: String){
-        val trainings = BookingData().bookings
+        val trainings = loadTrainingsFromDB()
 
         if(date == "" && timeStart == ""){
             LazyColumn {
@@ -42,12 +39,11 @@ class TrainingOverviewViewModel {
         }else{
             filterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings)
         }
-
-
     }
     @Composable
     fun GetSignedUpView(navController: NavController, date: String, timeStart: String){
-        val trainings = BookingData().getSignedUpTrainings()
+        val trainings = getSignedUpTrainings()
+
 
         if (date == "" && timeStart == ""){
             LazyColumn {

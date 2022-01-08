@@ -107,3 +107,5 @@ data class Training(
     val team1: Int = 0,
     val team2: Int = 0
 ): Parcelable
+
+
