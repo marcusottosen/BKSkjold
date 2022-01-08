@@ -6,7 +6,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +51,7 @@ fun LoginPage() {
 
     ) {
 
-        Row(modifier = Modifier.padding(24.dp), horizontalArrangement = Arrangement.Start) {
+        Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Start) {
             Button(
                 onClick = {},
                 modifier = Modifier
@@ -112,7 +116,13 @@ fun LoginPage() {
                 onValueChange = { emailValue = it },
                 label = null,
                 placeholder = { Text(text = "Email") },
-                shape = RoundedCornerShape(50)
+                shape = RoundedCornerShape(50),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Email,
+                        contentDescription = "Email icon")
+                }
+
 
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -126,7 +136,12 @@ fun LoginPage() {
                 onValueChange = { passwordValue = it },
                 label = null,
                 placeholder = { Text(text = "Adgangskode") },
-                shape = RoundedCornerShape(50)
+                shape = RoundedCornerShape(50),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Lock,
+                        contentDescription = "Lock icon")
+                }
 
             )
             Spacer(modifier = Modifier.height(8.dp))
