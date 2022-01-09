@@ -194,7 +194,13 @@ fun RegisterPage() {
                         contentDescription = "Email icon"
                     )
                 },
-
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(
+                    onNext = {focusManager.moveFocus(FocusDirection.Down)
+                    }
+                )
 
                 )
 
@@ -224,6 +230,13 @@ fun RegisterPage() {
                         contentDescription = "Lock icon"
                     )
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(
+                    onNext = {focusManager.moveFocus(FocusDirection.Down)
+                    }
+                )
 
                 )
 
@@ -253,6 +266,13 @@ fun RegisterPage() {
                         contentDescription = "Lock icon"
                     )
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(
+                    onDone = {focusManager.clearFocus()
+                    }
+                )
 
                 )
 
