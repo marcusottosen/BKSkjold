@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -205,6 +206,7 @@ fun RegisterPage() {
                         color = colorResource(R.color.primary)
                     )
                 },
+                visualTransformation = PasswordVisualTransformation(),
                 shape = RoundedCornerShape(50),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color.Red,
@@ -294,6 +296,7 @@ fun RegisterPage() {
                         color = colorResource(R.color.primary)
                     )
                 },
+                visualTransformation = PasswordVisualTransformation(),
                 shape = RoundedCornerShape(50),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color.White,
