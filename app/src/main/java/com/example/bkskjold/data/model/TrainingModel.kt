@@ -99,7 +99,7 @@ fun updateParticipants(training: Training){
 
     val db = Firebase.firestore
 
-    var dbTraining: QueryDocumentSnapshot
+    var dbTraining: QueryDocumentSnapshot? = null
     //var dbTraining
     db.collection("trainings")
         .get()
@@ -107,8 +107,9 @@ fun updateParticipants(training: Training){
             for (doc in result) {
                 if (doc["date"] == training.date && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
                     var test = doc.data
-                    dbTraining = doc
+                    val dbTraining = doc
                     //doc.reference
+
                     print("")
 
                 }
@@ -120,7 +121,13 @@ fun updateParticipants(training: Training){
     val updatedList = training.participants.toMutableList().add(userId)
 
     //val updateableTraining = db.collection("trainings").document(trainingRef)
+    if (dbTraining != null){
+        try {
+            val updateable = db.collection("trainings").document(dbTraining!!.reference.toString())
+            print("")
+        }catch (e: Exception){}
 
+    }
 
 
 
