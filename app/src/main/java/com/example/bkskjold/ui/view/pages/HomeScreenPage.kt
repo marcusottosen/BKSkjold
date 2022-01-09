@@ -69,10 +69,10 @@ fun HomeScreenPage() {
                     modifier = Modifier
                         .padding(top = 120.dp)
                         .fillMaxWidth()
-                        .height(75.dp)
+                        .height(50.dp)
                         .clip(RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
                         .background(colorResource(id = R.color.main_background))
-                ) {}
+                )
             }
         }
 
