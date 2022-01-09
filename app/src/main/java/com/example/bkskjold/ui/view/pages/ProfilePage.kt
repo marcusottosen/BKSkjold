@@ -10,7 +10,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.data.model.InvitationData
+import com.example.bkskjold.data.model.User
 import com.example.bkskjold.data.model.users
 import com.example.bkskjold.ui.view.reusables.DefaultProfileHeader
 import com.example.bkskjold.ui.view.reusables.InvitationCard
@@ -19,7 +21,7 @@ import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
 
 //class ProfilePage { }
 @Composable
-fun ProfileOverview() {
+fun profileOverview(navController: NavController) {
 
     val currentUser = users[3] //TODO Skal bruge den user der er logget ind! Lav function i UserModel.kt
 
@@ -29,7 +31,7 @@ fun ProfileOverview() {
 
     ) {
         item {
-            DefaultProfileHeader(currentUser)
+            DefaultProfileHeader(currentUser, navController)
         }
         item { ProfileOverviewViewModel().GetProfileView(currentUser)
             Spacer(modifier = Modifier.height(30.dp))}
@@ -83,6 +85,11 @@ fun ProfileOverview() {
             Spacer(modifier = Modifier.height(50.dp))
         }
     }
+}
+
+fun gotoSettingsPage(user: User, navController: NavController){
+    navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
+    navController.navigate("settingsInfo")
 }
 
 

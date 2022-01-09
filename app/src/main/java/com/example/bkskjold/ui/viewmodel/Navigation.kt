@@ -15,17 +15,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.navArgument
-import com.example.bkskjold.DefaultDetails
-import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
 import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.User
 import com.example.bkskjold.ui.view.pages.*
 
 
@@ -47,7 +44,7 @@ fun Navigation(navController: NavHostController) {
             eventOverview(navController)
         }
         composable(NavigationItem.Profile.route) {
-            ProfileOverview()
+            profileOverview(navController)
         }
 
         //Subpages
@@ -61,6 +58,12 @@ fun Navigation(navController: NavHostController) {
             val eventModel = navController.previousBackStackEntry?.arguments?.getParcelable<Event>("event")
             eventModel?.let {
                 EventInfoPage(event = it, navController = navController)
+            }
+        }
+        composable("settingsInfo"){
+            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("setting")
+            settingModel?.let {
+                settingsPage(navController = navController)
             }
         }
     }

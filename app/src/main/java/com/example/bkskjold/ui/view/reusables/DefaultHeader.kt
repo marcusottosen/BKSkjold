@@ -18,12 +18,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.User
+import com.example.bkskjold.ui.view.pages.gotoSettingsPage
 
 
 @Composable
-fun DefaultProfileHeader(user: User){
+fun DefaultProfileHeader(user: User, navController: NavController){
     val iconSize = 40.dp
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -83,7 +85,7 @@ fun DefaultProfileHeader(user: User){
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .padding(start = 50.dp)
-                        .clickable { /*TODO*/ },
+                        .clickable { gotoSettingsPage(user, navController)},
                 ) {
                     Icon(
                         painterResource(id = R.drawable.icon_settings),
