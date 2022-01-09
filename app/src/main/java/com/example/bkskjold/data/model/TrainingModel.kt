@@ -1,5 +1,6 @@
 package com.example.bkskjold.data.model
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Parcelable
 import android.util.Log
 import com.google.firebase.firestore.DocumentReference
@@ -99,17 +100,24 @@ fun updateParticipants(training: Training){
 
     val db = Firebase.firestore
 
-    var dbTraining: QueryDocumentSnapshot? = null
+    //var dbTraining: QueryDocumentSnapshot? = null
     //var dbTraining
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
             for (doc in result) {
                 if (doc["date"] == training.date && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
-                    var test = doc.data
                     val dbTraining = doc
                     //doc.reference
+                    var updatedList = training.participants.toMutableList()
+                    updatedList.add(userId)
+                    var updatedArray = arrayOf(updatedList)
+                    val updateable = db.collection("trainings").document(dbTraining.reference.toString())
 
+                    updateable
+                        .update("participants", updatedArray)
+                        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
+                        .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
                     print("")
 
                 }
@@ -118,16 +126,16 @@ fun updateParticipants(training: Training){
         .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting documents: ", exception)
         }
-    val updatedList = training.participants.toMutableList().add(userId)
+    //val updatedList = training.participants.toMutableList().add(userId)
 
     //val updateableTraining = db.collection("trainings").document(trainingRef)
-    if (dbTraining != null){
+    /*if (dbTraining != null){
         try {
             val updateable = db.collection("trainings").document(dbTraining!!.reference.toString())
             print("")
         }catch (e: Exception){}
 
-    }
+    }*/
 
 
 
