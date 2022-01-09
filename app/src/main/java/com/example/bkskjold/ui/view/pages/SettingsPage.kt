@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.User
 import com.example.bkskjold.ui.view.reusables.DefaultButton
 import com.example.bkskjold.ui.view.reusables.SettingsButton
 
@@ -29,7 +30,8 @@ import com.example.bkskjold.ui.view.reusables.SettingsButton
 fun settingsPage(navController: NavController) {
     Column (
         modifier = Modifier
-            .background(color = colorResource(R.color.main_background)),
+            .background(color = colorResource(R.color.main_background))
+            .fillMaxSize()
     ) {
         Box(modifier = Modifier
             .background(colorResource(id = R.color.primary))

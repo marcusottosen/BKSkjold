@@ -61,7 +61,7 @@ fun Navigation(navController: NavHostController) {
             }
         }
         composable("settingsInfo"){
-            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("setting")
+            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
             settingModel?.let {
                 settingsPage(navController = navController)
             }
