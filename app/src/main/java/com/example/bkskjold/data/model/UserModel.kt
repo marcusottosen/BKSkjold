@@ -86,7 +86,7 @@ fun getUsersFromId(ids: List<String>): MutableList<User> {
     db.collection("users")
         .get()
         .addOnSuccessListener { result ->
-            participants.clear()
+            participants.clear() //Always clear participants before getting new participants for new pratice
             for (id in ids) {
                 for (doc in result){
 

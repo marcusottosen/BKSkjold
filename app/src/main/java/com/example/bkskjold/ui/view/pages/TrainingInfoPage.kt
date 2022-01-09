@@ -81,13 +81,11 @@ fun trainingInfoPage(training: Training, navController: NavController) {
         }
 
 
-
         Column() {
             Text(text = stringResource(R.string.TraningDescription))
             // TODO data should be fetched from a database
             Text(text = training.description)
         }
-
 
 
         Column(
@@ -101,7 +99,6 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                 Text(text = "Navn")
                 Text(text = "Tlfnr.")
             }
-
             LazyColumn(Modifier.height(200.dp)){
                 val participants = getUsersFromId(training.participants)
                 items(participants.size) { i ->
@@ -128,8 +125,6 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     }
                 }
             }
-
-
 
 
             Column(
