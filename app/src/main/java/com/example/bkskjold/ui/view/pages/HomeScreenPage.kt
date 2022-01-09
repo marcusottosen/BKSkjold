@@ -119,7 +119,6 @@ fun HomeScreenPage() {
         }
         items(news.size) { i ->
             NewsCard(news = news[i])
-            println("NEWS ADDED")
         }
         item { Spacer(modifier = Modifier.height(100.dp)) }
     }

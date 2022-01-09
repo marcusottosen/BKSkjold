@@ -41,3 +41,10 @@ fun getMonth(): String{
     // tror der er en SimpleDateFormat("??").format(date) der virker
     return month
 }
+
+fun getYear(timestamp: com.google.firebase.Timestamp): String{
+    val c: Calendar = Calendar.getInstance()
+    c.setTime(timestamp.toDate())
+    return "${c.get(Calendar.YEAR)}"
+}
+

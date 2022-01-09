@@ -19,22 +19,7 @@ import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
-fun TrainingCard(training: Training, navController: NavController
-
-    /*
-    id: String,
-    timeStart: String,
-    timeEnd: String,
-    date: String,
-    weekday: String,
-    participants: String,
-    location: String,
-    league: String,
-    trainer: String,
-    attending: String,
-    color: Color
-*/
-) { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
+fun TrainingCard(training: Training, navController: NavController) { //TODO Gør så der kan skiftes mellem deltager/deltager ikke
     var isAttending = ""
     val color: Color
 
@@ -56,14 +41,13 @@ fun TrainingCard(training: Training, navController: NavController
         elevation = 12.dp
     ) {
         Row {
-            Column {
+            Column (modifier = Modifier.width(95.dp)){
                 Text( //date
                     text = training.date,
                     fontSize = 10.sp,
                     modifier = Modifier.padding(10.dp, 18.dp, 5.dp),
                     color = Color.DarkGray
                 )
-                //Spacer(modifier = Modifier.height(8.dp))
                 Text( //day
                     text = training.weekday,
                     fontWeight = FontWeight.Bold,
