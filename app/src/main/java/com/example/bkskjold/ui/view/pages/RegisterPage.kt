@@ -40,10 +40,10 @@ fun RegisterPage() {
     val scrollState = rememberScrollState()
 
     var firstNameValue by remember { mutableStateOf("") }
-    var lastNameValue by remember { mutableStateOf("")}
-    var emailValue by remember { mutableStateOf("")}
+    var lastNameValue by remember { mutableStateOf("") }
+    var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
-    var passwordValueCheck by remember { mutableStateOf("")}
+    var passwordValueCheck by remember { mutableStateOf("") }
     var phoneValue by remember { mutableStateOf("") }
     var dateOfBirthValue by remember { mutableStateOf("") }
     var addressValue by remember { mutableStateOf("") }
@@ -93,17 +93,17 @@ fun RegisterPage() {
 
             Text(
                 text = "Velkommen!",
-                fontSize = 18.sp,
+                fontSize = 16.sp,
                 color = Color.White
             )
             Text(
-                text = "Opret gæstebruger",
-                fontSize = 32.sp,
+                text = "Opret en gæstebruger",
+                fontSize = 28.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             OutlinedTextField(
                 modifier = Modifier
@@ -111,17 +111,18 @@ fun RegisterPage() {
                     .height(60.dp)
                     .background(Color.White, RoundedCornerShape(50)),
                 value = firstNameValue,
-                onValueChange = {firstNameValue = it},
+                onValueChange = { firstNameValue = it },
                 label = null,
                 placeholder = { Text(text = "  Fornavn", color = colorResource(R.color.primary)) },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Person,
-                        contentDescription = "Email icon")
+                        contentDescription = "Email icon"
+                    )
                 },
 
-            )
+                )
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -131,18 +132,24 @@ fun RegisterPage() {
                     .height(60.dp)
                     .background(Color.White, RoundedCornerShape(50)),
                 value = lastNameValue,
-                onValueChange = {lastNameValue = it},
+                onValueChange = { lastNameValue = it },
                 label = null,
-                placeholder = { Text(text = "  Efternavn", color = colorResource(R.color.primary)) },
+                placeholder = {
+                    Text(
+                        text = "  Efternavn",
+                        color = colorResource(R.color.primary)
+                    )
+                },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Person,
-                        contentDescription = "Email icon")
+                        contentDescription = "Email icon"
+                    )
 
                 },
 
-            )
+                )
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -154,15 +161,16 @@ fun RegisterPage() {
                 value = emailValue,
                 onValueChange = { emailValue = it },
                 label = null,
-                placeholder = { Text(text = "  Email", color = colorResource(R.color.primary))  },
+                placeholder = { Text(text = "  Email", color = colorResource(R.color.primary)) },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Email,
-                        contentDescription = "Email icon")
+                        contentDescription = "Email icon"
+                    )
                 },
 
-            )
+                )
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -174,12 +182,18 @@ fun RegisterPage() {
                 value = passwordValue,
                 onValueChange = { passwordValue = it },
                 label = null,
-                placeholder = { Text(text = "  Adgangskode", color = colorResource(R.color.primary))  },
+                placeholder = {
+                    Text(
+                        text = "  Adgangskode",
+                        color = colorResource(R.color.primary)
+                    )
+                },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Lock,
-                        contentDescription = "Lock icon")
+                        contentDescription = "Lock icon"
+                    )
                 },
 
                 )
@@ -194,12 +208,18 @@ fun RegisterPage() {
                 value = passwordValueCheck,
                 onValueChange = { passwordValueCheck = it },
                 label = null,
-                placeholder = { Text(text = "  Gentag adgangskode", color = colorResource(R.color.primary))  },
+                placeholder = {
+                    Text(
+                        text = "  Gentag adgangskode",
+                        color = colorResource(R.color.primary)
+                    )
+                },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Lock,
-                        contentDescription = "Lock icon")
+                        contentDescription = "Lock icon"
+                    )
                 },
 
                 )
@@ -211,7 +231,7 @@ fun RegisterPage() {
                     .background(Color.Transparent)
                     .padding(24.dp, 4.dp)
 
-            ){
+            ) {
                 Text(
                     modifier = Modifier.align(Alignment.BottomStart),
                     text = "Valgfrit",
@@ -231,12 +251,18 @@ fun RegisterPage() {
                 value = phoneValue,
                 onValueChange = { phoneValue = it },
                 label = null,
-                placeholder = { Text(text = "  Telefonnummer", color = colorResource(R.color.primary))  },
+                placeholder = {
+                    Text(
+                        text = "  Telefonnummer",
+                        color = colorResource(R.color.primary)
+                    )
+                },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Phone,
-                        contentDescription = "Phone icon")
+                        contentDescription = "Phone icon"
+                    )
                 },
 
                 )
@@ -250,32 +276,18 @@ fun RegisterPage() {
                 value = dateOfBirthValue,
                 onValueChange = { dateOfBirthValue = it },
                 label = null,
-                placeholder = { Text(text = "  Fødselsdag", color = colorResource(R.color.primary))  },
+                placeholder = {
+                    Text(
+                        text = "  Fødselsdato",
+                        color = colorResource(R.color.primary)
+                    )
+                },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.DateRange,
-                        contentDescription = "Phone icon")
-                },
-
-                )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OutlinedTextField(
-                modifier = Modifier
-                    .width(340.dp)
-                    .height(60.dp)
-                    .background(Color.White, RoundedCornerShape(50)),
-                value = phoneValue,
-                onValueChange = { phoneValue = it },
-                label = null,
-                placeholder = { Text(text = "  Telefonnummer", color = colorResource(R.color.primary))  },
-                shape = RoundedCornerShape(50),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.Phone,
-                        contentDescription = "Phone icon")
+                        contentDescription = "Phone icon"
+                    )
                 },
 
                 )
@@ -290,17 +302,40 @@ fun RegisterPage() {
                 value = addressValue,
                 onValueChange = { addressValue = it },
                 label = null,
-                placeholder = { Text(text = "  Adresse", color = colorResource(R.color.primary))  },
+                placeholder = { Text(text = "  Adresse", color = colorResource(R.color.primary)) },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.LocationOn,
-                        contentDescription = "Location icon")
+                        contentDescription = "Location icon"
+                    )
                 },
 
                 )
 
+            Spacer(modifier = Modifier.height(8.dp))
 
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp)
+                    .border(1.dp, Color.White, RoundedCornerShape(50)),
+                shape = RoundedCornerShape(50),
+                elevation = null,
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Transparent
+                )
+
+
+            ) {
+                Text(
+                    text = "Register",
+                    color = Color.White,
+                    fontSize = 14.sp
+                )
+
+            }
         }
     }
 }
