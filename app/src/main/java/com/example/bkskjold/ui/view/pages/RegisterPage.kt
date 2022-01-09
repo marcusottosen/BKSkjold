@@ -37,6 +37,7 @@ fun RegisterPage() {
         startY = 0.0f,
         endY = 1000.0f
     )
+    val scrollState = rememberScrollState()
 
     var firstNameValue by remember { mutableStateOf("") }
     var lastNameValue by remember { mutableStateOf("")}
@@ -85,7 +86,7 @@ fun RegisterPage() {
                 .fillMaxWidth()
                 .fillMaxHeight(1.0f)
                 .background(Color.Transparent)
-
+                .verticalScroll(state = scrollState)
         )
         {
             Spacer(modifier = Modifier.height(36.dp))
@@ -102,7 +103,7 @@ fun RegisterPage() {
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(modifier = Modifier.height(18.dp))
+
 
             OutlinedTextField(
                 modifier = Modifier
@@ -121,6 +122,8 @@ fun RegisterPage() {
                 },
 
             )
+
+
             OutlinedTextField(
                 modifier = Modifier
                     .width(340.dp)
@@ -140,6 +143,7 @@ fun RegisterPage() {
 
             )
 
+
             OutlinedTextField(
                 modifier = Modifier
                     .width(340.dp)
@@ -158,6 +162,7 @@ fun RegisterPage() {
 
             )
 
+
             OutlinedTextField(
                 modifier = Modifier
                     .width(340.dp)
@@ -175,6 +180,7 @@ fun RegisterPage() {
                 },
 
                 )
+
 
             OutlinedTextField(
                 modifier = Modifier
@@ -197,8 +203,10 @@ fun RegisterPage() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(60.dp)
                     .background(Color.Transparent)
-                    .padding(24.dp)
+                    .padding(24.dp, 4.dp)
+
             ){
                 Text(
                     modifier = Modifier.align(Alignment.BottomStart),
@@ -227,6 +235,7 @@ fun RegisterPage() {
 
                 )
 
+
             OutlinedTextField(
                 modifier = Modifier
                     .width(340.dp)
@@ -244,6 +253,9 @@ fun RegisterPage() {
                 },
 
                 )
+
+
+
             OutlinedTextField(
                 modifier = Modifier
                     .width(340.dp)
@@ -261,6 +273,8 @@ fun RegisterPage() {
                 },
 
                 )
+
+
             OutlinedTextField(
                 modifier = Modifier
                     .width(340.dp)
