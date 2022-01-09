@@ -115,6 +115,9 @@ fun RegisterPage() {
                 label = null,
                 placeholder = { Text(text = "  Fornavn", color = colorResource(R.color.primary)) },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Red,
+                    unfocusedBorderColor = Color.Red),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Person,
@@ -141,6 +144,9 @@ fun RegisterPage() {
                     )
                 },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Red,
+                    unfocusedBorderColor = Color.Red),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Person,
@@ -163,6 +169,9 @@ fun RegisterPage() {
                 label = null,
                 placeholder = { Text(text = "  Email", color = colorResource(R.color.primary)) },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Red,
+                    unfocusedBorderColor = Color.Red),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Email,
@@ -189,6 +198,9 @@ fun RegisterPage() {
                     )
                 },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Red,
+                    unfocusedBorderColor = Color.Red),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Lock,
@@ -215,6 +227,9 @@ fun RegisterPage() {
                     )
                 },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Red,
+                    unfocusedBorderColor = Color.Red),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Lock,
@@ -336,6 +351,8 @@ fun RegisterPage() {
                 )
 
             }
+
+            Spacer(modifier = Modifier.height(48.dp))
         }
     }
 }
