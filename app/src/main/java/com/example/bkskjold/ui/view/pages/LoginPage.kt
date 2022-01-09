@@ -1,8 +1,6 @@
 package com.example.bkskjold.ui.view.pages
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -44,6 +42,7 @@ fun LoginPage() {
     startY = 0.0f,
     endY = 1000.0f)
 
+    val scrollState = rememberScrollState()
     val focusManager = LocalFocusManager.current
 
     var emailValue by remember { mutableStateOf("") }
@@ -70,6 +69,7 @@ fun LoginPage() {
                 .fillMaxWidth()
                 .fillMaxHeight(1.0f)
                 .background(Color.Transparent)
+                .verticalScroll(state = scrollState)
         )
         {
 
@@ -180,6 +180,7 @@ fun LoginPage() {
 
 
             }
+            Spacer(modifier = Modifier.height(175.dp))
 
         }
     }
