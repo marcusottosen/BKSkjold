@@ -5,26 +5,31 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Lock
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -35,10 +40,11 @@ import com.example.bkskjold.R
 fun LoginPage() {
 
     val loginImage = painterResource(id = R.drawable.login_image2)
-    val backButton = painterResource(id = R.drawable.back_white)
     val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary), colorResource(R.color.light_green)),
     startY = 0.0f,
     endY = 1000.0f)
+
+    val focusManager = LocalFocusManager.current
 
     var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
@@ -99,13 +105,20 @@ fun LoginPage() {
                 value = emailValue,
                 onValueChange = { emailValue = it },
                 label = null,
-                placeholder = { Text(text = "  Email") },
+                placeholder = { Text(text = "Email") },
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Email,
                         contentDescription = "Email icon")
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(
+                    onNext = {focusManager.moveFocus(FocusDirection.Down)
+                    }
+                )
 
 
             )
@@ -119,13 +132,22 @@ fun LoginPage() {
                 value = passwordValue,
                 onValueChange = { passwordValue = it },
                 label = null,
-                placeholder = { Text(text = "  Adgangskode") },
+                placeholder = { Text(text = "Adgangskode") },
+                visualTransformation = PasswordVisualTransformation(),
                 shape = RoundedCornerShape(50),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Lock,
                         contentDescription = "Lock icon")
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(
+                    onDone = {focusManager.clearFocus()
+                    }
+                )
+
 
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -152,10 +174,6 @@ fun LoginPage() {
 
 
             }
-
-
         }
-
     }
-
 }
