@@ -14,9 +14,11 @@ import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -38,6 +40,7 @@ fun RegisterPage() {
         endY = 1000.0f
     )
     val scrollState = rememberScrollState()
+    val focusManager = LocalFocusManager.current
 
     var firstNameValue by remember { mutableStateOf("") }
     var lastNameValue by remember { mutableStateOf("") }
@@ -124,6 +127,13 @@ fun RegisterPage() {
                         contentDescription = "Email icon"
                     )
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(
+                    onNext = {focusManager.moveFocus(FocusDirection.Down)
+                    }
+                )
 
                 )
 
@@ -152,8 +162,14 @@ fun RegisterPage() {
                         imageVector = Icons.Outlined.Person,
                         contentDescription = "Email icon"
                     )
-
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(
+                    onNext = {focusManager.moveFocus(FocusDirection.Down)
+                    }
+                )
 
                 )
 
@@ -178,6 +194,7 @@ fun RegisterPage() {
                         contentDescription = "Email icon"
                     )
                 },
+
 
                 )
 
@@ -328,7 +345,7 @@ fun RegisterPage() {
 
                 )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(48.dp))
 
             Button(
                 onClick = {},
