@@ -2,6 +2,8 @@ package com.example.bkskjold.data.model
 import android.content.ContentValues
 import android.os.Parcelable
 import android.util.Log
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
@@ -91,6 +93,40 @@ fun getSignedUpTrainings(): MutableList<Training> {
     }
     return signedUpTrainings
 }
+
+fun updateParticipants(training: Training){
+    val userId = "ybdyou1ynl9KfgHjn6Mq" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldny be hardcoded
+
+    val db = Firebase.firestore
+
+    var dbTraining: QueryDocumentSnapshot
+    //var dbTraining
+    db.collection("trainings")
+        .get()
+        .addOnSuccessListener { result ->
+            for (doc in result) {
+                if (doc["date"] == training.date && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
+                    var test = doc.data
+                    dbTraining = doc
+                    //doc.reference
+                    print("")
+
+                }
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+        }
+    val updatedList = training.participants.toMutableList().add(userId)
+
+    //val updateableTraining = db.collection("trainings").document(trainingRef)
+
+
+
+
+
+}
+
 
 @Parcelize
 data class Training(

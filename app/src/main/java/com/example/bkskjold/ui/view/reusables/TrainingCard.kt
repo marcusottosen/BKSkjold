@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.updateParticipants
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
@@ -127,6 +128,7 @@ fun TrainingCard(training: Training, navController: NavController
                     onClick = { /*TODO*/ },
                     modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)
                 )
+                updateParticipants(training)
             }
         }
 
