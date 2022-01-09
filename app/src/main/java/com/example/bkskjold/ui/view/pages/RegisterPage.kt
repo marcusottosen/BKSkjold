@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -43,6 +44,7 @@ fun RegisterPage() {
     var lastNameValue by remember { mutableStateOf("")}
     var emailValue by remember { mutableStateOf("")}
     var passwordValue by remember { mutableStateOf("") }
+    var passwordValueCheck by remember { mutableStateOf("")}
     var phoneValue by remember { mutableStateOf("") }
     var dateOfBirthValue by remember { mutableStateOf("") }
     var addressValue by remember { mutableStateOf("") }
@@ -154,10 +156,45 @@ fun RegisterPage() {
                         contentDescription = "Email icon")
                 },
 
-
-
-
             )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp)
+                    .background(Color.White, RoundedCornerShape(50)),
+                value = passwordValue,
+                onValueChange = { passwordValue = it },
+                label = null,
+                placeholder = { Text(text = "  Adgangskode", color = colorResource(R.color.primary))  },
+                shape = RoundedCornerShape(50),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Lock,
+                        contentDescription = "Lock icon")
+                },
+
+                )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp)
+                    .background(Color.White, RoundedCornerShape(50)),
+                value = passwordValueCheck,
+                onValueChange = { passwordValueCheck = it },
+                label = null,
+                placeholder = { Text(text = "  Gentag adgangskode", color = colorResource(R.color.primary))  },
+                shape = RoundedCornerShape(50),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Lock,
+                        contentDescription = "Lock icon")
+                },
+
+                )
+
+
 
         }
     }
