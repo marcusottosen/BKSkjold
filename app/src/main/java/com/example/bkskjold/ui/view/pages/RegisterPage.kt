@@ -10,9 +10,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Lock
-import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -80,12 +78,14 @@ fun RegisterPage() {
             }
         }
 
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(1.0f)
                 .background(Color.Transparent)
+
         )
         {
             Spacer(modifier = Modifier.height(36.dp))
@@ -194,6 +194,90 @@ fun RegisterPage() {
 
                 )
 
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Transparent)
+                    .padding(24.dp)
+            ){
+                Text(
+                    modifier = Modifier.align(Alignment.BottomStart),
+                    text = "Valgfrit",
+                    fontSize = 12.sp,
+                    color = Color.White,
+
+                    )
+            }
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp)
+                    .background(Color.White, RoundedCornerShape(50)),
+                value = phoneValue,
+                onValueChange = { phoneValue = it },
+                label = null,
+                placeholder = { Text(text = "  Telefonnummer", color = colorResource(R.color.primary))  },
+                shape = RoundedCornerShape(50),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Phone,
+                        contentDescription = "Phone icon")
+                },
+
+                )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp)
+                    .background(Color.White, RoundedCornerShape(50)),
+                value = dateOfBirthValue,
+                onValueChange = { dateOfBirthValue = it },
+                label = null,
+                placeholder = { Text(text = "  Fødselsdag", color = colorResource(R.color.primary))  },
+                shape = RoundedCornerShape(50),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.DateRange,
+                        contentDescription = "Phone icon")
+                },
+
+                )
+            OutlinedTextField(
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp)
+                    .background(Color.White, RoundedCornerShape(50)),
+                value = phoneValue,
+                onValueChange = { phoneValue = it },
+                label = null,
+                placeholder = { Text(text = "  Telefonnummer", color = colorResource(R.color.primary))  },
+                shape = RoundedCornerShape(50),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Phone,
+                        contentDescription = "Phone icon")
+                },
+
+                )
+            OutlinedTextField(
+                modifier = Modifier
+                    .width(340.dp)
+                    .height(60.dp)
+                    .background(Color.White, RoundedCornerShape(50)),
+                value = addressValue,
+                onValueChange = { addressValue = it },
+                label = null,
+                placeholder = { Text(text = "  Adresse", color = colorResource(R.color.primary))  },
+                shape = RoundedCornerShape(50),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.LocationOn,
+                        contentDescription = "Location icon")
+                },
+
+                )
 
 
         }
