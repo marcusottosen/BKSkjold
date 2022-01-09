@@ -79,7 +79,6 @@ fun RegisterPage() {
             }
         }
 
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -88,6 +87,7 @@ fun RegisterPage() {
                 .background(Color.Transparent)
                 .verticalScroll(state = scrollState)
         )
+
         {
             Spacer(modifier = Modifier.height(36.dp))
 
@@ -103,7 +103,7 @@ fun RegisterPage() {
                 fontWeight = FontWeight.Bold
             )
 
-
+            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 modifier = Modifier
@@ -123,6 +123,7 @@ fun RegisterPage() {
 
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 modifier = Modifier
@@ -143,6 +144,7 @@ fun RegisterPage() {
 
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 modifier = Modifier
@@ -162,6 +164,7 @@ fun RegisterPage() {
 
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 modifier = Modifier
@@ -181,6 +184,7 @@ fun RegisterPage() {
 
                 )
 
+            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 modifier = Modifier
@@ -217,6 +221,8 @@ fun RegisterPage() {
                     )
             }
 
+            Spacer(modifier = Modifier.height(8.dp))
+
             OutlinedTextField(
                 modifier = Modifier
                     .width(340.dp)
@@ -234,7 +240,7 @@ fun RegisterPage() {
                 },
 
                 )
-
+            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 modifier = Modifier
@@ -254,7 +260,7 @@ fun RegisterPage() {
 
                 )
 
-
+            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 modifier = Modifier
@@ -274,6 +280,7 @@ fun RegisterPage() {
 
                 )
 
+            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 modifier = Modifier
