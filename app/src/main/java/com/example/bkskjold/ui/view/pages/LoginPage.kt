@@ -107,6 +107,9 @@ fun LoginPage() {
                 label = null,
                 placeholder = { Text(text = "Email") },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.White),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Email,
@@ -135,6 +138,9 @@ fun LoginPage() {
                 placeholder = { Text(text = "Adgangskode") },
                 visualTransformation = PasswordVisualTransformation(),
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.White),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Lock,
@@ -174,6 +180,7 @@ fun LoginPage() {
 
 
             }
+
         }
     }
 }
