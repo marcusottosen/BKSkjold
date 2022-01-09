@@ -18,12 +18,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.compose.rememberNavController
+import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.User
+import com.example.bkskjold.ui.viewmodel.logoutUser
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 @Composable
-fun DefaultProfileHeader(user: User){
+fun DefaultProfileHeader(user: User, navController: NavController){
     val iconSize = 40.dp
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -38,7 +46,7 @@ fun DefaultProfileHeader(user: User){
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 TextButton(
-                    onClick = {/* TODO */ },
+                    onClick = { logoutUser(navController) },
                     modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
                 ) {
                     Text(
@@ -67,7 +75,7 @@ fun DefaultProfileHeader(user: User){
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp),
-                text = (user.firstname + " " + user.surname),
+                text = (FirebaseAuth.getInstance().currentUser?.email.toString()),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
