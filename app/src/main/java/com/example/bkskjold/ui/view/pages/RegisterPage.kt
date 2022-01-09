@@ -3,13 +3,12 @@ package com.example.bkskjold.ui.view.pages
 import android.view.RoundedCorner
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,7 +18,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -60,25 +58,8 @@ fun RegisterPage() {
     ) {
 
         Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Start) {
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .width(75.dp)
-                    .height(50.dp),
-                elevation = null,
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Transparent
-                )
-
-
-            ) {
-                Image(
-                    backButton,
-                    contentDescription = "backButton",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .size(100.dp, 100.dp)
-                )
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back icon", tint = Color.White)
             }
         }
 
@@ -116,7 +97,11 @@ fun RegisterPage() {
                 value = firstNameValue,
                 onValueChange = { firstNameValue = it },
                 label = null,
-                placeholder = { Text(text = "  Fornavn", color = colorResource(R.color.primary)) },
+                placeholder = { Text(
+                    text = "Fornavn",
+                    color = colorResource(R.color.primary),
+
+                ) },
                 shape = RoundedCornerShape(50),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color.Red,
@@ -149,7 +134,7 @@ fun RegisterPage() {
                 label = null,
                 placeholder = {
                     Text(
-                        text = "  Efternavn",
+                        text = "Efternavn",
                         color = colorResource(R.color.primary)
                     )
                 },
@@ -183,7 +168,7 @@ fun RegisterPage() {
                 value = emailValue,
                 onValueChange = { emailValue = it },
                 label = null,
-                placeholder = { Text(text = "  Email", color = colorResource(R.color.primary)) },
+                placeholder = { Text(text = "Email", color = colorResource(R.color.primary)) },
                 shape = RoundedCornerShape(50),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color.Red,
@@ -216,7 +201,7 @@ fun RegisterPage() {
                 label = null,
                 placeholder = {
                     Text(
-                        text = "  Adgangskode",
+                        text = "Adgangskode",
                         color = colorResource(R.color.primary)
                     )
                 },
@@ -252,7 +237,7 @@ fun RegisterPage() {
                 label = null,
                 placeholder = {
                     Text(
-                        text = "  Gentag adgangskode",
+                        text = "Gentag adgangskode",
                         color = colorResource(R.color.primary)
                     )
                 },
@@ -305,17 +290,27 @@ fun RegisterPage() {
                 label = null,
                 placeholder = {
                     Text(
-                        text = "  Telefonnummer",
+                        text = "Telefonnummer",
                         color = colorResource(R.color.primary)
                     )
                 },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.White),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Phone,
                         contentDescription = "Phone icon"
                     )
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Phone,
+                    imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(
+                    onDone = {focusManager.clearFocus()
+                    }
+                )
 
                 )
             Spacer(modifier = Modifier.height(8.dp))
@@ -330,17 +325,27 @@ fun RegisterPage() {
                 label = null,
                 placeholder = {
                     Text(
-                        text = "  Fødselsdato",
+                        text = "Fødselsdato",
                         color = colorResource(R.color.primary)
                     )
                 },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.White),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.DateRange,
                         contentDescription = "Phone icon"
                     )
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(
+                    onDone = {focusManager.clearFocus()
+                    }
+                )
 
                 )
 
@@ -354,14 +359,24 @@ fun RegisterPage() {
                 value = addressValue,
                 onValueChange = { addressValue = it },
                 label = null,
-                placeholder = { Text(text = "  Adresse", color = colorResource(R.color.primary)) },
+                placeholder = { Text(text = "Adresse", color = colorResource(R.color.primary)) },
                 shape = RoundedCornerShape(50),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.White),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.LocationOn,
                         contentDescription = "Location icon"
                     )
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(
+                    onDone = {focusManager.clearFocus()
+                    }
+                )
 
                 )
 
@@ -389,7 +404,7 @@ fun RegisterPage() {
 
             }
 
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(150.dp))
         }
     }
 }

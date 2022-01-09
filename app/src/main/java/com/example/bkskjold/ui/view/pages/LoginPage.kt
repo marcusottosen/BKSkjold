@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Lock
@@ -52,27 +53,10 @@ fun LoginPage() {
     ) {
 
         Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Start) {
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .width(75.dp)
-                    .height(50.dp),
-                elevation = null,
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Transparent
-                )
-
-
-            ) {
-                Image(
-                    backButton,
-                    contentDescription = "backButton",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .size(100.dp, 100.dp)
-                )
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back icon", tint = Color.White)
+            }
         }
-    }
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
