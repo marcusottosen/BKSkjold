@@ -122,7 +122,6 @@ fun TrainingCard(training: Training, navController: NavController
                         )
                     }
                 }
-                //var participants: List<String> = training.participants
                 DefaultButton(text = isAttending,
                     checked = true,
                     onClick = { /*TODO*/ },
