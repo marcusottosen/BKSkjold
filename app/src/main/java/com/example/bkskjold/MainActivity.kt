@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.updateCurrentUser
 import com.example.bkskjold.data.util.preloadDB
 import com.example.bkskjold.ui.view.pages.AppStartPage
 import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
         FirebaseApp.initializeApp(this)
         setContent {
             preloadDB()
+            if (FirebaseAuth.getInstance().currentUser != null) updateCurrentUser()
             MainScreen()
         }
     }

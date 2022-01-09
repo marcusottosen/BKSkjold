@@ -3,6 +3,7 @@ package com.example.bkskjold.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bkskjold.data.model.updateCurrentUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -45,6 +46,7 @@ class LoginViewModel : ViewModel() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
+                        updateCurrentUser()
                         home()
                     }
                     _loading.value = false

@@ -23,11 +23,18 @@ import androidx.navigation.Navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.User
 import com.example.bkskjold.ui.viewmodel.logoutUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.okhttp.internal.DiskLruCache
+
+//val name = Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().currentUser?.uid.toString()).get().result.getString("name")
+
+
 
 
 @Composable
@@ -75,13 +82,12 @@ fun DefaultProfileHeader(user: User, navController: NavController){
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp),
-                text = (FirebaseAuth.getInstance().currentUser?.email.toString()),
+                text = (CurrentUser.firstName + " " + CurrentUser.lastName),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 color = androidx.compose.ui.graphics.Color.White
             )
-
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 20.dp),

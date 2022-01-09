@@ -32,7 +32,7 @@ fun ProfileOverview(navController: NavController) {
         item {
             DefaultProfileHeader(currentUser, navController)
         }
-        item { ProfileOverviewViewModel().GetProfileView(currentUser)
+        item { ProfileOverviewViewModel().GetProfileView()
             Spacer(modifier = Modifier.height(30.dp))}
         // item {ProfileOverviewViewModel().getProfileInvitationView()}
         val inviInfo = InvitationData().getInvitations()

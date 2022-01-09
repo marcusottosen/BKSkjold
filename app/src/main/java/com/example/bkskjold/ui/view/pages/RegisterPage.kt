@@ -31,8 +31,14 @@ fun RegisterView(
     back: () -> Unit,
     registerViewModel: RegisterViewModel = viewModel()
 ) {
+    val firstName: String by registerViewModel.firstName.observeAsState("")
+    val lastName: String by registerViewModel.lastName.observeAsState("")
     val email: String by registerViewModel.email.observeAsState("")
     val password: String by registerViewModel.password.observeAsState("")
+    val address: String by registerViewModel.address.observeAsState("")
+    val phoneNumber: String by registerViewModel.phoneNumber.observeAsState("")
+    val team: String by registerViewModel.team.observeAsState("")
+
     val loading: Boolean by registerViewModel.loading.observeAsState(initial = false)
 
     Box(
@@ -52,6 +58,20 @@ fun RegisterView(
                 action = back
             )
             TextFormField(
+                value = firstName,
+                onValueChange = { registerViewModel.updateFirstName(it) },
+                label = "First Name",
+                keyboardType = KeyboardType.Text,
+                visualTransformation = VisualTransformation.None
+            )
+            TextFormField(
+                value = lastName,
+                onValueChange = { registerViewModel.updateLastName(it) },
+                label = "Last Name",
+                keyboardType = KeyboardType.Text,
+                visualTransformation = VisualTransformation.None
+            )
+            TextFormField(
                 value = email,
                 onValueChange = { registerViewModel.updateEmail(it) },
                 label = "Email",
@@ -64,6 +84,27 @@ fun RegisterView(
                 label = "Password",
                 keyboardType = KeyboardType.Password,
                 visualTransformation = PasswordVisualTransformation()
+            )
+            TextFormField(
+                value = phoneNumber,
+                onValueChange = { registerViewModel.updatePhone(it) },
+                label = "Phone",
+                keyboardType = KeyboardType.Number,
+                visualTransformation = VisualTransformation.None
+            )
+            TextFormField(
+                value = address,
+                onValueChange = { registerViewModel.updateAddress(it) },
+                label = "Address",
+                keyboardType = KeyboardType.Text,
+                visualTransformation = VisualTransformation.None
+            )
+            TextFormField(
+                value = team,
+                onValueChange = { registerViewModel.updateTeam(it) },
+                label = "Team",
+                keyboardType = KeyboardType.Text,
+                visualTransformation = VisualTransformation.None
             )
             Spacer(modifier = Modifier.height(20.dp))
             Buttons(
