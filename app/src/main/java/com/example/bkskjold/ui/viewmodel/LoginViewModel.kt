@@ -37,6 +37,8 @@ class LoginViewModel : ViewModel() {
     // Register user
     fun loginUser(home: () -> Unit) {
         if (_loading.value == false) {
+            if ((email.value != "") && (password.value != "")) {
+
             val email: String = _email.value ?: throw IllegalArgumentException("email expected")
             val password: String =
                 _password.value ?: throw IllegalArgumentException("password expected")
@@ -51,6 +53,7 @@ class LoginViewModel : ViewModel() {
                     }
                     _loading.value = false
                 }
+            }
         }
     }
 }

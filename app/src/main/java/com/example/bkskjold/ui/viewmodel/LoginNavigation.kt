@@ -37,22 +37,7 @@ class Action(navController: NavHostController) {
     val navigateBack: () -> Unit = { navController.popBackStack() }
 }
 
-@Composable
-fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
-    Surface(color = MaterialTheme.colors.background) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom
-        ) {
-            Title(title = "NemSport")
-            Buttons(title = "Register", onClick = register, backgroundColor = colorResource(R.color.primary))
-            Buttons(title = "Login", onClick = login, backgroundColor = colorResource(R.color.primary_light))
-        }
-    }
-}
+
 
 fun logoutUser(navController: NavController){
     FirebaseAuth.getInstance().signOut()

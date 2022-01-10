@@ -31,6 +31,9 @@ class RegisterViewModel : ViewModel() {
     private val _password = MutableLiveData("")
     val password: LiveData<String> = _password
 
+    private val _passwordCheck = MutableLiveData("")
+    val passwordCheck: LiveData<String> = _passwordCheck
+
     private val _phoneNumber = MutableLiveData("")
     val phoneNumber: LiveData<String> = _phoneNumber
 
@@ -60,6 +63,9 @@ class RegisterViewModel : ViewModel() {
     fun updatePassword(newPassword: String) {
         _password.value = newPassword
     }
+    fun updatePasswordCheck(newPasswordCheck: String) {
+        _passwordCheck.value = newPasswordCheck
+    }
 
     // Update phone
     fun updatePhone(newPhoneNumber: String){
@@ -78,39 +84,50 @@ class RegisterViewModel : ViewModel() {
     // Register user
     fun registerUser(home: () -> Unit) {
         if (_loading.value == false) {
-            val firstName: String = _firstName.value ?: throw IllegalArgumentException("first name expected")
-            val lastName: String = _lastName.value ?: throw IllegalArgumentException("last name expected")
-            val email: String = _email.value ?: throw IllegalArgumentException("email expected")
-            val password: String = _password.value ?: throw IllegalArgumentException("password expected")
-            val phoneNumber: String = _phoneNumber.value ?: throw IllegalArgumentException("phonenumber expected")
-            val address: String = _address.value ?: throw IllegalArgumentException("address expected")
-            val team: String = _team.value ?: throw IllegalArgumentException("team expected")
 
-            _loading.value = true
+            if (_password.value == _passwordCheck.value) {
 
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
-                            CurrentUserModel(
-                                FirebaseAuth.getInstance().uid.toString(),
-                                firstName,
-                                lastName,
-                                email,
-                                address,
-                                phoneNumber.toInt(),
-                                com.google.firebase.Timestamp.now(),
-                                team,
-                                1,
-                                0,
-                                com.google.firebase.Timestamp.now()
+                val firstName: String = _firstName.value ?: throw IllegalArgumentException("first name expected")
+                val lastName: String = _lastName.value ?: throw IllegalArgumentException("last name expected")
+                val email: String = _email.value ?: throw IllegalArgumentException("email expected")
+                val password: String = _password.value ?: throw IllegalArgumentException("password expected")
+                val address: String = _address.value ?: throw IllegalArgumentException("address expected")
+                val team: String = _team.value ?: throw IllegalArgumentException("team expected")
 
-                        ))
-                        updateCurrentUser()
-                        home()
-                    }
-                    _loading.value = false
+                val phoneNumber: String = if (_phoneNumber.value == "") {
+                    "0"
+                } else {
+                    _phoneNumber.value ?: throw IllegalArgumentException("phonenumber expected")
                 }
+
+
+
+                _loading.value = true
+
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
+                                CurrentUserModel(
+                                    FirebaseAuth.getInstance().uid.toString(),
+                                    firstName,
+                                    lastName,
+                                    email,
+                                    address,
+                                    phoneNumber.toInt(),
+                                    com.google.firebase.Timestamp.now(),
+                                    "default-team",
+                                    1,
+                                    0,
+                                    com.google.firebase.Timestamp.now()
+
+                                ))
+                            updateCurrentUser()
+                            home()
+                        }
+                        _loading.value = false
+                    }
+            }
         }
     }
 }
