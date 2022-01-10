@@ -90,4 +90,11 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
+    implementation 'androidx.navigation:navigation-compose:2.4.0-rc01'
 }

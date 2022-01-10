@@ -21,17 +21,24 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.updateCurrentUser
 import com.example.bkskjold.data.util.preloadDB
 import com.example.bkskjold.ui.view.pages.LoginFrontPage
 import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
 import com.example.bkskjold.ui.viewmodel.Navigation
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContent {
             preloadDB()
+            if (FirebaseAuth.getInstance().currentUser != null) updateCurrentUser()
             MainScreen()
         }
     }
@@ -41,14 +48,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
+
     Scaffold(
-        bottomBar = { BottomNavigationBar(navController) }
+            bottomBar = { if (Firebase.auth.currentUser != null) BottomNavigationBar(navController) }
     ) {
         Navigation(navController = navController)
     }
 }
-
-
 
 
 //TODO fjern når siderne er blevet oprettet!

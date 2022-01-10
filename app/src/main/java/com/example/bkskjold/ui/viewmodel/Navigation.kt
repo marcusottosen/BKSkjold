@@ -8,6 +8,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -22,11 +23,15 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
 import com.example.bkskjold.DefaultDetails
 import com.example.bkskjold.DefaultScreen
+import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
 import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.ui.view.pages.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 /**
@@ -36,7 +41,14 @@ import com.example.bkskjold.ui.view.pages.*
 @ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController, startDestination = "loginFrontPage") {
+    NavHost(navController, startDestination =
+    if (Firebase.auth.currentUser != null)
+        NavigationItem.Home.route
+    else
+        "authenticationOption"
+
+    ) {
+        // Navbar
         composable(NavigationItem.Home.route) {
             HomeScreenPage()
         }
@@ -50,15 +62,27 @@ fun Navigation(navController: NavHostController) {
             ProfileOverview(navController)
         }
 
-        //Login
-        composable("loginFrontPage") {
-            LoginFrontPage(navController)
+        // Login pages
+        composable("authenticationOption") {
+            AuthenticationView(
+                register = remember(navController) { Action(navController) }.register,
+                login = remember(navController) { Action(navController) }.login
+            )
         }
-        composable("loginPage") {
-            LoginPage(navController)
+        composable("register") {
+            RegisterView(
+                home = remember(navController) { Action(navController) }.home,
+                back = remember(navController) { Action(navController) }.navigateBack
+            )
         }
-        composable("registerPage") {
-            RegisterPage(navController)
+        composable("login") {
+            LoginView(
+                home = remember(navController) { Action(navController) }.home,
+                back = remember(navController) { Action(navController) }.navigateBack
+            )
+        }
+        composable("mainScreen") {
+            MainScreen()
         }
 
         //Subpages
