@@ -27,10 +27,10 @@ class TrainingOverviewViewModel {
 
 
     @Composable
-    fun GetOverviewView(navController: NavController, date: String, timeStart: String){
+    fun GetOverviewView(navController: NavController, date: String, timeStart: String, team: String){
         val trainings = loadTrainingsFromDB()
 
-        if(date == "" && timeStart == ""){
+        if(date == "" && timeStart == "" && team == ""){
             LazyColumn {
                 items(trainings.size) { i ->
                     TrainingCard(training = trainings[i], navController)
@@ -38,15 +38,15 @@ class TrainingOverviewViewModel {
                 item{ Spacer(modifier = Modifier.height(80.dp))}
             }
         }else{
-            filterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings)
+            filterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings, team = team)
         }
     }
     @Composable
-    fun GetSignedUpView(navController: NavController, date: String, timeStart: String){
+    fun GetSignedUpView(navController: NavController, date: String, timeStart: String, team: String){
         val trainings = getSignedUpTrainings()
 
 
-        if (date == "" && timeStart == ""){
+        if (date == "" && timeStart == "" && team == ""){
             LazyColumn {
                 items(trainings.size) { i ->
                     TrainingCard(training = trainings[i], navController)
@@ -54,26 +54,69 @@ class TrainingOverviewViewModel {
                 item{ Spacer(modifier = Modifier.height(80.dp))}
             }
         }else{
-            filterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings)
+            filterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings, team = team)
         }
     }
 
     @Composable
-    fun filterAndSort(navController: NavController, date: String, timeStart: String, practices: List<Training>){
-        var filteredPractices: MutableList<Training> = mutableListOf()
+    fun filterAndSort(navController: NavController, date: String, timeStart: String, team: String, practices: List<Training>){
+        val filteredPractices: MutableList<Training> = mutableListOf()
 
         try {
             for ( i in practices){
-                if (date != "" && timeStart != ""){
+                if (date != "" && timeStart == "" && team == ""){
+                    if (i.date == date){
+                        filteredPractices.add(i)
+                    }
+                }else if (timeStart != "" && date == "" && team == ""){
+                    if (i.timeStart == timeStart){
+                        filteredPractices.add(i)
+                    }
+                }else if (team != "" && timeStart == "" && date == ""){
+                    if (i.league == team){
+                        filteredPractices.add(i)
+                    }
+                }else if (date != "" && timeStart != "" && team == ""){
                     if (i.date == date && i.timeStart == timeStart){
                         filteredPractices.add(i)
                     }
-                }else if(date != "" || timeStart != ""){
-                    if (i.date == date || i.timeStart == timeStart){
+                }else if (date != "" && team != "" && timeStart == ""){
+                    if (i.date == date && i.league == team){
+                        filteredPractices.add(i)
+                    }
+                }else if (timeStart != "" && team != "" && date == ""){
+                    if (i.timeStart == timeStart && i.league == team){
+                        filteredPractices.add(i)
+                    }
+                }else if (date != "" && timeStart != "" && team != ""){
+                    if (i.date == date && i.timeStart == timeStart && i.league == team){
                         filteredPractices.add(i)
                     }
                 }
+
+                /*if (date != "" || timeStart != "" || team != ""){
+                    if (i.date == date || i.timeStart == timeStart || i.league == team){
+                        filteredPractices.add(i)
+                    }
+                }else if(date != "" && timeStart != "" && team != ""){
+                    if (i.date == date && i.timeStart == timeStart && i.league == team){
+                        filteredPractices.add(i)
+                    }
+                }else if (date != "" && timeStart != "" || team != ""){
+                    if (i.date == date && i.timeStart == timeStart || i.league == team){
+                        filteredPractices.add(i)
+                    }
+                }else if (date != "" || timeStart != "" && team != ""){
+                    if (i.date == date || i.timeStart == timeStart && i.league == team){
+                        filteredPractices.add(i)
+                    }
+                }else if (date != "" && team != "" || timeStart != ""){
+                    if (i.date == date && i.league == team || i.timeStart == timeStart){
+                        filteredPractices.add(i)
+                    }
+                }*/
             }
+            print("")
         } catch (e: Exception){
             print("Something went wrong, when trying to filter through practices. Method: filterAndSort in TrainingOverviewViewModel")
         }
@@ -81,7 +124,7 @@ class TrainingOverviewViewModel {
         //Finally create the view with the right practices.
         LazyColumn {
             items(filteredPractices.size) { i ->
-                TrainingCard(training = filteredPractices[i], navController)
+                TrainingCard(training = filteredPractices[i], navController = navController)
             }
             item{ Spacer(modifier = Modifier.height(80.dp))}
         }
