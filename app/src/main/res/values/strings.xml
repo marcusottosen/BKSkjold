@@ -14,6 +14,18 @@
     <string name="Attend">Deltag</string>
     <string name="Trainer">Træner</string>
     <string name="TraningDescription">Træningsbeskrivelse:</string>
+    <string name="clubName">BKSkjold</string>
 
+    <!-- HomePage -->
+    <string name="nextTraining">Næste Træning</string>
+    <string name="trainingFor">Træning for</string>
+    <string name="Invite">Inviter</string>
+    <string name="deregister">Afmeld</string>
+    <string name="news">Nyheder</string>
 
-</resources>
+    <string name="bookField">Book Bane</string>
+    <string name="calender">Kalender</string>
+    <string name="map">Kort</string>
+    <string name="discussionForum">Diskussions
+ -forum</string>
+    </resources>

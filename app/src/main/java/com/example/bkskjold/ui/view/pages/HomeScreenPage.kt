@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,7 +30,6 @@ import com.example.bkskjold.ui.view.reusables.NextTrainingCard
 @Preview
 @Composable
 fun HomeScreenPage() {
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -54,13 +54,13 @@ fun HomeScreenPage() {
                 ) {
                     Column(Modifier.padding(start = 15.dp, top = 36.dp)) {
                         Text(//Card title
-                            text = "NemSport",
+                            text = stringResource(R.string.app_name),
                             fontSize = 36.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = Color.White
                         )
                         Text(//Card title
-                            text = "BKSkjold",
+                            text = stringResource(R.string.clubName),
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.White
@@ -79,7 +79,6 @@ fun HomeScreenPage() {
         }
 
         item {
-
             NextTrainingCard(training = trainings[1])
         }
 
@@ -89,17 +88,17 @@ fun HomeScreenPage() {
                 .padding(15.dp, 35.dp, 15.dp, 0.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                HomePageCategories(R.drawable.icon_field, "Book Bane")
-                HomePageCategories(R.drawable.icon_calendarhome, "Kalender")
-                HomePageCategories(R.drawable.icon_map, "Kort")
-                HomePageCategories(R.drawable.icon_forum, "Diskussions \n -forum")
+                HomePageCategories(R.drawable.icon_field, stringResource(R.string.bookField))
+                HomePageCategories(R.drawable.icon_calendarhome, stringResource(R.string.calender))
+                HomePageCategories(R.drawable.icon_map, stringResource(R.string.map))
+                HomePageCategories(R.drawable.icon_forum, stringResource(R.string.discussionForum))
             }
         }
 
         item {
             Spacer(modifier = Modifier.height(35.dp))
             Text(//Card title
-                text = "Nyheder",
+                text = stringResource(R.string.news),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Gray,
@@ -113,17 +112,3 @@ fun HomeScreenPage() {
         item { Spacer(modifier = Modifier.height(100.dp)) }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

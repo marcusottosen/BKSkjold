@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -58,11 +59,11 @@ fun NextTrainingCard(training: Training) {
                         .padding(20.dp, 15.dp, 20.dp, 15.dp)
                 ) {
                     Text(//Card title
-                        text = "Næste Træning",
+                        text = stringResource(R.string.nextTraining),
                         color = Color.White
                     )
                     Text(// Header
-                        text = "Træning for ${training.league}",
+                        text = stringResource(R.string.trainingFor) + " " + training.league,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 5.dp),
@@ -198,7 +199,7 @@ fun NextTrainingCard(training: Training) {
                         modifier = Modifier.size(40.dp)
                     )
                     Text(
-                        text = "Inviter",
+                        text = stringResource(R.string.Invite),
                         fontSize = 10.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
@@ -219,7 +220,7 @@ fun NextTrainingCard(training: Training) {
                         modifier = Modifier.size(40.dp)
                     )
                     Text(
-                        text = "Afmeld",
+                        text = stringResource(R.string.deregister),
                         fontSize = 10.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
