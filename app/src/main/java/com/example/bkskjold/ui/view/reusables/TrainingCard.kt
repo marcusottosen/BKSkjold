@@ -57,7 +57,9 @@ fun TrainingCard(training: Training, navController: NavController
             .padding(30.dp, 10.dp, 30.dp, 20.dp)
             .height(85.dp)
             .fillMaxWidth()
-            .clickable { gotoTrainingDetails(training, navController) },
+            .clickable {
+                gotoTrainingDetails(training, navController)
+                       },
         shape = RoundedCornerShape(9.dp),
         elevation = 12.dp
     ) {
@@ -140,11 +142,6 @@ fun TrainingCard(training: Training, navController: NavController
                             .fillMaxWidth()
                         , onClick = {
                             updateParticipants(training)
-                            //trainings.clear()
-                            loadTrainingsFromDB()
-
-                            print(trainings)
-                            print("")
                                     }
                         , shape = RoundedCornerShape(18.dp)
                         , colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary))

@@ -102,16 +102,14 @@ fun updateParticipants(training: Training){
     val userId = "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldny be hardcoded
 
     val db = Firebase.firestore
-    // TODO THIS METHODE IS PRONE FOR ERROR: MAKE SURE TO CHECK USER DOESNT GET ADDED TWICE
-    //var dbTraining: QueryDocumentSnapshot? = null
-    //var dbTraining
-    lateinit var tmpTraining: Training
+
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
             for (doc in result) {
                 if (doc["date"] == training.date && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
-                    var participants = doc["participants"]
+
+                    //Create a mutable list, so we can add items to it.
                     var mutableParticipants = training.participants.toMutableList()
                     if (mutableParticipants.contains(userId)){
                         mutableParticipants.remove(userId)
@@ -119,27 +117,20 @@ fun updateParticipants(training: Training){
                         mutableParticipants.add(userId)
                     }
 
+                    //map of field to update
                     var updatedTraining = hashMapOf(
                         "participants" to mutableParticipants
                     )
 
-                    //val dbTraining = doc
-                    //doc.reference
-                    //var participants = training.participants
-                    //var mutableList = participants.toMutableList()
-                    //mutableList.add(userId)
-                    //var updatedList = listOf(mutableList)
+                    //Update field
                     val updateable = db.collection("trainings").document(doc.id)
                     updateable
                         .set(updatedTraining, SetOptions.merge())
-                        //.update("participants", mutableParticipants)
                         .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
                         .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
-                    var TMPtrainings = trainings
-                    print("")
-                    //trainings.clear()
+
+                    //Finally load the updated trainings from DB again.
                     loadTrainingsFromDB()
-                    print("")
 
                 }
             }
@@ -147,20 +138,6 @@ fun updateParticipants(training: Training){
         .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting documents: ", exception)
         }
-    //val updatedList = training.participants.toMutableList().add(userId)
-
-    //val updateableTraining = db.collection("trainings").document(trainingRef)
-    /*if (dbTraining != null){
-        try {
-            val updateable = db.collection("trainings").document(dbTraining!!.reference.toString())
-            print("")
-        }catch (e: Exception){}
-
-    }*/
-
-
-
-
 }
 
 
