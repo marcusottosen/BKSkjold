@@ -60,10 +60,17 @@ fun Navigation(navController: NavHostController) {
                 EventInfoPage(event = it, navController = navController)
             }
         }
-        composable("settingsInfo"){
+        composable("settingsPage"){
             val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
             settingModel?.let {
                 settingsPage(navController = navController)
+            }
+        }
+
+        composable("editProfile"){
+            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
+            settingModel?.let {
+                editProfilePage(navController = navController)
             }
         }
     }

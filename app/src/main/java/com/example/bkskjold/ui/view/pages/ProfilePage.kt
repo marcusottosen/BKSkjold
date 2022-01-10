@@ -89,7 +89,11 @@ fun profileOverview(navController: NavController) {
 
 fun gotoSettingsPage(user: User, navController: NavController){
     navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
-    navController.navigate("settingsInfo")
+    navController.navigate("settingsPage")
+}
+fun gotoEditProfilePage(user: User, navController: NavController){
+    navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
+    navController.navigate("editProfile")
 }
 
 

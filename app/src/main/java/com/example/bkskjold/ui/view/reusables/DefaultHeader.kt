@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.User
+import com.example.bkskjold.ui.view.pages.gotoEditProfilePage
 import com.example.bkskjold.ui.view.pages.gotoSettingsPage
 
 
@@ -102,7 +103,7 @@ fun DefaultProfileHeader(user: User, navController: NavController){
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .padding(end = 50.dp)
-                        .clickable { /*TODO*/ }
+                        .clickable { gotoEditProfilePage(user, navController) }
                 ) {
                     Icon(
                         painterResource(id = R.drawable.icon_edit_pencil),
@@ -114,6 +115,49 @@ fun DefaultProfileHeader(user: User, navController: NavController){
                         text = "Rediger Profil",
                         color = androidx.compose.ui.graphics.Color.White
                     )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun DefaultEditProfileHeader(user: User, navController: NavController) {
+    val iconSize = 40.dp
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(painter = painterResource(id = R.drawable.img_profile_header_background, ),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .height(400.dp)
+                .fillMaxWidth())
+
+        Column(modifier = Modifier.fillMaxSize()) {
+
+            Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .padding(start = 20.dp)
+                        .clickable { gotoSettingsPage(user, navController)},
+                ) {
+                TextButton(
+                    onClick = {navController.navigateUp()},
+                    modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
+                ) {
+                    Text(
+                        text = "Annuller",
+                        color = androidx.compose.ui.graphics.Color.White)
+                } }
+                TextButton(
+                    onClick = {/* TODO */ },
+                    modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
+                ) {
+                    Text(
+                        text = "Gem ændringer",
+                        color = androidx.compose.ui.graphics.Color.White)
                 }
             }
         }
