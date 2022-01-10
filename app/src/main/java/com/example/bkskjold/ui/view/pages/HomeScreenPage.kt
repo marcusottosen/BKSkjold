@@ -30,6 +30,7 @@ import com.example.bkskjold.ui.view.reusables.NextTrainingCard
 @Preview
 @Composable
 fun HomeScreenPage() {
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -79,7 +80,7 @@ fun HomeScreenPage() {
         }
 
         item {
-            NextTrainingCard(training = trainings[1])
+            //NextTrainingCard(training = trainings[1])
         }
 
         item {
