@@ -37,7 +37,7 @@ fun getWeekDay(timestamp: com.google.firebase.Timestamp): String{
 }
 
 fun getMonth(): String{
-    val month = ""
+    val month = "month"
     // tror der er en SimpleDateFormat("??").format(date) der virker
     return month
 }

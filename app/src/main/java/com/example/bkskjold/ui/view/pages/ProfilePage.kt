@@ -61,26 +61,6 @@ fun ProfileOverview(navController: NavController) {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(30.dp))
-        }
-
-        //TODO Skift til at bruge info fra nuværende bruger. Bør bare ændre i NextTrainingCard og overføre nuværende user
-        item {
-            NextTrainingCard(
-                header = "Træning for seniorer",
-                date = "25. oktober",
-                timeStart = "16:00",
-                timeEnd = "17:30",
-                day = "mandag",
-                team = "U12",
-                location = "Bane C",
-                attending = 8,
-                spots = 12,
-                trainer = "Bjarne Andersen"
-            )
-            Spacer(modifier = Modifier.height(30.dp))
-        }
-        item() {
             Spacer(modifier = Modifier.height(50.dp))
         }
     }

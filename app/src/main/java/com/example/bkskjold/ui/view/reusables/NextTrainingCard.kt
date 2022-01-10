@@ -22,23 +22,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.util.getDate
 
 
 @Composable
-fun NextTrainingCard(
-    header: String,
-    date: String,
-    timeStart: String,
-    timeEnd: String,
-    day: String,
-    team: String,
-    location: String,
-    attending: Int,
-    spots: Int,
-    trainer: String
-) {
-
-
+fun NextTrainingCard(training: Training) {
     Card(
         shape = RoundedCornerShape(22.dp),
         border = BorderStroke(width = 1.dp, color = colorResource(id = R.color.border)),
@@ -74,7 +62,7 @@ fun NextTrainingCard(
                         color = Color.White
                     )
                     Text(// Header
-                        text = header,
+                        text = "Træning for ${training.league}",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 5.dp),
@@ -90,10 +78,10 @@ fun NextTrainingCard(
                         horizontalArrangement = Arrangement.Start
                     ) {
                         Column() { //Date & time
-                            Text(text = date, fontSize = 10.sp, color = Color.White)
-                            Text(text = day, fontSize = 20.sp, color = Color.White)
+                            Text(text = "25. oktober", fontSize = 10.sp, color = Color.White) //TODO getDate(training.timeStart) (Kan først når timeEnd etc er timestamp
+                            Text(text = "mandag", fontSize = 20.sp, color = Color.White) //TODO getWeekDay(training.timeStart)
                             Text(
-                                text = "$timeStart - $timeEnd",
+                                text = "16:00 - 17:30", //TODO getTime(training.startTime) - getTime(training.endTime)
                                 fontSize = 10.sp,
                                 color = Color.White
                             )
@@ -112,7 +100,7 @@ fun NextTrainingCard(
                                         modifier = Modifier.size(15.dp),
                                     )
                                     Text(
-                                        text = team,
+                                        text = training.league,
                                         fontSize = 10.sp,
                                         modifier = Modifier
                                             .padding(start = 5.dp)
@@ -132,7 +120,7 @@ fun NextTrainingCard(
                                         modifier = Modifier.size(15.dp),
                                     )
                                     Text(
-                                        text = location,
+                                        text = training.location,
                                         fontSize = 10.sp,
                                         modifier = Modifier
                                             .padding(start = 5.dp)
@@ -171,7 +159,7 @@ fun NextTrainingCard(
                                 modifier = Modifier.size(15.dp)
                             )
                             Text(
-                                text = "$attending/$spots",
+                                text = "${training.participants.size}/${training.maxParticipants}", //$attending/$spots"
                                 fontSize = 10.sp,
                                 modifier = Modifier
                                     .padding(start = 5.dp)
@@ -189,7 +177,7 @@ fun NextTrainingCard(
                                 modifier = Modifier.size(15.dp),
                             )
                             Text(
-                                text = trainer,
+                                text = training.trainer,
                                 fontSize = 10.sp,
                                 modifier = Modifier
                                     .padding(start = 5.dp)

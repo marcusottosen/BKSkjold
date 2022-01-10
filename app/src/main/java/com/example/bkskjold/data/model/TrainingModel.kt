@@ -50,7 +50,7 @@ fun loadTrainingsFromDB(): MutableList<Training>{
         .get()
         .addOnSuccessListener { result ->
             for (doc in result) {
-                val test : Number = doc["price"] as Number
+                //val test : Number = doc["price"] as Number
                 //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int
                 //trainings.add(training)
 

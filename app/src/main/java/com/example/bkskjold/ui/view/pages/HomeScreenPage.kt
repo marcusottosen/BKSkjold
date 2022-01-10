@@ -18,7 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.news
+import com.example.bkskjold.data.model.trainings
 import com.example.bkskjold.ui.view.reusables.HomePageCategories
 import com.example.bkskjold.ui.view.reusables.NewsCard
 import com.example.bkskjold.ui.view.reusables.NextTrainingCard
@@ -41,14 +43,14 @@ fun HomeScreenPage() {
                         .fillMaxWidth()
                         .height(160.dp)
                         .background(colorResource(id = R.color.primary))
-                    .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            colorResource(id = R.color.primary),
-                            colorResource(id = R.color.home_header_secondary)
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(
+                                    colorResource(id = R.color.primary),
+                                    colorResource(id = R.color.home_header_secondary)
+                                )
+                            )
                         )
-                    )
-                )
                 ) {
                     Column(Modifier.padding(start = 15.dp, top = 36.dp)) {
                         Text(//Card title
@@ -77,21 +79,8 @@ fun HomeScreenPage() {
         }
 
         item {
-            NextTrainingCard(
-                header = "Træning for seniorer",
-                date = "25. oktober",
-                timeStart = "16:00",
-                timeEnd = "17:30",
-                day = "mandag",
-                team = "U12",
-                location = "Bane C",
-                attending = 8,
-                spots = 12,
-                trainer = "Bjarne Andersen"
-            )
+            NextTrainingCard(training = trainings[1])
         }
-
-
 
         item {
             Row(modifier = Modifier
