@@ -20,3 +20,10 @@ fun newTraining(
 
 
 }
+
+/*
+Fjern Date, team1, team2, wekkday, price
+add: userBooking
+Ændre: Trainer: userID
+
+ */
