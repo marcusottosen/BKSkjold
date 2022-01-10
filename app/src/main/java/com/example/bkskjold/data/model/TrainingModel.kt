@@ -1,7 +1,12 @@
 package com.example.bkskjold.data.model
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Parcelable
 import android.util.Log
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
@@ -93,6 +98,49 @@ fun getSignedUpTrainings(): MutableList<Training> {
     }
     return signedUpTrainings
 }
+
+fun updateParticipants(training: Training){
+    val userId = "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldny be hardcoded
+
+    val db = Firebase.firestore
+
+    db.collection("trainings")
+        .get()
+        .addOnSuccessListener { result ->
+            for (doc in result) {
+                if (doc["date"] == training.date && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
+
+                    //Create a mutable list, so we can add items to it.
+                    var mutableParticipants = training.participants.toMutableList()
+                    if (mutableParticipants.contains(userId)){
+                        mutableParticipants.remove(userId)
+                    }else{
+                        mutableParticipants.add(userId)
+                    }
+
+                    //map of field to update
+                    var updatedTraining = hashMapOf(
+                        "participants" to mutableParticipants
+                    )
+
+                    //Update field
+                    val updateable = db.collection("trainings").document(doc.id)
+                    updateable
+                        .set(updatedTraining, SetOptions.merge())
+                        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
+                        .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
+
+                    //Finally load the updated trainings from DB again.
+                    loadTrainingsFromDB()
+
+                }
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+        }
+}
+
 
 @Parcelize
 data class Training(
