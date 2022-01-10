@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.util.preloadDB
+import com.example.bkskjold.ui.view.pages.LoginFrontPage
 import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
 import com.example.bkskjold.ui.viewmodel.Navigation
 

@@ -18,12 +18,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.User
 
 
 @Composable
-fun DefaultProfileHeader(user: User){
+fun DefaultProfileHeader(user: User, navController: NavController){
     val iconSize = 40.dp
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -38,7 +39,7 @@ fun DefaultProfileHeader(user: User){
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 TextButton(
-                    onClick = {/* TODO */ },
+                    onClick = {navController.navigate("loginFrontPage")},
                     modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
                 ) {
                     Text(

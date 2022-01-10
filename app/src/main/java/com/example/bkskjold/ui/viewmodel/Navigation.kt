@@ -36,7 +36,7 @@ import com.example.bkskjold.ui.view.pages.*
 @ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController, startDestination = NavigationItem.Home.route) {
+    NavHost(navController, startDestination = "loginFrontPage") {
         composable(NavigationItem.Home.route) {
             HomeScreenPage()
         }
@@ -47,7 +47,18 @@ fun Navigation(navController: NavHostController) {
             eventOverview(navController)
         }
         composable(NavigationItem.Profile.route) {
-            ProfileOverview()
+            ProfileOverview(navController)
+        }
+
+        //Login
+        composable("loginFrontPage") {
+            LoginFrontPage(navController)
+        }
+        composable("loginPage") {
+            LoginPage(navController)
+        }
+        composable("registerPage") {
+            RegisterPage(navController)
         }
 
         //Subpages

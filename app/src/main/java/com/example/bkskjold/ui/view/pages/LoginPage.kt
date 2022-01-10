@@ -24,12 +24,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.NavigationItem
 
 @Composable
-fun LoginPage() {
+fun LoginPage(navController: NavController) {
 
     val loginImage = painterResource(id = R.drawable.login_image2)
     val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary), colorResource(R.color.light_green)),
@@ -50,10 +53,13 @@ fun LoginPage() {
             .padding(20.dp)
 
     ) {
-
         Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Start) {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back icon", tint = Color.White)
+            IconButton(onClick = { navController.navigateUp()}) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back icon",
+                    tint = Color.White
+                )
             }
         }
 
@@ -63,10 +69,9 @@ fun LoginPage() {
                 .fillMaxWidth()
                 .fillMaxHeight(1.0f)
                 .background(Color.Transparent)
-                .verticalScroll(state = scrollState)
+                //.verticalScroll(state = scrollState)
         )
         {
-
             Image(
                 loginImage,
                 contentDescription = "login_image",
@@ -153,7 +158,7 @@ fun LoginPage() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
-                onClick = {},
+                onClick = {navController.navigate(NavigationItem.Home.route)},
                 modifier = Modifier
                     .width(340.dp)
                     .height(60.dp)
@@ -171,8 +176,6 @@ fun LoginPage() {
                     color = Color.White,
                     fontSize = 14.sp
                 )
-
-
             }
             Spacer(modifier = Modifier.height(175.dp))
 

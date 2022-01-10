@@ -20,10 +20,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
 
 @Composable
-fun LoginFrontPage() {
+fun LoginFrontPage(navController: NavController) {
     val frontLoginImage = painterResource(id = R.drawable.login_image)
     val frontBgColor = Brush.verticalGradient(
         listOf(colorResource(R.color.light_green), colorResource(R.color.primary)),
@@ -80,7 +81,7 @@ fun LoginFrontPage() {
             Spacer(modifier = Modifier.height(42.dp))
 
             Button(
-                onClick = {/*TODO*/},
+                onClick = {/*TODO: Link to website*/},
                 modifier = Modifier
                     .wrapContentWidth()
                     .height(48.dp),
@@ -98,7 +99,7 @@ fun LoginFrontPage() {
             }
 
             Button(
-                onClick = {/*TODO*/},
+                onClick = {navController.navigate("registerPage")},
                 modifier = Modifier
                     .width(340.dp)
                     .height(60.dp),
@@ -122,7 +123,7 @@ fun LoginFrontPage() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
-                onClick = {/*TODO*/},
+                onClick = {navController.navigate("loginPage")},
                 modifier = Modifier
                     .width(340.dp)
                     .height(60.dp)
