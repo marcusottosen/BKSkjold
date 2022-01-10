@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -122,6 +123,16 @@ fun LoginView(
 
     ) {
 
+        Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Start) {
+            IconButton(onClick = back) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back icon",
+                    tint = Color.White
+                )
+            }
+        }
+
         Box(
             //contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
@@ -132,133 +143,162 @@ fun LoginView(
                 }
             } else {
 
-                Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Start) {
-                    IconButton(onClick = back) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Back icon",
-                            tint = Color.White
-                        )
-                    }
-                }
 
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                LazyColumn(horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(1.0f)
-                        .background(Color.Transparent)
-                    //.verticalScroll(state = scrollState)
-                )
-                {
-                    Image(
-                        loginImage,
-                        contentDescription = "login_image",
-                        contentScale = ContentScale.FillBounds,
-                        modifier = Modifier
-                            .size(300.dp, 250.dp)
-                    )
+                    .fillMaxWidth()
+                    .fillMaxHeight(1.0f)
+                    .background(Color.Transparent)){
 
-                    Spacer(modifier = Modifier.height(36.dp))
+                    item {
 
-                    Text(
-                        text = "Velkommen tilbage!",
-                        fontSize = 18.sp,
-                        color = Color.White
-                    )
-                    Text(
-                        text = "log ind",
-                        fontSize = 32.sp,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold
-                    )
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(1.0f)
+                                .background(Color.Transparent)
+                            //.verticalScroll(state = scrollState)
+                        )
+                        {
+                            Image(
+                                loginImage,
+                                contentDescription = "login_image",
+                                contentScale = ContentScale.FillBounds,
+                                modifier = Modifier
+                                    .size(300.dp, 250.dp)
+                            )
 
-                    Spacer(modifier = Modifier.height(18.dp))
+                            Spacer(modifier = Modifier.height(36.dp))
 
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .width(340.dp)
-                            .height(60.dp)
-                            .background(Color.White, RoundedCornerShape(50)),
-                        value = email,
-                        onValueChange = { loginViewModel.updateEmail(it) },
-                        label = null,
-                        placeholder = { Text(text = "Email") },
-                        shape = RoundedCornerShape(50),
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            focusedBorderColor = Color.White,
-                            unfocusedBorderColor = Color.White),
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Outlined.Email,
-                                contentDescription = "Email icon")
-                        },
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Email,
-                            imeAction = ImeAction.Next),
-                        keyboardActions = KeyboardActions(
-                            onNext = {focusManager.moveFocus(FocusDirection.Down)
+                            Text(
+                                text = "Velkommen tilbage!",
+                                fontSize = 18.sp,
+                                color = Color.White
+                            )
+                            Text(
+                                text = "Log ind",
+                                fontSize = 32.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Spacer(modifier = Modifier.height(18.dp))
+
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .width(340.dp)
+                                    .height(60.dp)
+                                    .background(Color.White, RoundedCornerShape(50)),
+                                value = email,
+                                onValueChange = { loginViewModel.updateEmail(it) },
+                                label = null,
+                                placeholder = { Text(text = "Email") },
+                                shape = RoundedCornerShape(50),
+                                colors = TextFieldDefaults.outlinedTextFieldColors(
+                                    focusedBorderColor = Color.White,
+                                    unfocusedBorderColor = Color.White),
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Email,
+                                        contentDescription = "Email icon")
+                                },
+                                keyboardOptions = KeyboardOptions(
+                                    keyboardType = KeyboardType.Email,
+                                    imeAction = ImeAction.Next),
+                                keyboardActions = KeyboardActions(
+                                    onNext = {
+                                        focusManager.moveFocus(FocusDirection.Down)
+                                    }
+                                )
+
+
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .width(340.dp)
+                                    .height(60.dp)
+                                    .background(Color.White, RoundedCornerShape(50)),
+                                value = password,
+                                onValueChange = { loginViewModel.updatePassword(it) },
+                                label = null,
+                                placeholder = { Text(text = "Adgangskode") },
+                                visualTransformation = PasswordVisualTransformation(),
+                                shape = RoundedCornerShape(50),
+                                colors = TextFieldDefaults.outlinedTextFieldColors(
+                                    focusedBorderColor = Color.White,
+                                    unfocusedBorderColor = Color.White),
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Lock,
+                                        contentDescription = "Lock icon")
+                                },
+                                keyboardOptions = KeyboardOptions(
+                                    keyboardType = KeyboardType.Password,
+                                    imeAction = ImeAction.Done),
+                                keyboardActions = KeyboardActions(
+                                    onDone = {
+                                        focusManager.clearFocus()
+                                    }
+                                )
+
+
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Button(
+                                onClick = { loginViewModel.loginUser(home = home) },
+                                modifier = Modifier
+                                    .width(340.dp)
+                                    .height(60.dp)
+                                    .border(1.dp, Color.White, RoundedCornerShape(50)),
+                                shape = RoundedCornerShape(50),
+                                elevation = null,
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = Color.Transparent
+                                )
+
+
+                            ) {
+                                Text(
+                                    text = "Fortsæt >",
+                                    color = Color.White,
+                                    fontSize = 14.sp
+                                )
                             }
-                        )
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Button(
+                                onClick = { loginViewModel.resetPassword() },
+                                modifier = Modifier
+                                    .width(340.dp)
+                                    .height(60.dp)
+                                    .border(1.dp, Color.White, RoundedCornerShape(50)),
+                                shape = RoundedCornerShape(50),
+                                elevation = null,
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = Color.Transparent
+                                )
 
 
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .width(340.dp)
-                            .height(60.dp)
-                            .background(Color.White, RoundedCornerShape(50)),
-                        value = password,
-                        onValueChange = { loginViewModel.updatePassword(it) },
-                        label = null,
-                        placeholder = { Text(text = "Adgangskode") },
-                        visualTransformation = PasswordVisualTransformation(),
-                        shape = RoundedCornerShape(50),
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            focusedBorderColor = Color.White,
-                            unfocusedBorderColor = Color.White),
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Outlined.Lock,
-                                contentDescription = "Lock icon")
-                        },
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Done),
-                        keyboardActions = KeyboardActions(
-                            onDone = {focusManager.clearFocus()
+                            ) {
+                                Text(
+                                    text = "Nulstil adgangskode",
+                                    color = Color.White,
+                                    fontSize = 14.sp
+                                )
                             }
-                        )
+                            Spacer(modifier = Modifier.height(150.dp))
 
+                        }
 
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Button(
-                        onClick = { loginViewModel.loginUser(home = home) },
-                        modifier = Modifier
-                            .width(340.dp)
-                            .height(60.dp)
-                            .border(1.dp, Color.White, RoundedCornerShape(50)),
-                        shape = RoundedCornerShape(50),
-                        elevation = null,
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = Color.Transparent
-                        )
-
-
-                    ) {
-                        Text(
-                            text = "Fortsæt >",
-                            color = Color.White,
-                            fontSize = 14.sp
-                        )
                     }
-                    Spacer(modifier = Modifier.height(175.dp))
-
                 }
+
+
             }
         }
     }

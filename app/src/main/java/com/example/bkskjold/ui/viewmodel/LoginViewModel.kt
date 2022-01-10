@@ -34,6 +34,12 @@ class LoginViewModel : ViewModel() {
         _password.value = newPassword
     }
 
+    // Reset password
+    fun resetPassword(){
+        val email: String = _email.value ?: throw IllegalArgumentException("email expected")
+        Firebase.auth.sendPasswordResetEmail(email)
+    }
+
     // Register user
     fun loginUser(home: () -> Unit) {
         if (_loading.value == false) {
