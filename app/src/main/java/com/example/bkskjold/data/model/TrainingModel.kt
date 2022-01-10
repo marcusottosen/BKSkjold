@@ -71,7 +71,6 @@ fun loadTrainingsFromDB(): MutableList<Training>{
                         location        = doc["location"] as String,
                         league          = doc["league"] as String,
                         trainer         = doc["trainer"] as String,
-                        attending       = doc["attending"] as Boolean,
                         price           = (doc["price"] as Number).toInt(),
                         description     = doc["description"] as String,
                         maxParticipants = (doc["maxParticipants"] as Number).toInt(),
