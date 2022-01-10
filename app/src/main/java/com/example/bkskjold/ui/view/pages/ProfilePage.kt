@@ -21,7 +21,7 @@ import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
 
 //class ProfilePage { }
 @Composable
-fun ProfileOverview(navController: NavController) {
+fun profileOverview(navController: NavController) {
 
     val currentUser = users[3] //TODO Skal bruge den user der er logget ind! Lav function i UserModel.kt
 
