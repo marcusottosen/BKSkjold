@@ -34,6 +34,7 @@ fun newsWriteToDB(){
 val news: MutableList<News> = mutableListOf()
 
 fun loadNewsFromDB(): MutableList<News>{
+    news.clear()
     val db = Firebase.firestore
     db.collection("news")
         .get()

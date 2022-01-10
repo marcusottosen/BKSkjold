@@ -40,6 +40,7 @@ fun eventWriteToDB(){
 val events: MutableList<Event> = mutableListOf()
 
 fun loadEventsFromDB(): MutableList<Event>{
+    events.clear()
     val db = Firebase.firestore
     db.collection("events")
         .get()

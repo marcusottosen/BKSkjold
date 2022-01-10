@@ -44,6 +44,7 @@ fun trainingsWriteToDB() {
 val trainings: MutableList<Training> = mutableListOf()
 
 fun loadTrainingsFromDB(): MutableList<Training>{
+    //trainings.clear()
 
     val db = Firebase.firestore
     db.collection("trainings")

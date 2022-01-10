@@ -45,6 +45,7 @@ fun userWriteToDB() {
 val users: MutableList<User> = mutableListOf()
 
 fun loadUsersFromDB(): MutableList<User>{
+    users.clear()
     val db = Firebase.firestore
     db.collection("users")
         .get()
