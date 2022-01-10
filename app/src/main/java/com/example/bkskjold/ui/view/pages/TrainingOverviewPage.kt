@@ -31,18 +31,21 @@ fun trainingOverview(navController: NavController) {
 
     //main filter menu variables
     var expanded by remember { mutableStateOf(false) }
-    val items = listOf("Dato", "Tidspunkt")
-    var selectedIndex by remember { mutableStateOf(0) }
+    val items = listOf("Hold", "Tidspunkt")
+    //var selectedIndex by remember { mutableStateOf(0) }
 
     //Tidspunkt filter menu variables
     var expandedTidspunkt by remember { mutableStateOf(false) }
     val times = listOf("15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00")
 
-    //date filter menu variables
-    //var expandedDate by remember { mutableStateOf(false) }
+    //team filter menu variables
+    var expandedTeam by remember { mutableStateOf(false) }
+    val teams = listOf("U18", "U19", "U20", "U21", "Senior")
+
 
     //passed filter values
     var tidspunkt = remember { mutableStateOf("") }
+    var team = remember { mutableStateOf("") }
     var date = remember { mutableStateOf("") }
 
     val viewModel = TrainingOverviewViewModel()
@@ -112,18 +115,17 @@ fun trainingOverview(navController: NavController) {
                             .fillMaxWidth()
                         , horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        items.forEachIndexed { index, t ->
+                        items.forEachIndexed { index, item ->
                             DropdownMenuItem(
                                 onClick = {
-                                    selectedIndex = index
                                     //expanded = false
-                                    if(t == "Tidspunkt"){expandedTidspunkt = !expandedTidspunkt}
-                                    //else if(t == "Date"){expandedDate = !expandedDate}
+                                    if (item == "Tidspunkt"){expandedTidspunkt = !expandedTidspunkt}
+                                    else if (item == "Hold"){expandedTeam = !expandedTeam}
                             }
                             , modifier = Modifier
                                     .width(125.dp)
                         ) {
-                            Text(text = t)
+                            Text(text = item)
                             }
                         }
                     }
@@ -164,6 +166,42 @@ fun trainingOverview(navController: NavController) {
                         }
                     }
 
+                    //dropdown menu for team filtering
+                    DropdownMenu(
+                        expanded = expandedTeam
+                        , onDismissRequest = { expandedTeam = false }
+                        , modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .height(170.dp)
+                                .verticalScroll(rememberScrollState(), enabled = true)
+                            ,
+                        ) {
+                            teams.forEachIndexed { index, item ->
+                                DropdownMenuItem(
+                                    onClick = {
+                                        expandedTeam = false
+                                        expanded = false
+                                        team.value = item
+                                    }
+                                    , modifier = Modifier
+                                ) {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                        , horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        Text(
+                                            text = item
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     //Calendar shown as standard in filter menu, to filter by date.
                     AndroidView(
                         { CalendarView(it) }
@@ -180,9 +218,9 @@ fun trainingOverview(navController: NavController) {
         }
 
         if(shouldShowOverview.value){
-            viewModel.GetOverviewView(navController, date = date.value, timeStart = tidspunkt.value)
+            viewModel.GetOverviewView(navController, date = date.value, timeStart = tidspunkt.value, team = team.value)
         }else {
-            viewModel.GetSignedUpView(navController, date = date.value, timeStart = tidspunkt.value)
+            viewModel.GetSignedUpView(navController, date = date.value, timeStart = tidspunkt.value, team = team.value)
         }
     }
 }
