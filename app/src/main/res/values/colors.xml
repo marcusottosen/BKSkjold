@@ -17,6 +17,7 @@
     <!-- Background Colors -->
     <color name="main_background">#FFFFFFFF</color>
     <color name="border">#FFD9D9D9</color>
+    <color name="bookingBackground">#FFF2F2F2</color>
 
     <!-- Border color -->
     <color name="main_border">#FFE7E7E7</color>

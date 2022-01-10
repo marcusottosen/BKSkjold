@@ -38,7 +38,7 @@ import com.example.bkskjold.ui.view.pages.*
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = "loginFrontPage") {
         composable(NavigationItem.Home.route) {
-            HomeScreenPage()
+            HomeScreenPage(navController)
         }
         composable(NavigationItem.Trainings.route) {
             trainingOverview(navController)
@@ -73,6 +73,12 @@ fun Navigation(navController: NavHostController) {
             eventModel?.let {
                 EventInfoPage(event = it, navController = navController)
             }
+        }
+        composable("bookedFieldsPage") {
+            BookedFieldsPage(navController)
+        }
+        composable("bookFieldPage") {
+            BookFieldPage(navController)
         }
     }
 } //Læs guide nedenfor til navigation!

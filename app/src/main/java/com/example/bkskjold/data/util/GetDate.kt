@@ -4,6 +4,7 @@ import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
 import java.text.DateFormat.getDateInstance
+import java.time.Month
 
 //OBS Kun dag virker!
 fun getDate(timestamp: com.google.firebase.Timestamp): String{
@@ -48,3 +49,21 @@ fun getYear(timestamp: com.google.firebase.Timestamp): String{
     return "${c.get(Calendar.YEAR)}"
 }
 
+fun getMonthFromString(month: String): Int{
+    val asInt: Int = when (month) {
+        "January" -> 1
+        "February" -> 2
+        "March" -> 3
+        "April" -> 4
+        "May" -> 5
+        "June" -> 6
+        "July" -> 7
+        "August" -> 8
+        "September" -> 9
+        "October" -> 10
+        "November" -> 11
+        "December" -> 12
+        else -> 1
+    }
+    return asInt
+}
