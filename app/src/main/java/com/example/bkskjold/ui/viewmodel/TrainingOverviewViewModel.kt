@@ -93,28 +93,6 @@ class TrainingOverviewViewModel {
                         filteredPractices.add(i)
                     }
                 }
-
-                /*if (date != "" || timeStart != "" || team != ""){
-                    if (i.date == date || i.timeStart == timeStart || i.league == team){
-                        filteredPractices.add(i)
-                    }
-                }else if(date != "" && timeStart != "" && team != ""){
-                    if (i.date == date && i.timeStart == timeStart && i.league == team){
-                        filteredPractices.add(i)
-                    }
-                }else if (date != "" && timeStart != "" || team != ""){
-                    if (i.date == date && i.timeStart == timeStart || i.league == team){
-                        filteredPractices.add(i)
-                    }
-                }else if (date != "" || timeStart != "" && team != ""){
-                    if (i.date == date || i.timeStart == timeStart && i.league == team){
-                        filteredPractices.add(i)
-                    }
-                }else if (date != "" && team != "" || timeStart != ""){
-                    if (i.date == date && i.league == team || i.timeStart == timeStart){
-                        filteredPractices.add(i)
-                    }
-                }*/
             }
             print("")
         } catch (e: Exception){

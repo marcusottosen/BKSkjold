@@ -118,11 +118,9 @@ fun trainingOverview(navController: NavController) {
                         items.forEachIndexed { index, item ->
                             DropdownMenuItem(
                                 onClick = {
-                                    //selectedIndex = index
                                     //expanded = false
                                     if (item == "Tidspunkt"){expandedTidspunkt = !expandedTidspunkt}
                                     else if (item == "Hold"){expandedTeam = !expandedTeam}
-                                    //else if(t == "Date"){expandedDate = !expandedDate}
                             }
                             , modifier = Modifier
                                     .width(125.dp)
