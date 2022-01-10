@@ -39,8 +39,8 @@ fun editProfilePage(navController: NavController) {
 
             val text = remember { mutableStateOf(currentUser.firstname)}
                 Text(text = "Fornavn",
-                Modifier.padding(start= 20.dp))
-            OutlinedTextField(modifier = Modifier.padding(start = 20.dp, bottom = 10.dp),
+                Modifier.padding(start= 20.dp, top = 10.dp)))
+            OutlinedTextField(modifier = Modifier.padding(start = 20.dp),
                     value = text.value,
                     onValueChange = { input -> text.value = input},
                     maxLines = 1, )
@@ -53,8 +53,8 @@ fun editProfilePage(navController: NavController) {
 
                 val text = remember { mutableStateOf(currentUser.surname)}
                 Text(text = "Efternavn",
-                    Modifier.padding(start= 20.dp))
-                OutlinedTextField(modifier = Modifier.padding(start = 20.dp, bottom = 10.dp),
+                    Modifier.padding(start= 20.dp, top = 10.dp)))
+                OutlinedTextField(modifier = Modifier.padding(start = 20.dp),
                     value = text.value,
                     onValueChange = { input -> text.value = input},
                     maxLines = 1, )
@@ -66,8 +66,8 @@ fun editProfilePage(navController: NavController) {
 
                 val text = remember { mutableStateOf(currentUser.email)}
                 Text(text = "E-mail",
-                    Modifier.padding(start= 20.dp))
-                OutlinedTextField(modifier = Modifier.padding(start = 40.dp),
+                    Modifier.padding(start= 20.dp, top = 10.dp))
+                OutlinedTextField(modifier = Modifier.padding(start = 20.dp),
                     value = text.value,
                     onValueChange = { input -> text.value = input},
                     maxLines = 1, )
