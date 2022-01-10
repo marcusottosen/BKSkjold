@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -125,6 +126,8 @@ fun DefaultProfileHeader(user: User, navController: NavController){
 fun DefaultEditProfileHeader(user: User, navController: NavController) {
     val iconSize = 40.dp
 
+
+
     Box(modifier = Modifier.fillMaxWidth()) {
         Image(painter = painterResource(id = R.drawable.img_profile_header_background, ),
             contentDescription = null,
@@ -159,6 +162,30 @@ fun DefaultEditProfileHeader(user: User, navController: NavController) {
                         text = "Gem ændringer",
                         color = androidx.compose.ui.graphics.Color.White)
                 }
+            }
+            Box(Modifier.fillMaxWidth()) {
+                Image(painter = painterResource(id = R.drawable.profile_picture),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(140.dp)
+                        .border(
+                            4.dp,
+                            color = androidx.compose.ui.graphics.Color.Black,
+                            shape = CircleShape,
+                        )
+                        .clip(CircleShape)
+                        .align(Alignment.TopCenter)
+                )
+            }
+            TextButton(
+                onClick = {/*TODO*/},
+                modifier = Modifier
+                    .align(CenterHorizontally)
+
+            ) {
+                Text(
+                    text = "Skift profilbillede",
+                    color = androidx.compose.ui.graphics.Color.White)
             }
         }
     }
