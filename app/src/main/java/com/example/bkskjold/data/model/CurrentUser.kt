@@ -7,7 +7,7 @@ import kotlin.properties.Delegates
 
 data class CurrentUserModel(
     val id: String,
-    val firstName: String?,
+    val firstName: String,
     val lastName: String,
     val email: String,
     val address: String,
@@ -21,7 +21,7 @@ data class CurrentUserModel(
 
 object CurrentUser {
     lateinit var id: String
-    var firstName: String? = null
+    lateinit var firstName: String
     lateinit var lastName: String
     lateinit var email: String
     lateinit var address: String

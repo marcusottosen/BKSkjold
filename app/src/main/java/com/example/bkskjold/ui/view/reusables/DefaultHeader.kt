@@ -22,7 +22,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.bkskjold.MainScreen
-import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.User

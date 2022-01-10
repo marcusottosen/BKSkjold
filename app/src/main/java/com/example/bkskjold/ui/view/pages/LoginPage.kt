@@ -101,7 +101,7 @@ fun LoginView(
     loginViewModel: LoginViewModel = viewModel()
 ) {
 
-    val loginImage = painterResource(id = R.drawable.login_image)
+    val loginImage = painterResource(id = R.drawable.login_image2)
     val bgColor = Brush.verticalGradient(listOf(colorResource(R.color.primary), colorResource(R.color.light_green)),
         startY = 0.0f,
         endY = 1000.0f)

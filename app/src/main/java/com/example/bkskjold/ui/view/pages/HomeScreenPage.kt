@@ -80,7 +80,7 @@ fun HomeScreenPage() {
 
         item {
 
-            NextTrainingCard(training = trainings[1])
+            //NextTrainingCard(training = trainings[1])
         }
 
         item {
