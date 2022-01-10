@@ -10,7 +10,7 @@ fun getDate(timestamp: com.google.firebase.Timestamp): String{
     //return "${timestamp.toDate().day}/${timestamp.toDate().month}"
     val c: Calendar = Calendar.getInstance()
     c.setTime(timestamp.toDate())
-    return "${c.get(Calendar.DAY_OF_MONTH)}/${c.get(Calendar.MONTH)}"
+    return "${c.get(Calendar.DAY_OF_MONTH)}/${c.get(Calendar.MONTH)+1}"
 }
 
 fun getTime(timestamp: com.google.firebase.Timestamp): String{

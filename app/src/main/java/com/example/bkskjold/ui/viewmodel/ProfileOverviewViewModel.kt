@@ -16,6 +16,7 @@ import com.example.bkskjold.data.model.User
 import com.example.bkskjold.data.model.events
 import com.example.bkskjold.data.util.getDate
 import com.example.bkskjold.data.util.getMonth
+import com.example.bkskjold.data.util.getWeekDay
 import com.example.bkskjold.data.util.getYear
 import com.example.bkskjold.ui.view.reusables.EventsCard
 import com.example.bkskjold.ui.view.reusables.InvitationCard

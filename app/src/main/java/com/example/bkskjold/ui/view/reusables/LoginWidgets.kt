@@ -94,22 +94,3 @@ fun TextFormField(value: String, onValueChange: (String) -> Unit, label: String,
         visualTransformation = visualTransformation
     )
 }
-
-@Composable
-fun SingleMessage(message: String, isCurrentUser: Boolean) {
-    Card(
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = if (isCurrentUser) MaterialTheme.colors.primary else Color.White
-    ) {
-        Text(
-            text = message,
-            textAlign =
-            if (isCurrentUser)
-                TextAlign.End
-            else
-                TextAlign.Start,
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            color = if (!isCurrentUser) MaterialTheme.colors.primary else Color.White
-        )
-    }
-}
