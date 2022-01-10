@@ -11,6 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.InvitationData
 import com.example.bkskjold.data.model.User
 import com.example.bkskjold.data.model.users
@@ -31,7 +32,7 @@ fun profileOverview(navController: NavController) {
 
     ) {
         item {
-            DefaultProfileHeader(currentUser, navController)
+            DefaultProfileHeader(currentUser,navController)
         }
         item { ProfileOverviewViewModel().GetProfileView()
             Spacer(modifier = Modifier.height(30.dp))}

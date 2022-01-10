@@ -14,9 +14,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.users
 import com.example.bkskjold.ui.view.reusables.DefaultEditProfileHeader
-import com.example.bkskjold.ui.view.reusables.DefaultProfileHeader
+
 import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
 
 
@@ -30,14 +31,14 @@ fun editProfilePage(navController: NavController) {
 
     ) {
         item {
-            DefaultEditProfileHeader(currentUser, navController)
+            DefaultEditProfileHeader(currentUser,navController)
         }
         item {
             Column(modifier = Modifier
                 .fillMaxWidth())
             {
 
-            val text = remember { mutableStateOf(currentUser.firstname)}
+            val text = remember { mutableStateOf(CurrentUser.firstName)}
                 Text(text = "Fornavn",
                 Modifier.padding(start= 20.dp, top = 10.dp))
             OutlinedTextField(modifier = Modifier.padding(start = 20.dp),
@@ -51,7 +52,7 @@ fun editProfilePage(navController: NavController) {
                 .fillMaxWidth())
             {
 
-                val text = remember { mutableStateOf(currentUser.surname)}
+                val text = remember { mutableStateOf(CurrentUser.lastName)}
                 Text(text = "Efternavn",
                     Modifier.padding(start= 20.dp, top = 10.dp))
                 OutlinedTextField(modifier = Modifier.padding(start = 20.dp),
@@ -64,7 +65,7 @@ fun editProfilePage(navController: NavController) {
                 .fillMaxWidth())
             {
 
-                val text = remember { mutableStateOf(currentUser.email)}
+                val text = remember { mutableStateOf(CurrentUser.email)}
                 Text(text = "E-mail",
                     Modifier.padding(start= 20.dp, top = 10.dp))
                 OutlinedTextField(modifier = Modifier.padding(start = 20.dp),

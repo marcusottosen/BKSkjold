@@ -41,7 +41,8 @@ import com.squareup.okhttp.internal.DiskLruCache
 
 
 @Composable
-fun DefaultProfileHeader(user: User, navController: NavController){
+fun DefaultProfileHeader(user: User,navController: NavController){
+
     val iconSize = 40.dp
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -137,7 +138,7 @@ fun DefaultProfileHeader(user: User, navController: NavController){
 }
 
 @Composable
-fun DefaultEditProfileHeader(user: User, navController: NavController) {
+fun DefaultEditProfileHeader(user: User,navController: NavController) {
     val iconSize = 40.dp
 
 
@@ -158,7 +159,7 @@ fun DefaultEditProfileHeader(user: User, navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .padding(start = 20.dp)
-                        .clickable { gotoSettingsPage(user, navController)},
+                        .clickable { gotoSettingsPage(user,navController)},
                 ) {
                 TextButton(
                     onClick = {navController.navigateUp()},

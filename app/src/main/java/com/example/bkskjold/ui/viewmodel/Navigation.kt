@@ -25,10 +25,7 @@ import com.example.bkskjold.DefaultDetails
 import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.Event
-import com.example.bkskjold.data.model.NavigationItem
-import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.data.model.User
+import com.example.bkskjold.data.model.*
 import com.example.bkskjold.ui.view.pages.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
