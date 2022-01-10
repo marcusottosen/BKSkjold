@@ -4,9 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -16,6 +19,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.loadTrainingsFromDB
+import com.example.bkskjold.data.model.trainings
 import com.example.bkskjold.data.model.updateParticipants
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
@@ -123,12 +128,34 @@ fun TrainingCard(training: Training, navController: NavController
                         )
                     }
                 }
-                DefaultButton(text = isAttending,
-                    checked = true,
-                    onClick = {  /* TODO also pass the state: if already participating or not*/},
-                    modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)
-                )
-                updateParticipants(training)
+                /// NEW DEFAULT BUTTON
+                Column(
+                    modifier = Modifier
+                        .padding(20.dp,2.dp,40.dp,2.dp)
+                    , horizontalAlignment = Alignment.CenterHorizontally
+                ){
+                    Button(
+                        modifier = Modifier
+                            .padding(0.dp)
+                            .fillMaxWidth()
+                        , onClick = {
+                            updateParticipants(training)
+                            //trainings.clear()
+                            loadTrainingsFromDB()
+
+                            print(trainings)
+                            print("")
+                                    }
+                        , shape = RoundedCornerShape(18.dp)
+                        , colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary))
+                    ) {
+                        Text(
+                            text = isAttending
+                            , color = colorResource(id =R.color.primary_light))
+
+                    }
+                }
+
             }
         }
 

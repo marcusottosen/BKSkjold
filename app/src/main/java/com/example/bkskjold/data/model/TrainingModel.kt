@@ -6,6 +6,7 @@ import android.util.Log
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
@@ -53,6 +54,7 @@ fun loadTrainingsFromDB(): MutableList<Training>{
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
+            trainings.clear()
             for (doc in result) {
                 val test : Number = doc["price"] as Number
                 //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int
@@ -97,29 +99,46 @@ fun getSignedUpTrainings(): MutableList<Training> {
 }
 
 fun updateParticipants(training: Training){
-    val userId = "ybdyou1ynl9KfgHjn6Mq" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldny be hardcoded
+    val userId = "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldny be hardcoded
 
     val db = Firebase.firestore
     // TODO THIS METHODE IS PRONE FOR ERROR: MAKE SURE TO CHECK USER DOESNT GET ADDED TWICE
     //var dbTraining: QueryDocumentSnapshot? = null
     //var dbTraining
+    lateinit var tmpTraining: Training
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
             for (doc in result) {
                 if (doc["date"] == training.date && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
-                    val dbTraining = doc
+                    var participants = doc["participants"]
+                    var mutableParticipants = training.participants.toMutableList()
+                    if (mutableParticipants.contains(userId)){
+                        mutableParticipants.remove(userId)
+                    }else{
+                        mutableParticipants.add(userId)
+                    }
+
+                    var updatedTraining = hashMapOf(
+                        "participants" to mutableParticipants
+                    )
+
+                    //val dbTraining = doc
                     //doc.reference
                     //var participants = training.participants
                     //var mutableList = participants.toMutableList()
                     //mutableList.add(userId)
                     //var updatedList = listOf(mutableList)
-                    val updateable = db.collection("trainings").document(dbTraining.reference.toString())
-
+                    val updateable = db.collection("trainings").document(doc.id)
                     updateable
-                        .update("participants", FieldValue.arrayUnion(userId))
+                        .set(updatedTraining, SetOptions.merge())
+                        //.update("participants", mutableParticipants)
                         .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
                         .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
+                    var TMPtrainings = trainings
+                    print("")
+                    //trainings.clear()
+                    loadTrainingsFromDB()
                     print("")
 
                 }

@@ -100,7 +100,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                 Text(text = "Tlfnr.")
             }
             LazyColumn(Modifier.height(200.dp)){
-                val participants = getUsersFromId(training.participants)
+                var participants = getUsersFromId(training.participants)
                 items(participants.size) { i ->
                     Row(modifier = Modifier
                         .fillMaxWidth()
