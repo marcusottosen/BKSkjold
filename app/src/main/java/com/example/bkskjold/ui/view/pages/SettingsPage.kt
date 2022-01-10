@@ -19,16 +19,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.User
 import com.example.bkskjold.ui.view.reusables.DefaultButton
 import com.example.bkskjold.ui.view.reusables.SettingsButton
 
-@Preview
+
 @Composable
-fun SettingsPage() {
+fun settingsPage(navController: NavController) {
     Column (
         modifier = Modifier
-            .background(color = colorResource(R.color.main_background)),
+            .background(color = colorResource(R.color.main_background))
+            .fillMaxSize()
     ) {
         Box(modifier = Modifier
             .background(colorResource(id = R.color.primary))
@@ -38,7 +41,7 @@ fun SettingsPage() {
             Row(){
 
                 IconButton( modifier = Modifier.fillMaxHeight(),
-                    onClick = { /*TODO*/ }
+                    onClick = { navController.navigateUp() }
 
                 ){
                     Icon(
@@ -47,16 +50,16 @@ fun SettingsPage() {
                     )
                 }
 
-            Text(
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(start = 20.dp),
-                text = "Indstillinger",
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 36.sp,
-                color = Color.White,
-            )
-        }}
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .padding(start = 20.dp),
+                    text = "Indstillinger",
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 36.sp,
+                    color = Color.White,
+                )
+            }}
 
         SettingsButton(description = "Abonnement",
             image = R.drawable.icon_subscription,

@@ -26,6 +26,7 @@ import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
 import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.User
 import com.example.bkskjold.ui.view.pages.*
 
 
@@ -47,7 +48,7 @@ fun Navigation(navController: NavHostController) {
             eventOverview(navController)
         }
         composable(NavigationItem.Profile.route) {
-            ProfileOverview(navController)
+            profileOverview(navController)
         }
 
         //Login
@@ -72,6 +73,19 @@ fun Navigation(navController: NavHostController) {
             val eventModel = navController.previousBackStackEntry?.arguments?.getParcelable<Event>("event")
             eventModel?.let {
                 EventInfoPage(event = it, navController = navController)
+            }
+        }
+        composable("settingsPage"){
+            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
+            settingModel?.let {
+                settingsPage(navController = navController)
+            }
+        }
+
+        composable("editProfile"){
+            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
+            settingModel?.let {
+               editProfilePage(navController = navController)
             }
         }
     }

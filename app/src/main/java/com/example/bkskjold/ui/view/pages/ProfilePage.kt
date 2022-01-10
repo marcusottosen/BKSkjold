@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.InvitationData
+import com.example.bkskjold.data.model.User
 import com.example.bkskjold.data.model.users
 import com.example.bkskjold.ui.view.reusables.DefaultProfileHeader
 import com.example.bkskjold.ui.view.reusables.InvitationCard
@@ -64,6 +65,15 @@ fun ProfileOverview(navController: NavController) {
             Spacer(modifier = Modifier.height(50.dp))
         }
     }
+}
+
+fun gotoSettingsPage(user: User, navController: NavController){
+    navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
+    navController.navigate("settingsPage")
+}
+fun gotoEditProfilePage(user: User, navController: NavController){
+    navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
+    navController.navigate("editProfile")
 }
 
 
