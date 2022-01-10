@@ -44,12 +44,13 @@ fun trainingsWriteToDB() {
 val trainings: MutableList<Training> = mutableListOf()
 
 fun loadTrainingsFromDB(): MutableList<Training>{
-    //trainings.clear()
+
 
     val db = Firebase.firestore
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
+            trainings.clear()
             for (doc in result) {
                 //val test : Number = doc["price"] as Number
                 //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int

@@ -45,11 +45,11 @@ fun userWriteToDB() {
 val users: MutableList<User> = mutableListOf()
 
 fun loadUsersFromDB(): MutableList<User>{
-    users.clear()
     val db = Firebase.firestore
     db.collection("users")
         .get()
         .addOnSuccessListener { result ->
+            users.clear()
             for (doc in result) {
                 //val test : Number = doc["price"] as Number
                 //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int

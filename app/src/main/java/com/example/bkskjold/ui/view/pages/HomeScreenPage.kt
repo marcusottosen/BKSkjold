@@ -79,6 +79,7 @@ fun HomeScreenPage() {
         }
 
         item {
+
             NextTrainingCard(training = trainings[1])
         }
 
