@@ -125,7 +125,7 @@ fun DefaultProfileHeader(user: User, navController: NavController){
 fun DefaultEditProfileHeader(user: User, navController: NavController) {
     val iconSize = 40.dp
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxWidth()) {
         Image(painter = painterResource(id = R.drawable.img_profile_header_background, ),
             contentDescription = null,
             contentScale = ContentScale.Crop,
@@ -152,7 +152,7 @@ fun DefaultEditProfileHeader(user: User, navController: NavController) {
                         color = androidx.compose.ui.graphics.Color.White)
                 } }
                 TextButton(
-                    onClick = {/* TODO */ },
+                    onClick = {navController.navigateUp()},
                     modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
                 ) {
                     Text(
