@@ -72,7 +72,7 @@ fun loadUsersFromDB(): MutableList<User>{
             }
         }
         .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            Log.d(ContentValues.TAG, "Error getting documents: users", exception)
         }
     return users
 }

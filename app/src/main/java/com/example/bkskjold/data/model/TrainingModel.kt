@@ -76,7 +76,7 @@ fun loadTrainingsFromDB(): MutableList<Training>{
             }
         }
         .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            Log.d(ContentValues.TAG, "Error getting documents: trainings", exception)
         }
     return trainings
 }

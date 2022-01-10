@@ -49,7 +49,7 @@ fun loadNewsFromDB(): MutableList<News>{
             }
         }
         .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            Log.d(ContentValues.TAG, "Error getting documents: news", exception)
         }
     return news
 }

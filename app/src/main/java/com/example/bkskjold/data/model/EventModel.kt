@@ -58,7 +58,7 @@ fun loadEventsFromDB(): MutableList<Event>{
             }
         }
         .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            Log.d(ContentValues.TAG, "Error getting documents: events", exception)
         }
     return events
 }
