@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,7 +60,8 @@ fun LoginFrontPage() {
             Text(
                 text = "NemSport",
                 fontSize = 32.sp,
-                color = Color.White
+                color = Color.White,
+                fontWeight = FontWeight.Bold
             )
 
             Text(
@@ -78,7 +80,7 @@ fun LoginFrontPage() {
             Spacer(modifier = Modifier.height(42.dp))
 
             Button(
-                onClick = {},
+                onClick = {/*TODO*/},
                 modifier = Modifier
                     .wrapContentWidth()
                     .height(48.dp),
@@ -96,7 +98,7 @@ fun LoginFrontPage() {
             }
 
             Button(
-                onClick = {},
+                onClick = {/*TODO*/},
                 modifier = Modifier
                     .width(340.dp)
                     .height(60.dp),
@@ -120,7 +122,7 @@ fun LoginFrontPage() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
-                onClick = {},
+                onClick = {/*TODO*/},
                 modifier = Modifier
                     .width(340.dp)
                     .height(60.dp)
@@ -131,19 +133,13 @@ fun LoginFrontPage() {
                     backgroundColor = Color.Transparent
                 )
 
-
             ) {
                 Text(
                     text = "Log ind",
                     color = Color.White,
                     fontSize = 14.sp
                 )
-
-
             }
-
         }
-
-
     }
 }

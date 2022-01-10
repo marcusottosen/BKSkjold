@@ -1,6 +1,5 @@
 package com.example.bkskjold.ui.view.pages
 
-import android.view.RoundedCorner
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,15 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
@@ -32,7 +28,6 @@ import com.example.bkskjold.R
 @Composable
 fun RegisterPage() {
 
-    val backButton = painterResource(id = R.drawable.back_white)
     val registerBgColor = Brush.verticalGradient(
         listOf(colorResource(R.color.primary), colorResource(R.color.light_green)),
         startY = 0.0f,
@@ -386,7 +381,7 @@ fun RegisterPage() {
             Spacer(modifier = Modifier.height(48.dp))
 
             Button(
-                onClick = {},
+                onClick = { /*TODO*/ },
                 modifier = Modifier
                     .width(340.dp)
                     .height(60.dp)
