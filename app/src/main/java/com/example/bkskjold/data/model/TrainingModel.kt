@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.os.Parcelable
 import android.util.Log
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -99,7 +100,7 @@ fun updateParticipants(training: Training){
     val userId = "ybdyou1ynl9KfgHjn6Mq" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldny be hardcoded
 
     val db = Firebase.firestore
-
+    // TODO THIS METHODE IS PRONE FOR ERROR: MAKE SURE TO CHECK USER DOESNT GET ADDED TWICE
     //var dbTraining: QueryDocumentSnapshot? = null
     //var dbTraining
     db.collection("trainings")
@@ -109,13 +110,14 @@ fun updateParticipants(training: Training){
                 if (doc["date"] == training.date && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
                     val dbTraining = doc
                     //doc.reference
-                    var updatedList = training.participants.toMutableList()
-                    updatedList.add(userId)
-                    var updatedArray = arrayOf(updatedList)
+                    //var participants = training.participants
+                    //var mutableList = participants.toMutableList()
+                    //mutableList.add(userId)
+                    //var updatedList = listOf(mutableList)
                     val updateable = db.collection("trainings").document(dbTraining.reference.toString())
 
                     updateable
-                        .update("participants", updatedArray)
+                        .update("participants", FieldValue.arrayUnion(userId))
                         .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
                         .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
                     print("")

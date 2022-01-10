@@ -125,10 +125,10 @@ fun TrainingCard(training: Training, navController: NavController
                 }
                 DefaultButton(text = isAttending,
                     checked = true,
-                    onClick = { updateParticipants(training) /* TODO also pass the state: if already participating or not*/},
+                    onClick = {  /* TODO also pass the state: if already participating or not*/},
                     modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)
                 )
-
+                updateParticipants(training)
             }
         }
 
