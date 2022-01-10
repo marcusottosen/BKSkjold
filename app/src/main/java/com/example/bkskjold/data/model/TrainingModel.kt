@@ -98,8 +98,7 @@ fun getSignedUpTrainings(): MutableList<Training> {
     return signedUpTrainings
 }
 
-fun updateParticipants(training: Training){
-    val userId = "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldny be hardcoded
+fun updateParticipants(training: Training, userId: String){
 
     val db = Firebase.firestore
 
