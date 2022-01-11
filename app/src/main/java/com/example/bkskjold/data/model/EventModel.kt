@@ -2,6 +2,8 @@ package com.example.bkskjold.data.model
 import android.content.ContentValues
 import android.os.Parcelable
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
@@ -39,29 +41,36 @@ fun eventWriteToDB(){
 
 val events: MutableList<Event> = mutableListOf()
 
-fun loadEventsFromDB(): MutableList<Event>{
-    val db = Firebase.firestore
-    db.collection("events")
-        .get()
-        .addOnSuccessListener { result ->
-            events.clear()
-            for (doc in result) {
-                events.add(
-                    Event(
-                        timeStart = doc["timeStart"] as com.google.firebase.Timestamp,
-                        timeEnd = doc["timeEnd"] as com.google.firebase.Timestamp,
-                        location = doc["location"] as String,
-                        price = (doc["price"] as Number).toInt(),
-                        header = doc["header"] as String,
-                        description = doc["description"] as String
+class EventModel() {
+    private val _loading = MutableLiveData(true)
+    val loading: LiveData<Boolean> = _loading
+
+    fun loadEventsFromDB(): MutableList<Event> {
+        val db = Firebase.firestore
+        db.collection("events")
+            .get()
+            .addOnSuccessListener { result ->
+                events.clear()
+                for (doc in result) {
+                    events.add(
+                        Event(
+                            timeStart = doc["timeStart"] as com.google.firebase.Timestamp,
+                            timeEnd = doc["timeEnd"] as com.google.firebase.Timestamp,
+                            location = doc["location"] as String,
+                            price = (doc["price"] as Number).toInt(),
+                            header = doc["header"] as String,
+                            description = doc["description"] as String
+                        )
                     )
-                )
+                }
             }
-        }
-        .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: events", exception)
-        }
-    return events
+
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: events", exception)
+            }
+        _loading.value = false
+        return events
+    }
 }
 
 

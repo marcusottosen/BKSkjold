@@ -3,6 +3,8 @@ package com.example.bkskjold.data.model
 import android.content.ContentValues
 import android.os.Parcelable
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -12,7 +14,7 @@ import kotlinx.parcelize.Parcelize
 import java.sql.Timestamp
 import java.time.LocalDateTime.now
 
-// *** Uncomment hvis dataen skal tilføjes. (Uncomment også i PreloadDB.kt ***
+// *** Uncomment hvis dataen skal tilføjes. (Uncomment også i LoadFromDB.kt ***
 fun userWriteToDB() {
     val createUers = listOf(
         User("Ekkart", "Kindler", "ekkart@dtu.dk", "DTU Compute Secret HQ, Danmark", 11223344, com.google.firebase.Timestamp.now(),"Senior", 2, 26, com.google.firebase.Timestamp.now(),null),
@@ -44,38 +46,48 @@ fun userWriteToDB() {
 
 val users: MutableList<User> = mutableListOf()
 
-fun loadUsersFromDB(): MutableList<User>{
-    val db = Firebase.firestore
-    db.collection("users")
-        .get()
-        .addOnSuccessListener { result ->
-            users.clear()
-            for (doc in result) {
-                //val test : Number = doc["price"] as Number
-                //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int
-                //trainings.add(training)
+class UserModel() {
+    private val _loading = MutableLiveData(true)
+    val loading: LiveData<Boolean> = _loading
 
-                users.add(
-                    User(
-                        firstname = doc["firstname"] as String,
-                        surname = doc["surname"] as String,
-                        email = doc["email"] as String,
-                        address = doc["address"] as String,
-                        phoneNumber = (doc["phoneNumber"] as Number).toInt(),
-                        birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
-                        team = doc["team"] as String,
-                        userType = (doc["userType"] as Number).toInt(),
-                        finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
-                        memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
-                        loggedIn = doc["loggedIn"] as Boolean?
+    fun loadUsersFromDB(): MutableList<User>{
+        val db = Firebase.firestore
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                users.clear()
+                for (doc in result) {
+                    //val test : Number = doc["price"] as Number
+                    //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int
+                    //trainings.add(training)
+
+                    users.add(
+                        User(
+                            firstname = doc["firstname"] as String,
+                            surname = doc["surname"] as String,
+                            email = doc["email"] as String,
+                            address = doc["address"] as String,
+                            phoneNumber = (doc["phoneNumber"] as Number).toInt(),
+                            birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
+                            team = doc["team"] as String,
+                            userType = (doc["userType"] as Number).toInt(),
+                            finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
+                            memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
+                            loggedIn = doc["loggedIn"] as Boolean?
+                        )
                     )
-                )
+                }
             }
-        }
-        .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: users", exception)
-        }
-    return users
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    _loading.value = false
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: users", exception)
+            }
+        return users
+    }
 }
 
 //############# GET USERS FROM LIST OF USER IDS ###################

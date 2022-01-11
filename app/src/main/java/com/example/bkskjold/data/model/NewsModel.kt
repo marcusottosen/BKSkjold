@@ -3,6 +3,11 @@ package com.example.bkskjold.data.model
 import android.content.ContentValues
 import android.os.Parcelable
 import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
+import com.example.bkskjold.ui.view.pages.HomeScreenPage
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
@@ -33,26 +38,36 @@ fun newsWriteToDB(){
 
 val news: MutableList<News> = mutableListOf()
 
-fun loadNewsFromDB(): MutableList<News>{
-    val db = Firebase.firestore
-    db.collection("news")
-        .get()
-        .addOnSuccessListener { result ->
-            news.clear()
-            for (doc in result) {
-                news.add(
-                    News(
-                        header = doc["header"] as String,
-                        description = doc["description"] as String,
-                        date = doc["date"] as com.google.firebase.Timestamp
+class NewsModel() {
+    private val _loading = MutableLiveData(true)
+    val loading: LiveData<Boolean> = _loading
+
+    fun loadNewsFromDB(): MutableList<News> {
+        val db = Firebase.firestore
+        db.collection("news")
+            .get()
+            .addOnSuccessListener { result ->
+                news.clear()
+                for (doc in result) {
+                    news.add(
+                        News(
+                            header = doc["header"] as String,
+                            description = doc["description"] as String,
+                            date = doc["date"] as com.google.firebase.Timestamp
+                        )
                     )
-                )
+                }
             }
-        }
-        .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: news", exception)
-        }
-    return news
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    _loading.value = false
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: news", exception)
+            }
+        return news
+    }
 }
 
 

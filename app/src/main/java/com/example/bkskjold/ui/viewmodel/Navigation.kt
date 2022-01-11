@@ -25,6 +25,7 @@ import com.example.bkskjold.data.model.Event
 import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.User
+import com.example.bkskjold.data.util.LoadFromDB
 import com.example.bkskjold.ui.view.pages.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -39,7 +40,7 @@ import com.google.firebase.ktx.Firebase
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination =
     if (Firebase.auth.currentUser != null)
-        NavigationItem.Home.route
+        "loadFromDB"
     else
         "authenticationOption"
 
@@ -80,6 +81,12 @@ fun Navigation(navController: NavHostController) {
         composable("mainScreen") {
             MainScreen()
         }
+
+        //Load before homepage is shown
+        composable("loadFromDB") {
+            LoadFromDB(navController)
+        }
+
 
         //Subpages
         composable("trainingDetails"){
