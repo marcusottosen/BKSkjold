@@ -55,7 +55,7 @@ fun TrainingCard(training: Training, navController: NavController) {
                     color = Color.DarkGray
                 )
                 Text( //day
-                    text = "aa",//getWeekDay(training.timeStart),
+                    text = "getday",//getWeekDay(training.timeStart),
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                     fontSize = 20.sp

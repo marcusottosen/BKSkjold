@@ -85,10 +85,9 @@ fun loadTrainingsFromDB(): MutableList<Training>{
 
 fun getSignedUpTrainings(): MutableList<Training> {
     val signedUpTrainings: MutableList<Training> = mutableListOf()
- //TODO Fix
+ //TODO Find ud af hvem der er logget ind i stedet for "uqYviRk77BegdJdx9BW5"
     for (training in trainings){
         if (training.participants.contains("uqYviRk77BegdJdx9BW5")){
-            println("SIGNED UP FOR:" + training.description)
             signedUpTrainings.add(training)
         }
     }
@@ -102,7 +101,7 @@ fun updateParticipants(training: Training, userId: String){
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
-            for (doc in result) {// timeStart her var date før //TODO Få til at virke igen
+            for (doc in result) {// timeStart her var date før //TODO Få til at virke igen hvis den ikke allerede gør
                 if (doc["timeStart"] == training.timeStart && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
 
                     //Create a mutable list, so we can add items to it.

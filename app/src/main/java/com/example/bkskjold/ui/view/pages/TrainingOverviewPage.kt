@@ -209,14 +209,14 @@ fun trainingOverview(navController: NavController) {
                         , update = { views ->
                             views.setOnDateChangeListener { calendarView, year, month, day ->
                                 var monthShifted = month+1
-                                date.value = Util().dateFormatter(day, monthShifted)
+                                date.value = "$day/$monthShifted"
+                                //date.value = Util().dateFormatter(day, monthShifted)
                             }
                         }
                     )
                 }
             }
         }
-
         if(shouldShowOverview.value){
             viewModel.GetOverviewView(navController, date = date.value, timeStart = tidspunkt.value, team = team.value)
         }else {
