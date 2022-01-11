@@ -63,7 +63,7 @@ fun BookedFieldsPage(navController: NavController){
                         }
                     }
                     Text(
-                        text = "Du har følgende træninger",
+                        text = "Du har følgende bookninger",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(start = 20.dp, top = 10.dp)
