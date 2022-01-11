@@ -3,6 +3,7 @@ package com.example.bkskjold.ui.view.reusables
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -19,15 +20,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
 
 @Composable
-fun HomePageCategories(iconLink: Int, title: String) {
+fun HomePageCategories(iconLink: Int, title: String,navRoute: String, navController: NavController) {
     Card(
         shape = RoundedCornerShape(12.dp),
         border = BorderStroke(width = 1.dp, color = colorResource(id = R.color.border)),
-        modifier = Modifier.size(width = 77.dp, height = 93.dp),
-        elevation = 0.dp
+        modifier = Modifier.size(width = 77.dp, height = 93.dp)
+            .clickable {navController.navigate(navRoute)},
+        elevation = 0.dp,
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
