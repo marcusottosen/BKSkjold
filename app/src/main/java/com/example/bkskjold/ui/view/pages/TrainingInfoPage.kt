@@ -2,8 +2,6 @@ package com.example.bkskjold.ui.view.pages
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -11,7 +9,6 @@ import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bkskjold.R
@@ -19,11 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
-import com.example.bkskjold.data.model.PeopleSource
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.*
-import com.example.bkskjold.data.util.Util
-import com.example.bkskjold.data.util.getDate
+import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getTime
 
 
@@ -34,7 +29,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
             .fillMaxWidth()
             .padding(top = 30.dp)) {
-            Text(text = stringResource(id = R.string.TrainingInfoPageHeader) + " d. " + getDate(training.timeStart))
+            Text(text = stringResource(id = R.string.TrainingInfoPageHeader) + " d. " + getDayMonth(training.timeStart))
         }
 
         Column() {
@@ -62,7 +57,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     contentDescription = "tidspunkt",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = getTime(training.timeStart) + " - " + getTime(training.timeEnd) + " d. " + getDate(training.timeStart))
+                Text(text = getTime(training.timeStart) + " - " + getTime(training.timeEnd) + " d. " + getDayMonth(training.timeStart))
             }
             Row(Modifier.padding(bottom = 10.dp)) {
                 Icon(

@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.*
-import com.example.bkskjold.data.util.getDate
+import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 import java.lang.Exception
@@ -57,7 +57,7 @@ class TrainingOverviewViewModel {
         try {
             for ( i in practices){
                 if (date != "" && timeStart == "" && team == ""){
-                    if (getDate(i.timeStart) == date){
+                    if (getDayMonth(i.timeStart) == date){
                         filteredPractices.add(i)
                     }
                 }else if (timeStart != "" && date == "" && team == ""){
@@ -69,11 +69,11 @@ class TrainingOverviewViewModel {
                         filteredPractices.add(i)
                     }
                 }else if (date != "" && timeStart != "" && team == ""){
-                    if (getDate(i.timeStart) == date && getTime(i.timeStart) == timeStart){
+                    if (getDayMonth(i.timeStart) == date && getTime(i.timeStart) == timeStart){
                         filteredPractices.add(i)
                     }
                 }else if (date != "" && team != "" && timeStart == ""){
-                    if (getDate(i.timeStart) == date && i.league == team){
+                    if (getDayMonth(i.timeStart) == date && i.league == team){
                         filteredPractices.add(i)
                     }
                 }else if (timeStart != "" && team != "" && date == ""){
@@ -81,7 +81,7 @@ class TrainingOverviewViewModel {
                         filteredPractices.add(i)
                     }
                 }else if (date != "" && timeStart != "" && team != ""){
-                    if (getDate(i.timeStart) == date && getTime(i.timeStart) == timeStart && i.league == team){
+                    if (getDayMonth(i.timeStart) == date && getTime(i.timeStart) == timeStart && i.league == team){
                         filteredPractices.add(i)
                     }
                 }
