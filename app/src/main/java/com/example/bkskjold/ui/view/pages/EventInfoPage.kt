@@ -1,9 +1,6 @@
 package com.example.bkskjold.ui.view.pages
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,16 +15,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
-import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.data.util.getDate
+import com.example.bkskjold.data.util.getDay
+import com.example.bkskjold.data.util.getDayMonth
+import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 
 //TODO Alt tekst skal hentes fra database! Evt igennem et event objekt?
@@ -39,7 +34,6 @@ fun EventInfoPage(event: Event, navController: NavController) {
             .padding(25.dp)
             .wrapContentSize(Alignment.TopCenter)
     ) {
-
         item {
             Box(modifier = Modifier.fillMaxSize()) {
                 Button(
@@ -115,7 +109,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     contentDescription = null,
                 )
                 Text(
-                    text = getDate(event.timeStart),
+                    text = "${getDay(event.timeStart)}. ${getMonthString(event.timeStart)}",
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }

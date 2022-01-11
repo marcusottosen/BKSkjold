@@ -22,25 +22,11 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.updateParticipants
+import com.example.bkskjold.data.util.*
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
-fun TrainingCard(training: Training, navController: NavController
-
-    /*
-    id: String,
-    timeStart: String,
-    timeEnd: String,
-    date: String,
-    weekday: String,
-    participants: String,
-    location: String,
-    league: String,
-    trainer: String,
-    attending: String,
-    color: Color
-*/
-) {
+fun TrainingCard(training: Training, navController: NavController) {
     val userId = "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldnt be hardcoded
     val isAttending = remember { mutableStateOf(false)}
     var participants = training.participants
@@ -56,24 +42,24 @@ fun TrainingCard(training: Training, navController: NavController
                 gotoTrainingDetails(training, navController)
                        },
         shape = RoundedCornerShape(9.dp),
-        elevation = 12.dp
+        elevation = 3.dp
     ) {
         Row {
             Column (modifier = Modifier.width(95.dp)){
                 Text( //date
-                    text = training.date,
+                    text = "${getDay(training.timeStart)} ${getMonthString(training.timeStart)}",
                     fontSize = 10.sp,
                     modifier = Modifier.padding(10.dp, 18.dp, 5.dp),
                     color = Color.DarkGray
                 )
                 Text( //day
-                    text = training.weekday,
+                    text = getWeekDay(training.timeStart),
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
-                    fontSize = 20.sp,
+                    fontSize = 20.sp
                 )
                 Text( //time
-                    text = "${training.timeStart} - ${training.timeEnd}",
+                    text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                     fontSize = 10.sp,
                     color = Color.DarkGray

@@ -15,18 +15,18 @@ import kotlinx.parcelize.Parcelize
 // *** Uncomment hvis dataen skal tilføjes. (Uncomment også i PreloadDB.kt ***
 fun trainingsWriteToDB() {
     val bookings = listOf(
-        Training("21:00", "22:00", "mandag", "10 januar", "Bane C", "Senior", "Ekkart", false, 10, "Normal træning for u13. Kom i god tid!", 6, 3, 2),
-        Training("14:30", "18:30", "tirsdag", "11 januar", "Bane A", "U21", "Ekkart", true, 20, "Normal træning for u13. Kom i god tid!", 12, 5, 6),
-        Training("19:45", "22:00", "onsdag", "12 januar", "Bane B", "U20", "Ian", false, 21, "Kom glad. Husk vand", 12, 5, 3),
-        Training("17:00", "18:30", "onsdag", "12 januar", "Bane C", "U20", "Kasper", true, 20, "Normal træning for u13. Kom i god tid!", 24, 10, 9),
-        Training("18:00", "22:00", "torsdag", "13 januar", "Bane E", "U22", "Ekkart", true, 25, "Kom glad. Husk vand", 12, 2, 3),
-        Training("14:30", "15:30", "tirsdag", "13 januar", "Bane D", "U20", "Ian", true, 20, "Ekkart tager mad med", 10, 2, 3),
-        Training("19:45", "22:00", "mandag", "10 januar", "Bane C", "U14", "Ekkart", false, 20, "Normal træning for u13. Kom i god tid!", 12, 2, 3),
-        Training("17:00", "18:30", "fredag", "14 januar", "Bane F", "U14", "Peter", true, 25, "Ekkart tager mad med", 12, 2, 3),
-        Training("14:30", "22:00", "mandag", "10 januar", "Bane Y", "U20", "Ian", false, 10, "Ian tager mad med", 12, 2, 3),
-        Training("16:30", "18:30", "mandag", "10 januar", "Bane A", "U26", "Peter", true, 20, "Peter kom til tiden denne gang! Tak!!", 12, 7, 3),
-        Training("19:45", "22:00", "fredag", "14 januar", "Bane C", "Senior", "Ekkarts far", false, 20, "Ældre mennesker der spiller fodbold", 12, 6, 5),
-        Training("17:00", "19:45", "mandag", "10 januar", "Bane D", "U20", "Ian", false, 20, "Peter kom til tiden denne gang! Tak!!", 12, 3, 4)
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "Use", "Ekkart",  "Normal træning for u13. Kom i god tid!"     , 6,  listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane A", "U21", "Ekkart",  "Normal træning for u13. Kom i god tid!"     , 12, listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane B", "U20", "Ian",  "Kom glad. Husk vand"                           , 12, listOf("uqYviRk77BegdJdx9BW5"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "U20", "Kasper",  "Normal træning for u13. Kom i god tid!"     , 24, listOf("uqYviRk77BegdJdx9BW5"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane E", "U22", "Ekkart",  "Kom glad. Husk vand"                        , 12, listOf("uqYviRk77BegdJdx9BW5"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane D", "U20", "Ian", "Ekkart tager mad med"                           , 10, listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "U14", "Ekkart", "Normal træning for u13. Kom i god tid!"      , 12, listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane F", "U14", "Peter", "Ekkart tager mad med"                         , 24, listOf("OwSPgideDIgGiOzaUXWo"), true),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane Y", "U20", "Ian",  "Ian tager mad med"                             , 12, listOf("OwSPgideDIgGiOzaUXWo"), true),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane A", "U26", "Peter", "Peter kom til tiden denne gang! Tak!!"        , 12, listOf("OwSPgideDIgGiOzaUXWo"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "Use", "Ekkarts far",  "Ældre mennesker der spiller fodbold"   , 12, listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
+        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane D", "U20", "Ian","Peter kom til tiden denne gang! Tak!!"           , 12, listOf("4Tjz5r8ckZDua7Gl9cXg"), false)
     )
 
     val db = Firebase.firestore
@@ -64,19 +64,15 @@ fun loadTrainingsFromDB(): MutableList<Training>{
                 trainings.add(
                     Training(
                         //Telmeldte personer
-                        timeStart       = doc["timeStart"] as String,
-                        timeEnd         = doc["timeEnd"] as String,
-                        weekday         = doc["weekday"] as String,
-                        date            = doc["date"] as String,
+                        timeStart       = doc["timeStart"] as com.google.firebase.Timestamp,
+                        timeEnd         = doc["timeEnd"] as com.google.firebase.Timestamp,
                         location        = doc["location"] as String,
                         league          = doc["league"] as String,
                         trainer         = doc["trainer"] as String,
-                        price           = (doc["price"] as Number).toInt(),
                         description     = doc["description"] as String,
                         maxParticipants = (doc["maxParticipants"] as Number).toInt(),
                         participants    = (doc["participants"]) as List<String>,
-                        team1           = (doc["team1"] as Number).toInt(),
-                        team2           = (doc["team2"] as Number).toInt()
+                        userBooking     = doc["userBooking"] as Boolean
                     )
                 )
             }
@@ -89,9 +85,9 @@ fun loadTrainingsFromDB(): MutableList<Training>{
 
 fun getSignedUpTrainings(): MutableList<Training> {
     val signedUpTrainings: MutableList<Training> = mutableListOf()
-
+ //TODO Få currentUser i stedet for "uqYviRk77BegdJdx9BW5"
     for (training in trainings){
-        if (training.attending){
+        if (training.participants.contains("uqYviRk77BegdJdx9BW5")){
             signedUpTrainings.add(training)
         }
     }
@@ -105,8 +101,8 @@ fun updateParticipants(training: Training, userId: String){
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
-            for (doc in result) {
-                if (doc["date"] == training.date && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
+            for (doc in result) {// timeStart her var date før //TODO Få til at virke igen hvis den ikke allerede gør
+                if (doc["timeStart"] == training.timeStart && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
 
                     //Create a mutable list, so we can add items to it.
                     var mutableParticipants = training.participants.toMutableList()
@@ -142,20 +138,15 @@ fun updateParticipants(training: Training, userId: String){
 
 @Parcelize
 data class Training(
-    val timeStart: String = "",
-    val timeEnd: String= "",
-    val weekday: String= "",
-    val date: String= "",
+    val timeStart: com.google.firebase.Timestamp,
+    val timeEnd: com.google.firebase.Timestamp,
     val location: String= "",
     val league: String= "",
     val trainer: String= "",
-    val attending: Boolean = false,
-    val price: Int,
     val description: String= "",
     val maxParticipants: Int = 0,
     val participants: List<String> = listOf(),
-    val team1: Int = 0,
-    val team2: Int = 0
+    val userBooking: Boolean = false
 ): Parcelable
 
 

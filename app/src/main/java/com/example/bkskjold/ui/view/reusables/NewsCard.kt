@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.News
-import com.example.bkskjold.data.util.getDate
+import com.example.bkskjold.data.util.getDayMonth
 
 
 @Composable
@@ -29,11 +29,11 @@ fun NewsCard(news: News) {
         //backgroundColor = Color(212, 242, 191),
         shape = RoundedCornerShape(22.dp),
         border = BorderStroke(width = 1.dp, color = colorResource(id = R.color.border)),
-        elevation = 0.dp
+        elevation = 3.dp
     ) {
         Column(Modifier.fillMaxSize()) {
             Text(
-                text = getDate(news.date),
+                text = getDayMonth(news.date),
                 textAlign = TextAlign.Right,
                 modifier = Modifier.padding(0.dp, 5.dp, 20.dp, 0.dp).fillMaxWidth(),
                 color = Color.Gray,
