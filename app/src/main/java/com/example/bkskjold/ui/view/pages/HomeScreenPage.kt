@@ -79,7 +79,7 @@ fun HomeScreenPage(navController: NavController) {
         }
 
         item {
-            //NextTrainingCard(training = trainings[1])
+            NextTrainingCard(training = trainings[1]) //TODO Find the next training
         }
 
         item {
