@@ -23,6 +23,8 @@ import com.example.bkskjold.data.model.PeopleSource
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.*
 import com.example.bkskjold.data.util.Util
+import com.example.bkskjold.data.util.getDate
+import com.example.bkskjold.data.util.getTime
 
 
 @Composable
@@ -32,7 +34,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
             .fillMaxWidth()
             .padding(top = 30.dp)) {
-            Text(text = stringResource(id = R.string.TrainingInfoPageHeader) + " d. " + training.date)
+            Text(text = stringResource(id = R.string.TrainingInfoPageHeader) + " d. " + getDate(training.timeStart))
         }
 
         Column() {
@@ -60,7 +62,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     contentDescription = "tidspunkt",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = training.timeStart + " - " + training.timeEnd + " d. " + training.date)
+                Text(text = getTime(training.timeStart) + " - " + getTime(training.timeEnd) + " d. " + getDate(training.timeStart))
             }
             Row(Modifier.padding(bottom = 10.dp)) {
                 Icon(
@@ -68,7 +70,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     contentDescription = "deltagere",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = (training.team1 + training.team2).toString() + "/" + training.maxParticipants + " " + stringResource(R.string.participating))
+                Text(text = ( /*TODO Count antal deltagere!*/ ""+ "/" + training.maxParticipants + " " + stringResource(R.string.participating)))
             }
             Row() {
                 Icon(
@@ -76,7 +78,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     contentDescription = "pris",
                     Modifier.padding(end = 10.dp)
                 )
-                Text(text = stringResource(R.string.TrainingPrice, training.price, "0"))
+                Text(text = stringResource(R.string.TrainingPrice, "20", "0"))
             }
         }
 
@@ -137,6 +139,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                 val buttonColor: Color
                 val buttonText: String
                 val buttonIcon: ImageVector
+                /* TODO Fix
                 if (training.attending) {
                     buttonColor = colorResource(R.color.red)
                     buttonText = stringResource(R.string.Unattend)
@@ -166,7 +169,13 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                         )
                     }
                 }
+                */
             }
         }
     }
+}
+
+
+fun trainingInfoPage(){
+
 }

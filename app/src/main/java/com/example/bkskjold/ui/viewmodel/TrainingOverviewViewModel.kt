@@ -62,6 +62,7 @@ class TrainingOverviewViewModel {
     fun filterAndSort(navController: NavController, date: String, timeStart: String, team: String, practices: List<Training>){
         val filteredPractices: MutableList<Training> = mutableListOf()
 
+/*
         try {
             for ( i in practices){
                 if (date != "" && timeStart == "" && team == ""){
@@ -105,6 +106,11 @@ class TrainingOverviewViewModel {
                 TrainingCard(training = filteredPractices[i], navController = navController)
             }
             item{ Spacer(modifier = Modifier.height(80.dp))}
+        }*/
+        LazyColumn{
+            items(trainings.size){ i ->
+                TrainingCard(training = trainings[i], navController = navController)
+            }
         }
     }
 }
