@@ -1,7 +1,11 @@
 package com.example.bkskjold.ui.view.pages
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -15,127 +19,232 @@ import com.example.bkskjold.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.*
+import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getDayMonth
+import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 
 
 @Composable
 fun trainingInfoPage(training: Training, navController: NavController) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(25.dp)
+            .wrapContentSize(Alignment.TopCenter)
+    ) {
+        item {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Button(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .size(50.dp, 50.dp)
+                        .align(alignment = Alignment.TopStart),
+                    shape = RoundedCornerShape(40.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                    elevation = ButtonDefaults.elevation(
+                        defaultElevation = 0.dp
+                    ),
+                    onClick = { navController.navigateUp() },
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_back_arrow),
+                        contentScale = ContentScale.FillHeight,
+                        modifier = Modifier
+                            .height(20.dp),
+                        contentDescription = null,
+                    )
+                }
+            }
 
-    Column(verticalArrangement = Arrangement.spacedBy(30.dp), modifier = Modifier.padding(horizontal = 30.dp)) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 30.dp)) {
-            Text(text = stringResource(id = R.string.TrainingInfoPageHeader) + " d. " + getDayMonth(training.timeStart))
-        }
+            Column() {
+                Row(Modifier.padding(top = 20.dp,bottom = 10.dp)) {
+                    Icon(
+                        Icons.Outlined.Info,
+                        contentDescription = "hold",
+                        Modifier.padding(end = 10.dp)
+                    )
+                    Text(text = training.league + "-" + stringResource(R.string.TeamTraining),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Row(Modifier.padding(bottom = 10.dp)) {
+                    Icon(
+                        Icons.Outlined.Place,
+                        contentDescription = "lokation",
+                        Modifier.padding(end = 10.dp)
+                    )
+                    Text(text = training.location)
+                }
+                //date
+                Row(modifier = Modifier.padding(bottom = 10.dp)) {
+                    Icon(
+                        Icons.Outlined.DateRange,
+                        contentDescription = "dato",
+                        Modifier.padding(end = 10.dp)
+                    )
+                    Text(
+                        text = "${getDay(training.timeStart)}. ${getMonthString(training.timeStart)}")
+                }
+                //Time
+                Row(modifier = Modifier.padding(start = 1.dp, bottom = 10.dp)) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_time),
+                        contentScale = ContentScale.FillHeight,
+                        modifier = Modifier.height(22.dp),
+                        contentDescription = "tidspunkt",
+                    )
+                    Text(
+                        text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
+                        modifier = Modifier.padding(start = 15.dp)
+                    )
+                }
 
-        Column() {
-            Row(Modifier.padding(bottom = 10.dp)) {
-                Icon(
-                    Icons.Outlined.Info,
-                    contentDescription = "hold",
-                    Modifier.padding(end = 10.dp)
-                )
-                Text(text = training.league + "-" + stringResource(R.string.TeamTraining)
-                    + " (" + stringResource(R.string.Trainer) + " : " + training.trainer+ ")"
+                //trainer
+                Row(modifier = Modifier.padding(start = 1.dp, bottom = 10.dp)) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_whistle_outlined),
+                        contentScale = ContentScale.FillHeight,
+                        modifier = Modifier.height(22.dp),
+                        contentDescription = "tidspunkt",
+                    )
+                    Text(
+                        text = training.trainer,
+                        modifier = Modifier.padding(start = 15.dp)
+                    )
+                }
+
+                Row(Modifier.padding(bottom = 10.dp)) {
+                    Icon(
+                        Icons.Outlined.Person,
+                        contentDescription = "deltagere",
+                        Modifier.padding(end = 10.dp)
+                    )
+                    Text(text = ( /*TODO Count antal deltagere!*/ "" + "/" + training.maxParticipants + " " + stringResource(
+                        R.string.participating)))
+                }
+                Row() {
+                    Icon(
+                        Icons.Outlined.ShoppingCart,
+                        contentDescription = "pris",
+                        Modifier.padding(end = 10.dp)
+                    )
+                    Text(text = stringResource(R.string.TrainingPrice, "20", "0"))
+                }
+            }
+
+
+            //Description
+            Column() {
+                Text(text = training.description,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(top = 30.dp, bottom = 20.dp)
+                    )
+            }
+
+            Button(
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .size(320.dp, 50.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary)),
+                onClick = { /*TODO*/ }
+            ) {
+                Text(
+                    text = "DELTAG",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
                 )
             }
-            Row(Modifier.padding(bottom = 10.dp)) {
-                Icon(
-                    Icons.Outlined.Place,
-                    contentDescription = "lokation",
-                    Modifier.padding(end = 10.dp)
-                )
-                Text(text = training.location)
-            }
-            Row(Modifier.padding(bottom = 10.dp)) {
-                Icon(
-                    Icons.Outlined.DateRange,
-                    contentDescription = "tidspunkt",
-                    Modifier.padding(end = 10.dp)
-                )
-                Text(text = getTime(training.timeStart) + " - " + getTime(training.timeEnd) + " d. " + getDayMonth(training.timeStart))
-            }
-            Row(Modifier.padding(bottom = 10.dp)) {
-                Icon(
-                    Icons.Outlined.Person,
-                    contentDescription = "deltagere",
-                    Modifier.padding(end = 10.dp)
-                )
-                Text(text = ( /*TODO Count antal deltagere!*/ ""+ "/" + training.maxParticipants + " " + stringResource(R.string.participating)))
-            }
-            Row() {
-                Icon(
-                    Icons.Outlined.ShoppingCart,
-                    contentDescription = "pris",
-                    Modifier.padding(end = 10.dp)
-                )
-                Text(text = stringResource(R.string.TrainingPrice, "20", "0"))
-            }
-        }
-
-
-        Column() {
-            Text(text = stringResource(R.string.TraningDescription))
-            // TODO data should be fetched from a database
-            Text(text = training.description)
-        }
-
-
-        Column(
-            modifier = Modifier
+            Column(modifier = Modifier
                 .fillMaxWidth()
-        ) {
-            Text(text = "Tilmeldte deltagere")
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp), horizontalArrangement = Arrangement.SpaceBetween){
-                Text(text = "Navn")
-                Text(text = "Tlfnr.")
-            }
-            LazyColumn(Modifier.height(200.dp)){
-                var participants = getUsersFromId(training.participants)
-                items(participants.size) { i ->
-                    Row(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 2.5.dp)
-                        .padding(horizontal = 30.dp), Arrangement.SpaceBetween){
-                        if (participants[i].team != "guest"){
-                            Text(
-                                text = participants[i].surname,
-                                Modifier.padding(vertical = 2.5.dp)
-                            )
-                        } else {
-                            Text(
-                                text = participants[i].surname + " (Gæst)",
-                                Modifier.padding(vertical = 2.5.dp)
-                            )
-                        }
-                        Text(
-                            text = participants[i].phoneNumber.toString()
-                                .chunked(2).joinToString(separator = " "),
-                            Modifier.padding(vertical = 2.5.dp)
-                        )
-                    }
+                .padding(15.dp),
+                horizontalAlignment = Alignment.End) {
+                Button(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .size(120.dp, 50.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.green)),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Text(
+                        text = "Inviter",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_share_white),
+                        contentScale = ContentScale.FillHeight,
+                        modifier = Modifier
+                            .padding(start = 10.dp)
+                            .height(20.dp),
+                        contentDescription = null,
+                    )
                 }
             }
 
 
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 30.dp)
             ) {
+                Text(text = "Tilmeldte deltagere")
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(text = "Navn")
+                    Text(text = "Tlfnr.")
+                }
+                LazyColumn(Modifier.height(200.dp)) {
+                    var participants = getUsersFromId(training.participants)
+                    items(participants.size) { i ->
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 2.5.dp)
+                            .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
+                            if (participants[i].team != "guest") {
+                                Text(
+                                    text = participants[i].surname,
+                                    Modifier.padding(vertical = 2.5.dp)
+                                )
+                            } else {
+                                Text(
+                                    text = participants[i].surname + " (Gæst)",
+                                    Modifier.padding(vertical = 2.5.dp)
+                                )
+                            }
+                            Text(
+                                text = participants[i].phoneNumber.toString()
+                                    .chunked(2).joinToString(separator = " "),
+                                Modifier.padding(vertical = 2.5.dp)
+                            )
+                        }
+                    }
+                }
 
-                val buttonColor: Color
-                val buttonText: String
-                val buttonIcon: ImageVector
-                /* TODO Fix
-                if (training.attending) {
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 30.dp)
+                ) {
+
+                    val buttonColor: Color
+                    val buttonText: String
+                    val buttonIcon: ImageVector
+
+
+                if (training.participants.contains("uqYviRk77BegdJdx9BW5")) {
                     buttonColor = colorResource(R.color.red)
                     buttonText = stringResource(R.string.Unattend)
                     buttonIcon = Icons.Outlined.Clear
@@ -164,13 +273,9 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                         )
                     }
                 }
-                */
+
+                }
             }
         }
     }
-}
-
-
-fun trainingInfoPage(){
-
 }

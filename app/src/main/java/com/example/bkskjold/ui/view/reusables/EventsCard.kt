@@ -17,7 +17,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
+import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getDayMonth
+import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.ui.view.pages.gotoEventDetails
 
@@ -46,7 +48,6 @@ fun EventsCard(event: Event, navController: NavController) {
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(0.dp,0.dp,0.dp, 15.dp)
                 )
-                //Spacer(modifier = Modifier.height(8.dp))
                 Text( // event description
                     text = event.description,
                     modifier = Modifier.padding(0.dp,0.dp,0.dp, 5.dp),
@@ -62,7 +63,7 @@ fun EventsCard(event: Event, navController: NavController) {
                 ) {
                     Row() { //time
                         Image(painter = painterResource(id = R.drawable.icon_calendar), contentDescription = null)
-                        Text(text = "${getDayMonth(event.timeStart)}  kl. ${getTime(event.timeStart)}", fontWeight = FontWeight.Bold, modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
+                        Text(text = "${getDay(event.timeStart)}. ${getMonthString(event.timeStart)}  kl. ${getTime(event.timeStart)}", fontWeight = FontWeight.Bold, modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
                     }
                     Row() { //location
                         Image(painter = painterResource(id = R.drawable.icon_location), contentDescription = null)

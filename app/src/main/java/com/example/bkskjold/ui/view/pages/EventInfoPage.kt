@@ -20,7 +20,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Event
+import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getDayMonth
+import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 
 //TODO Alt tekst skal hentes fra database! Evt igennem et event objekt?
@@ -32,7 +34,6 @@ fun EventInfoPage(event: Event, navController: NavController) {
             .padding(25.dp)
             .wrapContentSize(Alignment.TopCenter)
     ) {
-
         item {
             Box(modifier = Modifier.fillMaxSize()) {
                 Button(
@@ -108,7 +109,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     contentDescription = null,
                 )
                 Text(
-                    text = getDayMonth(event.timeStart),
+                    text = "${getDay(event.timeStart)}. ${getMonthString(event.timeStart)}",
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }

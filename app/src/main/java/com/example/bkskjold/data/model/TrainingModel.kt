@@ -85,7 +85,7 @@ fun loadTrainingsFromDB(): MutableList<Training>{
 
 fun getSignedUpTrainings(): MutableList<Training> {
     val signedUpTrainings: MutableList<Training> = mutableListOf()
- //TODO Find ud af hvem der er logget ind i stedet for "uqYviRk77BegdJdx9BW5"
+ //TODO Få currentUser i stedet for "uqYviRk77BegdJdx9BW5"
     for (training in trainings){
         if (training.participants.contains("uqYviRk77BegdJdx9BW5")){
             signedUpTrainings.add(training)
