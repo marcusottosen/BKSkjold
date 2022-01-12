@@ -33,6 +33,8 @@ import com.example.bkskjold.data.util.getTime
 
 @Composable
 fun TrainingInfoPage(training: Training, navController: NavController) {
+    var training = training
+
     val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(false) }
     var participants = training.participants
@@ -168,7 +170,7 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                             .size(320.dp, 50.dp),
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
-                            updateParticipants(training, userId)
+                            training = updateParticipants(training, userId)
                             isAttending.value = !isAttending.value
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -196,7 +198,7 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                             .size(320.dp, 50.dp),
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
-                            updateParticipants(training, userId)
+                            training = updateParticipants(training, userId)
                             isAttending.value = !isAttending.value
                         },
                         colors = ButtonDefaults.buttonColors(

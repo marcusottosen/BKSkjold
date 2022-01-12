@@ -97,20 +97,21 @@ fun getSignedUpTrainings(): MutableList<Training> {
     val signedUpTrainings: MutableList<Training> = mutableListOf()
  //TODO Få currentUser i stedet for "uqYviRk77BegdJdx9BW5"
     for (training in trainings){
-        if (training.participants.contains("uqYviRk77BegdJdx9BW5")){
+        if (training.participants.contains(CurrentUser.id)){
             signedUpTrainings.add(training)
         }
     }
     return signedUpTrainings
 }
 
-fun updateParticipants(training: Training, userId: String){
+fun updateParticipants(training: Training, userId: String): Training {
+    var training = training
 
     val db = Firebase.firestore
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
-            for (doc in result) {// timeStart her var date før //TODO Få til at virke igen hvis den ikke allerede gør
+            for (doc in result) {
                 if (doc["timeStart"] == training.timeStart && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
 
                     //Create a mutable list, so we can add items to it.
@@ -133,17 +134,18 @@ fun updateParticipants(training: Training, userId: String){
                         .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
                         .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
 
-                    //Finally load the updated trainings from DB again.
-                    val trainings = TrainingModel()
-                    trainings.loadTrainingsFromDB()
-
+                    //Finally update participant on training object, so it can be returned later in the method
+                    training.participants = mutableParticipants
                 }
             }
         }
         .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting documents: ", exception)
         }
+    print("")
+    return training
 }
+
 
 
 @Parcelize
@@ -155,7 +157,7 @@ data class Training(
     val trainer: String= "",
     val description: String= "",
     val maxParticipants: Int = 0,
-    val participants: List<String> = listOf(),
+    var participants: List<String> = listOf(),
     val userBooking: Boolean = false
 ): Parcelable
 

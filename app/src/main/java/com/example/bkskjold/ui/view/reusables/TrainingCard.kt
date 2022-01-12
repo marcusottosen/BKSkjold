@@ -22,12 +22,14 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.TrainingModel
 import com.example.bkskjold.data.model.updateParticipants
 import com.example.bkskjold.data.util.*
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
 fun TrainingCard(training: Training, navController: NavController) {
+    var training = training//remember { mutableStateOf(training) }
     val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(false)}
     var participants = training.participants
@@ -40,8 +42,10 @@ fun TrainingCard(training: Training, navController: NavController) {
             .height(85.dp)
             .fillMaxWidth()
             .clickable {
+                TrainingModel().loadTrainingsFromDB()
+
                 gotoTrainingDetails(training, navController)
-                       },
+            },
         shape = RoundedCornerShape(9.dp),
         elevation = 3.dp
     ) {
@@ -122,7 +126,7 @@ fun TrainingCard(training: Training, navController: NavController) {
                             .padding(0.dp)
                             .fillMaxWidth()
                         , onClick = {
-                            updateParticipants(training, userId)
+                            training = updateParticipants(training, userId)
                             isAttending.value = !isAttending.value
                                     }
                         , shape = RoundedCornerShape(18.dp)
