@@ -85,14 +85,33 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun editCurrentUser() {
-        updateCurrentUser()
-        val firstName: String = _firstName.value ?: throw IllegalArgumentException("first name expected")
+       updateCurrentUser()
+        lateinit var firstName: String
+        lateinit var lastName: String
+        lateinit var email: String
+
+        if (_firstName.value != CurrentUser.firstName && _firstName.value != ""){
+           firstName = _firstName.value ?: throw IllegalArgumentException("first name expected")
+         }
+        else { firstName = CurrentUser.firstName}
+
+        if (_lastName.value != CurrentUser.lastName && _lastName.value != ""){
+            lastName = _lastName.value ?: throw IllegalArgumentException("last name expected")
+        }
+        else { lastName = CurrentUser.lastName}
+
+        if (_email.value != CurrentUser.email && _email.value != ""){
+            email = _email.value ?: throw IllegalArgumentException("email expected")
+        }
+        else { email = CurrentUser.email}
+
+
         Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
             CurrentUserModel(
                 CurrentUser.id,
                 firstName,
-                CurrentUser.lastName,
-                CurrentUser.email,
+                lastName,
+                email,
                 CurrentUser.address,
                 CurrentUser.phoneNumber,
                 CurrentUser.birthdate,
