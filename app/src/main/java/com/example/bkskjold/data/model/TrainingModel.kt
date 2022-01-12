@@ -75,7 +75,7 @@ class TrainingModel() {
                             trainer = doc["trainer"] as String,
                             description = doc["description"] as String,
                             maxParticipants = (doc["maxParticipants"] as Number).toInt(),
-                            participants = (doc["participants"]) as List<String>,
+                            participants = (doc["participants"]) as MutableList<String>,
                             userBooking = doc["userBooking"] as Boolean
                         )
                     )
@@ -95,7 +95,7 @@ class TrainingModel() {
 
 fun getSignedUpTrainings(): MutableList<Training> {
     val signedUpTrainings: MutableList<Training> = mutableListOf()
- //TODO Få currentUser i stedet for "uqYviRk77BegdJdx9BW5"
+
     for (training in trainings){
         if (training.participants.contains(CurrentUser.id)){
             signedUpTrainings.add(training)
@@ -157,7 +157,7 @@ data class Training(
     val trainer: String= "",
     val description: String= "",
     val maxParticipants: Int = 0,
-    var participants: List<String> = listOf(),
+    var participants: MutableList<String> = mutableListOf(),
     val userBooking: Boolean = false
 ): Parcelable
 

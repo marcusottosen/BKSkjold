@@ -32,12 +32,13 @@ import com.example.bkskjold.data.util.getTime
 fun TrainingInfoPage(training: Training, navController: NavController) {
     var training = training
     var participantsID = training.participants
-    val participants = remember { mutableStateOf(getUsersFromId(participantsID)) }
+    var participants = getUsersFromId(participantsID)
+    print("")
 
     val userId = CurrentUser.id
-    val isAttending = remember { mutableStateOf(false) }
+    val isAttending = remember { mutableStateOf(participantsID.contains(userId)) }
 
-    isAttending.value = participantsID.contains(userId)
+    //isAttending.value = participantsID.contains(userId)
 
 
     LazyColumn(
@@ -169,8 +170,14 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
                             training = updateParticipants(training, userId)
-                            participantsID = training.participants
-                            participants.value = getUsersFromId(participantsID)
+                            //participantsID = training.participants
+                            if (participantsID.contains(userId)){
+                                participantsID.remove(userId)
+                                participants.remove(getCurrentUserAsCurrentUserModel())
+                            }else{
+                                participantsID.add(userId)
+                                participants.add(getCurrentUserAsCurrentUserModel())
+                            }
                             isAttending.value = !isAttending.value
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -199,8 +206,15 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
                             training = updateParticipants(training, userId)
-                            participantsID = training.participants
-                            participants.value = getUsersFromId(participantsID)
+                            //participantsID = training.participants
+                            //participants.value = getUsersFromId(participantsID)
+                            if (participantsID.contains(userId)){
+                                participantsID.remove(userId)
+                                participants.remove(getCurrentUserAsCurrentUserModel())
+                            }else{
+                                participantsID.add(userId)
+                                participants.add(getCurrentUserAsCurrentUserModel())
+                            }
                             isAttending.value = !isAttending.value
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -271,24 +285,24 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
 //                }
                 if (isAttending.value){
                     LazyColumn(Modifier.height(200.dp)) {
-                        items(participants.value.size) { i ->
+                        items(participants.size) { i ->
                             Row(modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 2.5.dp)
                                 .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
-                                if (participants.value[i].team != "guest") {
+                                if (participants[i].team != "guest") {
                                     Text(
-                                        text = participants.value[i].firstName + " " + participants.value[i].lastName,
+                                        text = participants[i].firstName + " " + participants[i].lastName,
                                         Modifier.padding(vertical = 2.5.dp)
                                     )
                                 } else {
                                     Text(
-                                        text = participants.value[i].firstName + " " + participants.value[i].lastName + " (Gæst)",
+                                        text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
                                         Modifier.padding(vertical = 2.5.dp)
                                     )
                                 }
                                 Text(
-                                    text = participants.value[i].phoneNumber.toString()
+                                    text = participants[i].phoneNumber.toString()
                                         .chunked(2).joinToString(separator = " "),
                                     Modifier.padding(vertical = 2.5.dp)
                                 )
@@ -297,24 +311,25 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                     }
                 }else{
                     LazyColumn(Modifier.height(200.dp)) {
-                        items(participants.value.size) { i ->
+                        items(participants.size) { i ->
                             Row(modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 2.5.dp)
                                 .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
-                                if (participants.value[i].team != "guest") {
+
+                                if (participants[i].team != "guest") {
                                     Text(
-                                        text = participants.value[i].firstName + " " + participants.value[i].lastName,
+                                        text = participants[i].firstName + " " + participants[i].lastName,
                                         Modifier.padding(vertical = 2.5.dp)
                                     )
                                 } else {
                                     Text(
-                                        text = participants.value[i].firstName + " " + participants.value[i].lastName + " (Gæst)",
+                                        text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
                                         Modifier.padding(vertical = 2.5.dp)
                                     )
                                 }
                                 Text(
-                                    text = participants.value[i].phoneNumber.toString()
+                                    text = participants[i].phoneNumber.toString()
                                         .chunked(2).joinToString(separator = " "),
                                     Modifier.padding(vertical = 2.5.dp)
                                 )

@@ -153,6 +153,7 @@ fun getUsersFromId(ids: List<String>): MutableList<CurrentUserModel> {
                         if (participant !in participants){
                             participants.add(participant)
                         }
+
                     }
                 }
             }
@@ -160,10 +161,28 @@ fun getUsersFromId(ids: List<String>): MutableList<CurrentUserModel> {
         .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting participants: ", exception)
         }
-
+    var partics = participants
     return participants
 }
 
+
+fun getCurrentUserAsCurrentUserModel(): CurrentUserModel {
+
+    val currUser = CurrentUserModel(
+        id = CurrentUser.id,
+        firstName = CurrentUser.firstName,
+        lastName = CurrentUser.lastName,
+        email = CurrentUser.email,
+        address = CurrentUser.address,
+        phoneNumber = CurrentUser.phoneNumber,
+        birthdate = CurrentUser.birthdate,
+        team = CurrentUser.team,
+        userType = CurrentUser.userType,
+        finishedTrainings = CurrentUser.finishedTrainings,
+        memberSince = CurrentUser.memberSince
+    )
+    return currUser
+}
 
 
 @Parcelize
