@@ -25,6 +25,11 @@ import com.example.bkskjold.DefaultDetails
 import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.Event
+import com.example.bkskjold.data.model.NavigationItem
+import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.User
+import com.example.bkskjold.data.util.LoadFromDB
 import com.example.bkskjold.data.model.*
 import com.example.bkskjold.ui.view.pages.*
 import com.google.firebase.auth.FirebaseAuth
@@ -83,11 +88,17 @@ fun Navigation(navController: NavHostController) {
             MainScreen()
         }
 
+        //Load before homepage is shown
+        composable("loadFromDB") {
+            LoadFromDB(navController)
+        }
+
+
         //Subpages
         composable("trainingDetails"){
             val trainingModel = navController.previousBackStackEntry?.arguments?.getParcelable<Training>("training")
             trainingModel?.let { 
-                trainingInfoPage(training = it, navController = navController)
+                TrainingInfoPage(training = it, navController = navController)
             }
         }
         composable("eventDetails"){
@@ -109,11 +120,25 @@ fun Navigation(navController: NavHostController) {
                editProfilePage(navController = navController)
             }
         }
+        composable("bookedFieldsPage") {
+            BookedFieldsPage(navController)
+        }
+        composable("bookFieldPage") {
+            BookFieldPage(navController)
+        }
     }
 } //Læs guide nedenfor til navigation!
 
 /**
- * GUIDE TIL SUB-NAVIGATION
+ * GUIDE TIL SIMPEL SUB-NAVIGATION
+ * 1. lav composable som fx "BookedFieldsPage" ovenfor
+ * 2. Ved en knap/clickable skriv: .clickable {navController.navigate("BookedFieldsPage")}
+ *      (Hvis Button brug onClick = { navController.navigate("BookedFieldsPage")}
+ *
+ * Brug onClick = { navController.navigateUp() ved en tilbageknap
+ *
+ *
+ * GUIDE TIL SUB-NAVIGATION MED OBJEKT
  * (ved objekt i parameter)
  * 1.
  *   Ovenfor copypaste den nederste composable og ret den til. Der er 6 steder der skal ændres til den ønskede side.

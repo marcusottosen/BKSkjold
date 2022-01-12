@@ -18,7 +18,7 @@ import java.lang.Exception
 class TrainingOverviewViewModel {
     @Composable
     fun GetOverviewView(navController: NavController, date: String, timeStart: String, team: String){
-        val trainings = loadTrainingsFromDB()
+        val trainings = TrainingModel().loadTrainingsFromDB()
 
         //Filter only if filter is applied
         if(date == "" && timeStart == "" && team == ""){

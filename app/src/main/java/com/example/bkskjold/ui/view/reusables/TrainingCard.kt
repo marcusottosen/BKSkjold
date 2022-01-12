@@ -27,7 +27,7 @@ import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
 fun TrainingCard(training: Training, navController: NavController) {
-    val userId = "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldnt be hardcoded
+    val userId = "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldnt be hardcoded (Se også TrainingInfoPage)
     val isAttending = remember { mutableStateOf(false)}
     var participants = training.participants
 

@@ -3,6 +3,8 @@ import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.os.Parcelable
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.QueryDocumentSnapshot
@@ -12,7 +14,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
 
 /*
-// *** Uncomment hvis dataen skal tilføjes. (Uncomment også i PreloadDB.kt ***
+// *** Uncomment hvis dataen skal tilføjes. (Uncomment også i LoadFromDB.kt ***
 fun trainingsWriteToDB() {
     val bookings = listOf(
         Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "Use", "Ekkart",  "Normal træning for u13. Kom i god tid!"     , 6,  listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
@@ -48,39 +50,47 @@ fun trainingsWriteToDB() {
 
 val trainings: MutableList<Training> = mutableListOf()
 
-fun loadTrainingsFromDB(): MutableList<Training>{
+class TrainingModel() {
+    private val _loading = MutableLiveData(true)
+    val loading: LiveData<Boolean> = _loading
 
+    fun loadTrainingsFromDB(): MutableList<Training> {
+        val db = Firebase.firestore
+        db.collection("trainings")
+            .get()
+            .addOnSuccessListener { result ->
+                trainings.clear()
+                for (doc in result) {
+                    //val test : Number = doc["price"] as Number
+                    //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int
+                    //trainings.add(training)
 
-    val db = Firebase.firestore
-    db.collection("trainings")
-        .get()
-        .addOnSuccessListener { result ->
-            trainings.clear()
-            for (doc in result) {
-                //val test : Number = doc["price"] as Number
-                //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int
-                //trainings.add(training)
-
-                trainings.add(
-                    Training(
-                        //Telmeldte personer
-                        timeStart       = doc["timeStart"] as com.google.firebase.Timestamp,
-                        timeEnd         = doc["timeEnd"] as com.google.firebase.Timestamp,
-                        location        = doc["location"] as String,
-                        league          = doc["league"] as String,
-                        trainer         = doc["trainer"] as String,
-                        description     = doc["description"] as String,
-                        maxParticipants = (doc["maxParticipants"] as Number).toInt(),
-                        participants    = (doc["participants"]) as List<String>,
-                        userBooking     = doc["userBooking"] as Boolean
+                    trainings.add(
+                        Training(
+                            //Telmeldte personer
+                            timeStart = doc["timeStart"] as com.google.firebase.Timestamp,
+                            timeEnd = doc["timeEnd"] as com.google.firebase.Timestamp,
+                            location = doc["location"] as String,
+                            league = doc["league"] as String,
+                            trainer = doc["trainer"] as String,
+                            description = doc["description"] as String,
+                            maxParticipants = (doc["maxParticipants"] as Number).toInt(),
+                            participants = (doc["participants"]) as List<String>,
+                            userBooking = doc["userBooking"] as Boolean
+                        )
                     )
-                )
+                }
             }
-        }
-        .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: trainings", exception)
-        }
-    return trainings
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    _loading.value = false
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: trainings", exception)
+            }
+        return trainings
+    }
 }
 
 fun getSignedUpTrainings(): MutableList<Training> {
@@ -124,7 +134,8 @@ fun updateParticipants(training: Training, userId: String){
                         .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
 
                     //Finally load the updated trainings from DB again.
-                    loadTrainingsFromDB()
+                    val trainings = TrainingModel()
+                    trainings.loadTrainingsFromDB()
 
                 }
             }

@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.news
@@ -27,10 +28,8 @@ import com.example.bkskjold.ui.view.reusables.NewsCard
 import com.example.bkskjold.ui.view.reusables.NextTrainingCard
 
 //TODO Lav metode til at finde den næste tilmeldte træning
-@Preview
 @Composable
-fun HomeScreenPage() {
-
+fun HomeScreenPage(navController: NavController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -80,7 +79,7 @@ fun HomeScreenPage() {
         }
 
         item {
-            //NextTrainingCard(training = trainings[1])
+            NextTrainingCard(training = trainings[1]) //TODO Find the next training
         }
 
         item {
@@ -89,10 +88,10 @@ fun HomeScreenPage() {
                 .padding(15.dp, 35.dp, 15.dp, 0.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                HomePageCategories(R.drawable.icon_field, stringResource(R.string.bookField))
-                HomePageCategories(R.drawable.icon_calendarhome, stringResource(R.string.calender))
-                HomePageCategories(R.drawable.icon_map, stringResource(R.string.map))
-                HomePageCategories(R.drawable.icon_forum, stringResource(R.string.discussionForum))
+                HomePageCategories(R.drawable.icon_field, stringResource(R.string.bookField), "bookedFieldsPage", navController)
+                HomePageCategories(R.drawable.icon_calendarhome, stringResource(R.string.calender),"bookedFieldsPage", navController)
+                HomePageCategories(R.drawable.icon_map, stringResource(R.string.map),"bookedFieldsPage", navController)
+                HomePageCategories(R.drawable.icon_forum, stringResource(R.string.discussionForum),"bookedFieldsPage", navController)
             }
         }
 

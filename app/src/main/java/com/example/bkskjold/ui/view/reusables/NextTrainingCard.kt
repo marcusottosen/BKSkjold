@@ -22,6 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.util.getDay
+import com.example.bkskjold.data.util.getMonthString
+import com.example.bkskjold.data.util.getTime
+import com.example.bkskjold.data.util.getWeekDay
 
 
 @Composable
@@ -77,10 +81,10 @@ fun NextTrainingCard(training: Training) {
                         horizontalArrangement = Arrangement.Start
                     ) {
                         Column() { //Date & time
-                            Text(text = "25. oktober", fontSize = 10.sp, color = Color.White) //TODO getDate(training.timeStart) (Kan først når timeEnd etc er timestamp
-                            Text(text = "mandag", fontSize = 20.sp, color = Color.White) //TODO getWeekDay(training.timeStart)
+                            Text(text = "${getDay(training.timeStart)}. ${getMonthString(training.timeStart)}", fontSize = 10.sp, color = Color.White)
+                            Text(text = getWeekDay(training.timeStart), fontSize = 20.sp, color = Color.White)
                             Text(
-                                text = "16:00 - 17:30", //TODO getTime(training.startTime) - getTime(training.endTime)
+                                text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
                                 fontSize = 10.sp,
                                 color = Color.White
                             )

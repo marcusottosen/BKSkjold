@@ -16,14 +16,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.updateCurrentUser
-import com.example.bkskjold.data.util.preloadDB
-import com.example.bkskjold.ui.view.pages.LoginFrontPage
+import com.example.bkskjold.data.util.LoadFromDB
 import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
 import com.example.bkskjold.ui.viewmodel.Navigation
 import com.google.firebase.FirebaseApp
@@ -37,7 +35,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
         setContent {
-            preloadDB()
+            //LoadFromDB()
             if (FirebaseAuth.getInstance().currentUser != null) updateCurrentUser()
             MainScreen()
         }

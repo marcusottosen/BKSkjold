@@ -4,13 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
@@ -31,9 +31,16 @@ import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 
-
 @Composable
-fun trainingInfoPage(training: Training, navController: NavController) {
+fun TrainingInfoPage(training: Training, navController: NavController) {
+    val userId =
+        "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldnt be hardcoded
+    val isAttending = remember { mutableStateOf(false) }
+    var participants = training.participants
+
+    isAttending.value = participants.contains(userId)
+
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -65,7 +72,7 @@ fun trainingInfoPage(training: Training, navController: NavController) {
             }
 
             Column() {
-                Row(Modifier.padding(top = 20.dp,bottom = 10.dp)) {
+                Row(Modifier.padding(top = 20.dp, bottom = 10.dp)) {
                     Icon(
                         Icons.Outlined.Info,
                         contentDescription = "hold",
@@ -146,33 +153,84 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                 Text(text = training.description,
                     color = Color.Gray,
                     modifier = Modifier.padding(top = 30.dp, bottom = 20.dp)
-                    )
-            }
-
-            Button(
-                modifier = Modifier
-                    .padding(top = 10.dp)
-                    .size(320.dp, 50.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary)),
-                onClick = { /*TODO*/ }
-            ) {
-                Text(
-                    text = "DELTAG",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold
                 )
             }
+
+            //Tilmeld/afmeld deltagelse
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                if (isAttending.value) {
+                    Button(
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .size(320.dp, 50.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        onClick = {
+                            updateParticipants(training, userId)
+                            isAttending.value = !isAttending.value
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = colorResource(R.color.red)
+                        ),
+                    ) {
+                        Row() {
+                            Icon(
+                                Icons.Outlined.Clear,
+                                contentDescription = "tilmeld/afmeld træning",
+                                Modifier.padding(end = 10.dp),
+                                colorResource(id = R.color.main_background)
+                            )
+                            Text(
+                                text = stringResource(R.string.Unattend),
+                                color = colorResource(id = R.color.main_background),
+                                modifier = Modifier.padding(top = 3.dp)
+                            )
+                        }
+                    }
+                } else {
+                    Button(
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .size(320.dp, 50.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        onClick = {
+                            updateParticipants(training, userId)
+                            isAttending.value = !isAttending.value
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = colorResource(R.color.green)
+                        ),
+                    ) {
+                        Row() {
+                            Icon(
+                                Icons.Outlined.Check,
+                                contentDescription = "tilmeld/afmeld træning",
+                                Modifier.padding(end = 10.dp),
+                                colorResource(id = R.color.main_background)
+                            )
+                            Text(
+                                text = stringResource(R.string.Attend),
+                                color = colorResource(id = R.color.main_background),
+                                modifier = Modifier.padding(top = 3.dp)
+                            )
+                        }
+                    }
+                }
+            }
+
             Column(modifier = Modifier
                 .fillMaxWidth()
-                .padding(15.dp),
+                .padding(9.dp),
                 horizontalAlignment = Alignment.End) {
                 Button(
                     modifier = Modifier
                         .padding(top = 10.dp)
                         .size(120.dp, 50.dp),
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.green)),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary)),
                     onClick = { /*TODO*/ }
                 ) {
                     Text(
@@ -191,21 +249,24 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                 }
             }
 
-
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth().padding(top = 10.dp)
             ) {
-                Text(text = "Tilmeldte deltagere")
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 30.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text(text = "Navn")
-                    Text(text = "Tlfnr.")
-                }
+                Text(text = "Deltagere",
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(bottom = 10.dp)
+                )
+//                Row(modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(horizontal = 30.dp),
+//                    horizontalArrangement = Arrangement.SpaceBetween) {
+//                    Text(text = "Navn")
+//                    Text(text = "Tlfnr.")
+//                }
                 LazyColumn(Modifier.height(200.dp)) {
-                    var participants = getUsersFromId(training.participants)
+                    val participants = getUsersFromId(training.participants)
                     items(participants.size) { i ->
                         Row(modifier = Modifier
                             .fillMaxWidth()
@@ -213,12 +274,12 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                             .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
                             if (participants[i].team != "guest") {
                                 Text(
-                                    text = participants[i].surname,
+                                    text = participants[i].firstname + " " + participants[i].surname,
                                     Modifier.padding(vertical = 2.5.dp)
                                 )
                             } else {
                                 Text(
-                                    text = participants[i].surname + " (Gæst)",
+                                    text = participants[i].firstname + " " + participants[i].surname + " (Gæst)",
                                     Modifier.padding(vertical = 2.5.dp)
                                 )
                             }
@@ -231,51 +292,14 @@ fun trainingInfoPage(training: Training, navController: NavController) {
                     }
                 }
 
-
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 30.dp)
-                ) {
-
-                    val buttonColor: Color
-                    val buttonText: String
-                    val buttonIcon: ImageVector
-
-
-                if (training.participants.contains("uqYviRk77BegdJdx9BW5")) {
-                    buttonColor = colorResource(R.color.red)
-                    buttonText = stringResource(R.string.Unattend)
-                    buttonIcon = Icons.Outlined.Clear
-                } else {
-                    buttonColor = colorResource(R.color.green)
-                    buttonText = stringResource(R.string.Attend)
-                    buttonIcon = Icons.Outlined.Check
-                }
-
-                Button(
-                    onClick = { /*TODO*/ },
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = buttonColor
-                    ),
-                ) {
-                    Row() {
-                        Icon(
-                            buttonIcon,
-                            contentDescription = "tilmeld/afmeld træning",
-                            Modifier.padding(end = 10.dp),
-                            colorResource(id = R.color.main_background)
-                        )
-                        Text(
-                            text = buttonText,
-                            color = colorResource(id = R.color.main_background)
-                        )
-                    }
-                }
-
-                }
             }
+
         }
     }
 }
+
+
+
+
+
+
