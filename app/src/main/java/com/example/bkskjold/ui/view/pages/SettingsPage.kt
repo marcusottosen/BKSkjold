@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.OutlinedButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,8 +47,9 @@ fun settingsPage(navController: NavController) {
 
                 ){
                     Icon(
-                        painterResource(id = R.drawable.icon_back_arrow_head),
-                        contentDescription = null,
+                        imageVector = Icons.Outlined.KeyboardArrowLeft,
+                        tint = Color.White,
+                        contentDescription = "return arrow",
                     )
                 }
 

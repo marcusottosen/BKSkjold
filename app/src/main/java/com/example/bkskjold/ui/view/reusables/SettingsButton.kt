@@ -1,5 +1,6 @@
 package com.example.bkskjold.ui.view.reusables
 
+import android.bluetooth.BluetoothHealthAppConfiguration
 import android.graphics.Paint
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.*
@@ -9,6 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +42,7 @@ fun SettingsButton (
 
                 Icon(
                     painterResource(id = image),
+                    tint = Black,
                     contentDescription = null
                 )}
 

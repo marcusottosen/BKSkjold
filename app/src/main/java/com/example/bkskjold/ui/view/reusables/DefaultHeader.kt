@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -109,11 +111,16 @@ fun DefaultProfileHeader(user: User,navController: NavController){
                         .padding(start = 50.dp)
                         .clickable { gotoSettingsPage(user, navController) },
                 ) {
-                    Icon(
+                    Icon(//Modifier.size(iconSize),
                         painterResource(id = R.drawable.icon_settings),
                         contentDescription = null,
-                        Modifier.size(iconSize)
+                        Modifier.size(iconSize),
+                        tint = White,
+
+
+
                     )
+
                     Text(
                         text = "Indstillinger",
                         color = androidx.compose.ui.graphics.Color.White
@@ -129,7 +136,8 @@ fun DefaultProfileHeader(user: User,navController: NavController){
                     Icon(
                         painterResource(id = R.drawable.icon_edit_pencil),
                         contentDescription = null,
-                        Modifier.size(iconSize)
+                        Modifier.size(iconSize),
+                        tint = White,
                     )
 
                     Text(
