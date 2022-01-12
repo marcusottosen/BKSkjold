@@ -89,6 +89,7 @@ class RegisterViewModel : ViewModel() {
         lateinit var firstName: String
         lateinit var lastName: String
         lateinit var email: String
+        lateinit var team: String
 
         if (_firstName.value != CurrentUser.firstName && _firstName.value != ""){
            firstName = _firstName.value ?: throw IllegalArgumentException("first name expected")
@@ -105,6 +106,11 @@ class RegisterViewModel : ViewModel() {
         }
         else { email = CurrentUser.email}
 
+        if (_team.value != CurrentUser.team && _team.value != ""){
+            team = _team.value ?: throw IllegalArgumentException("team expected")
+        }
+        else { team = CurrentUser.team}
+
 
         Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
             CurrentUserModel(
@@ -115,7 +121,7 @@ class RegisterViewModel : ViewModel() {
                 CurrentUser.address,
                 CurrentUser.phoneNumber,
                 CurrentUser.birthdate,
-                CurrentUser.team,
+                team,
                 CurrentUser.userType,
                 CurrentUser.finishedTrainings,
                 CurrentUser.memberSince
