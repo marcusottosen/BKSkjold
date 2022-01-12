@@ -46,14 +46,14 @@ import com.google.firebase.ktx.Firebase
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination =
     if (Firebase.auth.currentUser != null)
-        NavigationItem.Home.route
+        "loadFromDB"
     else
         "authenticationOption"
 
     ) {
         // Navbar
         composable(NavigationItem.Home.route) {
-            HomeScreenPage()
+            HomeScreenPage(navController)
         }
         composable(NavigationItem.Trainings.route) {
             trainingOverview(navController)
