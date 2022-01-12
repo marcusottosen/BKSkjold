@@ -20,14 +20,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.getUserFromID
 import com.example.bkskjold.data.model.updateParticipants
 import com.example.bkskjold.data.util.*
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
 fun TrainingCard(training: Training, navController: NavController) {
-    val userId = "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldnt be hardcoded (Se også TrainingInfoPage)
+    val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(false)}
     var participants = training.participants
 
@@ -103,7 +105,7 @@ fun TrainingCard(training: Training, navController: NavController) {
                             color = Color.DarkGray
                         )
                         Text(
-                            text = training.trainer,
+                            text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
                             modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray

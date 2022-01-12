@@ -46,7 +46,6 @@ fun userWriteToDB() {
 
 
 val users: MutableList<User> = mutableListOf()
-
 class UserModel() {
     private val _loading = MutableLiveData(true)
     val loading: LiveData<Boolean> = _loading
@@ -90,6 +89,55 @@ class UserModel() {
         return users
     }
 }
+
+//TODO remove "loadUsersFromDB" and use "loadUsersFromDB2" instead (rename it too)
+//############# MAKES LIST OF ALL USERS FROM users-db ###################
+val allusers: MutableList<CurrentUserModel> = mutableListOf()
+fun loadUsersFromDB2(): MutableList<CurrentUserModel>{
+    val db = Firebase.firestore
+    db.collection("users-db")
+        .get()
+        .addOnSuccessListener { result ->
+            allusers.clear()
+            for (doc in result) {
+
+                allusers.add(
+                    CurrentUserModel(
+                        id = doc["id"] as String,
+                        firstName = doc["firstName"] as String,
+                        lastName = doc["lastName"] as String,
+                        email = doc["email"] as String,
+                        address = doc["address"] as String,
+                        phoneNumber = (doc["phoneNumber"] as Number).toInt(),
+                        birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
+                        team = doc["team"] as String,
+                        userType = (doc["userType"] as Number).toInt(),
+                        finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
+                        memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
+                    )
+                )
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting documents: users", exception)
+        }
+    return allusers
+}
+
+fun getUserFromID(idString: String): CurrentUserModel{
+    try {
+        for (user in allusers) {
+            if (idString == user.id) {
+                return user
+            }
+        }
+    } catch (e: Exception) {
+        Log.d(ContentValues.TAG, "User not found from ID in getUserFromID", e)
+    }
+    return allusers[0]
+}
+
+
 
 //############# GET USERS FROM LIST OF USER IDS ###################
 var participants: MutableList<User> = mutableListOf()

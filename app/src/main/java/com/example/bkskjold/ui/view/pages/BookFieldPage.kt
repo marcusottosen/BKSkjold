@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.newTraining
+import com.example.bkskjold.data.model.newTrainingFromBooking
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
 import java.text.DateFormatSymbols
 
@@ -62,8 +62,8 @@ fun BookFieldPage(navController: NavController){
             ExtendedFloatingActionButton(
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
-                          newTraining(
-                              field = field,
+                          newTrainingFromBooking(
+                              location = field,
                               month = month,
                               day = day,
                               startHour = startHour,
@@ -71,7 +71,8 @@ fun BookFieldPage(navController: NavController){
                               endHour = endHour,
                               endMin = endMin,
                               maxParticipants = maxParticipants,
-                              description = description.value.text
+                              description = description.value.text,
+                              navController = navController
                           )
                 },
                 icon = { Icon(Icons.Filled.Close, "Back", tint = Color.White) },
