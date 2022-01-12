@@ -75,7 +75,7 @@ fun BookFieldPage(navController: NavController){
                               navController = navController
                           )
                 },
-                icon = { Icon(Icons.Filled.Close, "Back", tint = Color.White) },
+                icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
                 modifier = Modifier.padding(bottom = 60.dp),
                 backgroundColor = colorResource(id = R.color.green)
             )

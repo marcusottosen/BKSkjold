@@ -132,6 +132,9 @@ fun Navigation(navController: NavHostController) {
         composable("newTrainingPage") {
             NewTrainingPage(navController)
         }
+        composable("newNewsPage") {
+            NewNewsPage(navController)
+        }
     }
 } //Læs guide nedenfor til navigation!
 

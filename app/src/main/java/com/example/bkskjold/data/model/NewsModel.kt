@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.bkskjold.ui.view.pages.HomeScreenPage
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
@@ -45,6 +46,7 @@ class NewsModel() {
     fun loadNewsFromDB(): MutableList<News> {
         val db = Firebase.firestore
         db.collection("news")
+            .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 news.clear()

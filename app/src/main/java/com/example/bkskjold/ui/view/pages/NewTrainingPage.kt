@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -82,7 +83,7 @@ fun NewTrainingPage(navController: NavController){
                         navController = navController
                     )
                 },
-                icon = { Icon(Icons.Filled.Close, "Back", tint = Color.White) },
+                icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
                 modifier = Modifier.padding(bottom = 60.dp),
                 backgroundColor = colorResource(id = R.color.green)
             )
