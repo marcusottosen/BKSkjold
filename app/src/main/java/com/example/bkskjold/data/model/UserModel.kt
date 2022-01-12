@@ -6,6 +6,7 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.parcelize.Parcelize
@@ -118,6 +119,8 @@ fun getUsersFromId(ids: List<String>): MutableList<User> {
 
     return participants
 }
+
+
 
 @Parcelize
 data class User(

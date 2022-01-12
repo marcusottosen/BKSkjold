@@ -1,9 +1,18 @@
 package com.example.bkskjold.data.model
 
+import com.example.bkskjold.data.model.CurrentUser.address
+import com.example.bkskjold.data.model.CurrentUser.email
+import com.example.bkskjold.data.model.CurrentUser.firstName
+import com.example.bkskjold.data.model.CurrentUser.lastName
+import com.example.bkskjold.data.model.CurrentUser.phoneNumber
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlin.properties.Delegates
+
 
 data class CurrentUserModel(
     val id: String,
@@ -34,7 +43,9 @@ object CurrentUser {
 }
 
 fun updateCurrentUser() {
-        Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().currentUser?.uid.toString()).get()
+
+
+       Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().currentUser?.uid.toString()).get()
             .addOnSuccessListener { result ->
                 CurrentUser.id = FirebaseAuth.getInstance().currentUser?.uid.toString()
                 CurrentUser.firstName = result["firstName"] as String

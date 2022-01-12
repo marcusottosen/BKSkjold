@@ -1,13 +1,16 @@
 package com.example.bkskjold.ui.viewmodel
 
+import androidx.compose.runtime.currentComposer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.CurrentUserModel
 import com.example.bkskjold.data.model.updateCurrentUser
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.type.Date
@@ -21,6 +24,7 @@ class RegisterViewModel : ViewModel() {
 
     private val _firstName = MutableLiveData("")
     val firstName: LiveData<String> = _firstName
+
 
     private val _lastName = MutableLiveData("")
     val lastName: LiveData<String> = _lastName
@@ -80,6 +84,32 @@ class RegisterViewModel : ViewModel() {
         _team.value = newTeam
     }
 
+    fun editCurrentUser() {
+        updateCurrentUser()
+        val firstName: String = _firstName.value ?: throw IllegalArgumentException("first name expected")
+        Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
+            CurrentUserModel(
+                CurrentUser.id,
+                firstName,
+                CurrentUser.lastName,
+                CurrentUser.email,
+                CurrentUser.address,
+                CurrentUser.phoneNumber,
+                CurrentUser.birthdate,
+                CurrentUser.team,
+                CurrentUser.userType,
+                CurrentUser.finishedTrainings,
+                CurrentUser.memberSince
+            ))
+        updateCurrentUser()
+        }
+
+
+
+
+
+
+
 
     // Register user
     fun registerUser(home: () -> Unit) {
@@ -103,7 +133,6 @@ class RegisterViewModel : ViewModel() {
 
 
                 _loading.value = true
-
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
@@ -131,3 +160,4 @@ class RegisterViewModel : ViewModel() {
         }
     }
 }
+

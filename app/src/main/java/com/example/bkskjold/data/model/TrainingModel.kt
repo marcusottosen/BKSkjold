@@ -97,7 +97,6 @@ fun getSignedUpTrainings(): MutableList<Training> {
 fun updateParticipants(training: Training, userId: String){
 
     val db = Firebase.firestore
-
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->

@@ -14,11 +14,13 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.compose.rememberNavController
@@ -26,8 +28,11 @@ import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.User
+import com.example.bkskjold.data.model.updateCurrentUser
+import com.example.bkskjold.ui.view.pages.editProfilePage
 import com.example.bkskjold.ui.view.pages.gotoEditProfilePage
 import com.example.bkskjold.ui.view.pages.gotoSettingsPage
+import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 import com.example.bkskjold.ui.viewmodel.logoutUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -102,7 +107,7 @@ fun DefaultProfileHeader(user: User,navController: NavController){
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .padding(start = 50.dp)
-                        .clickable { gotoSettingsPage(user, navController)},
+                        .clickable { gotoSettingsPage(user, navController) },
                 ) {
                     Icon(
                         painterResource(id = R.drawable.icon_settings),
@@ -138,7 +143,9 @@ fun DefaultProfileHeader(user: User,navController: NavController){
 }
 
 @Composable
-fun DefaultEditProfileHeader(user: User,navController: NavController) {
+fun DefaultEditProfileHeader(user: User,navController: NavController,registerViewModel: RegisterViewModel = viewModel()) {
+
+    val auth: FirebaseAuth = Firebase.auth
     val iconSize = 40.dp
 
 
@@ -159,7 +166,7 @@ fun DefaultEditProfileHeader(user: User,navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .padding(start = 20.dp)
-                        .clickable { gotoSettingsPage(user,navController)},
+                        .clickable { gotoSettingsPage(user, navController) },
                 ) {
                 TextButton(
                     onClick = {navController.navigateUp()},
@@ -170,7 +177,7 @@ fun DefaultEditProfileHeader(user: User,navController: NavController) {
                         color = androidx.compose.ui.graphics.Color.White)
                 } }
                 TextButton(
-                    onClick = {navController.navigateUp()},
+                    onClick = { registerViewModel.editCurrentUser() ; navController.navigateUp()},
                     modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
                 ) {
                     Text(
@@ -193,7 +200,7 @@ fun DefaultEditProfileHeader(user: User,navController: NavController) {
                 )
             }
             TextButton(
-                onClick = {/*TODO*/},
+                onClick = {println(registerViewModel.firstName.toString()); println(registerViewModel.firstName) ; println(CurrentUser.firstName)},
                 modifier = Modifier
                     .align(CenterHorizontally)
 
