@@ -80,6 +80,23 @@ fun AdminPanel(navController: NavController){
                     color = colorResource(id = R.color.main_background)
                 )
             }
+
+            Button(
+                modifier = Modifier
+                    .padding(top = 30.dp)
+                    .size(320.dp, 50.dp),
+                shape = RoundedCornerShape(12.dp),
+                onClick = {/*navController.navigate("newEventPage")*/ },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = colorResource(R.color.primary)
+                )
+            ) {
+                Text(
+                    text = "Opret nyt event",
+                    color = colorResource(id = R.color.main_background)
+                )
+            }
+
             Button(
                 modifier = Modifier
                     .padding(top = 30.dp)
