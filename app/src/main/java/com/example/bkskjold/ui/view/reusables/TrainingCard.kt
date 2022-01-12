@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.getUserFromID
 import com.example.bkskjold.data.model.updateParticipants
 import com.example.bkskjold.data.util.*
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
@@ -104,7 +105,7 @@ fun TrainingCard(training: Training, navController: NavController) {
                             color = Color.DarkGray
                         )
                         Text(
-                            text = training.trainer,
+                            text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
                             modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray
