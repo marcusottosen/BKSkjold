@@ -132,7 +132,6 @@ fun TrainingCard(training: Training, navController: NavController) {
                             }else{
                                 training.participants.add(userId)
                             }
-
                             training = updateParticipants(training, participants, userId)
                             isAttending.value = !isAttending.value
                                     }

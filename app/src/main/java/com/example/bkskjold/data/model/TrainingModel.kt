@@ -126,6 +126,8 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
 
                     //Create a mutable list, so we can add items to it.
                     var mutableParticipants = participants
+
+                    //This if statement is now done in the onclicks calling this method, instead of in this method.
                     /*if (mutableParticipants.contains(userId)){
                         mutableParticipants.remove(userId)
                     }else{
