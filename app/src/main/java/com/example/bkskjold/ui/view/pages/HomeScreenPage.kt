@@ -80,11 +80,25 @@ fun HomeScreenPage(navController: NavController) {
         }
 
         item {
-            for (item in trainings){
-                if (!item.userBooking && item.participants.contains(CurrentUser.id)){
-                    NextTrainingCard(training = item, navController)
-                    break
+            getNewest@ for (i in 0..0) {
+                for (item in trainings) {
+                    if (!item.userBooking && item.participants.contains(CurrentUser.id)) {
+                        NextTrainingCard(training = item, navController)
+                        break@getNewest
+                    }
                 }
+                val default = Training(
+                    timeStart = com.google.firebase.Timestamp.now(),
+                    timeEnd = com.google.firebase.Timestamp.now(),
+                    location = "Du deltager ikke i nogen træninger!",
+                    league = "",
+                    trainer = "",
+                    description = "Du deltager ikke i nogen træninger. Gå ind under \"Træninger\" for at deltage i en.",
+                    maxParticipants = 0,
+                    participants = listOf(),
+                    userBooking = false
+                )
+                NextTrainingCard(default, navController)
             }
         }
 
