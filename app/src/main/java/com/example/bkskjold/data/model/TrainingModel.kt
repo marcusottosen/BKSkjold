@@ -5,6 +5,7 @@ import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -54,6 +55,7 @@ class TrainingModel() {
     fun loadTrainingsFromDB(): MutableList<Training> {
         val db = Firebase.firestore
         db.collection("trainings")
+            .orderBy("timeStart", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { result ->
                 trainings.clear()

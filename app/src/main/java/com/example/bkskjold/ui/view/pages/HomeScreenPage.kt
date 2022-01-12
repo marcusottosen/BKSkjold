@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.news
 import com.example.bkskjold.data.model.trainings
@@ -79,7 +80,12 @@ fun HomeScreenPage(navController: NavController) {
         }
 
         item {
-            NextTrainingCard(training = trainings[1]) //TODO Find the next training
+            for (item in trainings){
+                if (!item.userBooking && item.participants.contains(CurrentUser.id)){
+                    NextTrainingCard(training = item, navController)
+                    break
+                }
+            }
         }
 
         item {

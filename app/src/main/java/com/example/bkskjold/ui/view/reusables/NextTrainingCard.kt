@@ -3,6 +3,7 @@ package com.example.bkskjold.ui.view.reusables
 import androidx.compose.foundation.BorderStroke
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -20,22 +21,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.data.util.getWeekDay
+import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 
 @Composable
-fun NextTrainingCard(training: Training) {
+fun NextTrainingCard(training: Training, navController: NavController) {
     Card(
         shape = RoundedCornerShape(22.dp),
         border = BorderStroke(width = 1.dp, color = colorResource(id = R.color.border)),
         modifier = Modifier
             .padding(15.dp, 0.dp, 15.dp, 0.dp)
-            .height(220.dp),
+            .height(220.dp)
+            .clickable {
+                gotoTrainingDetails(training, navController)
+            },
         elevation = 0.dp
     ) {
         Column() {
