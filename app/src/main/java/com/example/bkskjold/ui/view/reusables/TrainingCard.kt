@@ -24,12 +24,16 @@ import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.getUserFromID
 import com.example.bkskjold.data.model.updateParticipants
+import com.example.bkskjold.data.model.*
 import com.example.bkskjold.data.util.*
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
 fun TrainingCard(training: Training, navController: NavController) {
-    val userId = CurrentUser.id // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldnt be hardcoded (Se også TrainingInfoPage)
+    var training = training//remember { mutableStateOf(training) }
+
+
+    val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(false)}
     var participants = training.participants
 
@@ -42,7 +46,7 @@ fun TrainingCard(training: Training, navController: NavController) {
             .fillMaxWidth()
             .clickable {
                 gotoTrainingDetails(training, navController)
-                       },
+            },
         shape = RoundedCornerShape(9.dp),
         elevation = 3.dp
     ) {
@@ -123,7 +127,13 @@ fun TrainingCard(training: Training, navController: NavController) {
                             .padding(0.dp)
                             .fillMaxWidth()
                         , onClick = {
-                            updateParticipants(training, userId)
+                            if (training.participants.contains(userId)){
+                                training.participants.remove(userId)
+                            }else{
+                                training.participants.add(userId)
+                            }
+
+                            training = updateParticipants(training, participants, userId)
                             isAttending.value = !isAttending.value
                                     }
                         , shape = RoundedCornerShape(18.dp)
