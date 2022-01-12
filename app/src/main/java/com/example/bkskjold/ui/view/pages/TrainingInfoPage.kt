@@ -122,7 +122,7 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                         contentDescription = "tidspunkt",
                     )
                     Text(
-                        text = training.trainer,
+                        text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
                         modifier = Modifier.padding(start = 15.dp)
                     )
                 }

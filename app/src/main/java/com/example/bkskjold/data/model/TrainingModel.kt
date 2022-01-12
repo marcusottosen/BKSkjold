@@ -5,9 +5,6 @@ import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -102,6 +99,16 @@ fun getSignedUpTrainings(): MutableList<Training> {
         }
     }
     return signedUpTrainings
+}
+
+fun getBookings(): MutableList<Training> {
+    val bookings: MutableList<Training> = mutableListOf()
+    for (training in trainings){
+        if (training.participants.contains(CurrentUser.id) && training.userBooking){
+            bookings.add(training)
+        }
+    }
+    return bookings
 }
 
 fun updateParticipants(training: Training, userId: String){
