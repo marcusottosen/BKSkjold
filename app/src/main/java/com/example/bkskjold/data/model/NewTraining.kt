@@ -53,7 +53,7 @@ fun newTrainingFromBooking(
     addToDB(booking, navController)
 }
 
-fun createTrainingInDB(
+fun newTraining(
     location: String,
     month: String,
     day: Int,
@@ -62,7 +62,7 @@ fun createTrainingInDB(
     endHour: Int,
     endMin: Int,
     maxParticipants: Int,
-    league: String,
+    team: String,
     description: String,
     navController: NavController
 ){
@@ -72,18 +72,18 @@ fun createTrainingInDB(
     val endTimestamp = com.google.firebase.Timestamp(
         SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$endHour-$endMin").toString()))
 
-    val booking = Training(
+    val training = Training(
         timeStart = startTimestamp,
         timeEnd = endTimestamp,
         location = location,
-        league = league,
+        league = team,
         trainer = CurrentUser.id,
         description = description,
         maxParticipants = maxParticipants,
-        participants = listOf(CurrentUser.id),
-        userBooking = true,
+        participants = listOf(),
+        userBooking = false,
     )
-    addToDB(booking, navController)
+    addToDB(training, navController)
 }
 
 
@@ -99,7 +99,10 @@ fun addToDB(item: Training, navController: NavController){
         }
         .addOnCompleteListener {
             if (it.isSuccessful) {
-                navController.navigate("bookedFieldsPage")
+                if (item.userBooking)
+                    navController.navigate("bookedFieldsPage")
+                else
+                    navController.navigate("adminPanel")
             }
         }
         .addOnFailureListener { e ->

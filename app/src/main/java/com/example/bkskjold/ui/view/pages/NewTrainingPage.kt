@@ -1,13 +1,16 @@
 package com.example.bkskjold.ui.view.pages
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,14 +24,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.newTraining
 import com.example.bkskjold.data.model.newTrainingFromBooking
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
 import java.text.DateFormatSymbols
 
 @Composable
-fun BookFieldPage(navController: NavController){
+fun NewTrainingPage(navController: NavController){
     //TODO These lists should probably be made different
     val fields = listOf("A", "B", "C", "D","E","F","G","H","1","2","3")
+    val teams = listOf("U18", "U19", "U20", "U21","Senior")
 
     val months = mutableListOf<String>()
     for (month in DateFormatSymbols().months){
@@ -46,6 +51,7 @@ fun BookFieldPage(navController: NavController){
     for (i in 1..60){
         minutes.add(i.toString())
     }
+    var team = ""
     var field = "A"
     var month = "January"
     var day = 1
@@ -62,18 +68,19 @@ fun BookFieldPage(navController: NavController){
             ExtendedFloatingActionButton(
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
-                          newTrainingFromBooking(
-                              location = field,
-                              month = month,
-                              day = day,
-                              startHour = startHour,
-                              startMin = startMin,
-                              endHour = endHour,
-                              endMin = endMin,
-                              maxParticipants = maxParticipants,
-                              description = description.value.text,
-                              navController = navController
-                          )
+                    newTraining(
+                        team = team,
+                        location = field,
+                        month = month,
+                        day = day,
+                        startHour = startHour,
+                        startMin = startMin,
+                        endHour = endHour,
+                        endMin = endMin,
+                        maxParticipants = maxParticipants,
+                        description = description.value.text,
+                        navController = navController
+                    )
                 },
                 icon = { Icon(Icons.Filled.Close, "Back", tint = Color.White) },
                 modifier = Modifier.padding(bottom = 60.dp),
@@ -117,6 +124,17 @@ fun BookFieldPage(navController: NavController){
                         .background(colorResource(R.color.bookingBackground))
                     ) {
                         Column(modifier = Modifier.padding(start = 15.dp)) {
+                            Text(
+                                text = "Hold",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
+                            )
+
+                            team = dropDownMenu(items = teams as MutableList<String>, menuWidth = 110)
+
+                            Spacer(modifier = Modifier.padding(top = 20.dp))
+
                             Text(
                                 text = "Bane",
                                 fontSize = 20.sp,
@@ -165,7 +183,8 @@ fun BookFieldPage(navController: NavController){
                                 }
                                 Spacer(modifier = Modifier.padding(start = 20.dp))
                                 Column() {
-                                    Text(text = "T", fontWeight = FontWeight.Bold, color = colorResource(R.color.bookingBackground))
+                                    Text(text = "T", fontWeight = FontWeight.Bold, color = colorResource(
+                                        R.color.bookingBackground))
                                     Text(text = "Minut")
                                     startMin = dropDownMenu(items = minutes, menuWidth = 60).toInt()
                                 }
@@ -181,7 +200,8 @@ fun BookFieldPage(navController: NavController){
                                 }
                                 Spacer(modifier = Modifier.padding(start = 20.dp))
                                 Column() {
-                                    Text(text = "T", fontWeight = FontWeight.Bold, color = colorResource(R.color.bookingBackground))
+                                    Text(text = "T", fontWeight = FontWeight.Bold, color = colorResource(
+                                        R.color.bookingBackground))
                                     Text(text = "Minut")
                                     endMin = dropDownMenu(items = minutes, menuWidth = 60).toInt()
                                 }
@@ -198,7 +218,7 @@ fun BookFieldPage(navController: NavController){
                             Text(
                                 text = "Max antal deltagere",
 
-                            )
+                                )
                             maxParticipants = dropDownMenu(items = minutes, menuWidth = 60).toInt()
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
@@ -206,7 +226,7 @@ fun BookFieldPage(navController: NavController){
                             Text(
                                 text = "Beskrivelse",
 
-                            )
+                                )
                             TextField(
                                 value = description.value,
                                 onValueChange = { description.value = it }

@@ -126,6 +126,12 @@ fun Navigation(navController: NavHostController) {
         composable("bookFieldPage") {
             BookFieldPage(navController)
         }
+        composable("adminPanel") {
+            AdminPanel(navController)
+        }
+        composable("newTrainingPage") {
+            NewTrainingPage(navController)
+        }
     }
 } //Læs guide nedenfor til navigation!
 
