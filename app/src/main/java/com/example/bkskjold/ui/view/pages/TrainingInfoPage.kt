@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -18,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import com.example.bkskjold.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -27,19 +25,19 @@ import androidx.navigation.NavController
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.*
 import com.example.bkskjold.data.util.getDay
-import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 
 @Composable
 fun TrainingInfoPage(training: Training, navController: NavController) {
     var training = training
+    var participantsID = training.participants
+    val participants = remember { mutableStateOf(getUsersFromId(participantsID)) }
 
     val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(false) }
-    var participants = training.participants
 
-    isAttending.value = participants.contains(userId)
+    isAttending.value = participantsID.contains(userId)
 
 
     LazyColumn(
@@ -171,6 +169,8 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
                             training = updateParticipants(training, userId)
+                            participantsID = training.participants
+                            participants.value = getUsersFromId(participantsID)
                             isAttending.value = !isAttending.value
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -199,6 +199,8 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
                             training = updateParticipants(training, userId)
+                            participantsID = training.participants
+                            participants.value = getUsersFromId(participantsID)
                             isAttending.value = !isAttending.value
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -252,7 +254,8 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
 
             Column(
                 modifier = Modifier
-                    .fillMaxWidth().padding(top = 10.dp)
+                    .fillMaxWidth()
+                    .padding(top = 10.dp)
             ) {
                 Text(text = "Deltagere",
                     fontWeight = FontWeight.Bold,
@@ -266,35 +269,61 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
 //                    Text(text = "Navn")
 //                    Text(text = "Tlfnr.")
 //                }
-                LazyColumn(Modifier.height(200.dp)) {
-                    val participants = getUsersFromId(training.participants)
-                    items(participants.size) { i ->
-                        Row(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 2.5.dp)
-                            .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
-                            if (participants[i].team != "guest") {
+                if (isAttending.value){
+                    LazyColumn(Modifier.height(200.dp)) {
+                        items(participants.value.size) { i ->
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 2.5.dp)
+                                .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
+                                if (participants.value[i].team != "guest") {
+                                    Text(
+                                        text = participants.value[i].firstName + " " + participants.value[i].lastName,
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                } else {
+                                    Text(
+                                        text = participants.value[i].firstName + " " + participants.value[i].lastName + " (Gæst)",
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                }
                                 Text(
-                                    text = participants[i].firstname + " " + participants[i].surname,
-                                    Modifier.padding(vertical = 2.5.dp)
-                                )
-                            } else {
-                                Text(
-                                    text = participants[i].firstname + " " + participants[i].surname + " (Gæst)",
+                                    text = participants.value[i].phoneNumber.toString()
+                                        .chunked(2).joinToString(separator = " "),
                                     Modifier.padding(vertical = 2.5.dp)
                                 )
                             }
-                            Text(
-                                text = participants[i].phoneNumber.toString()
-                                    .chunked(2).joinToString(separator = " "),
-                                Modifier.padding(vertical = 2.5.dp)
-                            )
+                        }
+                    }
+                }else{
+                    LazyColumn(Modifier.height(200.dp)) {
+                        items(participants.value.size) { i ->
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 2.5.dp)
+                                .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
+                                if (participants.value[i].team != "guest") {
+                                    Text(
+                                        text = participants.value[i].firstName + " " + participants.value[i].lastName,
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                } else {
+                                    Text(
+                                        text = participants.value[i].firstName + " " + participants.value[i].lastName + " (Gæst)",
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                }
+                                Text(
+                                    text = participants.value[i].phoneNumber.toString()
+                                        .chunked(2).joinToString(separator = " "),
+                                    Modifier.padding(vertical = 2.5.dp)
+                                )
+                            }
                         }
                     }
                 }
 
             }
-
         }
     }
 }
