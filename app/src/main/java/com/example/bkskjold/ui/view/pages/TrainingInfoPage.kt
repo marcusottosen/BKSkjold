@@ -33,8 +33,7 @@ import com.example.bkskjold.data.util.getTime
 
 @Composable
 fun TrainingInfoPage(training: Training, navController: NavController) {
-    val userId =
-        "uqYviRk77BegdJdx9BW5" // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldnt be hardcoded
+    val userId = CurrentUser.id // TODO THIS SHOULD BE CHANGES WHEN PROFILE LOGIN IS AVAILABLE - shouldnt be hardcoded
     val isAttending = remember { mutableStateOf(false) }
     var participants = training.participants
 
