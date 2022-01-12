@@ -169,15 +169,17 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                             .size(320.dp, 50.dp),
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
-                            training = updateParticipants(training, userId)
-                            //participantsID = training.participants
                             if (participantsID.contains(userId)){
                                 participantsID.remove(userId)
                                 participants.remove(getCurrentUserAsCurrentUserModel())
                             }else{
                                 participantsID.add(userId)
                                 participants.add(getCurrentUserAsCurrentUserModel())
+
                             }
+
+                            training.participants = participantsID
+                            training = updateParticipants(training, participantsID, userId)
                             isAttending.value = !isAttending.value
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -205,9 +207,6 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                             .size(320.dp, 50.dp),
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
-                            training = updateParticipants(training, userId)
-                            //participantsID = training.participants
-                            //participants.value = getUsersFromId(participantsID)
                             if (participantsID.contains(userId)){
                                 participantsID.remove(userId)
                                 participants.remove(getCurrentUserAsCurrentUserModel())
@@ -215,6 +214,9 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                                 participantsID.add(userId)
                                 participants.add(getCurrentUserAsCurrentUserModel())
                             }
+
+                            training.participants = participantsID
+                            training = updateParticipants(training, participantsID, userId)
                             isAttending.value = !isAttending.value
                         },
                         colors = ButtonDefaults.buttonColors(

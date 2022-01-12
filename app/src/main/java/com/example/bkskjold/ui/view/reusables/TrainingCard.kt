@@ -123,7 +123,13 @@ fun TrainingCard(training: Training, navController: NavController) {
                             .padding(0.dp)
                             .fillMaxWidth()
                         , onClick = {
-                            training = updateParticipants(training, userId)
+                            if (training.participants.contains(userId)){
+                                training.participants.remove(userId)
+                            }else{
+                                training.participants.add(userId)
+                            }
+
+                            training = updateParticipants(training, participants, userId)
                             isAttending.value = !isAttending.value
                                     }
                         , shape = RoundedCornerShape(18.dp)

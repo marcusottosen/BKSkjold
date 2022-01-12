@@ -5,8 +5,6 @@ import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
@@ -104,7 +102,7 @@ fun getSignedUpTrainings(): MutableList<Training> {
     return signedUpTrainings
 }
 
-fun updateParticipants(training: Training, userId: String): Training {
+fun updateParticipants(training: Training, participants: MutableList<String>, userId: String): Training {
     var training = training
 
     val db = Firebase.firestore
@@ -115,12 +113,12 @@ fun updateParticipants(training: Training, userId: String): Training {
                 if (doc["timeStart"] == training.timeStart && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
 
                     //Create a mutable list, so we can add items to it.
-                    var mutableParticipants = training.participants.toMutableList()
-                    if (mutableParticipants.contains(userId)){
+                    var mutableParticipants = participants
+                    /*if (mutableParticipants.contains(userId)){
                         mutableParticipants.remove(userId)
                     }else{
                         mutableParticipants.add(userId)
-                    }
+                    }*/
 
                     //map of field to update
                     var updatedTraining = hashMapOf(
