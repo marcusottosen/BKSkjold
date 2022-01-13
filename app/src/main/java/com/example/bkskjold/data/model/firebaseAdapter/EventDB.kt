@@ -3,10 +3,13 @@ import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
 import com.example.bkskjold.data.model.dataClass.Event
+import com.example.bkskjold.data.util.getMonthFromString
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
 
 val events: MutableList<Event> = mutableListOf()
 
@@ -40,6 +43,54 @@ class EventDB() {
         return events
     }
 }
+
+fun newEvent(
+    header: String,
+    description: String,
+    location: String,
+    month: String,
+    day: Int,
+    startHour: Int,
+    startMin: Int,
+    endHour: Int,
+    endMin: Int,
+    price: Int,
+    navController: NavController
+){
+    val dateformat = "yyyy-MM-dd-k-m"
+    val startTimestamp = com.google.firebase.Timestamp(
+        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$startHour-$startMin").toString()))
+    val endTimestamp = com.google.firebase.Timestamp(
+        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$endHour-$endMin").toString()))
+
+    val event = Event(
+        timeStart = startTimestamp,
+        timeEnd = endTimestamp,
+        location = location,
+        price = price,
+        header = header,
+        description = description
+    )
+
+    val db = Firebase.firestore
+    db.collection("events")
+        .add(event)
+        .addOnSuccessListener { documentReference ->
+            Log.d(
+                ContentValues.TAG,
+                "DocumentSnapshot added with ID: ${documentReference.id}"
+            )
+        }
+        .addOnCompleteListener {
+            if (it.isSuccessful) {
+                navController.navigate("adminPanel")
+            }
+        }
+        .addOnFailureListener { e ->
+            Log.w(ContentValues.TAG, "Error adding document", e)
+        }
+}
+
 
 /*
 fun eventWriteToDB(){

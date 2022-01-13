@@ -86,7 +86,7 @@ fun AdminPanel(navController: NavController){
                     .padding(top = 30.dp)
                     .size(320.dp, 50.dp),
                 shape = RoundedCornerShape(12.dp),
-                onClick = {/*navController.navigate("newEventPage")*/ },
+                onClick = {navController.navigate("createEventPage") },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = colorResource(R.color.primary)
                 )
