@@ -1,17 +1,16 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.event
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.Event
+import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.ui.viewmodel.EventOverviewViewModel
 
 
-//class EventOverviewPage {
 @Composable
 fun eventOverview(navController: NavController){
     Column (
@@ -19,14 +18,11 @@ fun eventOverview(navController: NavController){
             .background(color = colorResource(R.color.main_background)),
     )
     {
-        EventOverviewViewModel().getEventsView(navController)
-
+        EventOverviewViewModel().GetEventsView(navController)
     }
-
 }
 
 fun gotoEventDetails(event: Event, navController: NavController){
     navController.currentBackStackEntry?.arguments?.putParcelable("event", event)
     navController.navigate("eventDetails")
 }
-//    }

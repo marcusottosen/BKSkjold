@@ -3,7 +3,7 @@ package com.example.bkskjold.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.bkskjold.data.model.updateCurrentUser
+import com.example.bkskjold.data.model.firebaseAdapter.updateCurrentUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

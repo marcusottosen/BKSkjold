@@ -7,13 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.bkskjold.data.model.events
+import com.example.bkskjold.data.model.firebaseAdapter.events
 import com.example.bkskjold.ui.view.reusables.EventsCard
 
 open class EventOverviewViewModel {
     @Composable
-    fun getEventsView(navController: NavController) {
-
+    fun GetEventsView(navController: NavController) {
         LazyColumn(){
             item {Spacer(modifier = Modifier.height(40.dp))}
             items(events.size) { i ->

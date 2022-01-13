@@ -11,20 +11,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.InvitationData
-import com.example.bkskjold.data.model.User
-import com.example.bkskjold.data.model.users
+import com.example.bkskjold.data.model.dataClass.User
+import com.example.bkskjold.data.model.firebaseAdapter.users
 import com.example.bkskjold.ui.view.reusables.DefaultProfileHeader
 import com.example.bkskjold.ui.view.reusables.InvitationCard
-import com.example.bkskjold.ui.view.reusables.NextTrainingCard
 import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
 
 //class ProfilePage { }
 @Composable
 fun profileOverview(navController: NavController) {
 
-    val currentUser = users[3] //TODO Skal bruge den user der er logget ind! Lav function i UserModel.kt
+    val currentUser = users[3] //TODO Skal bruge den user der er logget ind! Lav function i UserDB.kt
 
     LazyColumn(
         //verticalArrangement = Arrangement.spacedBy(30.dp)

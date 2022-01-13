@@ -1,10 +1,5 @@
 package com.example.bkskjold.data.util
 
-import com.example.bkskjold.data.model.User
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-
 class Util {
 
     //############# FORMAT DATE FROM DATE TO STRING ON FORM "12 januar" ##############################

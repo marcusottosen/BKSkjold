@@ -16,23 +16,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.navArgument
-import com.example.bkskjold.DefaultDetails
-import com.example.bkskjold.DefaultScreen
 import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.Event
 import com.example.bkskjold.data.model.NavigationItem
-import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.data.model.User
+import com.example.bkskjold.data.model.dataClass.Event
+import com.example.bkskjold.data.model.dataClass.Training
+import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.util.LoadFromDB
-import com.example.bkskjold.data.model.*
 import com.example.bkskjold.ui.view.pages.*
-import com.google.firebase.auth.FirebaseAuth
+import com.example.bkskjold.ui.view.pages.event.eventOverview
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

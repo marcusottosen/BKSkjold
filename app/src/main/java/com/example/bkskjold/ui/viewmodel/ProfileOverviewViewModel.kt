@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable;
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview;
 import androidx.compose.ui.unit.dp
-import com.example.bkskjold.data.model.CurrentUser
-import com.example.bkskjold.data.model.events
+import com.example.bkskjold.data.model.dataClass.CurrentUser
+import com.example.bkskjold.data.model.firebaseAdapter.events
 import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getYear
 import com.example.bkskjold.ui.view.reusables.InvitationCard

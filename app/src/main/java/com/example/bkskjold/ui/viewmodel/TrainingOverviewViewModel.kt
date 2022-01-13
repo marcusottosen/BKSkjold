@@ -2,18 +2,17 @@ package com.example.bkskjold.ui.viewmodel
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
 import androidx.navigation.NavController
-import com.example.bkskjold.data.model.*
+import com.example.bkskjold.data.model.dataClass.Training
+import com.example.bkskjold.data.model.firebaseAdapter.TrainingModel
+import com.example.bkskjold.data.model.firebaseAdapter.getSignedUpTrainings
 import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.ui.view.reusables.TrainingCard
-import java.lang.Exception
 
 class TrainingOverviewViewModel {
     @Composable

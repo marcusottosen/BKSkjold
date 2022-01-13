@@ -15,18 +15,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.CurrentUser
-import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.dataClass.CurrentUser
+import com.example.bkskjold.data.model.dataClass.Training
+import com.example.bkskjold.data.model.firebaseAdapter.trainings
 import com.example.bkskjold.data.model.news
-import com.example.bkskjold.data.model.trainings
 import com.example.bkskjold.ui.view.reusables.HomePageCategories
 import com.example.bkskjold.ui.view.reusables.NewsCard
 import com.example.bkskjold.ui.view.reusables.NextTrainingCard
+import com.google.firebase.Timestamp
 
 //TODO Lav metode til at finde den næste tilmeldte træning
 @Composable
@@ -88,8 +88,8 @@ fun HomeScreenPage(navController: NavController) {
                     }
                 }
                 val default = Training(
-                    timeStart = com.google.firebase.Timestamp.now(),
-                    timeEnd = com.google.firebase.Timestamp.now(),
+                    timeStart = Timestamp.now(),
+                    timeEnd = Timestamp.now(),
                     location = "Du deltager ikke i nogen træninger!",
                     league = "",
                     trainer = "",

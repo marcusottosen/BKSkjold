@@ -4,24 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.*
-import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.data.model.updateCurrentUser
-import com.example.bkskjold.data.util.LoadFromDB
+import androidx.compose.material.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.navigation.compose.rememberNavController
+import com.example.bkskjold.data.model.firebaseAdapter.updateCurrentUser
 import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
 import com.example.bkskjold.ui.viewmodel.Navigation
 import com.google.firebase.FirebaseApp
@@ -35,7 +21,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
         setContent {
-            //LoadFromDB()
             if (FirebaseAuth.getInstance().currentUser != null) updateCurrentUser()
             MainScreen()
         }
@@ -51,45 +36,5 @@ fun MainScreen() {
             bottomBar = { if (Firebase.auth.currentUser != null) BottomNavigationBar(navController) }
     ) {
         Navigation(navController = navController)
-    }
-}
-
-
-//TODO fjern når siderne er blevet oprettet!
-@Composable
-fun DefaultScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colorResource(id = R.color.notParticipating))
-            .wrapContentSize(Alignment.Center)
-    ) {
-        Text(
-            text = "Todo",
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center,
-            fontSize = 25.sp
-        )
-    }
-}
-
-@Composable
-fun DefaultDetails(training: Training, navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colorResource(id = R.color.notParticipating))
-            .wrapContentSize(Alignment.Center)
-    ) {
-        Text(
-            text = training.description,
-            fontWeight = FontWeight.Bold,
-            color = Color.Green,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center,
-            fontSize = 25.sp
-        )
     }
 }

@@ -1,27 +1,23 @@
 package com.example.bkskjold.ui.view.pages
 
+
+//resources and files
 import android.widget.CalendarView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.ui.unit.*
-
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
-
-
-//resources and files
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.data.util.*
+import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
-import java.sql.Timestamp
 
 
 //class TrainingOverviewPage {

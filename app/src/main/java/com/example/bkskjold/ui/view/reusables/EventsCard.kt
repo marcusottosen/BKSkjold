@@ -1,8 +1,8 @@
 package com.example.bkskjold.ui.view.reusables
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -16,12 +16,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.Event
+import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.util.getDay
-import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
-import com.example.bkskjold.ui.view.pages.gotoEventDetails
+import com.example.bkskjold.ui.view.pages.event.gotoEventDetails
 
 
 @Composable
@@ -30,7 +29,7 @@ fun EventsCard(event: Event, navController: NavController) {
         shape = RoundedCornerShape(22.dp),
         modifier = Modifier
             .padding(15.dp)
-            .clickable { gotoEventDetails(event, navController)},
+            .clickable { gotoEventDetails(event, navController) },
         backgroundColor = colorResource(R.color.main_background),
         elevation = 3.dp,
 

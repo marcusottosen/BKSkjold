@@ -1,7 +1,5 @@
 package com.example.bkskjold.ui.view.pages
 
-import android.content.ClipData
-import android.util.Size
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,39 +11,30 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius.Companion.Zero
-import androidx.compose.ui.input.key.Key.Companion.Zero
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.toSize
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.bkskjold.data.model.CurrentUser
-import com.example.bkskjold.data.model.users
+import com.example.bkskjold.data.model.dataClass.CurrentUser
+import com.example.bkskjold.data.model.firebaseAdapter.users
 import com.example.bkskjold.ui.view.reusables.DefaultEditProfileHeader
-import com.example.bkskjold.ui.view.reusables.dropDownMenu
 
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.selects.select
 
 
 @Composable
 fun editProfilePage(navController: NavController,registerViewModel: RegisterViewModel = viewModel()) {
-    val currentUser = users[3]
+    val currentUser = users[1]
     val focusManager = LocalFocusManager.current
     val auth: FirebaseAuth = Firebase.auth
     val firstName: String by registerViewModel.firstName.observeAsState("")
-
-
-
 
     LazyColumn(
         //verticalArrangement = Arrangement.spacedBy(30.dp)

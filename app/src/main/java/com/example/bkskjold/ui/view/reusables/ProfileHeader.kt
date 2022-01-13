@@ -13,10 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -24,23 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.compose.rememberNavController
-import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.CurrentUser
-import com.example.bkskjold.data.model.User
-import com.example.bkskjold.data.model.updateCurrentUser
-import com.example.bkskjold.ui.view.pages.editProfilePage
+import com.example.bkskjold.data.model.dataClass.CurrentUser
+import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.ui.view.pages.gotoEditProfilePage
 import com.example.bkskjold.ui.view.pages.gotoSettingsPage
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 import com.example.bkskjold.ui.viewmodel.logoutUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.squareup.okhttp.internal.DiskLruCache
 
 //val name = Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().currentUser?.uid.toString()).get().result.getString("name")
 
@@ -48,7 +39,7 @@ import com.squareup.okhttp.internal.DiskLruCache
 
 
 @Composable
-fun DefaultProfileHeader(user: User,navController: NavController){
+fun DefaultProfileHeader(user: User, navController: NavController){
 
     val iconSize = 40.dp
 
@@ -151,7 +142,7 @@ fun DefaultProfileHeader(user: User,navController: NavController){
 }
 
 @Composable
-fun DefaultEditProfileHeader(user: User,navController: NavController,registerViewModel: RegisterViewModel = viewModel()) {
+fun DefaultEditProfileHeader(user: User, navController: NavController, registerViewModel: RegisterViewModel = viewModel()) {
 
     val auth: FirebaseAuth = Firebase.auth
     val iconSize = 40.dp
@@ -208,7 +199,8 @@ fun DefaultEditProfileHeader(user: User,navController: NavController,registerVie
                 )
             }
             TextButton(
-                onClick = {println(registerViewModel.firstName.toString()); println(registerViewModel.firstName) ; println(CurrentUser.firstName)},
+                onClick = {println(registerViewModel.firstName.toString()); println(registerViewModel.firstName) ; println(
+                    CurrentUser.firstName)},
                 modifier = Modifier
                     .align(CenterHorizontally)
 

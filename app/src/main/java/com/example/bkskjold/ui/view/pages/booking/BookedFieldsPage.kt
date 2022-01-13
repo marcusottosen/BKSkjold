@@ -20,9 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
-import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.data.model.getBookings
-import com.example.bkskjold.data.model.getSignedUpTrainings
+import com.example.bkskjold.data.model.firebaseAdapter.getBookings
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 @Composable

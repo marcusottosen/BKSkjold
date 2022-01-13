@@ -1,51 +1,18 @@
-package com.example.bkskjold.data.model
+package com.example.bkskjold.data.model.firebaseAdapter
 import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
+import com.example.bkskjold.data.model.dataClass.CurrentUser
+import com.example.bkskjold.data.model.dataClass.Training
+import com.example.bkskjold.data.util.getMonthFromString
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.parcelize.Parcelize
-
-/*
-// *** Uncomment hvis dataen skal tilføjes. (Uncomment også i LoadFromDB.kt ***
-fun trainingsWriteToDB() {
-    val bookings = listOf(
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "Use", "Ekkart",  "Normal træning for u13. Kom i god tid!"     , 6,  listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane A", "U21", "Ekkart",  "Normal træning for u13. Kom i god tid!"     , 12, listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane B", "U20", "Ian",  "Kom glad. Husk vand"                           , 12, listOf("uqYviRk77BegdJdx9BW5"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "U20", "Kasper",  "Normal træning for u13. Kom i god tid!"     , 24, listOf("uqYviRk77BegdJdx9BW5"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane E", "U22", "Ekkart",  "Kom glad. Husk vand"                        , 12, listOf("uqYviRk77BegdJdx9BW5"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane D", "U20", "Ian", "Ekkart tager mad med"                           , 10, listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "U14", "Ekkart", "Normal træning for u13. Kom i god tid!"      , 12, listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane F", "U14", "Peter", "Ekkart tager mad med"                         , 24, listOf("OwSPgideDIgGiOzaUXWo"), true),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane Y", "U20", "Ian",  "Ian tager mad med"                             , 12, listOf("OwSPgideDIgGiOzaUXWo"), true),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane A", "U26", "Peter", "Peter kom til tiden denne gang! Tak!!"        , 12, listOf("OwSPgideDIgGiOzaUXWo"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", "Use", "Ekkarts far",  "Ældre mennesker der spiller fodbold"   , 12, listOf("4Tjz5r8ckZDua7Gl9cXg"), false),
-        Training(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane D", "U20", "Ian","Peter kom til tiden denne gang! Tak!!"           , 12, listOf("4Tjz5r8ckZDua7Gl9cXg"), false)
-    )
-
-    val db = Firebase.firestore
-    for (i in 1..bookings.size) {
-        db.collection("trainings")
-            .add(bookings[i-1])
-            .addOnSuccessListener { documentReference ->
-                Log.d(
-                    ContentValues.TAG,
-                    "DocumentSnapshot added with ID: ${documentReference.id}"
-                )
-            }
-            .addOnFailureListener { e ->
-                Log.w(ContentValues.TAG, "Error adding document", e)
-            }
-    }
-}*/
-
+import java.text.SimpleDateFormat
 
 val trainings: MutableList<Training> = mutableListOf()
 
@@ -61,13 +28,8 @@ class TrainingModel() {
             .addOnSuccessListener { result ->
                 trainings.clear()
                 for (doc in result) {
-                    //val test : Number = doc["price"] as Number
-                    //val training = doc.toObject(Training::class.java) //Virker hvis der ikke bruges Int
-                    //trainings.add(training)
-
                     trainings.add(
                         Training(
-                            //Telmeldte personer
                             timeStart = doc["timeStart"] as com.google.firebase.Timestamp,
                             timeEnd = doc["timeEnd"] as com.google.firebase.Timestamp,
                             location = doc["location"] as String,
@@ -154,23 +116,95 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
         .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting documents: ", exception)
         }
-    print("")
     return training
 }
 
+fun newTrainingFromBooking(
+    location: String,
+    month: String,
+    day: Int,
+    startHour: Int,
+    startMin: Int,
+    endHour: Int,
+    endMin: Int,
+    maxParticipants: Int,
+    description: String,
+    navController: NavController
+) {
+    val dateformat = "yyyy-MM-dd-k-m"
+    val startTimestamp = com.google.firebase.Timestamp(
+        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$startHour-$startMin").toString()))
+    val endTimestamp = com.google.firebase.Timestamp(
+        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$endHour-$endMin").toString()))
 
+    val booking = Training(
+        timeStart = startTimestamp,
+        timeEnd = endTimestamp,
+        location = location,
+        league = "Brugerbooking",
+        trainer = CurrentUser.id,
+        description = description,
+        maxParticipants = maxParticipants,
+        participants = listOf(CurrentUser.id) as MutableList<String>,
+        userBooking = true,
+    )
+    addToDB(booking, navController)
+}
 
-@Parcelize
-data class Training(
-    val timeStart: com.google.firebase.Timestamp,
-    val timeEnd: com.google.firebase.Timestamp,
-    val location: String= "",
-    val league: String= "",
-    val trainer: String= "",
-    val description: String= "",
-    val maxParticipants: Int = 0,
-    var participants: MutableList<String> = mutableListOf(),
-    val userBooking: Boolean = false
-): Parcelable
+fun newTraining(
+    location: String,
+    month: String,
+    day: Int,
+    startHour: Int,
+    startMin: Int,
+    endHour: Int,
+    endMin: Int,
+    maxParticipants: Int,
+    team: String,
+    description: String,
+    navController: NavController
+){
+    val dateformat = "yyyy-MM-dd-k-m"
+    val startTimestamp = com.google.firebase.Timestamp(
+        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$startHour-$startMin").toString()))
+    val endTimestamp = com.google.firebase.Timestamp(
+        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$endHour-$endMin").toString()))
+
+    val training = Training(
+        timeStart = startTimestamp,
+        timeEnd = endTimestamp,
+        location = location,
+        league = team,
+        trainer = CurrentUser.id,
+        description = description,
+        maxParticipants = maxParticipants,
+        participants = mutableListOf<String>(),
+        userBooking = false,
+    )
+    addToDB(training, navController)
+}
+
+fun addToDB(item: Training, navController: NavController){
+    val db = Firebase.firestore
+    db.collection("trainings")
+        .add(item)
+        .addOnSuccessListener { documentReference ->
+            Log.d(
+                ContentValues.TAG,
+                "DocumentSnapshot added with ID: ${documentReference.id}"
+            )
+        }
+        .addOnCompleteListener {
+            if (it.isSuccessful) {
+                if (item.userBooking)
+                    navController.navigate("bookedFieldsPage")
+                else
+                    navController.navigate("adminPanel")
+            }
+        }
+        .addOnFailureListener { e ->
+            Log.w(ContentValues.TAG, "Error adding document", e)
+        }
+}
 
 

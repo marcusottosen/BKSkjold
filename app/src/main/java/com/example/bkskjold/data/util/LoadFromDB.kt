@@ -8,12 +8,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.*
-import com.example.bkskjold.ui.view.pages.HomeScreenPage
+import com.example.bkskjold.data.model.NavigationItem
+import com.example.bkskjold.data.model.NewsModel
+import com.example.bkskjold.data.model.firebaseAdapter.EventDB
+import com.example.bkskjold.data.model.firebaseAdapter.TrainingModel
+import com.example.bkskjold.data.model.firebaseAdapter.UserDB
 
 @Composable
 fun LoadFromDB(navController: NavController){
@@ -22,17 +24,16 @@ fun LoadFromDB(navController: NavController){
     //eventWriteToDB()
     //newsWriteToDB()
 
-    loadUsersFromDB2()
 
     val trainings = TrainingModel()
     val trainingsLoading: Boolean by trainings.loading.observeAsState(initial = true)
     trainings.loadTrainingsFromDB()
 
-    val users = UserModel()
+    val users = UserDB()
     val usersLoading: Boolean by users.loading.observeAsState(initial = true)
     users.loadUsersFromDB()
 
-    val events = EventModel() //bruges pt ikke på homepage
+    val events = EventDB() //bruges pt ikke på homepage
     val eventsLoading: Boolean by events.loading.observeAsState(initial = true)
     events.loadEventsFromDB()
 

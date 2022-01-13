@@ -20,12 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.CurrentUser
-import com.example.bkskjold.data.model.Training
-import com.example.bkskjold.data.model.getUserFromID
-import com.example.bkskjold.data.model.updateParticipants
-import com.example.bkskjold.data.model.*
-import com.example.bkskjold.data.util.*
+import com.example.bkskjold.data.model.dataClass.CurrentUser
+import com.example.bkskjold.data.model.dataClass.Training
+import com.example.bkskjold.data.model.firebaseAdapter.getUserFromID
+import com.example.bkskjold.data.model.firebaseAdapter.updateParticipants
+import com.example.bkskjold.data.util.getDay
+import com.example.bkskjold.data.util.getMonthString
+import com.example.bkskjold.data.util.getTime
+import com.example.bkskjold.data.util.getWeekDay
 import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable

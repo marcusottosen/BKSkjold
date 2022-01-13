@@ -1,19 +1,15 @@
 package com.example.bkskjold.ui.viewmodel
 
-import androidx.compose.runtime.currentComposer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.bkskjold.data.model.CurrentUser
-import com.example.bkskjold.data.model.CurrentUserModel
-import com.example.bkskjold.data.model.updateCurrentUser
-import com.google.firebase.Timestamp
+import com.example.bkskjold.data.model.dataClass.CurrentUser
+import com.example.bkskjold.data.model.dataClass.User
+import com.example.bkskjold.data.model.firebaseAdapter.updateCurrentUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.type.Date
 import java.lang.IllegalArgumentException
 
 /**
@@ -113,7 +109,7 @@ class RegisterViewModel : ViewModel() {
 
 
         Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
-            CurrentUserModel(
+            User(
                 CurrentUser.id,
                 firstName,
                 lastName,
@@ -128,11 +124,6 @@ class RegisterViewModel : ViewModel() {
             ))
         updateCurrentUser()
         }
-
-
-
-
-
 
 
 
@@ -162,7 +153,7 @@ class RegisterViewModel : ViewModel() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
-                                CurrentUserModel(
+                                User(
                                     FirebaseAuth.getInstance().uid.toString(),
                                     firstName,
                                     lastName,

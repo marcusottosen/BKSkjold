@@ -19,9 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.Event
+import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.util.getDay
-import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 
