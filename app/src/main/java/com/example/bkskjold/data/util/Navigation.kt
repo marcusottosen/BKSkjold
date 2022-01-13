@@ -2,10 +2,7 @@ package com.example.bkskjold.ui.viewmodel
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -25,6 +22,7 @@ import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.dataClass.User
+import com.example.bkskjold.data.model.updateFAQ
 import com.example.bkskjold.data.util.LoadFromDB
 import com.example.bkskjold.ui.view.pages.*
 import com.example.bkskjold.ui.view.pages.event.eventOverview
@@ -36,6 +34,7 @@ import com.google.firebase.ktx.Firebase
  * NavBar inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
  */
 
+@ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
@@ -58,6 +57,7 @@ fun Navigation(navController: NavHostController) {
         }
         composable(NavigationItem.Profile.route) {
             profileOverview(navController)
+            updateFAQ()
         }
 
         // Login pages
@@ -120,6 +120,9 @@ fun Navigation(navController: NavHostController) {
         }
         composable("bookFieldPage") {
             BookFieldPage(navController)
+        }
+        composable("faqPage") {
+            FaqPage(navController)
         }
         composable("adminPanel") {
             AdminPanel(navController)
