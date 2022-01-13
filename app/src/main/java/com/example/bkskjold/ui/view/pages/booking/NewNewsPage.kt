@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
@@ -88,7 +89,12 @@ fun NewNewsPage(navController: NavController){
                             )
                             TextField(
                                 value = header.value,
-                                onValueChange = { header.value = it }
+                                onValueChange = { header.value = it },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    backgroundColor = Color.White,
+                                    cursorColor = colorResource(R.color.primary),
+                                    focusedIndicatorColor = colorResource(R.color.primary)
+                                )
                             )
 
                             Spacer(modifier = Modifier.padding(top = 40.dp))
@@ -102,7 +108,12 @@ fun NewNewsPage(navController: NavController){
                             TextField(
                                 value = description.value,
                                 modifier = Modifier.height(300.dp),
-                                onValueChange = { description.value = it }
+                                onValueChange = { description.value = it },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    backgroundColor = Color.White,
+                                    cursorColor = colorResource(R.color.primary),
+                                    focusedIndicatorColor = colorResource(R.color.primary)
+                                )
                             )
                             Spacer(modifier = Modifier.padding(top = 50.dp))
                         }

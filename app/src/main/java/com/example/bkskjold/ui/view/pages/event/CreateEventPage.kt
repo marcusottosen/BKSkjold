@@ -134,7 +134,12 @@ fun CreateEventPage(navController: NavController){
                             )
                             TextField(
                                 value = header.value,
-                                onValueChange = { header.value = it }
+                                onValueChange = { header.value = it },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    backgroundColor = Color.White,
+                                    cursorColor = colorResource(R.color.primary),
+                                    focusedIndicatorColor = colorResource(R.color.primary)
+                                )
                             )
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
@@ -147,7 +152,12 @@ fun CreateEventPage(navController: NavController){
                             )
                             TextField(
                                 value = description.value,
-                                onValueChange = { description.value = it }
+                                onValueChange = { description.value = it },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    backgroundColor = Color.White,
+                                    cursorColor = colorResource(R.color.primary),
+                                    focusedIndicatorColor = colorResource(R.color.primary)
+                                )
                             )
 
                             Spacer(modifier = Modifier.padding(top = 40.dp))

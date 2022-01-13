@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.util.getMonthFromString
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
@@ -20,6 +21,7 @@ class EventDB() {
     fun loadEventsFromDB(): MutableList<Event> {
         val db = Firebase.firestore
         db.collection("events")
+            .orderBy("timeStart", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { result ->
                 events.clear()
