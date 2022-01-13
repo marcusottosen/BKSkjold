@@ -47,7 +47,7 @@ fun newTrainingFromBooking(
         trainer = CurrentUser.id,
         description = description,
         maxParticipants = maxParticipants,
-        participants = listOf(CurrentUser.id),
+        participants = listOf(CurrentUser.id) as MutableList<String>,
         userBooking = true,
     )
     addToDB(booking, navController)
@@ -80,7 +80,7 @@ fun newTraining(
         trainer = CurrentUser.id,
         description = description,
         maxParticipants = maxParticipants,
-        participants = listOf(),
+        participants = mutableListOf<String>(),
         userBooking = false,
     )
     addToDB(training, navController)

@@ -95,7 +95,7 @@ fun HomeScreenPage(navController: NavController) {
                     trainer = "",
                     description = "Du deltager ikke i nogen træninger. Gå ind under \"Træninger\" for at deltage i en.",
                     maxParticipants = 0,
-                    participants = listOf(),
+                    participants = mutableListOf<String>(),
                     userBooking = false
                 )
                 NextTrainingCard(default, navController)
