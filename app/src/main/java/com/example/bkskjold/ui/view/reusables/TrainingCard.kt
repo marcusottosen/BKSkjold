@@ -91,7 +91,7 @@ fun TrainingCard(training: Training, navController: NavController) {
                         ) {
                     Column() {
                         Text(
-                            text = training.maxParticipants.toString(),
+                            text = "${training.participants.size}/${training.maxParticipants}",
                             modifier = Modifier.padding(10.dp, 10.dp, 0.dp),
                             fontSize = 10.sp,
                             color = Color.DarkGray

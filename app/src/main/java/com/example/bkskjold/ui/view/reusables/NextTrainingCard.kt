@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.Training
+import com.example.bkskjold.data.model.firebaseAdapter.getUserFromID
 import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
@@ -186,7 +187,7 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                                 modifier = Modifier.size(15.dp),
                             )
                             Text(
-                                text = training.trainer,
+                                text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
                                 fontSize = 10.sp,
                                 modifier = Modifier
                                     .padding(start = 5.dp)

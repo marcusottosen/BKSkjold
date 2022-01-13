@@ -136,7 +136,7 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                         contentDescription = "deltagere",
                         Modifier.padding(end = 10.dp)
                     )
-                    Text(text = ( /*TODO Count antal deltagere!*/ "" + "/" + training.maxParticipants + " " + stringResource(
+                    Text(text = ( "${training.participants.size}/${training.maxParticipants}" + " " + stringResource(
                         R.string.participating)))
                 }
                 Row() {
