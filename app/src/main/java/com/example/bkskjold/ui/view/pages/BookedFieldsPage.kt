@@ -19,6 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.NavigationItem
+import com.example.bkskjold.data.model.Training
+import com.example.bkskjold.data.model.getBookings
+import com.example.bkskjold.data.model.getSignedUpTrainings
+import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 @Composable
 fun BookedFieldsPage(navController: NavController){
@@ -36,11 +41,13 @@ fun BookedFieldsPage(navController: NavController){
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(25.dp)
+                    .padding(top = 25.dp)
                     .wrapContentSize(Alignment.TopCenter)
             ) {
                 item {
-                    Box(modifier = Modifier.fillMaxSize()) {
+                    Box(modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 25.dp)) {
                         Button(
                             modifier = Modifier
                                 .padding(top = 10.dp)
@@ -51,7 +58,7 @@ fun BookedFieldsPage(navController: NavController){
                             elevation = ButtonDefaults.elevation(
                                 defaultElevation = 0.dp
                             ),
-                            onClick = { navController.navigateUp() },
+                            onClick = { navController.navigate(NavigationItem.Home.route) },
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.icon_back_arrow),
@@ -66,41 +73,19 @@ fun BookedFieldsPage(navController: NavController){
                         text = "Du har følgende bookninger",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(start = 20.dp, top = 10.dp)
+                        modifier = Modifier.padding(start = 45.dp, top = 10.dp)
                     )
+                }
+                item{
+                    val bookings = getBookings()
+                    Column(modifier = Modifier.fillMaxSize()) {
+                        for (item in bookings){
+                            TrainingCard(item, navController)
+                        }
+                    }
+                    Spacer(modifier = Modifier.padding(bottom = 110.dp))
                 }
             }
         }
     )
 }
-
-/*
-@Composable
-fun HomeContent() {
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text("Title") })
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { /*TODO*/ },
-                backgroundColor = Color.Red,
-                content = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_add),
-                        contentDescription = null,
-                        tint = Color.White
-                    )
-                }
-            )
-        },
-        content = {
-            Surface(modifier = Modifier.padding(24.dp)) {
-                Text(
-                    text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    fontSize = 16.sp,
-                )
-            }
-        }
-    )
-}*/

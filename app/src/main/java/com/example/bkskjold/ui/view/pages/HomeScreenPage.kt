@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.CurrentUser
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.model.news
 import com.example.bkskjold.data.model.trainings
@@ -79,7 +80,26 @@ fun HomeScreenPage(navController: NavController) {
         }
 
         item {
-            NextTrainingCard(training = trainings[1]) //TODO Find the next training
+            getNewest@ for (i in 0..0) {
+                for (item in trainings) {
+                    if (!item.userBooking && item.participants.contains(CurrentUser.id)) {
+                        NextTrainingCard(training = item, navController)
+                        break@getNewest
+                    }
+                }
+                val default = Training(
+                    timeStart = com.google.firebase.Timestamp.now(),
+                    timeEnd = com.google.firebase.Timestamp.now(),
+                    location = "Du deltager ikke i nogen træninger!",
+                    league = "",
+                    trainer = "",
+                    description = "Du deltager ikke i nogen træninger. Gå ind under \"Træninger\" for at deltage i en.",
+                    maxParticipants = 0,
+                    participants = listOf(),
+                    userBooking = false
+                )
+                NextTrainingCard(default, navController)
+            }
         }
 
         item {
@@ -91,7 +111,7 @@ fun HomeScreenPage(navController: NavController) {
                 HomePageCategories(R.drawable.icon_field, stringResource(R.string.bookField), "bookedFieldsPage", navController)
                 HomePageCategories(R.drawable.icon_calendarhome, stringResource(R.string.calender),"bookedFieldsPage", navController)
                 HomePageCategories(R.drawable.icon_map, stringResource(R.string.map),"bookedFieldsPage", navController)
-                HomePageCategories(R.drawable.icon_forum, stringResource(R.string.discussionForum),"bookedFieldsPage", navController)
+                HomePageCategories(R.drawable.icon_trainer_panel, stringResource(R.string.trainingPanel),"adminPanel", navController)
             }
         }
 

@@ -46,7 +46,6 @@ fun userWriteToDB() {
 
 
 val users: MutableList<User> = mutableListOf()
-
 class UserModel() {
     private val _loading = MutableLiveData(true)
     val loading: LiveData<Boolean> = _loading
@@ -91,13 +90,62 @@ class UserModel() {
     }
 }
 
-//############# GET USERS FROM LIST OF USER IDS ###################
-var participants: MutableList<User> = mutableListOf()
+//TODO remove "loadUsersFromDB" and use "loadUsersFromDB2" instead (rename it too)
+//############# MAKES LIST OF ALL USERS FROM users-db ###################
+val allusers: MutableList<CurrentUserModel> = mutableListOf()
+fun loadUsersFromDB2(): MutableList<CurrentUserModel>{
+    val db = Firebase.firestore
+    db.collection("users-db")
+        .get()
+        .addOnSuccessListener { result ->
+            allusers.clear()
+            for (doc in result) {
 
-fun getUsersFromId(ids: List<String>): MutableList<User> {
+                allusers.add(
+                    CurrentUserModel(
+                        id = doc["id"] as String,
+                        firstName = doc["firstName"] as String,
+                        lastName = doc["lastName"] as String,
+                        email = doc["email"] as String,
+                        address = doc["address"] as String,
+                        phoneNumber = (doc["phoneNumber"] as Number).toInt(),
+                        birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
+                        team = doc["team"] as String,
+                        userType = (doc["userType"] as Number).toInt(),
+                        finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
+                        memberSince = doc["memberSince"] as com.google.firebase.Timestamp,
+                    )
+                )
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting documents: users", exception)
+        }
+    return allusers
+}
+
+fun getUserFromID(idString: String): CurrentUserModel{
+    try {
+        for (user in allusers) {
+            if (idString == user.id) {
+                return user
+            }
+        }
+    } catch (e: Exception) {
+        Log.d(ContentValues.TAG, "User not found from ID in getUserFromID", e)
+    }
+    return allusers[0]
+}
+
+
+
+//############# GET USERS FROM LIST OF USER IDS ###################
+var participants: MutableList<CurrentUserModel> = mutableListOf()
+
+fun getUsersFromId(ids: List<String>): MutableList<CurrentUserModel> {
     val db = Firebase.firestore
 
-    db.collection("users")
+    /*db.collection("users")
         .get()
         .addOnSuccessListener { result ->
             participants.clear() //Always clear participants before getting new participants for new pratice
@@ -127,11 +175,62 @@ fun getUsersFromId(ids: List<String>): MutableList<User> {
         }
         .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting participants: ", exception)
-        }
+        }*/
 
+    db.collection("users-db")
+        .get()
+        .addOnSuccessListener { result ->
+            participants.clear() //Always clear participants before getting new participants for new pratice
+            for (id in ids) {
+                for (doc in result){
+
+                    if (doc.id == id){
+                        var participant = CurrentUserModel(
+                            id = doc["id"] as String,
+                            firstName = doc["firstName"] as String,
+                            lastName = doc["lastName"] as String,
+                            email = doc["email"] as String,
+                            address = doc["address"] as String,
+                            phoneNumber = (doc["phoneNumber"] as Number).toInt(),
+                            birthdate = doc["birthdate"] as com.google.firebase.Timestamp,
+                            team = doc["team"] as String,
+                            userType = (doc["userType"] as Number).toInt(),
+                            finishedTrainings = (doc["finishedTrainings"] as Number).toInt(),
+                            memberSince = doc["memberSince"] as com.google.firebase.Timestamp
+                        )
+                        if (participant !in participants){
+                            participants.add(participant)
+                        }
+
+                    }
+                }
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting participants: ", exception)
+        }
+    var partics = participants
     return participants
 }
 
+
+fun getCurrentUserAsCurrentUserModel(): CurrentUserModel {
+
+    val currUser = CurrentUserModel(
+        id = CurrentUser.id,
+        firstName = CurrentUser.firstName,
+        lastName = CurrentUser.lastName,
+        email = CurrentUser.email,
+        address = CurrentUser.address,
+        phoneNumber = CurrentUser.phoneNumber,
+        birthdate = CurrentUser.birthdate,
+        team = CurrentUser.team,
+        userType = CurrentUser.userType,
+        finishedTrainings = CurrentUser.finishedTrainings,
+        memberSince = CurrentUser.memberSince
+    )
+    return currUser
+}
 
 
 @Parcelize

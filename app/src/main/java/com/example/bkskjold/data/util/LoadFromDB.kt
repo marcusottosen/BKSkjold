@@ -22,6 +22,8 @@ fun LoadFromDB(navController: NavController){
     //eventWriteToDB()
     //newsWriteToDB()
 
+    loadUsersFromDB2()
+
     val trainings = TrainingModel()
     val trainingsLoading: Boolean by trainings.loading.observeAsState(initial = true)
     trainings.loadTrainingsFromDB()

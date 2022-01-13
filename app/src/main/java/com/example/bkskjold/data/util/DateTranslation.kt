@@ -23,7 +23,14 @@ fun getDay(timestamp: com.google.firebase.Timestamp): String{
 
 //13:30
 fun getTime(timestamp: com.google.firebase.Timestamp): String{
-    return "${timestamp.toDate().hours}:${timestamp.toDate().minutes}"
+    var hour = timestamp.toDate().hours.toString()
+    var minute = timestamp.toDate().minutes.toString()
+
+    if (minute == "0"){
+        minute = "00"
+    }
+    var passable = "${hour}:${minute}"
+    return passable
 }
 
 //mandag

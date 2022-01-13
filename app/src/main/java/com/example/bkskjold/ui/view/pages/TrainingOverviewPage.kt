@@ -21,6 +21,7 @@ import com.example.bkskjold.R
 import com.example.bkskjold.data.model.Training
 import com.example.bkskjold.data.util.*
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
+import java.sql.Timestamp
 
 
 //class TrainingOverviewPage {

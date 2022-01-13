@@ -61,7 +61,9 @@ class TrainingOverviewViewModel {
                         filteredPractices.add(i)
                     }
                 }else if (timeStart != "" && date == "" && team == ""){
-                    if (getTime(i.timeStart) == timeStart){
+                    var THISTIMESTART = getTime(i.timeStart)
+                    print("")
+                    if (getTime(i.timeStart).toString() == timeStart){
                         filteredPractices.add(i)
                     }
                 }else if (team != "" && timeStart == "" && date == ""){
