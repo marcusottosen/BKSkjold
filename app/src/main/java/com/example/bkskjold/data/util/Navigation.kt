@@ -2,10 +2,7 @@ package com.example.bkskjold.ui.viewmodel
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -58,6 +55,7 @@ fun Navigation(navController: NavHostController) {
         }
         composable(NavigationItem.Profile.route) {
             profileOverview(navController)
+            updateFAQ()
         }
 
         // Login pages
@@ -120,6 +118,9 @@ fun Navigation(navController: NavHostController) {
         }
         composable("bookFieldPage") {
             BookFieldPage(navController)
+        }
+        composable("faqPage") {
+            FaqPage(navController)
         }
         composable("adminPanel") {
             AdminPanel(navController)
