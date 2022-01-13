@@ -1,5 +1,6 @@
 package com.example.bkskjold.ui.view.pages
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -60,13 +62,18 @@ fun NewTrainingPage(navController: NavController){
     var endMin = 0
     var maxParticipants = 1
     val description =  remember { mutableStateOf(TextFieldValue()) }
-    //var onTestValChange: String by remember{ mutableStateOf(testval)}
+
+    val showDialog = remember {mutableStateOf(false)}
+    if (showDialog.value) {
+        Toast.makeText(LocalContext.current, "Træning oprettet", Toast.LENGTH_SHORT).show()
+    }
 
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
+                    showDialog.value = true
                     newTraining(
                         team = team,
                         location = field,

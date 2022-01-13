@@ -1,5 +1,6 @@
 package com.example.bkskjold.ui.view.pages
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,11 +34,17 @@ fun NewNewsPage(navController: NavController){
     val header =  remember { mutableStateOf(TextFieldValue()) }
     val description =  remember { mutableStateOf(TextFieldValue()) }
 
+    val showDialog = remember {mutableStateOf(false)}
+    if (showDialog.value) {
+        Toast.makeText(LocalContext.current, "Nyhed oprettet", Toast.LENGTH_SHORT).show()
+    }
+
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
+                    showDialog.value = true
                     newNews(header.value.text,description.value.text,navController)
                 },
                 icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },

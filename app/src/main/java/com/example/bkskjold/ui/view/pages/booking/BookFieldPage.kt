@@ -1,5 +1,6 @@
 package com.example.bkskjold.ui.view.pages
 
+import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,14 +57,19 @@ fun BookFieldPage(navController: NavController){
     var endMin = 0
     var maxParticipants = 1
     val description =  remember { mutableStateOf(TextFieldValue()) }
-    //var onTestValChange: String by remember{ mutableStateOf(testval)}
+
+    val showDialog = remember {mutableStateOf(false)}
+    if (showDialog.value) {
+        Toast.makeText(LocalContext.current, "Bookning af bane oprettet", Toast.LENGTH_SHORT).show()
+    }
 
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
-                          newTrainingFromBooking(
+                    showDialog.value = true
+                    newTrainingFromBooking(
                               location = field,
                               month = month,
                               day = day,

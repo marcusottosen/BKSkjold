@@ -1,7 +1,12 @@
 package com.example.bkskjold.data.model
 
 import android.content.ContentValues
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
@@ -49,7 +54,7 @@ class NewsModel() {
 fun newNews(
     header: String,
     description: String,
-    navController: NavController
+    navController: NavController,
 ){
     val news = News(header, description, Timestamp.now())
 
@@ -67,9 +72,17 @@ fun newNews(
                 val update = NewsModel()
                 update.loadNewsFromDB()
                 navController.navigate("adminPanel")
+                //Toast.makeText(this@newNews, "aaaa", Toast.LENGTH_SHORT).show()
             }
         }
         .addOnFailureListener { e ->
             Log.w(ContentValues.TAG, "Error adding document", e)
         }
+}
+
+@Composable
+fun showToast(text: String){
+    val context = LocalContext.current
+
+
 }
