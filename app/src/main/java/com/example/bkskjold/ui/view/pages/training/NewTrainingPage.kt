@@ -26,16 +26,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.dataClass.Locations
+import com.example.bkskjold.data.model.dataClass.Teams
 import com.example.bkskjold.data.model.firebaseAdapter.newTraining
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
 import java.text.DateFormatSymbols
 
 @Composable
 fun NewTrainingPage(navController: NavController){
-    //TODO These lists should probably be made different
-    val fields = listOf("A", "B", "C", "D","E","F","G","H","1","2","3")
-    val teams = listOf("U18", "U19", "U20", "U21","Senior")
-
+    val fields = mutableListOf<String>()
+    for (field in Locations.values()){
+        fields.add(field.toString())
+    }
+    val teams = mutableListOf<String>()
+    for (team in Teams.values()){
+        teams.add(team.asString)
+    }
     val months = mutableListOf<String>()
     for (month in DateFormatSymbols().months){
         months.add(month.toString())
@@ -52,8 +58,8 @@ fun NewTrainingPage(navController: NavController){
     for (i in 1..60){
         minutes.add(i.toString())
     }
-    var team = ""
-    var field = "A"
+    var team = Teams.U12.toString()
+    var field = Locations.A.toString()
     var month = "January"
     var day = 1
     var startHour = 1

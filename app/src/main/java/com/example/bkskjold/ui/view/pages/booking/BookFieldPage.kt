@@ -23,14 +23,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.dataClass.Locations
 import com.example.bkskjold.data.model.firebaseAdapter.newTrainingFromBooking
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
 import java.text.DateFormatSymbols
 
 @Composable
 fun BookFieldPage(navController: NavController){
-    //TODO These lists should probably be made different
-    val fields = listOf("A", "B", "C", "D","E","F","G","H","1","2","3")
+    val fields = mutableListOf<String>()
+    for (field in Locations.values()){
+        fields.add(field.toString())
+    }
 
     val months = mutableListOf<String>()
     for (month in DateFormatSymbols().months){
@@ -48,7 +51,7 @@ fun BookFieldPage(navController: NavController){
     for (i in 1..60){
         minutes.add(i.toString())
     }
-    var field = "A"
+    var field = Locations.A.toString()
     var month = "January"
     var day = 1
     var startHour = 1
@@ -131,7 +134,7 @@ fun BookFieldPage(navController: NavController){
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
                             )
 
-                            field = dropDownMenu(items = fields as MutableList<String>, menuWidth = 60)
+                            field = dropDownMenu(items = ArrayList(fields), menuWidth = 60)
 
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
@@ -216,7 +219,12 @@ fun BookFieldPage(navController: NavController){
                             )
                             TextField(
                                 value = description.value,
-                                onValueChange = { description.value = it }
+                                onValueChange = { description.value = it },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    backgroundColor = Color.White,
+                                    cursorColor = colorResource(R.color.primary),
+                                    focusedIndicatorColor = colorResource(R.color.primary)
+                                )
                             )
                             Spacer(modifier = Modifier.padding(top = 50.dp))
 

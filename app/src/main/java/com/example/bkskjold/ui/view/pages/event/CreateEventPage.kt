@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.dataClass.Locations
 import com.example.bkskjold.data.model.firebaseAdapter.newEvent
 import com.example.bkskjold.data.model.firebaseAdapter.newTrainingFromBooking
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
@@ -30,16 +31,16 @@ import java.text.DateFormatSymbols
 
 @Composable
 fun CreateEventPage(navController: NavController){
-    //TODO These lists should probably be made different
-    val fields = listOf("Klubhuset","A", "B", "C", "D","E","F","G","H","1","2","3")
-
+    val fields = mutableListOf<String>()
+    for (field in Locations.values()){
+        fields.add(field.toString())
+    }
     val priceOptions = mutableListOf<String>()
     var num = 0
     for (i in 0..10){
         priceOptions.add(num.toString())
         num += 5
     }
-
     val months = mutableListOf<String>()
     for (month in DateFormatSymbols().months){
         months.add(month.toString())
