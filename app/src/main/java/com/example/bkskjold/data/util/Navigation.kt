@@ -22,6 +22,7 @@ import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.dataClass.User
+import com.example.bkskjold.data.model.updateFAQ
 import com.example.bkskjold.data.util.LoadFromDB
 import com.example.bkskjold.ui.view.pages.*
 import com.example.bkskjold.ui.view.pages.event.eventOverview
@@ -33,6 +34,7 @@ import com.google.firebase.ktx.Firebase
  * NavBar inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
  */
 
+@ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
