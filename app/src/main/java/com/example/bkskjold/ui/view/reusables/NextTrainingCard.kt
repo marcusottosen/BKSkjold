@@ -9,6 +9,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -23,8 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.firebaseAdapter.getUserFromID
+import com.example.bkskjold.data.model.firebaseAdapter.getUsersFromId
+import com.example.bkskjold.data.model.firebaseAdapter.updateParticipants
 import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
@@ -34,6 +39,13 @@ import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
 fun NextTrainingCard(training: Training, navController: NavController) {
+    var training = training
+    val participants = training.participants
+
+    val userId = CurrentUser.id
+    val isAttending = remember { mutableStateOf(participants.contains(userId)) }
+
+
     Card(
         shape = RoundedCornerShape(22.dp),
         border = BorderStroke(width = 1.dp, color = colorResource(id = R.color.border)),
@@ -219,22 +231,49 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                 Column( //Cancel
                     modifier = Modifier
                         .fillMaxHeight()
-                        .padding(end = 30.dp),
-                    verticalArrangement = Arrangement.Center,
+                        .padding(end = 30.dp)
+                        .clickable {
+                            if (training.participants.contains(userId)){
+                                training.participants.remove(userId)
+                            }else{
+                                training.participants.add(userId)
+                            }
+                            training = updateParticipants(training, participants, userId)
+                            isAttending.value = !isAttending.value
+                        }
+                    , verticalArrangement = Arrangement.Center,
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.icon_home_cancel_button),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.size(40.dp)
-                    )
-                    Text(
-                        text = stringResource(R.string.deregister),
-                        fontSize = 10.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .padding(start = 5.dp)
-                    )
+                    if (isAttending.value){
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_home_cancel_button),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(40.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.deregister),
+                            fontSize = 10.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .padding(start = 5.dp)
+                        )
+                    }else{
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_home_cancel_button),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(40.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.deregister),
+                            fontSize = 10.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .padding(start = 5.dp)
+                        )
+                    }
                 }
             }
         }
