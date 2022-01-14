@@ -119,7 +119,7 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
     return training
 }
 
-fun addToDB(item: Training, navController: NavController){
+fun addTrainingToDB(item: Training, navController: NavController){
     val db = Firebase.firestore
     db.collection("trainings")
         .add(item)

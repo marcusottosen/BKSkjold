@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
-import com.example.bkskjold.ui.viewmodel.BookTrainingViewModel
+import com.example.bkskjold.ui.viewmodel.DocumentCreationViewModel
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.datetime.time.timepicker
@@ -44,7 +44,7 @@ fun NewTrainingPage(navController: NavController){
 
 
 
-    val viewModel = BookTrainingViewModel()
+    val viewModel = DocumentCreationViewModel()
 
     var team = viewModel.getTeams()[0]
     var field = viewModel.getFields()[0]

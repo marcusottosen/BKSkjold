@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
-import com.example.bkskjold.ui.viewmodel.BookTrainingViewModel
+import com.example.bkskjold.ui.viewmodel.DocumentCreationViewModel
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.datetime.time.timepicker
@@ -34,7 +34,7 @@ import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 
 @Composable
 fun BookFieldPage(navController: NavController){
-    val viewModel = BookTrainingViewModel()
+    val viewModel = DocumentCreationViewModel()
 
     var field = viewModel.getFields()[0]
     var maxParticipants = 1
