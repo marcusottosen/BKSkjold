@@ -50,12 +50,18 @@ fun NextTrainingCard(training: Training, navController: NavController) {
     Card(
         shape = RoundedCornerShape(22.dp),
         border = BorderStroke(width = 1.dp, color = colorResource(id = R.color.border)),
-        modifier = Modifier
+        modifier = if (training.location != "Du deltager ikke i nogen træninger!"){
+            Modifier
             .padding(15.dp, 0.dp, 15.dp, 0.dp)
             .height(220.dp)
             .clickable {
                 gotoTrainingDetails(training, navController)
-            },
+            }
+        } else {
+            Modifier
+                .padding(15.dp, 0.dp, 15.dp, 0.dp)
+                .height(150.dp)
+        },
         elevation = 0.dp
     ) {
         Column() {
@@ -111,14 +117,20 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                             .padding(0.dp, 0.dp, 0.dp, 0.dp),
                         horizontalArrangement = Arrangement.Start
                     ) {
-                        Column() { //Date & time
-                            Text(text = "${getDay(training.timeStart)}. ${getMonthString(training.timeStart)}", fontSize = 10.sp, color = Color.White)
-                            Text(text = getWeekDay(training.timeStart), fontSize = 20.sp, color = Color.White)
-                            Text(
-                                text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
-                                fontSize = 10.sp,
-                                color = Color.White
-                            )
+                        if (training.location != "Du deltager ikke i nogen træninger!") {
+                            Column() { //Date & time
+                                Text(text = "${getDay(training.timeStart)}. ${
+                                    getMonthString(training.timeStart)
+                                }", fontSize = 10.sp, color = Color.White)
+                                Text(text = getWeekDay(training.timeStart),
+                                    fontSize = 20.sp,
+                                    color = Color.White)
+                                Text(
+                                    text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
+                                    fontSize = 10.sp,
+                                    color = Color.White
+                                )
+                            }
                         }
 
                         Column(modifier = Modifier.fillMaxSize()) {
@@ -143,24 +155,27 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                                     )
                                 }
 
-                                Row( //location
-                                    modifier = Modifier
-                                        .padding(start = 20.dp)
-                                        .align(alignment = Alignment.BottomStart),
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.icon_location_white),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(15.dp),
-                                    )
-                                    Text(
-                                        text = training.location,
-                                        fontSize = 10.sp,
+                                if (training.location != "Du deltager ikke i nogen træninger!") {
+                                    Row(
+                                        //location
                                         modifier = Modifier
-                                            .padding(start = 5.dp)
-                                            .align(alignment = Alignment.Bottom),
-                                        color = Color.White
-                                    )
+                                            .padding(start = 20.dp)
+                                            .align(alignment = Alignment.BottomStart),
+                                    ) {
+                                        Image(
+                                            painter = painterResource(id = R.drawable.icon_location_white),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(15.dp),
+                                        )
+                                        Text(
+                                            text = training.location,
+                                            fontSize = 10.sp,
+                                            modifier = Modifier
+                                                .padding(start = 5.dp)
+                                                .align(alignment = Alignment.Bottom),
+                                            color = Color.White
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -169,133 +184,137 @@ fun NextTrainingCard(training: Training, navController: NavController) {
             }
 
 
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(
+            if (training.location != "Du deltager ikke i nogen træninger!") {
+                Row(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(start = 25.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Box(modifier = Modifier.fillMaxHeight()) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .padding(start = 25.dp)
+                    ) {
+                        Box(modifier = Modifier.fillMaxHeight()) {
 
-                        Row( //number of players
+                            Row( //number of players
+                                modifier = Modifier
+                                    .padding(top = 15.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.icon_person),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier.size(15.dp)
+                                )
+                                Text(
+                                    text = "${training.participants.size}/${training.maxParticipants}", //$attending/$spots"
+                                    fontSize = 10.sp,
+                                    modifier = Modifier
+                                        .padding(start = 5.dp)
+                                )
+                            }
+
+                            Row( //trainer
+                                modifier = Modifier
+                                    .padding(top = 40.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.icon_whistle),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier.size(15.dp),
+                                )
+                                if (training.location != "Du deltager ikke i nogen træninger!") {
+                                    Text(
+                                        text = getUserFromID(training.trainer).firstName + " " + getUserFromID(
+                                            training.trainer).lastName,
+                                        fontSize = 10.sp,
+                                        modifier = Modifier
+                                            .padding(start = 5.dp)
+                                    )
+                                } else {
+                                    Text(
+                                        text = "N/A",
+                                        fontSize = 10.sp,
+                                        modifier = Modifier
+                                            .padding(start = 5.dp)
+                                    )
+                                }
+
+                            }
+                        }
+                    }
+
+                    Column(
+                        //Invite
+                        modifier = Modifier
+                            .fillMaxHeight(),
+                        verticalArrangement = Arrangement.Center,
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_home_share_button),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.size(40.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.Invite),
+                            fontSize = 10.sp,
+                            textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .padding(top = 15.dp)
-                        ) {
+                                .padding(start = 5.dp)
+                        )
+                    }
+
+                    Column(
+                        //Cancel
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .padding(end = 30.dp)
+                            .clickable {
+                                if (training.participants.contains(userId)) {
+                                    training.participants.remove(userId)
+                                } else {
+                                    training.participants.add(userId)
+                                }
+                                training = updateParticipants(training, participants, userId)
+                                isAttending.value = !isAttending.value
+                            },
+                        verticalArrangement = Arrangement.Center,
+                    ) {
+                        if (isAttending.value) {
                             Image(
-                                painter = painterResource(id = R.drawable.icon_person),
+                                painter = painterResource(id = R.drawable.icon_home_cancel_button),
                                 contentDescription = null,
                                 contentScale = ContentScale.Crop,
-                                modifier = Modifier.size(15.dp)
+                                modifier = Modifier
+                                    .size(40.dp)
                             )
                             Text(
-                                text = "${training.participants.size}/${training.maxParticipants}", //$attending/$spots"
+                                text = stringResource(R.string.deregister),
                                 fontSize = 10.sp,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                    .padding(start = 5.dp)
+                            )
+                        } else {
+                            Image(
+                                painter = painterResource(id = R.drawable.icon_home_accept_button),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                //colorFilter = ColorFilter.tint(Color(0xFF698C44)),
+                                modifier = Modifier
+                                    .size(40.dp)
+                            )
+                            Text(
+                                text = stringResource(R.string.Attend),
+                                fontSize = 10.sp,
+                                textAlign = TextAlign.Center,
                                 modifier = Modifier
                                     .padding(start = 5.dp)
                             )
                         }
-
-                        Row( //trainer
-                            modifier = Modifier
-                                .padding(top = 40.dp)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.icon_whistle),
-                                contentDescription = null,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier.size(15.dp),
-                            )
-                            if (training.location != "Du deltager ikke i nogen træninger!"){
-                                Text(
-                                    text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
-                                    fontSize = 10.sp,
-                                    modifier = Modifier
-                                        .padding(start = 5.dp)
-                                )
-                            }else{
-                                Text(
-                                    text = "N/A",
-                                    fontSize = 10.sp,
-                                    modifier = Modifier
-                                        .padding(start = 5.dp)
-                                )
-                            }
-
-                        }
-                    }
-                }
-
-                Column( //Invite
-                    modifier = Modifier
-                        .fillMaxHeight(),
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.icon_home_share_button),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.size(40.dp)
-                    )
-                    Text(
-                        text = stringResource(R.string.Invite),
-                        fontSize = 10.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .padding(start = 5.dp)
-                    )
-                }
-
-                Column( //Cancel
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(end = 30.dp)
-                        .clickable {
-                            if (training.participants.contains(userId)) {
-                                training.participants.remove(userId)
-                            } else {
-                                training.participants.add(userId)
-                            }
-                            training = updateParticipants(training, participants, userId)
-                            isAttending.value = !isAttending.value
-                        }
-                    , verticalArrangement = Arrangement.Center,
-                ) {
-                    if (isAttending.value){
-                        Image(
-                            painter = painterResource(id = R.drawable.icon_home_cancel_button),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(40.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.deregister),
-                            fontSize = 10.sp,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .padding(start = 5.dp)
-                        )
-                    }else{
-                        Image(
-                            painter = painterResource(id = R.drawable.icon_home_accept_button),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            //colorFilter = ColorFilter.tint(Color(0xFF698C44)),
-                            modifier = Modifier
-                                .size(40.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.Attend),
-                            fontSize = 10.sp,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .padding(start = 5.dp)
-                        )
                     }
                 }
             }
