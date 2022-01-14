@@ -25,7 +25,6 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.Locations
 import com.example.bkskjold.data.model.firebaseAdapter.newEvent
-import com.example.bkskjold.data.model.firebaseAdapter.newTrainingFromBooking
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
 import java.text.DateFormatSymbols
 

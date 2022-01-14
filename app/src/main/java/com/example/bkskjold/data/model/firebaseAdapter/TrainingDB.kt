@@ -119,23 +119,23 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
     return training
 }
 
-fun newTrainingFromBooking(
+
+/*fun newTrainingFromBooking(
     location: String,
-    month: String,
-    day: Int,
-    startHour: Int,
-    startMin: Int,
-    endHour: Int,
-    endMin: Int,
+    date: String,
+    startTime: String,
+    endTime: String,
     maxParticipants: Int,
     description: String,
     navController: NavController
 ) {
-    val dateformat = "yyyy-MM-dd-k-m"
+    val dateformat = "yyyy-MM-dd-k:m"
     val startTimestamp = com.google.firebase.Timestamp(
-        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$startHour-$startMin").toString()))
+        SimpleDateFormat(dateformat).parse(("$date-$startTime").toString()))
+
     val endTimestamp = com.google.firebase.Timestamp(
-        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$endHour-$endMin").toString()))
+        SimpleDateFormat(dateformat).parse(("$date-$endTime").toString()))
+
 
     val booking = Training(
         timeStart = startTimestamp,
@@ -149,7 +149,7 @@ fun newTrainingFromBooking(
         userBooking = true,
     )
     addToDB(booking, navController)
-}
+}*/
 
 fun newTraining(
     location: String,

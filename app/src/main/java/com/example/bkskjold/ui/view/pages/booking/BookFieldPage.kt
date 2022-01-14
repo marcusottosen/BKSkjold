@@ -1,14 +1,16 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.booking
 
-import android.widget.Toast
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,84 +25,46 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.dataClass.Locations
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
+import com.example.bkskjold.ui.viewmodel.BookTrainingViewModel
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.datetime.time.timepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
-import java.text.DateFormatSymbols
 
 @Composable
 fun BookFieldPage(navController: NavController){
-    val fields = mutableListOf<String>()
-    for (field in Locations.values()){
-        fields.add(field.toString())
-    }
+    val viewModel = BookTrainingViewModel()
 
-    val months = mutableListOf<String>()
-    for (month in DateFormatSymbols().months){
-        months.add(month.toString())
-    }
-    val days = mutableListOf<String>()
-    for (i in 1..31){
-        days.add(i.toString())
-    }
-    val hours = mutableListOf<String>()
-    for (i in 1..24){
-        hours.add(i.toString())
-    }
-    val minutes = mutableListOf<String>()
-    for (i in 1..60){
-        minutes.add(i.toString())
-    }
-
-    var month = "January"
-    var day = 1
-    var startHour = 1
-    var startMin = 0
-    var endHour = 1
-    var endMin = 0
-
-
-    var field = Locations.A.toString()
+    var field = viewModel.getFields()[0]
     var maxParticipants = 1
     val description =  remember { mutableStateOf(TextFieldValue()) }
     val date =  remember { mutableStateOf("Vælg dato") }
     val startTime =  remember { mutableStateOf("Vælg starttid") }
     val endTime =  remember { mutableStateOf("Vælg sluttid") }
 
+    val context = LocalContext.current
 
-
-    val showDialog = remember {mutableStateOf(false)}
-    if (showDialog.value) {
-        Toast.makeText(LocalContext.current, "Bookning af bane oprettet", Toast.LENGTH_SHORT).show()
-    }
-
+    //Variables to keep track of when to open/close date/time pickers
     val dateDialogState = rememberMaterialDialogState()
     val startTimeDialogState = rememberMaterialDialogState()
     val endTimeDialogState = rememberMaterialDialogState()
-
 
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
-                    
-                    /*showDialog.value = true
-                    newTrainingFromBooking(
-                              location = field,
-                              month = month,
-                              day = day,
-                              startHour = startHour,
-                              startMin = startMin,
-                              endHour = endHour,
-                              endMin = endMin,
-                              maxParticipants = maxParticipants,
-                              description = description.value.text,
-                              navController = navController
-                          )*/
+                    viewModel.createTrainingFromBooking(
+                        location = field,
+                        date = date.value,
+                        startTime = startTime.value,
+                        endTime = endTime.value,
+                        maxParticipants = maxParticipants,
+                        description = description.value.text,
+                        navController = navController,
+                        context = context
+                    )
                 },
                 icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
                 modifier = Modifier.padding(bottom = 60.dp),
@@ -138,7 +102,6 @@ fun BookFieldPage(navController: NavController){
                         }
                     }
 
-
                     Box(modifier = Modifier
                         .wrapContentHeight()
                         .fillMaxWidth()
@@ -153,7 +116,7 @@ fun BookFieldPage(navController: NavController){
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
                             )
 
-                            field = dropDownMenu(items = ArrayList(fields), menuWidth = 60)
+                            field = dropDownMenu(items = ArrayList(viewModel.getFields()), menuWidth = 60)
 
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
@@ -163,7 +126,11 @@ fun BookFieldPage(navController: NavController){
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
                             )
-                            Button(onClick = { dateDialogState.show() }) {
+                            Button(
+                                onClick = { dateDialogState.show() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
                                 Text(text = date.value)
                             }
                             MaterialDialog(
@@ -175,6 +142,7 @@ fun BookFieldPage(navController: NavController){
                             ) {
                                 datepicker { dateChosen ->
                                     date.value = dateChosen.toString()
+                                    println(date.value)
                                 }
                             }
 
@@ -204,13 +172,18 @@ fun BookFieldPage(navController: NavController){
                             ) {
                                 timepicker { time ->
                                     startTime.value = time.toString()
+                                    println(startTime.value)
                                 }
                             }
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
                             Text(text = "Slut", fontWeight = FontWeight.Bold)
-                            Button(onClick = { endTimeDialogState.show() }) {
+                            Button(
+                                onClick = { endTimeDialogState.show() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
                                 Text(text = endTime.value)
                             }
                             MaterialDialog(
@@ -225,8 +198,6 @@ fun BookFieldPage(navController: NavController){
                                 }
                             }
 
-
-
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
                             Text(
@@ -238,14 +209,13 @@ fun BookFieldPage(navController: NavController){
                             Text(
                                 text = "Max antal deltagere",
 
-                            )
-                            maxParticipants = dropDownMenu(items = minutes, menuWidth = 60).toInt()
+                                )
+                            maxParticipants = dropDownMenu(items = viewModel.getParticipantList(), menuWidth = 60).toInt()
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
                             Text(
-                                text = "Beskrivelse",
-
+                                text = "Beskrivelse"
                             )
                             TextField(
                                 value = description.value,
