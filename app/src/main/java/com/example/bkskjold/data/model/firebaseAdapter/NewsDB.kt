@@ -51,16 +51,10 @@ class NewsModel() {
     }
 }
 
-fun newNews(
-    header: String,
-    description: String,
-    navController: NavController,
-){
-    val news = News(header, description, Timestamp.now())
-
+fun addNewsToDB(item: News, navController: NavController){
     val db = Firebase.firestore
     db.collection("news")
-        .add(news)
+        .add(item)
         .addOnSuccessListener { documentReference ->
             Log.d(
                 ContentValues.TAG,

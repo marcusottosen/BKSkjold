@@ -3,9 +3,11 @@ package com.example.bkskjold.ui.viewmodel
 import android.content.Context
 import android.widget.Toast
 import androidx.navigation.NavController
+import com.example.bkskjold.data.model.addNewsToDB
 import com.example.bkskjold.data.model.dataClass.*
 import com.example.bkskjold.data.model.firebaseAdapter.addEventToDB
 import com.example.bkskjold.data.model.firebaseAdapter.addTrainingToDB
+import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 
 /**
@@ -132,14 +134,28 @@ class DocumentCreationViewModel {
             )
             addEventToDB(event, navController)
             Toast.makeText(context, "Event oprettet", Toast.LENGTH_SHORT).show()
-        }
-        catch (e: Exception){
+        } catch (e: Exception){
             errorToast(context)
         }
     }
 
-    fun toTimeStamp(date: String, time: String): com.google.firebase.Timestamp{
-        return com.google.firebase.Timestamp(SimpleDateFormat(dateformat).parse(("$date-$time").toString()))
+    fun newNews(
+        header: String,
+        description: String,
+        navController: NavController,
+        context: Context
+    ){
+        try {
+            val news = News(header, description, Timestamp.now())
+            addNewsToDB(news, navController)
+            Toast.makeText(context, "Nyhed oprettet", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception){
+            errorToast(context)
+        }
+    }
+
+    fun toTimeStamp(date: String, time: String): Timestamp{
+        return Timestamp(SimpleDateFormat(dateformat).parse(("$date-$time").toString()))
     }
 
     fun errorToast(context: Context){
