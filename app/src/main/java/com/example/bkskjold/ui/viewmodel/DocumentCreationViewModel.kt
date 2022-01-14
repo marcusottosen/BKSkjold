@@ -130,7 +130,8 @@ class DocumentCreationViewModel {
                 location = location,
                 price = price,
                 header = header,
-                description = description
+                description = description,
+                participants = mutableListOf()
             )
             addEventToDB(event, navController)
             Toast.makeText(context, "Event oprettet", Toast.LENGTH_SHORT).show()
