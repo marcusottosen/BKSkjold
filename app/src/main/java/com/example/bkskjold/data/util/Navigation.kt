@@ -27,6 +27,7 @@ import com.example.bkskjold.data.util.LoadFromDB
 import com.example.bkskjold.ui.view.pages.*
 import com.example.bkskjold.ui.view.pages.booking.BookFieldPage
 import com.example.bkskjold.ui.view.pages.event.eventOverview
+import com.example.bkskjold.ui.view.pages.training.NewTrainingPage
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

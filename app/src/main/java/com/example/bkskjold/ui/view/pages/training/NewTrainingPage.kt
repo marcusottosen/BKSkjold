@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.training
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -26,53 +26,42 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.dataClass.Locations
-import com.example.bkskjold.data.model.dataClass.Teams
-import com.example.bkskjold.data.model.firebaseAdapter.newTraining
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
-import java.text.DateFormatSymbols
+import com.example.bkskjold.ui.viewmodel.BookTrainingViewModel
+import com.vanpra.composematerialdialogs.MaterialDialog
+import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.vanpra.composematerialdialogs.datetime.time.timepicker
+import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 
 @Composable
 fun NewTrainingPage(navController: NavController){
-    val fields = mutableListOf<String>()
-    for (field in Locations.values()){
-        fields.add(field.toString())
-    }
-    val teams = mutableListOf<String>()
-    for (team in Teams.values()){
-        teams.add(team.asString)
-    }
-    val months = mutableListOf<String>()
-    for (month in DateFormatSymbols().months){
-        months.add(month.toString())
-    }
-    val days = mutableListOf<String>()
-    for (i in 1..31){
-        days.add(i.toString())
-    }
-    val hours = mutableListOf<String>()
-    for (i in 1..24){
-        hours.add(i.toString())
-    }
-    val minutes = mutableListOf<String>()
-    for (i in 1..60){
-        minutes.add(i.toString())
-    }
-    var team = Teams.U12.toString()
-    var field = Locations.A.toString()
-    var month = "January"
-    var day = 1
-    var startHour = 1
-    var startMin = 0
-    var endHour = 1
-    var endMin = 0
-    var maxParticipants = 1
-    val description =  remember { mutableStateOf(TextFieldValue()) }
+
 
     val showDialog = remember {mutableStateOf(false)}
     if (showDialog.value) {
         Toast.makeText(LocalContext.current, "Træning oprettet", Toast.LENGTH_SHORT).show()
     }
+
+
+
+    val viewModel = BookTrainingViewModel()
+
+    var team = viewModel.getTeams()[0]
+    var field = viewModel.getFields()[0]
+    var maxParticipants = 1
+    val description =  remember { mutableStateOf(TextFieldValue()) }
+    val date =  remember { mutableStateOf("Vælg dato") }
+    val startTime =  remember { mutableStateOf("Vælg starttid") }
+    val endTime =  remember { mutableStateOf("Vælg sluttid") }
+
+    val context = LocalContext.current
+
+
+
+    //Variables to keep track of when to open/close date/time pickers
+    val dateDialogState = rememberMaterialDialogState()
+    val startTimeDialogState = rememberMaterialDialogState()
+    val endTimeDialogState = rememberMaterialDialogState()
 
     Scaffold(
         floatingActionButton = {
@@ -80,18 +69,16 @@ fun NewTrainingPage(navController: NavController){
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
                     showDialog.value = true
-                    newTraining(
+                    viewModel.newTraining(
                         team = team,
                         location = field,
-                        month = month,
-                        day = day,
-                        startHour = startHour,
-                        startMin = startMin,
-                        endHour = endHour,
-                        endMin = endMin,
+                        date = date.value,
+                        startTime = startTime.value,
+                        endTime = endTime.value,
                         maxParticipants = maxParticipants,
                         description = description.value.text,
-                        navController = navController
+                        navController = navController,
+                        context = context
                     )
                 },
                 icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
@@ -107,7 +94,7 @@ fun NewTrainingPage(navController: NavController){
                     .wrapContentSize(Alignment.TopCenter)
             ) {
                 item {
-                    Box() {
+                    Box {
                         Button(
                             modifier = Modifier
                                 .padding(top = 10.dp)
@@ -143,7 +130,7 @@ fun NewTrainingPage(navController: NavController){
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
                             )
 
-                            team = dropDownMenu(items = teams as MutableList<String>, menuWidth = 110)
+                            team = dropDownMenu(items = viewModel.getTeams(), menuWidth = 110)
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
@@ -154,7 +141,7 @@ fun NewTrainingPage(navController: NavController){
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
                             )
 
-                            field = dropDownMenu(items = fields as MutableList<String>, menuWidth = 60)
+                            field = dropDownMenu(items = viewModel.getFields(), menuWidth = 60)
 
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
@@ -164,16 +151,23 @@ fun NewTrainingPage(navController: NavController){
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
                             )
-                            Row() {
-                                Column() {
-                                    Text(text = "Måned")
-                                    month = dropDownMenu(items = months, menuWidth = 110)
+                            Button(
+                                onClick = { dateDialogState.show() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text(text = date.value)
+                            }
+                            MaterialDialog(
+                                dialogState = dateDialogState,
+                                buttons = {
+                                    positiveButton("Ok")
+                                    negativeButton("Cancel")
                                 }
-                                Spacer(modifier = Modifier.padding(start = 20.dp))
-
-                                Column() {
-                                    Text(text = "Dag")
-                                    day = dropDownMenu(items = days, menuWidth = 60).toInt()
+                            ) {
+                                datepicker { dateChosen ->
+                                    date.value = dateChosen.toString()
+                                    println(date.value)
                                 }
                             }
 
@@ -181,41 +175,52 @@ fun NewTrainingPage(navController: NavController){
 
 
 
-                            Text(
+                                                        Text(
                                 text = "Tidspunkt",
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
                             )
-                            Row() {
-                                Column() {
-                                    Text(text = "Start", fontWeight = FontWeight.Bold)
-                                    Text(text = "Time")
-                                    startHour = dropDownMenu(items = hours, menuWidth = 60).toInt()
+                            Text(text = "Start", fontWeight = FontWeight.Bold)
+                            Button(
+                                onClick = { startTimeDialogState.show() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text(text = startTime.value)
+                            }
+                            MaterialDialog(
+                                dialogState = startTimeDialogState,
+                                buttons = {
+                                    positiveButton("Ok")
+                                    negativeButton("Cancel")
                                 }
-                                Spacer(modifier = Modifier.padding(start = 20.dp))
-                                Column() {
-                                    Text(text = "T", fontWeight = FontWeight.Bold, color = colorResource(
-                                        R.color.bookingBackground))
-                                    Text(text = "Minut")
-                                    startMin = dropDownMenu(items = minutes, menuWidth = 60).toInt()
+                            ) {
+                                timepicker { time ->
+                                    startTime.value = time.toString()
+                                    println(startTime.value)
                                 }
                             }
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
-                            Row() {
-                                Column() {
-                                    Text(text = "Slut", fontWeight = FontWeight.Bold)
-                                    Text(text = "Time")
-                                    endHour = dropDownMenu(items = hours, menuWidth = 60).toInt()
+                            Text(text = "Slut", fontWeight = FontWeight.Bold)
+                            Button(
+                                onClick = { endTimeDialogState.show() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text(text = endTime.value)
+                            }
+                            MaterialDialog(
+                                dialogState = endTimeDialogState,
+                                buttons = {
+                                    positiveButton("Ok")
+                                    negativeButton("Cancel")
                                 }
-                                Spacer(modifier = Modifier.padding(start = 20.dp))
-                                Column() {
-                                    Text(text = "T", fontWeight = FontWeight.Bold, color = colorResource(
-                                        R.color.bookingBackground))
-                                    Text(text = "Minut")
-                                    endMin = dropDownMenu(items = minutes, menuWidth = 60).toInt()
+                            ) {
+                                timepicker { time ->
+                                    endTime.value = time.toString()
                                 }
                             }
 
@@ -231,7 +236,7 @@ fun NewTrainingPage(navController: NavController){
                                 text = "Max antal deltagere",
 
                                 )
-                            maxParticipants = dropDownMenu(items = minutes, menuWidth = 60).toInt()
+                            maxParticipants = dropDownMenu(items = viewModel.getParticipantList(), menuWidth = 60).toInt()
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
