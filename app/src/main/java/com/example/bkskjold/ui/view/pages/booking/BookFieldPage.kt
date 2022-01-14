@@ -24,8 +24,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.Locations
-import com.example.bkskjold.data.model.firebaseAdapter.newTrainingFromBooking
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
+import com.vanpra.composematerialdialogs.MaterialDialog
+import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.vanpra.composematerialdialogs.datetime.time.timepicker
+import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import java.text.DateFormatSymbols
 
 @Composable
@@ -51,27 +54,41 @@ fun BookFieldPage(navController: NavController){
     for (i in 1..60){
         minutes.add(i.toString())
     }
-    var field = Locations.A.toString()
+
     var month = "January"
     var day = 1
     var startHour = 1
     var startMin = 0
     var endHour = 1
     var endMin = 0
+
+
+    var field = Locations.A.toString()
     var maxParticipants = 1
     val description =  remember { mutableStateOf(TextFieldValue()) }
+    val date =  remember { mutableStateOf("Vælg dato") }
+    val startTime =  remember { mutableStateOf("Vælg starttid") }
+    val endTime =  remember { mutableStateOf("Vælg sluttid") }
+
+
 
     val showDialog = remember {mutableStateOf(false)}
     if (showDialog.value) {
         Toast.makeText(LocalContext.current, "Bookning af bane oprettet", Toast.LENGTH_SHORT).show()
     }
 
+    val dateDialogState = rememberMaterialDialogState()
+    val startTimeDialogState = rememberMaterialDialogState()
+    val endTimeDialogState = rememberMaterialDialogState()
+
+
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
-                    showDialog.value = true
+                    
+                    /*showDialog.value = true
                     newTrainingFromBooking(
                               location = field,
                               month = month,
@@ -83,7 +100,7 @@ fun BookFieldPage(navController: NavController){
                               maxParticipants = maxParticipants,
                               description = description.value.text,
                               navController = navController
-                          )
+                          )*/
                 },
                 icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
                 modifier = Modifier.padding(bottom = 60.dp),
@@ -120,6 +137,8 @@ fun BookFieldPage(navController: NavController){
                             )
                         }
                     }
+
+
                     Box(modifier = Modifier
                         .wrapContentHeight()
                         .fillMaxWidth()
@@ -144,22 +163,23 @@ fun BookFieldPage(navController: NavController){
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
                             )
-                            Row() {
-                                Column() {
-                                    Text(text = "Måned")
-                                    month = dropDownMenu(items = months, menuWidth = 110)
+                            Button(onClick = { dateDialogState.show() }) {
+                                Text(text = date.value)
+                            }
+                            MaterialDialog(
+                                dialogState = dateDialogState,
+                                buttons = {
+                                    positiveButton("Ok")
+                                    negativeButton("Cancel")
                                 }
-                                Spacer(modifier = Modifier.padding(start = 20.dp))
-
-                                Column() {
-                                    Text(text = "Dag")
-                                    day = dropDownMenu(items = days, menuWidth = 60).toInt()
+                            ) {
+                                datepicker { dateChosen ->
+                                    date.value = dateChosen.toString()
                                 }
                             }
 
+
                             Spacer(modifier = Modifier.padding(top = 40.dp))
-
-
 
                             Text(
                                 text = "Tidspunkt",
@@ -167,35 +187,45 @@ fun BookFieldPage(navController: NavController){
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
                             )
-                            Row() {
-                                Column() {
-                                    Text(text = "Start", fontWeight = FontWeight.Bold)
-                                    Text(text = "Time")
-                                    startHour = dropDownMenu(items = hours, menuWidth = 60).toInt()
+                            Text(text = "Start", fontWeight = FontWeight.Bold)
+                            Button(
+                                onClick = { startTimeDialogState.show() },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text(text = startTime.value)
+                            }
+                            MaterialDialog(
+                                dialogState = startTimeDialogState,
+                                buttons = {
+                                    positiveButton("Ok")
+                                    negativeButton("Cancel")
                                 }
-                                Spacer(modifier = Modifier.padding(start = 20.dp))
-                                Column() {
-                                    Text(text = "T", fontWeight = FontWeight.Bold, color = colorResource(R.color.bookingBackground))
-                                    Text(text = "Minut")
-                                    startMin = dropDownMenu(items = minutes, menuWidth = 60).toInt()
+                            ) {
+                                timepicker { time ->
+                                    startTime.value = time.toString()
                                 }
                             }
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
-                            Row() {
-                                Column() {
-                                    Text(text = "Slut", fontWeight = FontWeight.Bold)
-                                    Text(text = "Time")
-                                    endHour = dropDownMenu(items = hours, menuWidth = 60).toInt()
+                            Text(text = "Slut", fontWeight = FontWeight.Bold)
+                            Button(onClick = { endTimeDialogState.show() }) {
+                                Text(text = endTime.value)
+                            }
+                            MaterialDialog(
+                                dialogState = endTimeDialogState,
+                                buttons = {
+                                    positiveButton("Ok")
+                                    negativeButton("Cancel")
                                 }
-                                Spacer(modifier = Modifier.padding(start = 20.dp))
-                                Column() {
-                                    Text(text = "T", fontWeight = FontWeight.Bold, color = colorResource(R.color.bookingBackground))
-                                    Text(text = "Minut")
-                                    endMin = dropDownMenu(items = minutes, menuWidth = 60).toInt()
+                            ) {
+                                timepicker { time ->
+                                    endTime.value = time.toString()
                                 }
                             }
+
+
 
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
