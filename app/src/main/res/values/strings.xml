@@ -19,6 +19,7 @@
     <!-- HomePage -->
     <string name="nextTraining">Næste Træning</string>
     <string name="trainingFor">Træning for</string>
+    <string name="noTraining">Du er ikke tilmeldt nogle træninger</string>
     <string name="Invite">Inviter</string>
     <string name="deregister">Afmeld</string>
     <string name="news">Nyheder</string>

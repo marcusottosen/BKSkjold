@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -83,13 +84,24 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                         text = stringResource(R.string.nextTraining),
                         color = Color.White
                     )
-                    Text(// Header
-                        text = stringResource(R.string.trainingFor) + " " + training.league,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 5.dp),
-                        color = Color.White
-                    )
+                    if (training.location != "Du deltager ikke i nogen træninger!"){
+                        Text(// Header
+                            text = stringResource(R.string.trainingFor) + " " + training.league,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 5.dp),
+                            color = Color.White
+                        )
+                    }else{
+                        Text(// Header
+                            text = stringResource(R.string.noTraining),
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 5.dp),
+                            color = Color.White
+                        )
+                    }
+
 
                     Spacer(modifier = Modifier.height(20.dp))
 
@@ -198,12 +210,22 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier.size(15.dp),
                             )
-                            Text(
-                                text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
-                                fontSize = 10.sp,
-                                modifier = Modifier
-                                    .padding(start = 5.dp)
-                            )
+                            if (training.location != "Du deltager ikke i nogen træninger!"){
+                                Text(
+                                    text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
+                                    fontSize = 10.sp,
+                                    modifier = Modifier
+                                        .padding(start = 5.dp)
+                                )
+                            }else{
+                                Text(
+                                    text = "N/A",
+                                    fontSize = 10.sp,
+                                    modifier = Modifier
+                                        .padding(start = 5.dp)
+                                )
+                            }
+
                         }
                     }
                 }
@@ -233,9 +255,9 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                         .fillMaxHeight()
                         .padding(end = 30.dp)
                         .clickable {
-                            if (training.participants.contains(userId)){
+                            if (training.participants.contains(userId)) {
                                 training.participants.remove(userId)
-                            }else{
+                            } else {
                                 training.participants.add(userId)
                             }
                             training = updateParticipants(training, participants, userId)
@@ -260,14 +282,15 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                         )
                     }else{
                         Image(
-                            painter = painterResource(id = R.drawable.icon_home_cancel_button),
+                            painter = painterResource(id = R.drawable.icon_home_accept_button),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
+                            //colorFilter = ColorFilter.tint(Color(0xFF698C44)),
                             modifier = Modifier
                                 .size(40.dp)
                         )
                         Text(
-                            text = stringResource(R.string.deregister),
+                            text = stringResource(R.string.Attend),
                             fontSize = 10.sp,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
