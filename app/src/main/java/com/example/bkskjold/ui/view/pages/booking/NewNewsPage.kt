@@ -1,13 +1,11 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.booking
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
@@ -27,25 +25,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.newNews
+import com.example.bkskjold.ui.viewmodel.DocumentCreationViewModel
 
 @Composable
 fun NewNewsPage(navController: NavController){
+    val viewModel = DocumentCreationViewModel()
     val header =  remember { mutableStateOf(TextFieldValue()) }
     val description =  remember { mutableStateOf(TextFieldValue()) }
-
-    val showDialog = remember {mutableStateOf(false)}
-    if (showDialog.value) {
-        Toast.makeText(LocalContext.current, "Nyhed oprettet", Toast.LENGTH_SHORT).show()
-    }
+    val context = LocalContext.current
 
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 text = { Text(text = "Save", color = Color.White) },
                 onClick = {
-                    showDialog.value = true
-                    newNews(header.value.text,description.value.text,navController)
+                    viewModel.newNews(
+                        header.value.text,
+                        description.value.text,
+                        navController,
+                        context = context
+                    )
                 },
                 icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
                 modifier = Modifier.padding(bottom = 60.dp),
@@ -60,7 +59,7 @@ fun NewNewsPage(navController: NavController){
                     .wrapContentSize(Alignment.TopCenter)
             ) {
                 item {
-                    Box() {
+                    Box {
                         Button(
                             modifier = Modifier
                                 .padding(top = 10.dp)

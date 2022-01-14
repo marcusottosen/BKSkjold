@@ -49,39 +49,10 @@ class EventDB() {
     }
 }
 
-fun newEvent(
-    header: String,
-    description: String,
-    location: String,
-    participants: MutableList<String>,
-    month: String,
-    day: Int,
-    startHour: Int,
-    startMin: Int,
-    endHour: Int,
-    endMin: Int,
-    price: Int,
-    navController: NavController
-){
-    val dateformat = "yyyy-MM-dd-k-m"
-    val startTimestamp = com.google.firebase.Timestamp(
-        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$startHour-$startMin").toString()))
-    val endTimestamp = com.google.firebase.Timestamp(
-        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$endHour-$endMin").toString()))
-
-    val event = Event(
-        timeStart = startTimestamp,
-        timeEnd = endTimestamp,
-        location = location,
-        participants = participants,
-        price = price,
-        header = header,
-        description = description
-    )
-
+fun addEventToDB(item: Event, navController: NavController){
     val db = Firebase.firestore
     db.collection("events")
-        .add(event)
+        .add(item)
         .addOnSuccessListener { documentReference ->
             Log.d(
                 ContentValues.TAG,

@@ -119,72 +119,7 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
     return training
 }
 
-fun newTrainingFromBooking(
-    location: String,
-    month: String,
-    day: Int,
-    startHour: Int,
-    startMin: Int,
-    endHour: Int,
-    endMin: Int,
-    maxParticipants: Int,
-    description: String,
-    navController: NavController
-) {
-    val dateformat = "yyyy-MM-dd-k-m"
-    val startTimestamp = com.google.firebase.Timestamp(
-        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$startHour-$startMin").toString()))
-    val endTimestamp = com.google.firebase.Timestamp(
-        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$endHour-$endMin").toString()))
-
-    val booking = Training(
-        timeStart = startTimestamp,
-        timeEnd = endTimestamp,
-        location = location,
-        league = "Brugerbooking",
-        trainer = CurrentUser.id,
-        description = description,
-        maxParticipants = maxParticipants,
-        participants = listOf(CurrentUser.id) as MutableList<String>,
-        userBooking = true,
-    )
-    addToDB(booking, navController)
-}
-
-fun newTraining(
-    location: String,
-    month: String,
-    day: Int,
-    startHour: Int,
-    startMin: Int,
-    endHour: Int,
-    endMin: Int,
-    maxParticipants: Int,
-    team: String,
-    description: String,
-    navController: NavController
-){
-    val dateformat = "yyyy-MM-dd-k-m"
-    val startTimestamp = com.google.firebase.Timestamp(
-        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$startHour-$startMin").toString()))
-    val endTimestamp = com.google.firebase.Timestamp(
-        SimpleDateFormat(dateformat).parse(("2022-${getMonthFromString(month)}-$day-$endHour-$endMin").toString()))
-
-    val training = Training(
-        timeStart = startTimestamp,
-        timeEnd = endTimestamp,
-        location = location,
-        league = team,
-        trainer = CurrentUser.id,
-        description = description,
-        maxParticipants = maxParticipants,
-        participants = mutableListOf<String>(),
-        userBooking = false,
-    )
-    addToDB(training, navController)
-}
-
-fun addToDB(item: Training, navController: NavController){
+fun addTrainingToDB(item: Training, navController: NavController){
     val db = Firebase.firestore
     db.collection("trainings")
         .add(item)
