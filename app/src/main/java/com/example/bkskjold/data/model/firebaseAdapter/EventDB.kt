@@ -31,6 +31,7 @@ class EventDB() {
                             timeStart = doc["timeStart"] as Timestamp,
                             timeEnd = doc["timeEnd"] as Timestamp,
                             location = doc["location"] as String,
+                            participants = doc["participants"] as MutableList<String>,
                             price = (doc["price"] as Number).toInt(),
                             header = doc["header"] as String,
                             description = doc["description"] as String
