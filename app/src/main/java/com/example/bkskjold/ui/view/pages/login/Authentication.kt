@@ -161,3 +161,4 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
         }
     }
 }
+

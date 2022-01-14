@@ -1,5 +1,6 @@
 package com.example.bkskjold.ui.view.pages
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,6 +24,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -113,6 +115,8 @@ fun LoginView(
     val email: String by loginViewModel.email.observeAsState("")
     val password: String by loginViewModel.password.observeAsState("")
     val loading: Boolean by loginViewModel.loading.observeAsState(initial = false)
+
+    val context = LocalContext.current
 
 
     Box(
@@ -272,7 +276,12 @@ fun LoginView(
                             Spacer(modifier = Modifier.height(8.dp))
 
                             Button(
-                                onClick = { loginViewModel.resetPassword() },
+                                onClick = { loginViewModel.resetPassword()
+                                    Toast.makeText(
+                                        context,
+                                        "Nulstillelse sendt til valgte email",
+                                        Toast.LENGTH_LONG
+                                    ).show()},
                                 modifier = Modifier
                                     .width(340.dp)
                                     .height(60.dp)
