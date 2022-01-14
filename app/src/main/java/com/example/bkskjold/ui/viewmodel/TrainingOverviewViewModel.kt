@@ -18,34 +18,47 @@ class TrainingOverviewViewModel {
     @Composable
     fun GetOverviewView(navController: NavController, date: String, timeStart: String, team: String){
         val trainings = TrainingModel().loadTrainingsFromDB()
+        val trainingsFinal: MutableList<Training> = mutableListOf()
+
+        for (item in trainings){
+            if (!item.userBooking){
+                trainingsFinal.add(item)
+            }
+        }
 
         //Filter only if filter is applied
         if(date == "" && timeStart == "" && team == ""){
             LazyColumn {
-                items(trainings.size) { i ->
-                    TrainingCard(training = trainings[i], navController)
+                items(trainingsFinal.size) { i ->
+                    TrainingCard(training = trainingsFinal[i], navController)
                 }
                 item{ Spacer(modifier = Modifier.height(80.dp))}
             }
         }else{
-            FilterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings, team = team)
+            FilterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainingsFinal, team = team)
         }
     }
 
     @Composable
     fun GetSignedUpView(navController: NavController, date: String, timeStart: String, team: String){
         val trainings = getSignedUpTrainings()
+        val trainingsFinal: MutableList<Training> = mutableListOf()
 
+        for (item in trainings){
+            if (!item.userBooking){
+                trainingsFinal.add(item)
+            }
+        }
         //Filter only if filter is applied
         if (date == "" && timeStart == "" && team == ""){
             LazyColumn {
-                items(trainings.size) { i ->
-                    TrainingCard(training = trainings[i], navController)
+                items(trainingsFinal.size) { i ->
+                    TrainingCard(training = trainingsFinal[i], navController)
                 }
                 item{ Spacer(modifier = Modifier.height(80.dp))}
             }
         }else{
-            FilterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainings, team = team)
+            FilterAndSort(navController = navController, date = date, timeStart = timeStart, practices = trainingsFinal, team = team)
         }
     }
 
@@ -60,8 +73,8 @@ class TrainingOverviewViewModel {
                         filteredPractices.add(i)
                     }
                 }else if (timeStart != "" && date == "" && team == ""){
-                    var THISTIMESTART = getTime(i.timeStart)
-                    print("")
+                    //var THISTIMESTART = getTime(i.timeStart)
+                    //print("")
                     if (getTime(i.timeStart).toString() == timeStart){
                         filteredPractices.add(i)
                     }
