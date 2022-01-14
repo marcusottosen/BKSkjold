@@ -5,9 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.dataClass.Event
+import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.util.getMonthFromString
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
@@ -51,6 +53,7 @@ fun newEvent(
     header: String,
     description: String,
     location: String,
+    participants: MutableList<String>,
     month: String,
     day: Int,
     startHour: Int,
@@ -70,6 +73,7 @@ fun newEvent(
         timeStart = startTimestamp,
         timeEnd = endTimestamp,
         location = location,
+        participants = participants,
         price = price,
         header = header,
         description = description
@@ -92,6 +96,50 @@ fun newEvent(
         .addOnFailureListener { e ->
             Log.w(ContentValues.TAG, "Error adding document", e)
         }
+}
+
+
+fun updateEventParticipants(event: Event, participants: MutableList<String>, userId: String): Event {
+    var event = event
+
+    val db = Firebase.firestore
+    db.collection("events")
+        .get()
+        .addOnSuccessListener { result ->
+            for (doc in result) {
+                if (doc["timeStart"] == event.timeStart && doc["location"] == event.location && doc["description"] == event.description){
+
+                    //Create a mutable list, so we can add items to it.
+                    var mutableParticipants = participants
+
+                    //This if statement is now done in the onclicks calling this method, instead of in this method.
+                    /*if (mutableParticipants.contains(userId)){
+                        mutableParticipants.remove(userId)
+                    }else{
+                        mutableParticipants.add(userId)
+                    }*/
+
+                    //map of field to update
+                    var updatedEvent = hashMapOf(
+                        "participants" to mutableParticipants
+                    )
+
+                    //Update field
+                    val updateable = db.collection("events").document(doc.id)
+                    updateable
+                        .set(updatedEvent, SetOptions.merge())
+                        .addOnSuccessListener { Log.d(ContentValues.TAG, "DocumentSnapshot successfully updated!") }
+                        .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error updating document", e) }
+
+                    //Finally update participant on training object, so it can be returned later in the method
+                    event.participants = mutableParticipants
+                }
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+        }
+    return event
 }
 
 

@@ -8,7 +8,7 @@ data class Event(
     val timeStart: com.google.firebase.Timestamp,
     val timeEnd: com.google.firebase.Timestamp,
     val location: String,
-    var participants: MutableList<String> = mutableListOf(),
+    var participants: MutableList<String>,
     val price: Int,
     val header: String,
     val description: String

@@ -26,6 +26,7 @@ import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.Locations
 import com.example.bkskjold.data.model.firebaseAdapter.newEvent
 import com.example.bkskjold.data.model.firebaseAdapter.newTrainingFromBooking
+import com.example.bkskjold.data.model.firebaseAdapter.participants
 import com.example.bkskjold.ui.view.reusables.dropDownMenu
 import java.text.DateFormatSymbols
 
@@ -67,6 +68,7 @@ fun CreateEventPage(navController: NavController){
     var price = 0
     val header =  remember { mutableStateOf(TextFieldValue()) }
     val description =  remember { mutableStateOf(TextFieldValue()) }
+    val participants = mutableListOf<String>()
 
     val showDialog = remember {mutableStateOf(false)}
     if (showDialog.value) {
@@ -81,6 +83,7 @@ fun CreateEventPage(navController: NavController){
                     showDialog.value = true
                     newEvent(
                         location = location,
+                        participants = participants,
                         month = month,
                         day = day,
                         startHour = startHour,
