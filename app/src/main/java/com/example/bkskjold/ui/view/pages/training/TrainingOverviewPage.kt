@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
@@ -224,5 +225,5 @@ fun trainingOverview(navController: NavController) {
 
 fun gotoTrainingDetails(training: Training, navController: NavController){
     navController.currentBackStackEntry?.arguments?.putParcelable("training", training)
-    navController.navigate("trainingDetails")
+    navController.navigate(NavigationRoute.TrainingDetails.route)
 }

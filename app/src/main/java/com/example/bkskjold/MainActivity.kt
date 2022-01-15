@@ -9,8 +9,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.example.bkskjold.data.model.firebaseAdapter.updateCurrentUser
-import com.example.bkskjold.ui.viewmodel.BottomNavigationBar
-import com.example.bkskjold.ui.viewmodel.Navigation
+import com.example.bkskjold.data.util.BottomNavigationBar
+import com.example.bkskjold.data.util.Navigation
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

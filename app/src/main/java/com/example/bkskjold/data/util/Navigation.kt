@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.viewmodel
+package com.example.bkskjold.data.util
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.size
@@ -19,24 +19,21 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.bkskjold.MainScreen
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
+import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.model.updateFAQ
-import com.example.bkskjold.data.util.LoadFromDB
 import com.example.bkskjold.ui.view.pages.*
 import com.example.bkskjold.ui.view.pages.booking.BookFieldPage
 import com.example.bkskjold.ui.view.pages.booking.NewNewsPage
 import com.example.bkskjold.ui.view.pages.event.CreateEventPage
 import com.example.bkskjold.ui.view.pages.event.eventOverview
+import com.example.bkskjold.ui.view.pages.profile.profileOverview
 import com.example.bkskjold.ui.view.pages.training.NewTrainingPage
+import com.example.bkskjold.ui.viewmodel.Action
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
-
-/**
- * NavBar inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
- */
 
 @ExperimentalMaterialApi
 @ExperimentalFoundationApi
@@ -44,7 +41,7 @@ import com.google.firebase.ktx.Firebase
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination =
     if (Firebase.auth.currentUser != null)
-        "loadFromDB"
+        NavigationRoute.LoadFromDB.route
     else
         "authenticationOption"
 
@@ -88,60 +85,58 @@ fun Navigation(navController: NavHostController) {
         }
 
         //Load before homepage is shown
-        composable("loadFromDB") {
+        composable(NavigationRoute.LoadFromDB.route) {
             LoadFromDB(navController)
         }
 
-
         //Subpages
-        composable("trainingDetails"){
+        composable(NavigationRoute.TrainingDetails.route){
             val trainingModel = navController.previousBackStackEntry?.arguments?.getParcelable<Training>("training")
             trainingModel?.let { 
                 TrainingInfoPage(training = it, navController = navController)
             }
         }
-        composable("eventDetails"){
+        composable(NavigationRoute.EventDetails.route){
             val eventModel = navController.previousBackStackEntry?.arguments?.getParcelable<Event>("event")
             eventModel?.let {
                 EventInfoPage(event = it, navController = navController)
             }
         }
-        composable("settingsPage"){
+        composable(NavigationRoute.SettingsPage.route){
             val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
             settingModel?.let {
                 settingsPage(navController = navController)
             }
         }
-
-        composable("editProfile"){
+        composable(NavigationRoute.EditProfile.route){
             val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
             settingModel?.let {
                editProfilePage(navController = navController)
             }
         }
-        composable("bookedFieldsPage") {
+        composable(NavigationRoute.BookedFieldsPage.route) {
             BookedFieldsPage(navController)
         }
-        composable("bookFieldPage") {
+        composable(NavigationRoute.BookFieldPage.route) {
             BookFieldPage(navController)
         }
-        composable("faqPage") {
+        composable(NavigationRoute.FaqPage.route) {
             FaqPage(navController)
         }
-        composable("adminPanel") {
+        composable(NavigationRoute.AdminPanel.route) {
             AdminPanel(navController)
         }
-        composable("newTrainingPage") {
+        composable(NavigationRoute.NewTrainingPage.route) {
             NewTrainingPage(navController)
         }
-        composable("newNewsPage") {
+        composable(NavigationRoute.NewNewsPage.route) {
             NewNewsPage(navController)
         }
-        composable("createEventPage") {
+        composable(NavigationRoute.CreateEventPage.route) {
             CreateEventPage(navController)
         }
     }
-} //Læs guide nedenfor til navigation!
+}
 
 /**
  * GUIDE TIL SIMPEL SUB-NAVIGATION
@@ -150,41 +145,12 @@ fun Navigation(navController: NavHostController) {
  *      (Hvis Button brug onClick = { navController.navigate("BookedFieldsPage")}
  *
  * Brug onClick = { navController.navigateUp() ved en tilbageknap
- *
- *
- * GUIDE TIL SUB-NAVIGATION MED OBJEKT
- * (ved objekt i parameter)
- * 1.
- *   Ovenfor copypaste den nederste composable og ret den til. Der er 6 steder der skal ændres til den ønskede side.
- *      "route" er stien den leder efter, så dette skal skrives ved punkt 2.
- *      den val der oprettes skal rettes til hvor .getParcelable<###> indeholder det objekt der parses. key bruges også ved punkt 2.
- *      Den nederste metode er sidens function. Skal indeholde navController hvis der skal navigeres fra den (DVS. ALTID!)
- *
- *  2.
- *      På siden der navigeres FRA (fx EventOverviewPage) copy/pastes nedenstående
-                fun gotoEventDetails(event: Event, navController: NavController){
-                navController.currentBackStackEntry?.arguments?.putParcelable("event", event)
-                navController.navigate("eventDetails")
-                }
- *      Hvor første parameter er variablen den skal overføre. Husk at ændre navnet på funktionen
- *      Linje 2 bør være sigende hvor "event" svarer til key fra punkt 1.
- *      Linje 3 skal "route" indsættes fra den oprettede composable i Navigation.
- *
- *  3.
- *      På knappen på siden der navigeres FRA (fx et card/button) skal der i modifier stå .clickable {navn på funktion fra punkt 2(variable/object, navController)}
- *      fx ved Card: modifier = Modifier.clickable { gotoEventDetails(event, navController)}
- *      Hvis en knap: onClick = {gotoEventDetails(event, navController)}
- *
- * 4.
- *      For at returnere fra den nye side skrives onClick = { navController.navigateUp() ved en knap
- *
- *
- * ps. Lidt anderledes ved overførsel af andre types
- *
- *
- * Spørgsmål spørg Marcus
  */
 
+
+/**
+ * NavBar inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
+ */
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
@@ -209,9 +175,6 @@ fun BottomNavigationBar(navController: NavController) {
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {
-                        // Pop up to the start destination of the graph to
-                        // avoid building up a large stack of destinations
-                        // on the back stack as users select items
                         navController.graph.startDestinationRoute?.let { route ->
                             popUpTo(route) {
                                 saveState = true
@@ -221,7 +184,7 @@ fun BottomNavigationBar(navController: NavController) {
                         // reselecting the same item
                         launchSingleTop = true
                         // Restore state when reselecting a previously selected item
-                        restoreState = true
+                        restoreState = false
                     }
                 }
             )

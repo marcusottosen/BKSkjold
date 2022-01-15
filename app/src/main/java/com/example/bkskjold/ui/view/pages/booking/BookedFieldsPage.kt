@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
+import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.firebaseAdapter.getBookings
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 
@@ -29,7 +30,7 @@ fun BookedFieldsPage(navController: NavController){
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 text = { Text(text = "Book bane", color = Color.White) },
-                onClick = { navController.navigate("bookFieldPage") },
+                onClick = { navController.navigate(NavigationRoute.BookFieldPage.route) },
                 icon = { Icon(Icons.Filled.Add, "", tint = Color.White)},
                 modifier = Modifier.padding(bottom = 60.dp),
                 backgroundColor = colorResource(id = R.color.green)

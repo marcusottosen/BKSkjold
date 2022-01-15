@@ -25,8 +25,8 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.User
-import com.example.bkskjold.ui.view.pages.gotoEditProfilePage
-import com.example.bkskjold.ui.view.pages.gotoSettingsPage
+import com.example.bkskjold.ui.view.pages.profile.gotoEditProfilePage
+import com.example.bkskjold.ui.view.pages.profile.gotoSettingsPage
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 import com.example.bkskjold.ui.viewmodel.logoutUser
 import com.google.firebase.auth.FirebaseAuth

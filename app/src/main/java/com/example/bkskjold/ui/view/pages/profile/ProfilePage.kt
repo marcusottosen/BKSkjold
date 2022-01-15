@@ -1,10 +1,9 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.profile
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
@@ -17,23 +16,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.bkskjold.data.model.*
 import com.example.bkskjold.data.model.InvitationData
+import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.model.firebaseAdapter.users
 import com.example.bkskjold.ui.view.reusables.DefaultProfileHeader
 import com.example.bkskjold.ui.view.reusables.InvitationCard
 import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
 
-//class ProfilePage { }
 @Composable
 fun profileOverview(navController: NavController) {
 
-    val currentUser = users[3] //TODO Skal bruge den user der er logget ind! Lav function i UserDB.kt
+    val currentUser = users[1] //TODO Få CurrentUser igennem en ViewModel!
 
     LazyColumn(
         //verticalArrangement = Arrangement.spacedBy(30.dp)
-    modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize()
 
     ) {
         item {
@@ -46,7 +44,7 @@ fun profileOverview(navController: NavController) {
 
         item {
             Column(modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally) {
+                horizontalAlignment = Alignment.CenterHorizontally) {
 
                 OutlinedButton(
                     onClick = { gotoFaqPage(navController) },
@@ -60,7 +58,7 @@ fun profileOverview(navController: NavController) {
                         backgroundColor = Color.Transparent
                     )
 
-                    ) {
+                ) {
                     Text(
                         text = "FAQs",
                         color = Color.Black,
@@ -72,11 +70,11 @@ fun profileOverview(navController: NavController) {
         }
 
         item { Text(modifier = Modifier
-           .fillMaxWidth(),
-               text = "Invitationer",
+            .fillMaxWidth(),
+            text = "Invitationer",
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
-           fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold
         ) }
 
         item {
@@ -85,7 +83,7 @@ fun profileOverview(navController: NavController) {
                     .height(280.dp)
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.Center)
-                ) {
+            ) {
 
                 items(inviInfo.size)  { i ->
                     InvitationCard(
@@ -102,17 +100,12 @@ fun profileOverview(navController: NavController) {
 
 fun gotoSettingsPage(user: User, navController: NavController){
     navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
-    navController.navigate("settingsPage")
+    navController.navigate(NavigationRoute.SettingsPage.route)
 }
 fun gotoEditProfilePage(user: User, navController: NavController){
     navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
-    navController.navigate("editProfile")
+    navController.navigate(NavigationRoute.SettingsPage.route)
 }
-
 fun gotoFaqPage(navController: NavController){
-    navController.navigate("faqPage")
+    navController.navigate(NavigationRoute.FaqPage.route)
 }
-
-
-
-

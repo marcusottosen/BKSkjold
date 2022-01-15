@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.bkskjold.R
+import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.ui.viewmodel.EventOverviewViewModel
 
@@ -24,5 +25,5 @@ fun eventOverview(navController: NavController){
 
 fun gotoEventDetails(event: Event, navController: NavController){
     navController.currentBackStackEntry?.arguments?.putParcelable("event", event)
-    navController.navigate("eventDetails")
+    navController.navigate(NavigationRoute.EventDetails.route)
 }
