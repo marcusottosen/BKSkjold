@@ -18,11 +18,13 @@ fun getDay(timestamp: com.google.firebase.Timestamp): String{
 
 //13:30
 fun getTime(timestamp: com.google.firebase.Timestamp): String {
-    val hour = timestamp.toDate().hours.toString()
+    var hour = timestamp.toDate().hours.toString()
     var minute = timestamp.toDate().minutes.toString()
-
     if (minute.length == 1) {
         minute += 0
+    }
+    if (hour.length == 1){
+        hour = "0$hour"
     }
     return "${hour}:${minute}"
 }
