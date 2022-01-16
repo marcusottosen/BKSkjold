@@ -1,7 +1,4 @@
-package com.example.bkskjold.ui.view.pages
-
-
-//resources and files
+package com.example.bkskjold.ui.view.pages.training
 import android.widget.CalendarView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -21,7 +18,6 @@ import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 
 
-//class TrainingOverviewPage {
 @Composable
 fun trainingOverview(navController: NavController) {
     val shouldShowOverview = remember { mutableStateOf(true) }
@@ -42,23 +38,23 @@ fun trainingOverview(navController: NavController) {
 
 
     //passed filter values
-    var tidspunkt = remember { mutableStateOf("") }
-    var team = remember { mutableStateOf("") }
-    var date = remember { mutableStateOf("") }
+    val tidspunkt = remember { mutableStateOf("") }
+    val team = remember { mutableStateOf("") }
+    val date = remember { mutableStateOf("") }
 
     val viewModel = TrainingOverviewViewModel()
 
     Column (
-        verticalArrangement = Arrangement.spacedBy(30.dp)
+        //verticalArrangement = Arrangement.spacedBy(30.dp)
     ){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 50.dp)
+                .padding(top = 30.dp)
             ,
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
-            val overViewButton = Button(
+            Button(
                 onClick = { shouldShowOverview.value = true },
                 shape = RoundedCornerShape(14.dp),
                 colors = ButtonDefaults.buttonColors(
@@ -69,7 +65,7 @@ fun trainingOverview(navController: NavController) {
                 ){
                 Text(text = "Alle Træninger", color = colorResource(id = R.color.main_background))
             }
-            val signedUpButton = Button(
+            Button(
                 onClick = { shouldShowOverview.value = false },
                 shape = RoundedCornerShape(14.dp),
                 colors = ButtonDefaults.buttonColors(
@@ -85,7 +81,7 @@ fun trainingOverview(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(end = 10.dp)
+                .padding(0.dp, 10.dp, 15.dp, 10.dp)
             , verticalArrangement = Arrangement.Center
             , horizontalAlignment = Alignment.End
 
@@ -107,7 +103,7 @@ fun trainingOverview(navController: NavController) {
                     .fillMaxWidth()
                     .background(colorResource(id = R.color.primary_light))
             ) {
-                Column() {
+                Column {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -206,7 +202,7 @@ fun trainingOverview(navController: NavController) {
                         , modifier = Modifier.wrapContentWidth()
                         , update = { views ->
                             views.setOnDateChangeListener { calendarView, year, month, day ->
-                                var monthShifted = month+1
+                                val monthShifted = month+1
                                 date.value = "$day/$monthShifted"
                                 //date.value = Util().dateFormatter(day, monthShifted)
                             }

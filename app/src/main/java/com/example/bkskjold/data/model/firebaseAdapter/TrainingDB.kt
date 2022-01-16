@@ -7,16 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.Training
-import com.example.bkskjold.data.util.getMonthFromString
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
 
 val trainings: MutableList<Training> = mutableListOf()
 
-class TrainingModel() {
+class TrainingModel {
     private val _loading = MutableLiveData(true)
     val loading: LiveData<Boolean> = _loading
 
@@ -49,7 +47,7 @@ class TrainingModel() {
                 }
             }
             .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: trainings", exception)
+                Log.d(TAG, "Error getting documents: trainings", exception)
             }
         return trainings
     }
@@ -77,8 +75,6 @@ fun getBookings(): MutableList<Training> {
 }
 
 fun updateParticipants(training: Training, participants: MutableList<String>, userId: String): Training {
-    var training = training
-
     val db = Firebase.firestore
     db.collection("trainings")
         .get()
@@ -87,7 +83,7 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
                 if (doc["timeStart"] == training.timeStart && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
 
                     //Create a mutable list, so we can add items to it.
-                    var mutableParticipants = participants
+                    val mutableParticipants = participants
 
                     //This if statement is now done in the onclicks calling this method, instead of in this method.
                     /*if (mutableParticipants.contains(userId)){
@@ -97,7 +93,7 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
                     }*/
 
                     //map of field to update
-                    var updatedTraining = hashMapOf(
+                    val updatedTraining = hashMapOf(
                         "participants" to mutableParticipants
                     )
 
@@ -113,8 +109,11 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
                 }
             }
         }
+        .addOnCompleteListener{
+            TrainingModel().loadTrainingsFromDB()
+        }
         .addOnFailureListener { exception ->
-            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            Log.d(TAG, "Error getting documents: ", exception)
         }
     return training
 }
@@ -125,7 +124,7 @@ fun addTrainingToDB(item: Training, navController: NavController){
         .add(item)
         .addOnSuccessListener { documentReference ->
             Log.d(
-                ContentValues.TAG,
+                TAG,
                 "DocumentSnapshot added with ID: ${documentReference.id}"
             )
         }
@@ -138,7 +137,7 @@ fun addTrainingToDB(item: Training, navController: NavController){
             }
         }
         .addOnFailureListener { e ->
-            Log.w(ContentValues.TAG, "Error adding document", e)
+            Log.w(TAG, "Error adding document", e)
         }
 }
 

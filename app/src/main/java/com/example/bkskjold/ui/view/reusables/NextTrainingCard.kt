@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -29,13 +28,12 @@ import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.firebaseAdapter.getUserFromID
-import com.example.bkskjold.data.model.firebaseAdapter.getUsersFromId
 import com.example.bkskjold.data.model.firebaseAdapter.updateParticipants
 import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.data.util.getWeekDay
-import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
+import com.example.bkskjold.ui.view.pages.training.gotoTrainingDetails
 
 
 @Composable

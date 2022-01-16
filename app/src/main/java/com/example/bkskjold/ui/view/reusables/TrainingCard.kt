@@ -30,7 +30,7 @@ import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.data.util.getWeekDay
-import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
+import com.example.bkskjold.ui.view.pages.training.gotoTrainingDetails
 
 @Composable
 fun TrainingCard(training: Training, navController: NavController) {

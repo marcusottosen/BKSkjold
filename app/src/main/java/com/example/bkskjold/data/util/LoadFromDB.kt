@@ -12,19 +12,13 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
-import com.example.bkskjold.data.model.NewsModel
+import com.example.bkskjold.data.model.firebaseAdapter.NewsModel
 import com.example.bkskjold.data.model.firebaseAdapter.EventDB
 import com.example.bkskjold.data.model.firebaseAdapter.TrainingModel
 import com.example.bkskjold.data.model.firebaseAdapter.UserDB
 
 @Composable
 fun LoadFromDB(navController: NavController){
-    //userWriteToDB()
-    //trainingsWriteToDB()
-    //eventWriteToDB()
-    //newsWriteToDB()
-
-
     val trainings = TrainingModel()
     val trainingsLoading: Boolean by trainings.loading.observeAsState(initial = true)
     trainings.loadTrainingsFromDB()
@@ -33,8 +27,7 @@ fun LoadFromDB(navController: NavController){
     val usersLoading: Boolean by users.loading.observeAsState(initial = true)
     users.loadUsersFromDB()
 
-    val events = EventDB() //bruges pt ikke på homepage
-    val eventsLoading: Boolean by events.loading.observeAsState(initial = true)
+    val events = EventDB()
     events.loadEventsFromDB()
 
     val news = NewsModel()

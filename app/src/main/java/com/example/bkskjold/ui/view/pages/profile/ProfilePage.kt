@@ -78,14 +78,13 @@ fun profileOverview(navController: NavController) {
         ) }
 
         item {
-            LazyColumn(
+            Column(
                 modifier = Modifier
                     .height(280.dp)
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.Center)
             ) {
-
-                items(inviInfo.size)  { i ->
+                for (i in inviInfo.indices){
                     InvitationCard(
                         inviInfo[i][0],
                         inviInfo[i][1],

@@ -1,11 +1,6 @@
 package com.example.bkskjold.data.util
 
 import android.icu.util.Calendar
-import android.os.Build
-import androidx.annotation.RequiresApi
-import java.text.DateFormat.getDateInstance
-import java.text.SimpleDateFormat
-import java.time.Month
 
 //11/1
 fun getDayMonth(timestamp: com.google.firebase.Timestamp): String{
@@ -22,15 +17,14 @@ fun getDay(timestamp: com.google.firebase.Timestamp): String{
 }
 
 //13:30
-fun getTime(timestamp: com.google.firebase.Timestamp): String{
-    var hour = timestamp.toDate().hours.toString()
+fun getTime(timestamp: com.google.firebase.Timestamp): String {
+    val hour = timestamp.toDate().hours.toString()
     var minute = timestamp.toDate().minutes.toString()
 
-    if (minute == "0"){
-        minute = "00"
+    if (minute.length == 1) {
+        minute += 0
     }
-    var passable = "${hour}:${minute}"
-    return passable
+    return "${hour}:${minute}"
 }
 
 //mandag
@@ -66,7 +60,7 @@ fun getWeekFromNum(num: Int): String{
         5 -> "fredag"
         6 -> "lørdag"
         7 -> "søndag"
-        else -> "null"
+        else -> "søndag"
     }
     return dayOfWeek
 }
@@ -87,22 +81,4 @@ fun getMonthFromNum(num: Int): String{
         else -> "null"
     }
     return month
-}
-fun getMonthFromString(month: String): Int{
-    val asInt: Int = when (month) {
-        "January" -> 1
-        "February" -> 2
-        "March" -> 3
-        "April" -> 4
-        "May" -> 5
-        "June" -> 6
-        "July" -> 7
-        "August" -> 8
-        "September" -> 9
-        "October" -> 10
-        "November" -> 11
-        "December" -> 12
-        else -> 1
-    }
-    return asInt
 }

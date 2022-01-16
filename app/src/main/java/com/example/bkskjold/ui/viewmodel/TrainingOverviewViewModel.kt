@@ -28,7 +28,7 @@ class TrainingOverviewViewModel {
 
         //Filter only if filter is applied
         if(date == "" && timeStart == "" && team == ""){
-            LazyColumn {
+            LazyColumn() {
                 items(trainingsFinal.size) { i ->
                     TrainingCard(training = trainingsFinal[i], navController)
                 }

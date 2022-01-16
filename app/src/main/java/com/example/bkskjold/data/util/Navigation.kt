@@ -32,6 +32,7 @@ import com.example.bkskjold.ui.view.pages.event.eventOverview
 import com.example.bkskjold.ui.view.pages.profile.profileOverview
 import com.example.bkskjold.ui.view.pages.training.NewTrainingPage
 import com.example.bkskjold.ui.view.pages.training.TrainingInfoPage
+import com.example.bkskjold.ui.view.pages.training.trainingOverview
 import com.example.bkskjold.ui.viewmodel.Action
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

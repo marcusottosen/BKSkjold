@@ -23,7 +23,7 @@ import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.firebaseAdapter.trainings
-import com.example.bkskjold.data.model.news
+import com.example.bkskjold.data.model.firebaseAdapter.news
 import com.example.bkskjold.ui.view.reusables.HomePageCategories
 import com.example.bkskjold.ui.view.reusables.NewsCard
 import com.example.bkskjold.ui.view.reusables.NextTrainingCard

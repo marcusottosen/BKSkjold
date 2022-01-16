@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.model.dataClass.Training
-import com.example.bkskjold.data.util.getMonthFromString
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions

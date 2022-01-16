@@ -1,17 +1,11 @@
-package com.example.bkskjold.data.model
+package com.example.bkskjold.data.model.firebaseAdapter
 
 import android.content.ContentValues
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.dataClass.News
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -66,17 +60,9 @@ fun addNewsToDB(item: News, navController: NavController){
                 val update = NewsModel()
                 update.loadNewsFromDB()
                 navController.navigate("adminPanel")
-                //Toast.makeText(this@newNews, "aaaa", Toast.LENGTH_SHORT).show()
             }
         }
         .addOnFailureListener { e ->
             Log.w(ContentValues.TAG, "Error adding document", e)
         }
-}
-
-@Composable
-fun showToast(text: String){
-    val context = LocalContext.current
-
-
 }

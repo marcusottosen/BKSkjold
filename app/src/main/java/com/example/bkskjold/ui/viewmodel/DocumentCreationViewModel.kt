@@ -3,8 +3,9 @@ package com.example.bkskjold.ui.viewmodel
 import android.content.Context
 import android.widget.Toast
 import androidx.navigation.NavController
-import com.example.bkskjold.data.model.addNewsToDB
+import com.example.bkskjold.data.model.firebaseAdapter.addNewsToDB
 import com.example.bkskjold.data.model.dataClass.*
+import com.example.bkskjold.data.model.firebaseAdapter.TrainingModel
 import com.example.bkskjold.data.model.firebaseAdapter.addEventToDB
 import com.example.bkskjold.data.model.firebaseAdapter.addTrainingToDB
 import com.google.firebase.Timestamp
@@ -17,6 +18,8 @@ import java.text.SimpleDateFormat
  */
 class DocumentCreationViewModel {
     private val dateformat = "yyyy-MM-dd-k:m"
+    private val loadNewTrainings = TrainingModel()
+
 
     fun getFields(): MutableList<String> {
         val fields = mutableListOf<String>()
@@ -74,6 +77,7 @@ class DocumentCreationViewModel {
                 participants = listOf(CurrentUser.id) as MutableList<String>,
                 userBooking = true,
             )
+            loadNewTrainings.loadTrainingsFromDB()
             addTrainingToDB(booking, navController)
             Toast.makeText(context, "Bookning af bane oprettet", Toast.LENGTH_SHORT).show()
         }catch (e: Exception){
@@ -104,6 +108,7 @@ class DocumentCreationViewModel {
                 participants = mutableListOf(),
                 userBooking = false,
             )
+            loadNewTrainings.loadTrainingsFromDB()
             addTrainingToDB(training, navController)
             Toast.makeText(context, "Træning oprettet", Toast.LENGTH_SHORT).show()
 
