@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.training
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -38,7 +38,7 @@ import com.example.bkskjold.data.util.getTime
 fun TrainingInfoPage(training: Training, navController: NavController) {
     var training = training
     val participantsID = training.participants
-    val participants = getUsersFromId(participantsID)
+    val participants = getUsersFromId(participantsID) //TODO: Overholder ikke MVVM
 
     val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(participantsID.contains(userId)) }
@@ -278,15 +278,11 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                     color = Color.Gray,
                     modifier = Modifier.padding(bottom = 10.dp)
                 )
-//                Row(modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 30.dp),
-//                    horizontalArrangement = Arrangement.SpaceBetween) {
-//                    Text(text = "Navn")
-//                    Text(text = "Tlfnr.")
-//                }
+
+
+                /*
                 if (isAttending.value){
-                    LazyColumn(Modifier.height(200.dp)) {
+                    LazyColumn(Modifier.height(300.dp)) {
                         items(participants.size) { i ->
                             Row(modifier = Modifier
                                 .fillMaxWidth()
@@ -312,7 +308,7 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                         }
                     }
                 }else{
-                    LazyColumn(Modifier.height(200.dp)) {
+                    LazyColumn(Modifier.height(300.dp)) {
                         items(participants.size) { i ->
                             Row(modifier = Modifier
                                 .fillMaxWidth()
@@ -338,8 +334,76 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                             }
                         }
                     }
+                }*/
+
+                if (isAttending.value){
+                    if (participants.size > 0) {
+                        Column {
+                            for (i in 0 until participants.size) {
+                                Row(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 2.5.dp)
+                                    .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
+                                    if (participants[i].team != "guest") {
+                                        Text(
+                                            text = participants[i].firstName + " " + participants[i].lastName,
+                                            Modifier.padding(vertical = 2.5.dp)
+                                        )
+                                    } else {
+                                        Text(
+                                            text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
+                                            Modifier.padding(vertical = 2.5.dp)
+                                        )
+                                    }
+                                    Text(
+                                        text = participants[i].phoneNumber.toString()
+                                            .chunked(2).joinToString(separator = " "),
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }else {
+                    if (participants.size > 0) {
+                        Column {
+                            for (i in 0 until participants.size) {
+                                Row(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 2.5.dp)
+                                    .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
+
+                                    if (participants[i].team != "guest") {
+                                        Text(
+                                            text = participants[i].firstName + " " + participants[i].lastName,
+                                            Modifier.padding(vertical = 2.5.dp)
+                                        )
+                                    } else {
+                                        Text(
+                                            text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
+                                            Modifier.padding(vertical = 2.5.dp)
+                                        )
+                                    }
+                                    Text(
+                                        text = participants[i].phoneNumber.toString()
+                                            .chunked(2).joinToString(separator = " "),
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
 
+
+
+
+
+
+
+
+
+                Spacer(modifier = Modifier.height(50.dp))
             }
         }
     }

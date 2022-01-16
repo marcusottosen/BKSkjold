@@ -134,7 +134,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
                 var dropDownWidth by remember { mutableStateOf(0) }
 
 
-                Text(text = "E-mail",
+                Text(text = "Hold",
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(
                     value = selectedText,

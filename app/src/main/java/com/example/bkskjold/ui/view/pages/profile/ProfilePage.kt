@@ -104,7 +104,7 @@ fun gotoSettingsPage(user: User, navController: NavController){
 }
 fun gotoEditProfilePage(user: User, navController: NavController){
     navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
-    navController.navigate(NavigationRoute.SettingsPage.route)
+    navController.navigate(NavigationRoute.EditProfile.route)
 }
 fun gotoFaqPage(navController: NavController){
     navController.navigate(NavigationRoute.FaqPage.route)

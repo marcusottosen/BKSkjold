@@ -1,5 +1,6 @@
 package com.example.bkskjold.ui.view.reusables
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,12 +34,12 @@ import com.example.bkskjold.ui.view.pages.gotoTrainingDetails
 
 @Composable
 fun TrainingCard(training: Training, navController: NavController) {
-    var training = training//remember { mutableStateOf(training) }
+    var training = training//remember { mutableStateOf(training) } TODO ???
 
-
+    val iconSize = 11
     val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(false)}
-    var participants = training.participants
+    val participants = training.participants
 
     isAttending.value = participants.contains(userId)
 
@@ -56,7 +58,7 @@ fun TrainingCard(training: Training, navController: NavController) {
             Column (modifier = Modifier.width(95.dp)){
                 Text( //date
                     text = "${getDay(training.timeStart)} ${getMonthString(training.timeStart)}",
-                    fontSize = 10.sp,
+                    fontSize = 11.sp,
                     modifier = Modifier.padding(10.dp, 18.dp, 5.dp),
                     color = Color.DarkGray
                 )
@@ -69,15 +71,13 @@ fun TrainingCard(training: Training, navController: NavController) {
                 Text( //time
                     text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
                     modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
-                    fontSize = 10.sp,
+                    fontSize = 11.sp,
                     color = Color.DarkGray
                 )
             }
-
-            Column {
+            Column { //Separation line
                 Box(
                     modifier = Modifier
-                        //.padding(20.dp, 0.dp, 0.dp, 0.dp)
                         .width(1.dp)
                         .fillMaxHeight()
                         .background(Color.Gray)
@@ -85,40 +85,81 @@ fun TrainingCard(training: Training, navController: NavController) {
                 )
             }
 
-            Column {
+            Column { //Number of attending & location
                 Row (
                     modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)
+                ) {
+                    Column {
+                        Row(
+                            modifier = Modifier
+                                .padding(top = 5.dp)
                         ) {
-                    Column() {
-                        Text(
-                            text = "${training.participants.size}/${training.maxParticipants}",
-                            modifier = Modifier.padding(10.dp, 10.dp, 0.dp),
-                            fontSize = 10.sp,
-                            color = Color.DarkGray
-                        )
-                        Text(
-                            text = training.location,
-                            modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
-                            fontSize = 10.sp,
-                            color = Color.DarkGray
-                        )
+                            Image(
+                                painter = painterResource(id = R.drawable.icon_group_black),
+                                contentDescription = null,
+                                modifier = Modifier.size(iconSize.dp),
+                            )
+                            Text(
+                                text = "${training.participants.size}/${training.maxParticipants}",
+                                modifier = Modifier.padding(start = 5.dp, end = 15.dp),
+                                fontSize = 11.sp,
+                                color = Color.DarkGray
+                            )
+                        }
+                        Row(
+                            modifier = Modifier
+                                .padding(0.dp, 5.dp, 0.dp, 0.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.icon_location_black),
+                                contentDescription = null,
+                                modifier = Modifier.size(iconSize.dp),
+                            )
+                            Text(
+                                text = training.location,
+                                modifier = Modifier.padding(start = 5.dp, end = 15.dp),
+                                fontSize = 11.sp,
+                                color = Color.DarkGray
+                            )
+                        }
                     }
-                    Column() {
-                        Text(
-                            text = training.league,
-                            modifier = Modifier.padding(10.dp, 10.dp, 10.dp),
-                            fontSize = 10.sp,
-                            color = Color.DarkGray
-                        )
-                        Text(
-                            text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
-                            modifier = Modifier.padding(10.dp, 0.dp, 10.dp),
-                            fontSize = 10.sp,
-                            color = Color.DarkGray
-                        )
+
+                    Column { //Team & trainer name
+                        Row(
+                            modifier = Modifier
+                                .padding(top = 5.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.icon_person),
+                                contentDescription = null,
+                                modifier = Modifier.size(iconSize.dp),
+                            )
+                            Text(
+                                text = training.league,
+                                modifier = Modifier.padding(start = 5.dp),
+                                fontSize = 11.sp,
+                                color = Color.DarkGray
+                            )
+                        }
+                        Row(
+                            modifier = Modifier
+                                .padding(top = 5.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.icon_whistle),
+                                contentDescription = null,
+                                modifier = Modifier.size(iconSize.dp),
+                            )
+                            Text(
+                                text = getUserFromID(training.trainer).firstName + " " + getUserFromID(
+                                    training.trainer).lastName,
+                                modifier = Modifier.padding(start = 5.dp),
+                                fontSize = 11.sp,
+                                color = Color.DarkGray
+                            )
+                        }
                     }
                 }
-                /// NEW DEFAULT BUTTON
                 Column(
                     modifier = Modifier
                         .padding(20.dp,2.dp,40.dp,2.dp)
@@ -136,7 +177,7 @@ fun TrainingCard(training: Training, navController: NavController) {
                             }
                             training = updateParticipants(training, participants, userId)
                             isAttending.value = !isAttending.value
-                                    }
+                        }
                         , shape = RoundedCornerShape(18.dp)
                         , colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary))
                     ) {
@@ -151,7 +192,6 @@ fun TrainingCard(training: Training, navController: NavController) {
                         }
                     }
                 }
-
             }
         }
 
@@ -161,7 +201,6 @@ fun TrainingCard(training: Training, navController: NavController) {
             if (isAttending.value){
                 Box(
                     modifier = Modifier
-                        .padding(0.dp, 0.dp, 0.dp, 0.dp)
                         .width(20.dp)
                         .fillMaxHeight()
                         .background(colorResource(R.color.green))
@@ -169,7 +208,6 @@ fun TrainingCard(training: Training, navController: NavController) {
             }else{
                 Box(
                     modifier = Modifier
-                        .padding(0.dp, 0.dp, 0.dp, 0.dp)
                         .width(20.dp)
                         .fillMaxHeight()
                         .background(colorResource(R.color.red))
