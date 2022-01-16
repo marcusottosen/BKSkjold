@@ -70,8 +70,6 @@ fun addEventToDB(item: Event, navController: NavController){
 
 
 fun updateEventParticipants(event: Event, participants: MutableList<String>, userId: String): Event {
-    var event = event
-
     val db = Firebase.firestore
     db.collection("events")
         .get()
@@ -80,7 +78,7 @@ fun updateEventParticipants(event: Event, participants: MutableList<String>, use
                 if (doc["timeStart"] == event.timeStart && doc["location"] == event.location && doc["description"] == event.description){
 
                     //Create a mutable list, so we can add items to it.
-                    var mutableParticipants = participants
+                    val mutableParticipants = participants
 
                     //This if statement is now done in the onclicks calling this method, instead of in this method.
                     /*if (mutableParticipants.contains(userId)){
@@ -90,7 +88,7 @@ fun updateEventParticipants(event: Event, participants: MutableList<String>, use
                     }*/
 
                     //map of field to update
-                    var updatedEvent = hashMapOf(
+                    val updatedEvent = hashMapOf(
                         "participants" to mutableParticipants
                     )
 
@@ -106,42 +104,11 @@ fun updateEventParticipants(event: Event, participants: MutableList<String>, use
                 }
             }
         }
+        .addOnCompleteListener{
+            EventDB().loadEventsFromDB()
+        }
         .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting documents: ", exception)
         }
     return event
 }
-
-
-/*
-fun eventWriteToDB(){
-    val createEvents = listOf(
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Klubhuset", 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Klubhuset", 20, "Klubmøde", "Vi skal snakke om klubben\", \"05/12 kl. 21:00\", \"Klubhuset"),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Klubhuset", 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Klubhuset", 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Klubhuset", 20, "Klubmøde", "Vi skal snakke om klubben\", \"05/12 kl. 21:00\", \"Klubhuset"),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane K", 20, "Juniorkamp", "Juniorerne skal spille kamp mod Ballerup. Kom og se med!"),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Klubhuset", 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane A", 20, "Kampdag!", "Kom og se os tæske Lyngby Boldklub"),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Klubhuset", 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene."),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane B", 20, "Kæmpe kamp!", "Juniorerne skal spille kamp mod Ballerup. Kom og se med!"),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Bane C", 20, "Dagens kamp", "Kom og se os tæske Lyngby Boldklub"),
-        Event(com.google.firebase.Timestamp.now(), com.google.firebase.Timestamp.now(), "Klubhuset", 20, "hygge i klubhuset", "Kom og hyg i klubuset!! Der vil være pølsehorn og sodavand til de små, samt øl og vin de forældrene.")
-    )
-    val db = Firebase.firestore
-    for (i in 1..createEvents.size) {
-        db.collection("events")
-            .add(createEvents[i-1])
-            .addOnSuccessListener { documentReference ->
-                Log.d(
-                    ContentValues.TAG,
-                    "DocumentSnapshot added with ID: ${documentReference.id}"
-                )
-            }
-            .addOnFailureListener { e ->
-                Log.w(ContentValues.TAG, "Error adding document", e)
-            }
-    }
-}
-*/
