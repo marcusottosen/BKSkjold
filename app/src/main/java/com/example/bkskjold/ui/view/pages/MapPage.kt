@@ -3,6 +3,8 @@ package com.example.bkskjold.ui.view.pages
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
@@ -10,12 +12,14 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -26,6 +30,14 @@ import com.example.bkskjold.R
 fun MapPage() {
 
     val map = painterResource(id = R.drawable.banekort)
+    var scale by remember { mutableStateOf(1f) }
+    var rotation by remember { mutableStateOf(0f) }
+    var offset by remember { mutableStateOf(Offset.Zero) }
+    val state = rememberTransformableState { zoomChange, offsetChange, rotationChange ->
+        scale *= zoomChange
+        rotation += rotationChange
+        offset += offsetChange
+    }
 
     Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Start) {
         IconButton(onClick = { /*TODO*/ }) {
@@ -67,9 +79,18 @@ fun MapPage() {
 
                     Image(
                         painter = map,
-                        contentDescription = "Map of football fields",
+                        contentDescription = null,
                         modifier = Modifier
                             .clip(RectangleShape)
+                            .graphicsLayer(
+                                scaleX = scale,
+                                scaleY = scale,
+                                rotationZ = rotation,
+                                translationX = offset.x,
+                                translationY = offset.y
+                            )
+                            .transformable(state = state)
+
                     )
 
                 }
