@@ -111,7 +111,7 @@ fun HomeScreenPage(navController: NavController) {
             ) {
                 HomePageCategories(R.drawable.icon_field, stringResource(R.string.bookField), "bookedFieldsPage", navController)
                 HomePageCategories(R.drawable.icon_calendarhome, stringResource(R.string.calender),"bookedFieldsPage", navController)
-                HomePageCategories(R.drawable.icon_map, stringResource(R.string.map),"bookedFieldsPage", navController)
+                HomePageCategories(R.drawable.icon_map, stringResource(R.string.map),NavigationRoute.MapPage.route, navController)
                 HomePageCategories(R.drawable.icon_trainer_panel, stringResource(R.string.trainingPanel),NavigationRoute.AdminPanel.route, navController)
             }
         }
