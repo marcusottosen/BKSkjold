@@ -13,19 +13,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationRoute
+import com.example.bkskjold.data.model.dataClass.Teams
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
+import java.util.stream.Collectors.toList
 
 
 @Composable
-fun trainingOverview(navController: NavController) {
+fun TrainingOverview(navController: NavController) {
+    val viewModel = TrainingOverviewViewModel()
     val shouldShowOverview = remember { mutableStateOf(true) }
-    //val showFilterOptions = remember { mutableStateOf(true) }
 
     //main filter menu variables
     var expanded by remember { mutableStateOf(false) }
@@ -38,15 +41,12 @@ fun trainingOverview(navController: NavController) {
 
     //team filter menu variables
     var expandedTeam by remember { mutableStateOf(false) }
-    val teams = listOf("U18", "U19", "U20", "U21", "Senior")
-
+    val teams = viewModel.getTeams()
 
     //passed filter values
     val chosenTime = remember { mutableStateOf("") }
     val team = remember { mutableStateOf("") }
     val date = remember { mutableStateOf("") }
-
-    val viewModel = TrainingOverviewViewModel()
 
     val filterModifier = Modifier
         .wrapContentWidth()
@@ -164,6 +164,7 @@ fun trainingOverview(navController: NavController) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .background(colorResource(id = R.color.primary))
                         , horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         items.forEachIndexed { index, item ->
@@ -173,10 +174,9 @@ fun trainingOverview(navController: NavController) {
                                     if (item == "Tidspunkt"){expandedTidspunkt = !expandedTidspunkt}
                                     else if (item == "Hold"){expandedTeam = !expandedTeam}
                             }
-                            , modifier = Modifier
-                                    .width(125.dp)
+                            , modifier = Modifier.width(125.dp)
                         ) {
-                            Text(text = item)
+                            Text(text = item, color = Color.White)
                             }
                         }
                     }
@@ -252,7 +252,6 @@ fun trainingOverview(navController: NavController) {
                             }
                         }
                     }
-
                     //Calendar shown as standard in filter menu, to filter by date.
                     AndroidView(
                         { CalendarView(it) }
@@ -261,7 +260,6 @@ fun trainingOverview(navController: NavController) {
                             views.setOnDateChangeListener { calendarView, year, month, day ->
                                 val monthShifted = month+1
                                 date.value = "$day/$monthShifted"
-                                //date.value = Util().dateFormatter(day, monthShifted)
                             }
                         }
                     )

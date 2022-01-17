@@ -32,7 +32,7 @@ import com.example.bkskjold.ui.view.pages.event.EventOverview
 import com.example.bkskjold.ui.view.pages.profile.profileOverview
 import com.example.bkskjold.ui.view.pages.training.NewTrainingPage
 import com.example.bkskjold.ui.view.pages.training.TrainingInfoPage
-import com.example.bkskjold.ui.view.pages.training.trainingOverview
+import com.example.bkskjold.ui.view.pages.training.TrainingOverview
 import com.example.bkskjold.ui.viewmodel.Action
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -53,7 +53,7 @@ fun Navigation(navController: NavHostController) {
             HomeScreenPage(navController)
         }
         composable(NavigationItem.Trainings.route) {
-            trainingOverview(navController)
+            TrainingOverview(navController)
         }
         composable(NavigationItem.Events.route) {
             EventOverview(navController)

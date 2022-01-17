@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.bkskjold.data.model.dataClass.Locations
+import com.example.bkskjold.data.model.dataClass.Teams
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.firebaseAdapter.TrainingModel
 import com.example.bkskjold.data.model.firebaseAdapter.getSignedUpTrainings
@@ -15,6 +17,14 @@ import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.ui.view.reusables.TrainingCard
 
 class TrainingOverviewViewModel {
+    fun getTeams(): List<String> {
+        val teams = mutableListOf<String>()
+        for (team in Teams.values()){
+            teams.add(team.toString())
+        }
+        return teams.toList()
+    }
+
     @Composable
     fun GetOverviewView(navController: NavController, date: String, timeStart: String, team: String){
         val trainings = TrainingModel().loadTrainingsFromDB()
