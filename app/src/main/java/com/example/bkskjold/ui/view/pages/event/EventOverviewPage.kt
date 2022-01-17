@@ -11,9 +11,8 @@ import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.ui.viewmodel.EventOverviewViewModel
 
-
 @Composable
-fun eventOverview(navController: NavController){
+fun EventOverview(navController: NavController){
     Column (
         modifier = Modifier
             .background(color = colorResource(R.color.main_background)),

@@ -19,7 +19,7 @@ enum class Locations() {
     K
 }
 
-enum class Teams(val asString: String){
+enum class Teams(val asString: String) {
     U12("U12"),
     U13("U13"),
     U14("U14"),
@@ -27,5 +27,5 @@ enum class Teams(val asString: String){
     U16("U16"),
     U17("U17"),
     U18("U18"),
-    SENIOR("Senior"),
+    SENIOR("Senior")
 }

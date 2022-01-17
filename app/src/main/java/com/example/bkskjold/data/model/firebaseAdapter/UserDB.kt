@@ -100,7 +100,8 @@ fun getUserFromID(idString: String): User{
     } catch (e: Exception) {
         Log.d(ContentValues.TAG, "User not found from ID in getUserFromID", e)
     }
-    return users[0]
+    //To avoid errors, return (almost)empty User.
+    return User("","","","","",0,com.google.firebase.Timestamp.now(),"",1,0,com.google.firebase.Timestamp.now())
 }
 
 

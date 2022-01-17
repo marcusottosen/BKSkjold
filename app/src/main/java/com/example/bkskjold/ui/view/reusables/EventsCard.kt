@@ -6,7 +6,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.AddCircle
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,6 +27,7 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.Event
+import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
@@ -27,7 +35,9 @@ import com.example.bkskjold.ui.view.pages.event.gotoEventDetails
 
 
 @Composable
-fun EventsCard(event: Event, navController: NavController) {
+fun EventsCard(event: Event, navController: NavController, userId: String) {
+
+
     Card( //event card
         shape = RoundedCornerShape(22.dp),
         modifier = Modifier
@@ -36,7 +46,7 @@ fun EventsCard(event: Event, navController: NavController) {
         backgroundColor = colorResource(R.color.main_background),
         elevation = 3.dp,
 
-    ) {
+        ) {
         Column(
 
         ){
@@ -45,11 +55,21 @@ fun EventsCard(event: Event, navController: NavController) {
                     .padding(20.dp, 15.dp, 20.dp, 15.dp),
                 verticalArrangement = Arrangement.Top
             ) {
-                Text(// event header
-                    text = event.header,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(0.dp,0.dp,0.dp, 15.dp)
-                )
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(// event header
+                        text = event.header,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp)
+                    )
+                    if (event.participants.contains(userId))
+                        Icon(painter = painterResource(id = R.drawable.icon_attending_event),
+                            modifier = Modifier.size(20.dp),
+                            contentDescription = "Attending")
+                    else
+                        Icon(painter = painterResource(id = R.drawable.icon_not_attending_event),
+                            modifier = Modifier.size(20.dp),
+                            contentDescription = "Not attending")
+                }
                 Text( // event description
                     text = event.description,
                     modifier = Modifier.padding(0.dp,0.dp,0.dp, 5.dp),
