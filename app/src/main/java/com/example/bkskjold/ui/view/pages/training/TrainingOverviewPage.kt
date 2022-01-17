@@ -4,9 +4,13 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -21,7 +25,7 @@ import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
 @Composable
 fun trainingOverview(navController: NavController) {
     val shouldShowOverview = remember { mutableStateOf(true) }
-    val showFilterOptions = remember { mutableStateOf(true) }
+    //val showFilterOptions = remember { mutableStateOf(true) }
 
     //main filter menu variables
     var expanded by remember { mutableStateOf(false) }
@@ -38,15 +42,20 @@ fun trainingOverview(navController: NavController) {
 
 
     //passed filter values
-    val tidspunkt = remember { mutableStateOf("") }
+    val chosenTime = remember { mutableStateOf("") }
     val team = remember { mutableStateOf("") }
     val date = remember { mutableStateOf("") }
 
     val viewModel = TrainingOverviewViewModel()
 
-    Column (
-        //verticalArrangement = Arrangement.spacedBy(30.dp)
-    ){
+    val filterModifier = Modifier
+        .wrapContentWidth()
+        .padding(15.dp, 0.dp)
+        .height(30.dp)
+        .clip(RoundedCornerShape(12.dp))
+        .background(colorResource(R.color.primary))
+
+    Column {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -77,23 +86,71 @@ fun trainingOverview(navController: NavController) {
             }
         }
 
-        //filter button
+        //filter buttons
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(0.dp, 10.dp, 15.dp, 10.dp)
+                .padding(35.dp, 10.dp, 15.dp, 10.dp)
             , verticalArrangement = Arrangement.Center
             , horizontalAlignment = Alignment.End
 
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.icon_filter)
-                , contentDescription = null
-                , modifier = Modifier
-                    .width(60.dp)
-                    .height(30.dp)
-                    .clickable { expanded = true }
-            )
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+
+                if (chosenTime.value != "") {
+                    Box(modifier = filterModifier.clickable { chosenTime.value = "" }
+                    ) {
+                        Row(Modifier.padding(5.dp, 5.dp)) {
+                            Text(text = chosenTime.value,
+                                Modifier.padding(start = 10.dp, end = 5.dp),
+                                color = Color.White
+                            )
+                            Icon (imageVector = Icons.Outlined.Close,
+                                contentDescription = "Close",
+                                tint = Color.White)
+                        }
+                    }
+                }
+
+                if (team.value != "") {
+                    Box(modifier = filterModifier.clickable { team.value = "" }
+                    ) {
+                        Row(Modifier.padding(5.dp, 5.dp)) {
+                            Text(text = team.value,
+                                Modifier.padding(start = 10.dp, end = 5.dp),
+                                color = Color.White
+                            )
+                            Icon(imageVector = Icons.Outlined.Close,
+                                contentDescription = "Close",
+                                tint = Color.White)
+                        }
+                    }
+                }
+
+                if (date.value != "") {
+                    Box(modifier = filterModifier.clickable { date.value = "" }
+                    ) {
+                        Row(Modifier.padding(5.dp, 5.dp)) {
+                            Text(text = date.value,
+                                Modifier.padding(start = 10.dp, end = 5.dp),
+                                color = Color.White
+                            )
+                            Icon(imageVector = Icons.Outlined.Close,
+                                contentDescription = "Close",
+                                tint = Color.White)
+                        }
+                    }
+                }
+
+                Image(
+                    painter = painterResource(id = R.drawable.icon_filter),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(60.dp)
+                        .height(30.dp)
+                        .clickable { expanded = true }
+                )
+            }
 
             //menu with filter options
             DropdownMenu(
@@ -142,7 +199,7 @@ fun trainingOverview(navController: NavController) {
                                     onClick = {
                                         expandedTidspunkt = false
                                         expanded = false
-                                        tidspunkt.value = time
+                                        chosenTime.value = time
                                     }
                                     , modifier = Modifier
                                 ) {
@@ -212,10 +269,10 @@ fun trainingOverview(navController: NavController) {
             }
         }
         if(shouldShowOverview.value){
-            viewModel.GetOverviewView(navController, date = date.value, timeStart = tidspunkt.value, team = team.value)
+            viewModel.GetOverviewView(navController, date = date.value, timeStart = chosenTime.value, team = team.value)
             print("")
         }else {
-            viewModel.GetSignedUpView(navController, date = date.value, timeStart = tidspunkt.value, team = team.value)
+            viewModel.GetSignedUpView(navController, date = date.value, timeStart = chosenTime.value, team = team.value)
         }
     }
 }
