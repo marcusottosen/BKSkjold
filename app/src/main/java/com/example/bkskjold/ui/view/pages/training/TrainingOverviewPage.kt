@@ -213,6 +213,7 @@ fun trainingOverview(navController: NavController) {
         }
         if(shouldShowOverview.value){
             viewModel.GetOverviewView(navController, date = date.value, timeStart = tidspunkt.value, team = team.value)
+            print("")
         }else {
             viewModel.GetSignedUpView(navController, date = date.value, timeStart = tidspunkt.value, team = team.value)
         }
