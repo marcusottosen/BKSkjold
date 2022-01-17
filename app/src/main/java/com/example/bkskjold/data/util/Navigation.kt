@@ -137,6 +137,9 @@ fun Navigation(navController: NavHostController) {
         composable(NavigationRoute.CreateEventPage.route) {
             CreateEventPage(navController)
         }
+        composable(NavigationRoute.MapPage.route) {
+            MapPage(navController)
+        }
     }
 }
 
