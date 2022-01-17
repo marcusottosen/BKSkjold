@@ -74,6 +74,11 @@ fun MapPage() {
 
                 }
 
+                Text(
+                    text = "OBS Banerne er flyttet grundet Corona testcenteret - telte og adgangsveje på Blegdamsfælleden.",
+                    color = Color.Red,
+                    fontSize = 12.sp
+                )
 
             }
         }
