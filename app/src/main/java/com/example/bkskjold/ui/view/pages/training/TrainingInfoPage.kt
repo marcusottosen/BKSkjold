@@ -35,8 +35,8 @@ import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 
 @Composable
-fun TrainingInfoPage(training: Training, navController: NavController) {
-    var training = training
+fun TrainingInfoPage(trainings: Training, navController: NavController) {
+    var training = trainings
     val participantsID = training.participants
     val participants = getUsersFromId(participantsID) //TODO: Overholder ikke MVVM
 
@@ -148,7 +148,6 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                     Text(text = stringResource(R.string.TrainingPrice, "20", "0"))
                 }
             }
-
 
             //Description
             Column() {
@@ -279,63 +278,6 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                     modifier = Modifier.padding(bottom = 10.dp)
                 )
 
-
-                /*
-                if (isAttending.value){
-                    LazyColumn(Modifier.height(300.dp)) {
-                        items(participants.size) { i ->
-                            Row(modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 2.5.dp)
-                                .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
-                                if (participants[i].team != "guest") {
-                                    Text(
-                                        text = participants[i].firstName + " " + participants[i].lastName,
-                                        Modifier.padding(vertical = 2.5.dp)
-                                    )
-                                } else {
-                                    Text(
-                                        text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
-                                        Modifier.padding(vertical = 2.5.dp)
-                                    )
-                                }
-                                Text(
-                                    text = participants[i].phoneNumber.toString()
-                                        .chunked(2).joinToString(separator = " "),
-                                    Modifier.padding(vertical = 2.5.dp)
-                                )
-                            }
-                        }
-                    }
-                }else{
-                    LazyColumn(Modifier.height(300.dp)) {
-                        items(participants.size) { i ->
-                            Row(modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 2.5.dp)
-                                .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
-
-                                if (participants[i].team != "guest") {
-                                    Text(
-                                        text = participants[i].firstName + " " + participants[i].lastName,
-                                        Modifier.padding(vertical = 2.5.dp)
-                                    )
-                                } else {
-                                    Text(
-                                        text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
-                                        Modifier.padding(vertical = 2.5.dp)
-                                    )
-                                }
-                                Text(
-                                    text = participants[i].phoneNumber.toString()
-                                        .chunked(2).joinToString(separator = " "),
-                                    Modifier.padding(vertical = 2.5.dp)
-                                )
-                            }
-                        }
-                    }
-                }*/
-
                 if (isAttending.value){
                     if (participants.size > 0) {
                         Column {
@@ -394,15 +336,6 @@ fun TrainingInfoPage(training: Training, navController: NavController) {
                         }
                     }
                 }
-
-
-
-
-
-
-
-
-
                 Spacer(modifier = Modifier.height(50.dp))
             }
         }

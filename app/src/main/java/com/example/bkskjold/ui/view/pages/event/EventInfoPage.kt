@@ -171,10 +171,10 @@ fun EventInfoPage(event: Event, navController: NavController) {
                             .size(320.dp, 50.dp),
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
-                            if (participantsID.contains(userId)){
+                            if (participantsID.contains(userId)) {
                                 participantsID.remove(userId)
                                 participants.remove(getCurrentUserAsCurrentUserModel())
-                            }else{
+                            } else {
                                 participantsID.add(userId)
                                 participants.add(getCurrentUserAsCurrentUserModel())
                             }
@@ -207,10 +207,10 @@ fun EventInfoPage(event: Event, navController: NavController) {
                             .size(320.dp, 50.dp),
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
-                            if (participantsID.contains(userId)){
+                            if (participantsID.contains(userId)) {
                                 participantsID.remove(userId)
                                 participants.remove(getCurrentUserAsCurrentUserModel())
-                            }else{
+                            } else {
                                 participantsID.add(userId)
                                 participants.add(getCurrentUserAsCurrentUserModel())
                             }
@@ -249,7 +249,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                         .padding(top = 10.dp)
                         .size(120.dp, 50.dp),
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.green)),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary)),
                     onClick = { /*TODO*/ }
                 ) {
                     Text(
@@ -271,68 +271,69 @@ fun EventInfoPage(event: Event, navController: NavController) {
             Spacer(modifier = Modifier.height(15.dp))
 
             Text(
-                text = "Deltagere",
+                text = "Deltagere: ${participants.size}",
                 modifier = Modifier.padding(start = 10.dp, bottom = 10.dp),
                 fontWeight = FontWeight.Bold,
                 color = Color.Gray
             )
-
-            //TODO Hent navne fra database
-            if (isAttending.value){
-                LazyColumn(Modifier.height(200.dp)) {
-                    items(participants.size) { i ->
-                        Row(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 2.5.dp)
-                            .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
-                            if (participants[i].team != "guest") {
+            if (isAttending.value) {
+                if (participants.size > 0) {
+                    Column {
+                        for (i in 0 until participants.size) {
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 2.5.dp)
+                                .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
+                                if (participants[i].team != "guest") {
+                                    Text(
+                                        text = participants[i].firstName + " " + participants[i].lastName,
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                } else {
+                                    Text(
+                                        text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                }
                                 Text(
-                                    text = participants[i].firstName + " " + participants[i].lastName,
-                                    Modifier.padding(vertical = 2.5.dp)
-                                )
-                            } else {
-                                Text(
-                                    text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
+                                    text = participants[i].phoneNumber.toString()
+                                        .chunked(2).joinToString(separator = " "),
                                     Modifier.padding(vertical = 2.5.dp)
                                 )
                             }
-                            Text(
-                                text = participants[i].phoneNumber.toString()
-                                    .chunked(2).joinToString(separator = " "),
-                                Modifier.padding(vertical = 2.5.dp)
-                            )
                         }
                     }
                 }
-            }else{
-                LazyColumn(Modifier.height(200.dp)) {
-                    items(participants.size) { i ->
-                        Row(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 2.5.dp)
-                            .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
+            } else {
+                if (participants.size > 0) {
+                    Column {
+                        for (i in 0 until participants.size) {
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 2.5.dp)
+                                .padding(horizontal = 30.dp), Arrangement.SpaceBetween) {
 
-                            if (participants[i].team != "guest") {
+                                if (participants[i].team != "guest") {
+                                    Text(
+                                        text = participants[i].firstName + " " + participants[i].lastName,
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                } else {
+                                    Text(
+                                        text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
+                                        Modifier.padding(vertical = 2.5.dp)
+                                    )
+                                }
                                 Text(
-                                    text = participants[i].firstName + " " + participants[i].lastName,
-                                    Modifier.padding(vertical = 2.5.dp)
-                                )
-                            } else {
-                                Text(
-                                    text = participants[i].firstName + " " + participants[i].lastName + " (Gæst)",
+                                    text = participants[i].phoneNumber.toString()
+                                        .chunked(2).joinToString(separator = " "),
                                     Modifier.padding(vertical = 2.5.dp)
                                 )
                             }
-                            Text(
-                                text = participants[i].phoneNumber.toString()
-                                    .chunked(2).joinToString(separator = " "),
-                                Modifier.padding(vertical = 2.5.dp)
-                            )
                         }
                     }
                 }
             }
-
             Spacer(modifier = Modifier.height(50.dp))
         }
     }
