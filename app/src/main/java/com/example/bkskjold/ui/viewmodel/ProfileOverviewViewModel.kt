@@ -26,11 +26,11 @@ class ProfileOverviewViewModel {
         Column(modifier = Modifier.padding(start = 45.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Text(text = "${stringResource(R.string.Membership)}${translateMemberType(CurrentUser.userType)}")
-            Text(text = "${stringResource(R.string.FinshedTrainings)}${CurrentUser.finishedTrainings}")
-            Text(text = "${stringResource(R.string.MemberSince)}${getDayMonth(CurrentUser.memberSince)} - ${
+            Text(text = "${stringResource(R.string.Membership)} ${translateMemberType(CurrentUser.userType)}")
+            Text(text = "${stringResource(R.string.FinshedTrainings)} ${CurrentUser.finishedTrainings}")
+            Text(text = "${stringResource(R.string.MemberSince)} ${getDayMonth(CurrentUser.memberSince)} - ${
                 getYear(CurrentUser.memberSince)}")
-            Text(text = "${stringResource(R.string.TeamJoined)}${CurrentUser.team}")
+            Text(text = "${stringResource(R.string.TeamJoined)} ${CurrentUser.team}")
         }
     }
 

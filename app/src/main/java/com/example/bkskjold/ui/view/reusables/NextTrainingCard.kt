@@ -106,73 +106,77 @@ fun NextTrainingCard(trainings: Training, navController: NavController) {
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    Row( //Row to display time and location
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(0.dp, 0.dp, 0.dp, 0.dp),
-                        horizontalArrangement = Arrangement.Start
-                    ) {
-                        if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
-                            Column { //Date & time
-                                Text(text = "${getDay(training.timeStart)}. ${
-                                    getMonthString(training.timeStart)
-                                }", fontSize = 10.sp, color = Color.White)
-                                Text(text = getWeekDay(training.timeStart),
-                                    fontSize = 20.sp,
-                                    color = Color.White)
-                                Text(
-                                    text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
-                                    fontSize = 10.sp,
-                                    color = Color.White
-                                )
-                            }
-                        }
-
-                        Column(modifier = Modifier.fillMaxSize()) {
-                            Box(modifier = Modifier.fillMaxSize()) {
-                                Row(
-                                    //team
-                                    modifier = Modifier
-                                        .padding(20.dp, 0.dp, 0.dp, 20.dp)
-                                        .align(alignment = Alignment.BottomStart),
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.icon_group_white),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(15.dp),
-                                    )
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Row(
+                            //Row to display time and date
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(0.dp, 0.dp, 0.dp, 0.dp)
+                                .align(alignment = Alignment.BottomStart)
+                        ) {
+                            if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
+                                Column(modifier = Modifier.fillMaxHeight(),
+                                    verticalArrangement = Arrangement.Bottom) { //Date & time
                                     Text(
-                                        text = training.league,
+                                        text = "${getDay(training.timeStart)}. ${
+                                            getMonthString(training.timeStart)
+                                        }", fontSize = 10.sp, color = Color.White
+                                    )
+                                    Text(text = getWeekDay(training.timeStart),
+                                        fontSize = 20.sp,
+                                        color = Color.White)
+                                    Text(
+                                        text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
                                         fontSize = 10.sp,
-                                        modifier = Modifier
-                                            .padding(start = 5.dp)
-                                            .align(alignment = Alignment.Bottom),
                                         color = Color.White
                                     )
                                 }
+                            }
 
-                                if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
+                            Column(modifier = Modifier.fillMaxSize()) {
+                                Box(modifier = Modifier.fillMaxSize()) {
                                     Row(
-                                        //location
+                                        //team
                                         modifier = Modifier
-                                            .padding(start = 20.dp)
+                                            .padding(20.dp, 0.dp, 0.dp, 20.dp)
                                             .align(alignment = Alignment.BottomStart),
                                     ) {
                                         Image(
-                                            painter = painterResource(id = R.drawable.icon_location_white),
+                                            painter = painterResource(id = R.drawable.icon_group_white),
                                             contentDescription = null,
                                             modifier = Modifier.size(15.dp),
                                         )
                                         Text(
-                                            text = training.location,
+                                            text = training.league,
                                             fontSize = 10.sp,
                                             modifier = Modifier
                                                 .padding(start = 5.dp)
                                                 .align(alignment = Alignment.Bottom),
                                             color = Color.White
                                         )
+                                    }
+
+                                    if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
+                                        Row(
+                                            //location
+                                            modifier = Modifier
+                                                .padding(start = 20.dp)
+                                                .align(alignment = Alignment.BottomStart),
+                                        ) {
+                                            Image(
+                                                painter = painterResource(id = R.drawable.icon_location_white),
+                                                contentDescription = null,
+                                                modifier = Modifier.size(15.dp),
+                                            )
+                                            Text(
+                                                text = training.location,
+                                                fontSize = 10.sp,
+                                                modifier = Modifier
+                                                    .padding(start = 5.dp)
+                                                    .align(alignment = Alignment.Bottom),
+                                                color = Color.White
+                                            )
+                                        }
                                     }
                                 }
                             }
