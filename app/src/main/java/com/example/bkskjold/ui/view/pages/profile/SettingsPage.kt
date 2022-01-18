@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,10 +20,9 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.ui.view.reusables.SettingsButton
 
-
 @Composable
-fun settingsPage(navController: NavController) {
-    Column (
+fun SettingsPage(navController: NavController) {
+    Column(
         modifier = Modifier
             .background(color = colorResource(R.color.main_background))
             .fillMaxSize()
@@ -32,12 +32,11 @@ fun settingsPage(navController: NavController) {
             .height(80.dp)
             .fillMaxWidth())
         {
-            Row(){
+            Row {
 
-                IconButton( modifier = Modifier.fillMaxHeight(),
+                IconButton(modifier = Modifier.fillMaxHeight(),
                     onClick = { navController.navigateUp() }
-
-                ){
+                ) {
                     Icon(
                         imageVector = Icons.Outlined.KeyboardArrowLeft,
                         tint = Color.White,
@@ -49,46 +48,41 @@ fun settingsPage(navController: NavController) {
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
                         .padding(start = 20.dp),
-                    text = "Indstillinger",
+                    text = stringResource(R.string.Settings),
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 36.sp,
                     color = Color.White,
                 )
-            }}
+            }
+        }
 
-        SettingsButton(description = "Abonnement",
+        SettingsButton(
+            description = stringResource(R.string.Subscription),
             image = R.drawable.icon_subscription,
-            onClick = { /*TODO*/},
-
-
-            )
-        SettingsButton(description = "Notifikationer",
+            onClick = {},
+        )
+        SettingsButton(
+            description = stringResource(R.string.Notifications),
             image = R.drawable.icon_notification_bell,
-            onClick = { /*TODO*/},
+            onClick = {},
+        )
 
-
-            )
-
-        SettingsButton(description = "Privatliv og Sikkerhed",
+        SettingsButton(
+            description = stringResource(R.string.PrivatesAndSecurity),
             image = R.drawable.icon_privacy,
-            onClick = { /*TODO*/},
+            onClick = {},
+        )
 
-
-            )
-
-        SettingsButton(description = "Omkring BKSkjold",
+        SettingsButton(
+            description = stringResource(R.string.AboutAppName),
             image = R.drawable.icon_about_us,
-            onClick = { /*TODO*/},
+            onClick = {},
+        )
 
-
-            )
-
-        SettingsButton(description = "Kontakt Os",
+        SettingsButton(
+            description = stringResource(R.string.ContactUs),
             image = R.drawable.icon_contact_us,
-            onClick = { /*TODO*/},
-
-
-            )
-
+            onClick = {},
+        )
     }
 }

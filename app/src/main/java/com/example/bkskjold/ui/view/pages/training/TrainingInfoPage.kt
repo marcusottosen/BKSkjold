@@ -77,7 +77,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                 Row(Modifier.padding(top = 20.dp, bottom = 10.dp)) {
                     Icon(
                         Icons.Outlined.Info,
-                        contentDescription = "hold",
+                        contentDescription = stringResource(R.string.Team),
                         Modifier.padding(end = 10.dp)
                     )
                     Text(text = training.league + "-" + stringResource(R.string.TeamTraining),
@@ -87,7 +87,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                 Row(Modifier.padding(bottom = 10.dp)) {
                     Icon(
                         Icons.Outlined.Place,
-                        contentDescription = "lokation",
+                        contentDescription = stringResource(R.string.Location),
                         Modifier.padding(end = 10.dp)
                     )
                     Text(text = training.location)
@@ -96,7 +96,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                 Row(modifier = Modifier.padding(bottom = 10.dp)) {
                     Icon(
                         Icons.Outlined.DateRange,
-                        contentDescription = "dato",
+                        contentDescription = stringResource(R.string.Date),
                         Modifier.padding(end = 10.dp)
                     )
                     Text(
@@ -108,7 +108,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                         painter = painterResource(id = R.drawable.icon_time),
                         contentScale = ContentScale.FillHeight,
                         modifier = Modifier.height(22.dp),
-                        contentDescription = "tidspunkt",
+                        contentDescription = stringResource(R.string.Time),
                     )
                     Text(
                         text = "${getTime(training.timeStart)} - ${getTime(training.timeEnd)}",
@@ -122,10 +122,11 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                         painter = painterResource(id = R.drawable.icon_whistle_outlined),
                         contentScale = ContentScale.FillHeight,
                         modifier = Modifier.height(22.dp),
-                        contentDescription = "tidspunkt",
+                        contentDescription = stringResource(R.string.Time),
                     )
                     Text(
-                        text = getUserFromID(training.trainer).firstName + " " + getUserFromID(training.trainer).lastName,
+                        text = getUserFromID(training.trainer).firstName + " " + getUserFromID(
+                            training.trainer).lastName,
                         modifier = Modifier.padding(start = 15.dp)
                     )
                 }
@@ -133,16 +134,16 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                 Row(Modifier.padding(bottom = 10.dp)) {
                     Icon(
                         Icons.Outlined.Person,
-                        contentDescription = "deltagere",
+                        contentDescription = stringResource(R.string.Attending),
                         Modifier.padding(end = 10.dp)
                     )
-                    Text(text = ( "${training.participants.size}/${training.maxParticipants}" + " " + stringResource(
+                    Text(text = ("${training.participants.size}/${training.maxParticipants}" + " " + stringResource(
                         R.string.participating)))
                 }
                 Row() {
                     Icon(
                         Icons.Outlined.ShoppingCart,
-                        contentDescription = "pris",
+                        contentDescription = stringResource(R.string.Price),
                         Modifier.padding(end = 10.dp)
                     )
                     Text(text = stringResource(R.string.TrainingPrice, "20", "0"))
@@ -170,10 +171,10 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                             .size(320.dp, 50.dp),
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
-                            if (participantsID.contains(userId)){
+                            if (participantsID.contains(userId)) {
                                 participantsID.remove(userId)
                                 participants.remove(getCurrentUserAsCurrentUserModel())
-                            }else{
+                            } else {
                                 participantsID.add(userId)
                                 participants.add(getCurrentUserAsCurrentUserModel())
 
@@ -189,7 +190,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                         Row() {
                             Icon(
                                 Icons.Outlined.Clear,
-                                contentDescription = "tilmeld/afmeld træning",
+                                contentDescription = stringResource(R.string.AttendCancelTraining),
                                 Modifier.padding(end = 10.dp),
                                 colorResource(id = R.color.main_background)
                             )
@@ -207,10 +208,10 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                             .size(320.dp, 50.dp),
                         shape = RoundedCornerShape(12.dp),
                         onClick = {
-                            if (participantsID.contains(userId)){
+                            if (participantsID.contains(userId)) {
                                 participantsID.remove(userId)
                                 participants.remove(getCurrentUserAsCurrentUserModel())
-                            }else{
+                            } else {
                                 participantsID.add(userId)
                                 participants.add(getCurrentUserAsCurrentUserModel())
                             }
@@ -225,7 +226,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                         Row() {
                             Icon(
                                 Icons.Outlined.Check,
-                                contentDescription = "tilmeld/afmeld træning",
+                                contentDescription = stringResource(R.string.AttendCancelTraining),
                                 Modifier.padding(end = 10.dp),
                                 colorResource(id = R.color.main_background)
                             )
@@ -249,10 +250,10 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                         .size(120.dp, 50.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary)),
-                    onClick = { /*TODO*/ }
+                    onClick = {}
                 ) {
                     Text(
-                        text = "Inviter",
+                        text = stringResource(R.string.Invite),
                         color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
@@ -272,13 +273,13 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                     .fillMaxWidth()
                     .padding(top = 10.dp)
             ) {
-                Text(text = "Deltagere",
+                Text(text = stringResource(R.string.Attending),
                     fontWeight = FontWeight.Bold,
                     color = Color.Gray,
                     modifier = Modifier.padding(bottom = 10.dp)
                 )
 
-                if (isAttending.value){
+                if (isAttending.value) {
                     if (participants.size > 0) {
                         Column {
                             for (i in 0 until participants.size) {
@@ -306,7 +307,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                             }
                         }
                     }
-                }else {
+                } else {
                     if (participants.size > 0) {
                         Column {
                             for (i in 0 until participants.size) {

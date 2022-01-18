@@ -30,6 +30,7 @@
     <string name="map">Kort</string>
     <string name="trainingPanel">Trænerpanel</string>
     <string name="FilterErrorMessage">Something went wrong, when trying to filter through practices. Method: filterAndSort in TrainingOverviewViewModel:</string>
+    <string name="TrainingDefaultDescription">Du deltager ikke i nogen træninger. Gå ind under \"Træninger\" for at deltage i en.</string>
 
     <!-- Profile -->
     <string name="Membership">Medlemsskab: </string>
@@ -43,6 +44,40 @@
     <string name="SaveSettings">Gem ændringer</string>
     <string name="ChangeProfilePicture">Skift profilbillede</string>
     <string name="NotAttendingAnyTrainings">Du deltager ikke i nogen træninger!</string>
+
+    <!-- MapPage -->
+    <string name="MapHeader">FS Banekort: Efterår 2021 - tfr</string>
+    <string name="ZoomHelp">Zoom ind med to fingre</string>
+    <string name="MapOBS">OBS Banerne er flyttet grundet Corona testcenteret - telte og adgangsveje på Blegdamsfælleden.</string>
+
+    <!-- Training -->
+    <string name="Team">Hold</string>
+    <string name="Time">Tidspunkt</string>
+    <string name="AllTrainings">Alle Træninger</string>
+    <string name="AttendingTrainings">Tilmeldte Træninger</string>
+    <string name="FAQs">FAQs</string>
+    <string name="Location">lokation</string>
+    <string name="Date">dato</string>
+    <string name="Attending">deltagere</string>
+    <string name="Price">pris</string>
+    <string name="AttendCancelTraining">tilmeld/afmeld træning</string>
+    <string name="TrainingCreated">Træning oprettet</string>
+    <string name="Save">Save</string>
+    <string name="Back">Back</string>
+    <string name="Field">Bane</string>
+    <string name="Start">Start</string>
+    <string name="End">Slut</string>
+    <string name="Other">Andet</string>
+    <string name="MaxAttending">Max antal deltagere</string>
+    <string name="Description">Beskrivelse</string>
+    <string name="Subscription">Abonnement</string>
+    <string name="Notifications">Notifikationer</string>
+    <string name="PrivatesAndSecurity">Privatliv og Sikkerhed</string>
+    <string name="AboutAppName">Omkring BKSkjold</string>
+    <string name="ContactUs">Kontakt Os</string>
+    <string name="Invitations">Invitationer</string>
+    <string name="Firstname">Fornavn</string>
+    <string name="Surname">Efternavn</string>
 
 
 </resources>

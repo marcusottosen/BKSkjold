@@ -14,17 +14,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationRoute
-import com.example.bkskjold.data.model.dataClass.Teams
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.ui.viewmodel.TrainingOverviewViewModel
-import java.util.stream.Collectors.toList
-
 
 @Composable
 fun TrainingOverview(navController: NavController) {
@@ -33,10 +30,10 @@ fun TrainingOverview(navController: NavController) {
 
     //main filter menu variables
     var expanded by remember { mutableStateOf(false) }
-    val items = listOf("Hold", "Tidspunkt")
+    val items = listOf(stringResource(R.string.Team), stringResource(R.string.Time))
     //var selectedIndex by remember { mutableStateOf(0) }
 
-    //Tidspunkt filter menu variables
+    //Time filter menu variables
     var expandedTidspunkt by remember { mutableStateOf(false) }
     val times = listOf("15:00",
         "15:30",
@@ -84,7 +81,8 @@ fun TrainingOverview(navController: NavController) {
                     else colorResource(R.color.primary_light)),
 
                 ) {
-                Text(text = "Alle Træninger", color = colorResource(id = R.color.main_background))
+                Text(text = stringResource(R.string.AllTrainings),
+                    color = colorResource(id = R.color.main_background))
             }
             Button(
                 onClick = { shouldShowOverview.value = false },
@@ -94,7 +92,7 @@ fun TrainingOverview(navController: NavController) {
                     if (shouldShowOverview.value) colorResource(R.color.primary_light)
                     else colorResource(R.color.primary)),
             ) {
-                Text(text = "Tilmeldte Træninger",
+                Text(text = stringResource(R.string.AttendingTrainings),
                     color = colorResource(id = R.color.main_background))
             }
         }
@@ -106,7 +104,6 @@ fun TrainingOverview(navController: NavController) {
                 .padding(35.dp, 10.dp, 15.dp, 10.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.End
-
         ) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
 
@@ -183,7 +180,6 @@ fun TrainingOverview(navController: NavController) {
                         items.forEachIndexed { index, item ->
                             DropdownMenuItem(
                                 onClick = {
-                                    //expanded = false
                                     if (item == "Tidspunkt") {
                                         expandedTidspunkt = !expandedTidspunkt
                                     } else if (item == "Hold") {
@@ -263,6 +259,7 @@ fun TrainingOverview(navController: NavController) {
                             }
                         }
                     }
+
                     //Calendar shown as standard in filter menu, to filter by date.
                     AndroidView(
                         { CalendarView(it) },
@@ -282,7 +279,6 @@ fun TrainingOverview(navController: NavController) {
                 date = date.value,
                 timeStart = chosenTime.value,
                 team = team.value)
-            print("")
         } else {
             viewModel.GetSignedUpView(navController,
                 date = date.value,

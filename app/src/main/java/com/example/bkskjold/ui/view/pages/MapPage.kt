@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.NavigationRail
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -23,13 +22,13 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
-import com.example.bkskjold.data.model.NavigationRoute
 
 @Composable
 fun MapPage(navController: NavController) {
@@ -44,7 +43,7 @@ fun MapPage(navController: NavController) {
         offset += offsetChange
     }
 
-    Column (
+    Column(
         modifier = Modifier.fillMaxSize()
     ) {
         Box(modifier = Modifier
@@ -53,13 +52,13 @@ fun MapPage(navController: NavController) {
             .padding(start = 25.dp, top = 35.dp)
         ) {
 
-                IconButton(onClick = { navController.navigate(NavigationItem.Home.route) }
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = null
-                    )
-                }
+            IconButton(onClick = { navController.navigate(NavigationItem.Home.route) }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = null
+                )
+            }
         }
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
@@ -75,14 +74,14 @@ fun MapPage(navController: NavController) {
                         .padding(bottom = 24.dp)
                 ) {
                     Text(
-                        text = "FS Banekort: Efterår 2021 - tfr",
+                        text = stringResource(R.string.MapHeader),
                         color = Color.Black,
                         fontSize = 18.sp
                     )
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
-                            .padding(24.dp, 24.dp, 24.dp, 10.dp,)
+                            .padding(24.dp, 24.dp, 24.dp, 10.dp)
                             .border(2.dp, Color.Black, RectangleShape)
                             .fillMaxWidth()
                             .background(colorResource(id = R.color.primary))
@@ -104,13 +103,13 @@ fun MapPage(navController: NavController) {
                         )
                     }
                     Text(
-                        text = "Zoom ind med to fingre",
+                        text = stringResource(R.string.ZoomHelp),
                         fontStyle = FontStyle.Italic,
                         fontSize = 12.sp,
                         modifier = Modifier.padding(bottom = 10.dp)
                     )
                     Text(
-                        text = "OBS Banerne er flyttet grundet Corona testcenteret - telte og adgangsveje på Blegdamsfælleden.",
+                        text = stringResource(R.string.MapOBS),
                         color = Color.Red,
                         fontSize = 12.sp,
                         modifier = Modifier.padding(start = 24.dp, end = 24.dp)

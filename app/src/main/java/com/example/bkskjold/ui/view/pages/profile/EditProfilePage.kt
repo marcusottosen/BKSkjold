@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.profile
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,11 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.firebaseAdapter.users
 import com.example.bkskjold.ui.view.reusables.DefaultEditProfileHeader
@@ -30,16 +32,17 @@ import com.google.firebase.ktx.Firebase
 
 
 @Composable
-fun editProfilePage(navController: NavController,registerViewModel: RegisterViewModel = viewModel()) {
+fun editProfilePage(
+    navController: NavController,
+    registerViewModel: RegisterViewModel = viewModel(),
+) {
     val currentUser = users[1]
     val focusManager = LocalFocusManager.current
     val auth: FirebaseAuth = Firebase.auth
     val firstName: String by registerViewModel.firstName.observeAsState("")
 
     LazyColumn(
-        //verticalArrangement = Arrangement.spacedBy(30.dp)
         modifier = Modifier.fillMaxSize()
-
     ) {
         item {
             DefaultEditProfileHeader(currentUser, navController)
@@ -51,7 +54,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
             {
                 val firstName = remember { mutableStateOf(CurrentUser.firstName) }
 
-                Text(text = "Fornavn",
+                Text(text = stringResource(R.string.Firstname),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
 
@@ -75,7 +78,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
             {
                 val lastName = remember { mutableStateOf(CurrentUser.lastName) }
 
-                Text(text = "Efternavn",
+                Text(text = stringResource(R.string.Surname),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
 
@@ -133,8 +136,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
                 val team = remember { mutableStateOf(CurrentUser.team) }
                 var dropDownWidth by remember { mutableStateOf(0) }
 
-
-                Text(text = "Hold",
+                Text(text = stringResource(R.string.Team),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(
                     value = selectedText,
@@ -144,10 +146,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
                         .onSizeChanged {
                             dropDownWidth = it.width
                         },
-
-
                     placeholder = { Text(CurrentUser.team) },
-
                     trailingIcon = {
                         Icon(Icons.Filled.ArrowDropDown, "contentDescription",
                             Modifier.clickable { expanded = !expanded })
@@ -156,8 +155,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
                 DropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false },
-                    modifier = Modifier.width(with(LocalDensity.current){dropDownWidth.toDp()})
-                    // .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
+                    modifier = Modifier.width(with(LocalDensity.current) { dropDownWidth.toDp() })
                 ) {
                     suggestions.forEach { label ->
                         DropdownMenuItem(onClick = {
@@ -168,9 +166,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
                     }
                 }
             }
-
             Spacer(modifier = Modifier.padding(top = 200.dp))
-
         }
     }
 }

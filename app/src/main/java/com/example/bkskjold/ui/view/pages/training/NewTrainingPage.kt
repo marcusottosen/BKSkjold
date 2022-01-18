@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -34,29 +35,23 @@ import com.vanpra.composematerialdialogs.datetime.time.timepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 
 @Composable
-fun NewTrainingPage(navController: NavController){
-
-
-    val showDialog = remember {mutableStateOf(false)}
+fun NewTrainingPage(navController: NavController) {
+    val showDialog = remember { mutableStateOf(false) }
     if (showDialog.value) {
-        Toast.makeText(LocalContext.current, "Træning oprettet", Toast.LENGTH_SHORT).show()
+        Toast.makeText(LocalContext.current,
+            stringResource(R.string.TrainingCreated),
+            Toast.LENGTH_SHORT).show()
     }
 
-
-
     val viewModel = DocumentCreationViewModel()
-
     var team = viewModel.getTeams()[0]
     var field = viewModel.getFields()[0]
     var maxParticipants = 1
-    val description =  remember { mutableStateOf(TextFieldValue()) }
-    val date =  remember { mutableStateOf("Vælg dato") }
-    val startTime =  remember { mutableStateOf("Vælg starttid") }
-    val endTime =  remember { mutableStateOf("Vælg sluttid") }
-
+    val description = remember { mutableStateOf(TextFieldValue()) }
+    val date = remember { mutableStateOf("Vælg dato") }
+    val startTime = remember { mutableStateOf("Vælg starttid") }
+    val endTime = remember { mutableStateOf("Vælg sluttid") }
     val context = LocalContext.current
-
-
 
     //Variables to keep track of when to open/close date/time pickers
     val dateDialogState = rememberMaterialDialogState()
@@ -66,7 +61,7 @@ fun NewTrainingPage(navController: NavController){
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                text = { Text(text = "Save", color = Color.White) },
+                text = { Text(text = stringResource(R.string.Save), color = Color.White) },
                 onClick = {
                     showDialog.value = true
                     viewModel.newTraining(
@@ -81,7 +76,11 @@ fun NewTrainingPage(navController: NavController){
                         context = context
                     )
                 },
-                icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
+                icon = {
+                    Icon(Icons.Filled.Check,
+                        stringResource(R.string.Back),
+                        tint = Color.White)
+                },
                 modifier = Modifier.padding(bottom = 60.dp),
                 backgroundColor = colorResource(id = R.color.green)
             )
@@ -124,7 +123,7 @@ fun NewTrainingPage(navController: NavController){
                     ) {
                         Column(modifier = Modifier.padding(start = 15.dp)) {
                             Text(
-                                text = "Hold",
+                                text = stringResource(R.string.Team),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
@@ -135,7 +134,7 @@ fun NewTrainingPage(navController: NavController){
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
                             Text(
-                                text = "Bane",
+                                text = stringResource(R.string.Field),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
@@ -146,7 +145,7 @@ fun NewTrainingPage(navController: NavController){
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
                             Text(
-                                text = "Dato",
+                                text = stringResource(R.string.Date),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
@@ -173,15 +172,14 @@ fun NewTrainingPage(navController: NavController){
 
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
-
-
-                                                        Text(
-                                text = "Tidspunkt",
+                            Text(
+                                text = stringResource(R.string.Time),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
                             )
-                            Text(text = "Start", fontWeight = FontWeight.Bold)
+                            Text(text = stringResource(R.string.Start),
+                                fontWeight = FontWeight.Bold)
                             Button(
                                 onClick = { startTimeDialogState.show() },
                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
@@ -204,7 +202,7 @@ fun NewTrainingPage(navController: NavController){
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
-                            Text(text = "Slut", fontWeight = FontWeight.Bold)
+                            Text(text = stringResource(R.string.End), fontWeight = FontWeight.Bold)
                             Button(
                                 onClick = { endTimeDialogState.show() },
                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
@@ -227,23 +225,23 @@ fun NewTrainingPage(navController: NavController){
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
                             Text(
-                                text = "Andet",
+                                text = stringResource(R.string.Other),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
                             )
                             Text(
-                                text = "Max antal deltagere",
+                                text = stringResource(R.string.MaxAttending),
 
                                 )
-                            maxParticipants = dropDownMenu(items = viewModel.getParticipantList(), menuWidth = 60).toInt()
+                            maxParticipants = dropDownMenu(items = viewModel.getParticipantList(),
+                                menuWidth = 60).toInt()
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
                             Text(
-                                text = "Beskrivelse",
-
-                                )
+                                text = stringResource(R.string.Description),
+                            )
                             TextField(
                                 value = description.value,
                                 onValueChange = { description.value = it },
@@ -254,7 +252,6 @@ fun NewTrainingPage(navController: NavController){
                                 )
                             )
                             Spacer(modifier = Modifier.padding(top = 50.dp))
-
                         }
                     }
                     Spacer(modifier = Modifier.padding(top = 200.dp))

@@ -1,6 +1,5 @@
 package com.example.bkskjold.ui.view.pages
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,14 +21,13 @@ import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.Training
-import com.example.bkskjold.data.model.firebaseAdapter.trainings
 import com.example.bkskjold.data.model.firebaseAdapter.news
+import com.example.bkskjold.data.model.firebaseAdapter.trainings
 import com.example.bkskjold.ui.view.reusables.HomePageCategories
 import com.example.bkskjold.ui.view.reusables.NewsCard
 import com.example.bkskjold.ui.view.reusables.NextTrainingCard
 import com.google.firebase.Timestamp
 
-//TODO Lav metode til at finde den næste tilmeldte træning
 @Composable
 fun HomeScreenPage(navController: NavController) {
     LazyColumn(
@@ -84,17 +82,17 @@ fun HomeScreenPage(navController: NavController) {
             getNewest@ for (i in 0..0) {
                 for (item in trainings) {
                     if (!item.userBooking && item.participants.contains(CurrentUser.id)) {
-                        NextTrainingCard(training = item, navController)
+                        NextTrainingCard(trainings = item, navController)
                         break@getNewest
                     }
                 }
                 val default = Training(
                     timeStart = Timestamp.now(),
                     timeEnd = Timestamp.now(),
-                    location = "Du deltager ikke i nogen træninger!",
+                    location = stringResource(R.string.NotAttendingAnyTrainings),
                     league = "N/A",
                     trainer = "N/A",
-                    description = "Du deltager ikke i nogen træninger. Gå ind under \"Træninger\" for at deltage i en.",
+                    description = stringResource(R.string.TrainingDefaultDescription),
                     maxParticipants = 0,
                     participants = mutableListOf<String>(),
                     userBooking = false
@@ -102,20 +100,30 @@ fun HomeScreenPage(navController: NavController) {
                 NextTrainingCard(default, navController)
             }
         }
-
         item {
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .padding(15.dp, 35.dp, 15.dp, 0.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                HomePageCategories(R.drawable.icon_field, stringResource(R.string.bookField), "bookedFieldsPage", navController)
-                HomePageCategories(R.drawable.icon_calendarhome, stringResource(R.string.calender),"bookedFieldsPage", navController)
-                HomePageCategories(R.drawable.icon_map, stringResource(R.string.map),NavigationRoute.MapPage.route, navController)
-                HomePageCategories(R.drawable.icon_trainer_panel, stringResource(R.string.trainingPanel),NavigationRoute.AdminPanel.route, navController)
+                HomePageCategories(R.drawable.icon_field,
+                    stringResource(R.string.bookField),
+                    NavigationRoute.BookedFieldsPage.route,
+                    navController)
+                HomePageCategories(R.drawable.icon_calendarhome,
+                    stringResource(R.string.calender),
+                    "bookedFieldsPage",
+                    navController)
+                HomePageCategories(R.drawable.icon_map,
+                    stringResource(R.string.map),
+                    NavigationRoute.MapPage.route,
+                    navController)
+                HomePageCategories(R.drawable.icon_trainer_panel,
+                    stringResource(R.string.trainingPanel),
+                    NavigationRoute.AdminPanel.route,
+                    navController)
             }
         }
-
         item {
             Spacer(modifier = Modifier.height(35.dp))
             Text(//Card title
@@ -125,7 +133,6 @@ fun HomeScreenPage(navController: NavController) {
                 color = Color.Gray,
                 modifier = Modifier.padding(start = 25.dp)
             )
-
         }
         items(news.size) { i ->
             NewsCard(news = news[i])

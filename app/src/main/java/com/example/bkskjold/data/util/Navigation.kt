@@ -29,6 +29,8 @@ import com.example.bkskjold.ui.view.pages.booking.BookFieldPage
 import com.example.bkskjold.ui.view.pages.booking.NewNewsPage
 import com.example.bkskjold.ui.view.pages.event.CreateEventPage
 import com.example.bkskjold.ui.view.pages.event.EventOverview
+import com.example.bkskjold.ui.view.pages.profile.SettingsPage
+import com.example.bkskjold.ui.view.pages.profile.editProfilePage
 import com.example.bkskjold.ui.view.pages.profile.profileOverview
 import com.example.bkskjold.ui.view.pages.training.NewTrainingPage
 import com.example.bkskjold.ui.view.pages.training.TrainingInfoPage
@@ -107,7 +109,7 @@ fun Navigation(navController: NavHostController) {
         composable(NavigationRoute.SettingsPage.route){
             val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
             settingModel?.let {
-                settingsPage(navController = navController)
+                SettingsPage(navController = navController)
             }
         }
         composable(NavigationRoute.EditProfile.route){
