@@ -8,15 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.AddCircle
-import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -25,37 +17,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
-import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.Event
-import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 import com.example.bkskjold.ui.view.pages.event.gotoEventDetails
 
-
 @Composable
 fun EventsCard(event: Event, navController: NavController, userId: String) {
-
-
-    Card( //event card
+    Card(
         shape = RoundedCornerShape(22.dp),
         modifier = Modifier
             .padding(15.dp)
             .clickable { gotoEventDetails(event, navController) },
         backgroundColor = colorResource(R.color.main_background),
         elevation = 3.dp,
-
-        ) {
-        Column(
-
-        ){
+    ) {
+        Column {
             Column(
                 modifier = Modifier
                     .padding(20.dp, 15.dp, 20.dp, 15.dp),
                 verticalArrangement = Arrangement.Top
             ) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(// event header
                         text = event.header,
                         fontWeight = FontWeight.Bold,
@@ -72,24 +57,31 @@ fun EventsCard(event: Event, navController: NavController, userId: String) {
                 }
                 Text( // event description
                     text = event.description,
-                    modifier = Modifier.padding(0.dp,0.dp,0.dp, 5.dp),
+                    modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 5.dp),
                     color = Color.DarkGray
                 )
                 Row( //Row to display time and location
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(0.dp, 35.dp, 0.dp, 0.dp)
-                        .height(20.dp)
-                    ,
+                        .height(20.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Row() { //time
-                        Image(painter = painterResource(id = R.drawable.icon_calendar), contentDescription = null)
-                        Text(text = "${getDay(event.timeStart)}. ${getMonthString(event.timeStart)}  kl. ${getTime(event.timeStart)}", fontWeight = FontWeight.Bold, modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
+                        Image(painter = painterResource(id = R.drawable.icon_calendar),
+                            contentDescription = null)
+                        Text(text = "${getDay(event.timeStart)}. ${getMonthString(event.timeStart)}  kl. ${
+                            getTime(event.timeStart)
+                        }",
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
                     }
                     Row() { //location
-                        Image(painter = painterResource(id = R.drawable.icon_location), contentDescription = null)
-                        Text(text = event.location, fontWeight = FontWeight.Bold, modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
+                        Image(painter = painterResource(id = R.drawable.icon_location),
+                            contentDescription = null)
+                        Text(text = event.location,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
                     }
                 }
             }

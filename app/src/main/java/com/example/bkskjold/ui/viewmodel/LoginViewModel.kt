@@ -7,7 +7,6 @@ import com.example.bkskjold.data.model.firebaseAdapter.updateCurrentUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import java.lang.IllegalArgumentException
 
 /**
  * View model for the login view.
@@ -35,7 +34,7 @@ class LoginViewModel : ViewModel() {
     }
 
     // Reset password
-    fun resetPassword(){
+    fun resetPassword() {
         if (email.value != "") {
             val email: String = _email.value ?: throw IllegalArgumentException("email expected")
             Firebase.auth.sendPasswordResetEmail(email)
@@ -47,20 +46,20 @@ class LoginViewModel : ViewModel() {
         if (_loading.value == false) {
             if ((email.value != "") && (password.value != "")) {
 
-            val email: String = _email.value ?: throw IllegalArgumentException("email expected")
-            val password: String =
-                _password.value ?: throw IllegalArgumentException("password expected")
+                val email: String = _email.value ?: throw IllegalArgumentException("email expected")
+                val password: String =
+                    _password.value ?: throw IllegalArgumentException("password expected")
 
-            _loading.value = true
+                _loading.value = true
 
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        updateCurrentUser()
-                        home()
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            updateCurrentUser()
+                            home()
+                        }
+                        _loading.value = false
                     }
-                    _loading.value = false
-                }
             }
         }
     }

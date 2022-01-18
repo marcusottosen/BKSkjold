@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,12 +34,12 @@ import com.example.bkskjold.data.util.getWeekDay
 import com.example.bkskjold.ui.view.pages.training.gotoTrainingDetails
 
 @Composable
-fun TrainingCard(training: Training, navController: NavController) {
-    var training = training//remember { mutableStateOf(training) } TODO ???
+fun TrainingCard(trainings: Training, navController: NavController) {
+    var training = trainings
 
     val iconSize = 11
     val userId = CurrentUser.id
-    val isAttending = remember { mutableStateOf(false)}
+    val isAttending = remember { mutableStateOf(false) }
     val participants = training.participants
 
     isAttending.value = participants.contains(userId)
@@ -55,7 +56,7 @@ fun TrainingCard(training: Training, navController: NavController) {
         elevation = 3.dp
     ) {
         Row {
-            Column (modifier = Modifier.width(95.dp)){
+            Column(modifier = Modifier.width(95.dp)) {
                 Text( //date
                     text = "${getDay(training.timeStart)} ${getMonthString(training.timeStart)}",
                     fontSize = 11.sp,
@@ -86,8 +87,8 @@ fun TrainingCard(training: Training, navController: NavController) {
             }
 
             Column { //Number of attending & location
-                Row (
-                    modifier = Modifier.padding(20.dp,2.dp,40.dp,2.dp)
+                Row(
+                    modifier = Modifier.padding(20.dp, 2.dp, 40.dp, 2.dp)
                 ) {
                     Column {
                         Row(
@@ -162,50 +163,50 @@ fun TrainingCard(training: Training, navController: NavController) {
                 }
                 Column(
                     modifier = Modifier
-                        .padding(20.dp,2.dp,40.dp,2.dp)
-                    , horizontalAlignment = Alignment.CenterHorizontally
-                ){
+                        .padding(20.dp, 2.dp, 40.dp, 2.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Button(
                         modifier = Modifier
                             .padding(0.dp)
-                            .fillMaxWidth()
-                        , onClick = {
-                            if (training.participants.contains(userId)){
+                            .fillMaxWidth(),
+                        onClick = {
+                            if (training.participants.contains(userId)) {
                                 training.participants.remove(userId)
-                            }else{
+                            } else {
                                 training.participants.add(userId)
                             }
                             training = updateParticipants(training, participants, userId)
                             isAttending.value = !isAttending.value
-                        }
-                        , shape = RoundedCornerShape(18.dp)
-                        , colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary))
+                        },
+                        shape = RoundedCornerShape(18.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary))
                     ) {
-                        if (isAttending.value){
+                        if (isAttending.value) {
                             Text(
-                                text = "Afmeld Deltagelse"
-                                , color = colorResource(id =R.color.main_background))
-                        }else{
+                                text = stringResource(R.string.Unattend),
+                                color = colorResource(id = R.color.main_background))
+                        } else {
                             Text(
-                                text = "Deltag"
-                                , color = colorResource(id =R.color.main_background))
+                                text = stringResource(R.string.Attend),
+                                color = colorResource(id = R.color.main_background))
                         }
                     }
                 }
             }
         }
 
-        Row (
+        Row(
             horizontalArrangement = Arrangement.End,
-        ){
-            if (isAttending.value){
+        ) {
+            if (isAttending.value) {
                 Box(
                     modifier = Modifier
                         .width(20.dp)
                         .fillMaxHeight()
                         .background(colorResource(R.color.green))
                 )
-            }else{
+            } else {
                 Box(
                     modifier = Modifier
                         .width(20.dp)

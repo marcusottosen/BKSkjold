@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -29,42 +30,33 @@ import com.example.bkskjold.ui.view.pages.profile.gotoEditProfilePage
 import com.example.bkskjold.ui.view.pages.profile.gotoSettingsPage
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 import com.example.bkskjold.ui.viewmodel.logoutUser
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-
-//val name = Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().currentUser?.uid.toString()).get().result.getString("name")
-
-
-
 
 @Composable
-fun DefaultProfileHeader(user: User, navController: NavController){
-
+fun DefaultProfileHeader(user: User, navController: NavController) {
     val iconSize = 40.dp
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(painter = painterResource(id = R.drawable.img_profile_header_background, ),
+        Image(painter = painterResource(id = R.drawable.img_profile_header_background),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .height(400.dp)
-                .fillMaxWidth())
+                .fillMaxWidth()
+        )
 
         Column(modifier = Modifier.fillMaxSize()) {
-
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 TextButton(
                     onClick = { logoutUser(navController) },
                     modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
                 ) {
                     Text(
-                        text = "Log ud",
-                        color = androidx.compose.ui.graphics.Color.White)
+                        text = stringResource(R.string.LogOut),
+                        color = White)
                 }
             }
 
-            //Profile picture TODO Get picture from database
+            //Profile picture
             Box(Modifier.fillMaxWidth()) {
                 Image(painter = painterResource(id = R.drawable.profile_picture),
                     contentDescription = null,
@@ -88,7 +80,7 @@ fun DefaultProfileHeader(user: User, navController: NavController){
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                color = androidx.compose.ui.graphics.Color.White
+                color = White
             )
 
             Row(modifier = Modifier
@@ -97,29 +89,26 @@ fun DefaultProfileHeader(user: User, navController: NavController){
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = CenterHorizontally,
                     modifier = Modifier
                         .padding(start = 50.dp)
                         .clickable { gotoSettingsPage(user, navController) },
                 ) {
-                    Icon(//Modifier.size(iconSize),
+                    Icon(
                         painterResource(id = R.drawable.icon_settings),
                         contentDescription = null,
                         Modifier.size(iconSize),
                         tint = White,
-
-
-
                     )
 
                     Text(
-                        text = "Indstillinger",
-                        color = androidx.compose.ui.graphics.Color.White
+                        text = stringResource(R.string.Settings),
+                        color = White
                     )
                 }
 
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = CenterHorizontally,
                     modifier = Modifier
                         .padding(end = 50.dp)
                         .clickable { gotoEditProfilePage(user, navController) }
@@ -130,10 +119,9 @@ fun DefaultProfileHeader(user: User, navController: NavController){
                         Modifier.size(iconSize),
                         tint = White,
                     )
-
                     Text(
-                        text = "Rediger Profil",
-                        color = androidx.compose.ui.graphics.Color.White
+                        text = stringResource(R.string.EditProfile),
+                        color = White
                     )
                 }
             }
@@ -142,46 +130,44 @@ fun DefaultProfileHeader(user: User, navController: NavController){
 }
 
 @Composable
-fun DefaultEditProfileHeader(user: User, navController: NavController, registerViewModel: RegisterViewModel = viewModel()) {
-
-    val auth: FirebaseAuth = Firebase.auth
-    val iconSize = 40.dp
-
-
-
+fun DefaultEditProfileHeader(
+    user: User,
+    navController: NavController,
+    registerViewModel: RegisterViewModel = viewModel(),
+) {
     Box(modifier = Modifier.fillMaxWidth()) {
-        Image(painter = painterResource(id = R.drawable.img_profile_header_background, ),
+        Image(painter = painterResource(id = R.drawable.img_profile_header_background),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .height(400.dp)
-                .fillMaxWidth())
-
+                .fillMaxWidth()
+        )
         Column(modifier = Modifier.fillMaxSize()) {
-
             Row(modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween) {
+                horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = CenterHorizontally,
                     modifier = Modifier
                         .padding(start = 20.dp)
                         .clickable { gotoSettingsPage(user, navController) },
                 ) {
+                    TextButton(
+                        onClick = { navController.navigateUp() },
+                        modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.Cancel),
+                            color = White)
+                    }
+                }
                 TextButton(
-                    onClick = {navController.navigateUp()},
+                    onClick = { registerViewModel.editCurrentUser(); navController.navigateUp() },
                     modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
                 ) {
                     Text(
-                        text = "Annuller",
-                        color = androidx.compose.ui.graphics.Color.White)
-                } }
-                TextButton(
-                    onClick = { registerViewModel.editCurrentUser() ; navController.navigateUp()},
-                    modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
-                ) {
-                    Text(
-                        text = "Gem ændringer",
-                        color = androidx.compose.ui.graphics.Color.White)
+                        text = stringResource(R.string.SaveSettings),
+                        color = White)
                 }
             }
             Box(Modifier.fillMaxWidth()) {
@@ -199,15 +185,17 @@ fun DefaultEditProfileHeader(user: User, navController: NavController, registerV
                 )
             }
             TextButton(
-                onClick = {println(registerViewModel.firstName.toString()); println(registerViewModel.firstName) ; println(
-                    CurrentUser.firstName)},
+                onClick = {
+                    println(registerViewModel.firstName.toString()); println(registerViewModel.firstName); println(
+                    CurrentUser.firstName)
+                },
                 modifier = Modifier
                     .align(CenterHorizontally)
 
             ) {
                 Text(
-                    text = "Skift profilbillede",
-                    color = androidx.compose.ui.graphics.Color.White)
+                    text = stringResource(R.string.ChangeProfilePicture),
+                    color = White)
             }
         }
     }

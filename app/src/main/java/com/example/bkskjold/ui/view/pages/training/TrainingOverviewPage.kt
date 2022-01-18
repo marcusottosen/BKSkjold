@@ -1,4 +1,5 @@
 package com.example.bkskjold.ui.view.pages.training
+
 import android.widget.CalendarView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -37,7 +38,19 @@ fun TrainingOverview(navController: NavController) {
 
     //Tidspunkt filter menu variables
     var expandedTidspunkt by remember { mutableStateOf(false) }
-    val times = listOf("15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00")
+    val times = listOf("15:00",
+        "15:30",
+        "16:00",
+        "16:30",
+        "17:00",
+        "17:30",
+        "18:00",
+        "18:30",
+        "19:00",
+        "19:30",
+        "20:00",
+        "20:30",
+        "21:00")
 
     //team filter menu variables
     var expandedTeam by remember { mutableStateOf(false) }
@@ -59,19 +72,18 @@ fun TrainingOverview(navController: NavController) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 30.dp)
-            ,
+                .padding(top = 30.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
-        ){
+        ) {
             Button(
                 onClick = { shouldShowOverview.value = true },
                 shape = RoundedCornerShape(14.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor =
-                    if(shouldShowOverview.value) colorResource(R.color.primary)
+                    if (shouldShowOverview.value) colorResource(R.color.primary)
                     else colorResource(R.color.primary_light)),
 
-                ){
+                ) {
                 Text(text = "Alle Træninger", color = colorResource(id = R.color.main_background))
             }
             Button(
@@ -79,10 +91,11 @@ fun TrainingOverview(navController: NavController) {
                 shape = RoundedCornerShape(14.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor =
-                    if(shouldShowOverview.value) colorResource(R.color.primary_light)
+                    if (shouldShowOverview.value) colorResource(R.color.primary_light)
                     else colorResource(R.color.primary)),
             ) {
-                Text(text = "Tilmeldte Træninger", color = colorResource(id = R.color.main_background))
+                Text(text = "Tilmeldte Træninger",
+                    color = colorResource(id = R.color.main_background))
             }
         }
 
@@ -90,9 +103,9 @@ fun TrainingOverview(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(35.dp, 10.dp, 15.dp, 10.dp)
-            , verticalArrangement = Arrangement.Center
-            , horizontalAlignment = Alignment.End
+                .padding(35.dp, 10.dp, 15.dp, 10.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.End
 
         ) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
@@ -105,7 +118,7 @@ fun TrainingOverview(navController: NavController) {
                                 Modifier.padding(start = 10.dp, end = 5.dp),
                                 color = Color.White
                             )
-                            Icon (imageVector = Icons.Outlined.Close,
+                            Icon(imageVector = Icons.Outlined.Close,
                                 contentDescription = "Close",
                                 tint = Color.White)
                         }
@@ -164,35 +177,36 @@ fun TrainingOverview(navController: NavController) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(colorResource(id = R.color.primary))
-                        , horizontalArrangement = Arrangement.SpaceEvenly
+                            .background(colorResource(id = R.color.primary)),
+                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         items.forEachIndexed { index, item ->
                             DropdownMenuItem(
                                 onClick = {
                                     //expanded = false
-                                    if (item == "Tidspunkt"){expandedTidspunkt = !expandedTidspunkt}
-                                    else if (item == "Hold"){expandedTeam = !expandedTeam}
-                            }
-                            , modifier = Modifier.width(125.dp)
-                        ) {
-                            Text(text = item, color = Color.White)
+                                    if (item == "Tidspunkt") {
+                                        expandedTidspunkt = !expandedTidspunkt
+                                    } else if (item == "Hold") {
+                                        expandedTeam = !expandedTeam
+                                    }
+                                }, modifier = Modifier.width(125.dp)
+                            ) {
+                                Text(text = item, color = Color.White)
                             }
                         }
                     }
 
                     //dropdown menu for time filtering
                     DropdownMenu(
-                        expanded = expandedTidspunkt
-                        , onDismissRequest = { expandedTidspunkt = false }
-                        , modifier = Modifier
+                        expanded = expandedTidspunkt,
+                        onDismissRequest = { expandedTidspunkt = false },
+                        modifier = Modifier
                             .fillMaxWidth()
                     ) {
                         Column(
                             modifier = Modifier
                                 .height(170.dp)
-                                .verticalScroll(rememberScrollState(), enabled = true)
-                            ,
+                                .verticalScroll(rememberScrollState(), enabled = true),
                         ) {
                             times.forEachIndexed { index, time ->
                                 DropdownMenuItem(
@@ -200,13 +214,12 @@ fun TrainingOverview(navController: NavController) {
                                         expandedTidspunkt = false
                                         expanded = false
                                         chosenTime.value = time
-                                    }
-                                    , modifier = Modifier
+                                    }, modifier = Modifier
                                 ) {
                                     Column(
                                         modifier = Modifier
-                                            .fillMaxWidth()
-                                        , horizontalAlignment = Alignment.CenterHorizontally
+                                            .fillMaxWidth(),
+                                        horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
                                         Text(
                                             text = time
@@ -219,16 +232,15 @@ fun TrainingOverview(navController: NavController) {
 
                     //dropdown menu for team filtering
                     DropdownMenu(
-                        expanded = expandedTeam
-                        , onDismissRequest = { expandedTeam = false }
-                        , modifier = Modifier
+                        expanded = expandedTeam,
+                        onDismissRequest = { expandedTeam = false },
+                        modifier = Modifier
                             .fillMaxWidth()
                     ) {
                         Column(
                             modifier = Modifier
                                 .height(170.dp)
-                                .verticalScroll(rememberScrollState(), enabled = true)
-                            ,
+                                .verticalScroll(rememberScrollState(), enabled = true),
                         ) {
                             teams.forEachIndexed { index, item ->
                                 DropdownMenuItem(
@@ -236,13 +248,12 @@ fun TrainingOverview(navController: NavController) {
                                         expandedTeam = false
                                         expanded = false
                                         team.value = item
-                                    }
-                                    , modifier = Modifier
+                                    }, modifier = Modifier
                                 ) {
                                     Column(
                                         modifier = Modifier
-                                            .fillMaxWidth()
-                                        , horizontalAlignment = Alignment.CenterHorizontally
+                                            .fillMaxWidth(),
+                                        horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
                                         Text(
                                             text = item
@@ -254,11 +265,11 @@ fun TrainingOverview(navController: NavController) {
                     }
                     //Calendar shown as standard in filter menu, to filter by date.
                     AndroidView(
-                        { CalendarView(it) }
-                        , modifier = Modifier.wrapContentWidth()
-                        , update = { views ->
+                        { CalendarView(it) },
+                        modifier = Modifier.wrapContentWidth(),
+                        update = { views ->
                             views.setOnDateChangeListener { calendarView, year, month, day ->
-                                val monthShifted = month+1
+                                val monthShifted = month + 1
                                 date.value = "$day/$monthShifted"
                             }
                         }
@@ -266,16 +277,22 @@ fun TrainingOverview(navController: NavController) {
                 }
             }
         }
-        if(shouldShowOverview.value){
-            viewModel.GetOverviewView(navController, date = date.value, timeStart = chosenTime.value, team = team.value)
+        if (shouldShowOverview.value) {
+            viewModel.GetOverviewView(navController,
+                date = date.value,
+                timeStart = chosenTime.value,
+                team = team.value)
             print("")
-        }else {
-            viewModel.GetSignedUpView(navController, date = date.value, timeStart = chosenTime.value, team = team.value)
+        } else {
+            viewModel.GetSignedUpView(navController,
+                date = date.value,
+                timeStart = chosenTime.value,
+                team = team.value)
         }
     }
 }
 
-fun gotoTrainingDetails(training: Training, navController: NavController){
+fun gotoTrainingDetails(training: Training, navController: NavController) {
     navController.currentBackStackEntry?.arguments?.putParcelable("training", training)
     navController.navigate(NavigationRoute.TrainingDetails.route)
 }

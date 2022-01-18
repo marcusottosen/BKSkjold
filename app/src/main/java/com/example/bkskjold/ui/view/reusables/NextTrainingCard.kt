@@ -37,8 +37,8 @@ import com.example.bkskjold.ui.view.pages.training.gotoTrainingDetails
 
 
 @Composable
-fun NextTrainingCard(training: Training, navController: NavController) {
-    var training = training
+fun NextTrainingCard(trainings: Training, navController: NavController) {
+    var training = trainings
     val participants = training.participants
 
     val userId = CurrentUser.id
@@ -48,13 +48,13 @@ fun NextTrainingCard(training: Training, navController: NavController) {
     Card(
         shape = RoundedCornerShape(22.dp),
         border = BorderStroke(width = 1.dp, color = colorResource(id = R.color.border)),
-        modifier = if (training.location != "Du deltager ikke i nogen træninger!"){
+        modifier = if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
             Modifier
-            .padding(15.dp, 0.dp, 15.dp, 0.dp)
-            .height(220.dp)
-            .clickable {
-                gotoTrainingDetails(training, navController)
-            }
+                .padding(15.dp, 0.dp, 15.dp, 0.dp)
+                .height(220.dp)
+                .clickable {
+                    gotoTrainingDetails(training, navController)
+                }
         } else {
             Modifier
                 .padding(15.dp, 0.dp, 15.dp, 0.dp)
@@ -62,7 +62,7 @@ fun NextTrainingCard(training: Training, navController: NavController) {
         },
         elevation = 0.dp
     ) {
-        Column() {
+        Column {
             Card(
                 //event card
                 modifier = Modifier
@@ -88,7 +88,7 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                         text = stringResource(R.string.nextTraining),
                         color = Color.White
                     )
-                    if (training.location != "Du deltager ikke i nogen træninger!"){
+                    if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
                         Text(// Header
                             text = stringResource(R.string.trainingFor) + " " + training.league,
                             fontSize = 24.sp,
@@ -96,7 +96,7 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                             modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 5.dp),
                             color = Color.White
                         )
-                    }else{
+                    } else {
                         Text(// Header
                             text = stringResource(R.string.noTraining),
                             fontSize = 24.sp,
@@ -106,7 +106,6 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                         )
                     }
 
-
                     Spacer(modifier = Modifier.height(20.dp))
 
                     Row( //Row to display time and location
@@ -115,8 +114,8 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                             .padding(0.dp, 0.dp, 0.dp, 0.dp),
                         horizontalArrangement = Arrangement.Start
                     ) {
-                        if (training.location != "Du deltager ikke i nogen træninger!") {
-                            Column() { //Date & time
+                        if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
+                            Column { //Date & time
                                 Text(text = "${getDay(training.timeStart)}. ${
                                     getMonthString(training.timeStart)
                                 }", fontSize = 10.sp, color = Color.White)
@@ -133,7 +132,8 @@ fun NextTrainingCard(training: Training, navController: NavController) {
 
                         Column(modifier = Modifier.fillMaxSize()) {
                             Box(modifier = Modifier.fillMaxSize()) {
-                                Row( //team
+                                Row(
+                                    //team
                                     modifier = Modifier
                                         .padding(20.dp, 0.dp, 0.dp, 20.dp)
                                         .align(alignment = Alignment.BottomStart),
@@ -153,7 +153,7 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                                     )
                                 }
 
-                                if (training.location != "Du deltager ikke i nogen træninger!") {
+                                if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
                                     Row(
                                         //location
                                         modifier = Modifier
@@ -181,8 +181,7 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                 }
             }
 
-
-            if (training.location != "Du deltager ikke i nogen træninger!") {
+            if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -206,7 +205,7 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                                     modifier = Modifier.size(15.dp)
                                 )
                                 Text(
-                                    text = "${training.participants.size}/${training.maxParticipants}", //$attending/$spots"
+                                    text = "${training.participants.size}/${training.maxParticipants}",
                                     fontSize = 10.sp,
                                     modifier = Modifier
                                         .padding(start = 5.dp)
@@ -223,7 +222,7 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier.size(15.dp),
                                 )
-                                if (training.location != "Du deltager ikke i nogen træninger!") {
+                                if (training.location != stringResource(R.string.NotAttendingAnyTrainings)) {
                                     Text(
                                         text = getUserFromID(training.trainer).firstName + " " + getUserFromID(
                                             training.trainer).lastName,
@@ -239,7 +238,6 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                                             .padding(start = 5.dp)
                                     )
                                 }
-
                             }
                         }
                     }
@@ -301,7 +299,6 @@ fun NextTrainingCard(training: Training, navController: NavController) {
                                 painter = painterResource(id = R.drawable.icon_home_accept_button),
                                 contentDescription = null,
                                 contentScale = ContentScale.Crop,
-                                //colorFilter = ColorFilter.tint(Color(0xFF698C44)),
                                 modifier = Modifier
                                     .size(40.dp)
                             )

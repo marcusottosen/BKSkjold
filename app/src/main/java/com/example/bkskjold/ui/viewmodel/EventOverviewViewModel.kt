@@ -15,12 +15,12 @@ open class EventOverviewViewModel {
     @Composable
     fun GetEventsView(navController: NavController) {
         val userId = CurrentUser.id
-        LazyColumn(){
-            item {Spacer(modifier = Modifier.height(40.dp))}
+        LazyColumn {
+            item { Spacer(modifier = Modifier.height(40.dp)) }
             items(events.size) { i ->
                 EventsCard(event = events[i], navController, userId)
             }
-            item {Spacer(modifier = Modifier.height(80.dp))}
+            item { Spacer(modifier = Modifier.height(80.dp)) }
         }
     }
 }

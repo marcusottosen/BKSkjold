@@ -3,10 +3,10 @@ package com.example.bkskjold.ui.viewmodel
 import android.content.Context
 import android.widget.Toast
 import androidx.navigation.NavController
-import com.example.bkskjold.data.model.firebaseAdapter.addNewsToDB
 import com.example.bkskjold.data.model.dataClass.*
 import com.example.bkskjold.data.model.firebaseAdapter.TrainingModel
 import com.example.bkskjold.data.model.firebaseAdapter.addEventToDB
+import com.example.bkskjold.data.model.firebaseAdapter.addNewsToDB
 import com.example.bkskjold.data.model.firebaseAdapter.addTrainingToDB
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
@@ -23,7 +23,7 @@ class DocumentCreationViewModel {
 
     fun getFields(): MutableList<String> {
         val fields = mutableListOf<String>()
-        for (field in Locations.values()){
+        for (field in Locations.values()) {
             fields.add(field.toString())
         }
         return fields
@@ -31,24 +31,24 @@ class DocumentCreationViewModel {
 
     fun getTeams(): MutableList<String> {
         val teams = mutableListOf<String>()
-        for (team in Teams.values()){
+        for (team in Teams.values()) {
             teams.add(team.toString())
         }
         return teams
     }
 
-    fun getParticipantList(): MutableList<String>{
+    fun getParticipantList(): MutableList<String> {
         val participantList = mutableListOf<String>()
-        for (i in 1..60){
+        for (i in 1..60) {
             participantList.add(i.toString())
         }
         return participantList
     }
 
-    fun getPriceList(): MutableList<String>{
+    fun getPriceList(): MutableList<String> {
         val priceOptions = mutableListOf<String>()
         var num = 0
-        for (i in 0..10){
+        for (i in 0..10) {
             priceOptions.add(num.toString())
             num += 5
         }
@@ -63,7 +63,7 @@ class DocumentCreationViewModel {
         maxParticipants: Int,
         description: String,
         navController: NavController,
-        context: Context
+        context: Context,
     ) {
         try {
             val booking = Training(
@@ -80,7 +80,7 @@ class DocumentCreationViewModel {
             loadNewTrainings.loadTrainingsFromDB()
             addTrainingToDB(booking, navController)
             Toast.makeText(context, "Bookning af bane oprettet", Toast.LENGTH_SHORT).show()
-        }catch (e: Exception){
+        } catch (e: Exception) {
             errorToast(context)
         }
     }
@@ -94,8 +94,8 @@ class DocumentCreationViewModel {
         description: String,
         team: String,
         navController: NavController,
-        context: Context
-    ){
+        context: Context,
+    ) {
         try {
             val training = Training(
                 timeStart = toTimeStamp(date, startTime),
@@ -112,7 +112,7 @@ class DocumentCreationViewModel {
             addTrainingToDB(training, navController)
             Toast.makeText(context, "Træning oprettet", Toast.LENGTH_SHORT).show()
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             errorToast(context)
         }
     }
@@ -126,8 +126,8 @@ class DocumentCreationViewModel {
         endTime: String,
         price: Int,
         navController: NavController,
-        context: Context
-    ){
+        context: Context,
+    ) {
         try {
             val event = Event(
                 timeStart = toTimeStamp(date, startTime),
@@ -140,7 +140,7 @@ class DocumentCreationViewModel {
             )
             addEventToDB(event, navController)
             Toast.makeText(context, "Event oprettet", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception){
+        } catch (e: Exception) {
             errorToast(context)
         }
     }
@@ -149,22 +149,24 @@ class DocumentCreationViewModel {
         header: String,
         description: String,
         navController: NavController,
-        context: Context
-    ){
+        context: Context,
+    ) {
         try {
             val news = News(header, description, Timestamp.now())
             addNewsToDB(news, navController)
             Toast.makeText(context, "Nyhed oprettet", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception){
+        } catch (e: Exception) {
             errorToast(context)
         }
     }
 
-    fun toTimeStamp(date: String, time: String): Timestamp{
+    private fun toTimeStamp(date: String, time: String): Timestamp {
         return Timestamp(SimpleDateFormat(dateformat).parse(("$date-$time").toString()))
     }
 
-    fun errorToast(context: Context){
-        Toast.makeText(context, "Der skete en fejl i oprettelsen! \n Husk at væle dato og tid", Toast.LENGTH_LONG).show()
+    private fun errorToast(context: Context) {
+        Toast.makeText(context,
+            "Der skete en fejl i oprettelsen! \n Husk at væle dato og tid",
+            Toast.LENGTH_LONG).show()
     }
 }

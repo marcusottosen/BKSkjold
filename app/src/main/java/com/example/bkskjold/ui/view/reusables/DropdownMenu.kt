@@ -6,7 +6,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.*
@@ -24,15 +27,13 @@ fun dropDownMenu(items: MutableList<String>, menuWidth: Int): String {
     var itemList: String by remember { mutableStateOf(items[0]) }
     var expanded by remember { mutableStateOf(false) }
 
-
     Box(Modifier
         .width(menuWidth.dp)
         .clip(RoundedCornerShape(12.dp))
         .border(BorderStroke(1.dp, colorResource(id = R.color.border)),
             shape = RoundedCornerShape(12.dp))
-        .background(Color.White)
-        ,contentAlignment = Alignment.Center
-    ){
+        .background(Color.White), contentAlignment = Alignment.Center
+    ) {
         Row(
             Modifier
                 .padding(0.dp)
@@ -50,10 +51,11 @@ fun dropDownMenu(items: MutableList<String>, menuWidth: Int): String {
                 id = R.color.primary),
                 contentDescription = "dropdown")
 
-
-            DropdownMenu(expanded = expanded,modifier = Modifier.height(200.dp), onDismissRequest = {
-                expanded = false
-            }) {
+            DropdownMenu(expanded = expanded,
+                modifier = Modifier.height(200.dp),
+                onDismissRequest = {
+                    expanded = false
+                }) {
                 items.forEach { item ->
                     DropdownMenuItem(onClick = {
                         expanded = false

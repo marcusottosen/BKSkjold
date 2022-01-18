@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.lang.IllegalArgumentException
 
 /**
  * View model for the login view.
@@ -20,7 +19,6 @@ class RegisterViewModel : ViewModel() {
 
     private val _firstName = MutableLiveData("")
     val firstName: LiveData<String> = _firstName
-
 
     private val _lastName = MutableLiveData("")
     val lastName: LiveData<String> = _lastName
@@ -50,6 +48,7 @@ class RegisterViewModel : ViewModel() {
     fun updateFirstName(newFirstName: String) {
         _firstName.value = newFirstName
     }
+
     fun updateLastName(newLastName: String) {
         _lastName.value = newLastName
     }
@@ -63,68 +62,72 @@ class RegisterViewModel : ViewModel() {
     fun updatePassword(newPassword: String) {
         _password.value = newPassword
     }
+
     fun updatePasswordCheck(newPasswordCheck: String) {
         _passwordCheck.value = newPasswordCheck
     }
 
     // Update phone
-    fun updatePhone(newPhoneNumber: String){
+    fun updatePhone(newPhoneNumber: String) {
         _phoneNumber.value = newPhoneNumber
     }
+
     // Update address
-    fun updateAddress(newAddress: String){
+    fun updateAddress(newAddress: String) {
         _address.value = newAddress
     }
+
     // Update team
-    fun updateTeam(newTeam: String){
+    fun updateTeam(newTeam: String) {
         _team.value = newTeam
     }
 
     fun editCurrentUser() {
-       updateCurrentUser()
-        lateinit var firstName: String
-        lateinit var lastName: String
-        lateinit var email: String
-        lateinit var team: String
-
-        if (_firstName.value != CurrentUser.firstName && _firstName.value != ""){
-           firstName = _firstName.value ?: throw IllegalArgumentException("first name expected")
-         }
-        else { firstName = CurrentUser.firstName}
-
-        if (_lastName.value != CurrentUser.lastName && _lastName.value != ""){
-            lastName = _lastName.value ?: throw IllegalArgumentException("last name expected")
-        }
-        else { lastName = CurrentUser.lastName}
-
-        if (_email.value != CurrentUser.email && _email.value != ""){
-            email = _email.value ?: throw IllegalArgumentException("email expected")
-        }
-        else { email = CurrentUser.email}
-
-        if (_team.value != CurrentUser.team && _team.value != ""){
-            team = _team.value ?: throw IllegalArgumentException("team expected")
-        }
-        else { team = CurrentUser.team}
-
-
-        Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
-            User(
-                CurrentUser.id,
-                firstName,
-                lastName,
-                email,
-                CurrentUser.address,
-                CurrentUser.phoneNumber,
-                CurrentUser.birthdate,
-                team,
-                CurrentUser.userType,
-                CurrentUser.finishedTrainings,
-                CurrentUser.memberSince
-            ))
         updateCurrentUser()
+
+        val firstName: String =
+            if (_firstName.value != CurrentUser.firstName && _firstName.value != "") {
+                _firstName.value ?: throw IllegalArgumentException("first name expected")
+            } else {
+                CurrentUser.firstName
+            }
+
+        val lastName: String =
+            if (_lastName.value != CurrentUser.lastName && _lastName.value != "") {
+                _lastName.value ?: throw IllegalArgumentException("last name expected")
+            } else {
+                CurrentUser.lastName
+            }
+
+        val email: String = if (_email.value != CurrentUser.email && _email.value != "") {
+            _email.value ?: throw IllegalArgumentException("email expected")
+        } else {
+            CurrentUser.email
         }
 
+        val team: String = if (_team.value != CurrentUser.team && _team.value != "") {
+            _team.value ?: throw IllegalArgumentException("team expected")
+        } else {
+            CurrentUser.team
+        }
+
+        Firebase.firestore.collection("users-db")
+            .document(FirebaseAuth.getInstance().uid.toString()).set(
+                User(
+                    CurrentUser.id,
+                    firstName,
+                    lastName,
+                    email,
+                    CurrentUser.address,
+                    CurrentUser.phoneNumber,
+                    CurrentUser.birthdate,
+                    team,
+                    CurrentUser.userType,
+                    CurrentUser.finishedTrainings,
+                    CurrentUser.memberSince
+                ))
+        updateCurrentUser()
+    }
 
 
     // Register user
@@ -133,11 +136,15 @@ class RegisterViewModel : ViewModel() {
 
             if (_password.value == _passwordCheck.value) {
 
-                val firstName: String = _firstName.value ?: throw IllegalArgumentException("first name expected")
-                val lastName: String = _lastName.value ?: throw IllegalArgumentException("last name expected")
+                val firstName: String =
+                    _firstName.value ?: throw IllegalArgumentException("first name expected")
+                val lastName: String =
+                    _lastName.value ?: throw IllegalArgumentException("last name expected")
                 val email: String = _email.value ?: throw IllegalArgumentException("email expected")
-                val password: String = _password.value ?: throw IllegalArgumentException("password expected")
-                val address: String = _address.value ?: throw IllegalArgumentException("address expected")
+                val password: String =
+                    _password.value ?: throw IllegalArgumentException("password expected")
+                val address: String =
+                    _address.value ?: throw IllegalArgumentException("address expected")
                 val team: String = _team.value ?: throw IllegalArgumentException("team expected")
 
                 val phoneNumber: String = if (_phoneNumber.value == "") {
@@ -146,27 +153,26 @@ class RegisterViewModel : ViewModel() {
                     _phoneNumber.value ?: throw IllegalArgumentException("phonenumber expected")
                 }
 
-
-
                 _loading.value = true
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
-                            Firebase.firestore.collection("users-db").document(FirebaseAuth.getInstance().uid.toString()).set(
-                                User(
-                                    FirebaseAuth.getInstance().uid.toString(),
-                                    firstName,
-                                    lastName,
-                                    email,
-                                    address,
-                                    phoneNumber.toInt(),
-                                    com.google.firebase.Timestamp.now(),
-                                    "default-team",
-                                    1,
-                                    0,
-                                    com.google.firebase.Timestamp.now()
+                            Firebase.firestore.collection("users-db")
+                                .document(FirebaseAuth.getInstance().uid.toString()).set(
+                                    User(
+                                        FirebaseAuth.getInstance().uid.toString(),
+                                        firstName,
+                                        lastName,
+                                        email,
+                                        address,
+                                        phoneNumber.toInt(),
+                                        com.google.firebase.Timestamp.now(),
+                                        "default-team",
+                                        1,
+                                        0,
+                                        com.google.firebase.Timestamp.now()
 
-                                ))
+                                    ))
                             updateCurrentUser()
                             home()
                         }
@@ -176,4 +182,3 @@ class RegisterViewModel : ViewModel() {
         }
     }
 }
-

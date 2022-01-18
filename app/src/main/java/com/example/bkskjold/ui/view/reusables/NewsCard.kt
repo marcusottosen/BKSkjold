@@ -21,14 +21,12 @@ import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getYear
 
-
 @Composable
 fun NewsCard(news: News) {
     Card(
         modifier = Modifier
             .padding(15.dp)
             .height(150.dp),
-        //backgroundColor = Color(212, 242, 191),
         shape = RoundedCornerShape(22.dp),
         border = BorderStroke(width = 1.dp, color = colorResource(id = R.color.border)),
         elevation = 3.dp
@@ -37,30 +35,30 @@ fun NewsCard(news: News) {
             Text(
                 text = "${getDay(news.date)}. ${getMonthString(news.date)} ${getYear(news.date)}",
                 textAlign = TextAlign.Right,
-                modifier = Modifier.padding(0.dp, 5.dp, 20.dp, 0.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(0.dp, 5.dp, 20.dp, 0.dp)
+                    .fillMaxWidth(),
                 color = Color.Gray,
                 fontSize = 10.sp
             )
-
-                Text(
-                    text = news.header,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(10.dp, 0.dp, 5.dp, 0.dp)
-                )
-                //Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = news.description,
-                    modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp),
-                    color = Color.DarkGray
-                )
+            Text(
+                text = news.header,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(10.dp, 0.dp, 5.dp, 0.dp)
+            )
+            Text(
+                text = news.description,
+                modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp),
+                color = Color.DarkGray
+            )
             Box(modifier = Modifier.fillMaxSize()) {
                 Box(
-                    modifier = Modifier.background(colorResource(id = R.color.primary))
+                    modifier = Modifier
+                        .background(colorResource(id = R.color.primary))
                         .height(5.dp)
                         .fillMaxWidth()
                         .align(Alignment.BottomStart)
-
-                ) {}
+                )
             }
         }
     }

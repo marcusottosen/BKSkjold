@@ -1,26 +1,9 @@
 package com.example.bkskjold.ui.viewmodel
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.navigation.NavHostController
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
-import com.example.bkskjold.R
-import com.example.bkskjold.ui.view.reusables.Buttons
-import com.example.bkskjold.ui.view.reusables.Title
+import androidx.navigation.NavHostController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
-// Forsøg på at gøre så man ikke kan komme tilbage til login-skærm med tilbageknappen
 class Action(navController: NavHostController) {
     val home: () -> Unit = {
         navController.navigate("mainScreen") {
@@ -37,9 +20,7 @@ class Action(navController: NavHostController) {
     val navigateBack: () -> Unit = { navController.popBackStack() }
 }
 
-
-
-fun logoutUser(navController: NavController){
+fun logoutUser(navController: NavController) {
     FirebaseAuth.getInstance().signOut()
     navController.navigate("mainScreen")
 }

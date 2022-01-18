@@ -8,6 +8,7 @@
     <string name="ProfileHeader">Profil</string>
     <string name="TrainingInfoPageHeader">Træning</string>
     <string name="TeamTraining">holdtræning</string>
+
     <string name="TrainingPrice">Pris: %1$s kr. (Medlemspris: %2$s kr.)</string>
     <string name="participating">deltagende</string>
     <string name="Unattend">Afmeld deltagelse</string>
@@ -28,4 +29,20 @@
     <string name="calender">Kalender</string>
     <string name="map">Kort</string>
     <string name="trainingPanel">Trænerpanel</string>
-    </resources>
+    <string name="FilterErrorMessage">Something went wrong, when trying to filter through practices. Method: filterAndSort in TrainingOverviewViewModel:</string>
+
+    <!-- Profile -->
+    <string name="Membership">Medlemsskab: </string>
+    <string name="FinshedTrainings">Træninger gennemført: </string>
+    <string name="MemberSince">Medlem siden: </string>
+    <string name="TeamJoined">Tilmeldt hold: </string>
+    <string name="Settings">Indstillinger</string>
+    <string name="LogOut">Log ud</string>
+    <string name="EditProfile">Rediger Profil</string>
+    <string name="Cancel">Annuller</string>
+    <string name="SaveSettings">Gem ændringer</string>
+    <string name="ChangeProfilePicture">Skift profilbillede</string>
+    <string name="NotAttendingAnyTrainings">Du deltager ikke i nogen træninger!</string>
+
+
+</resources>

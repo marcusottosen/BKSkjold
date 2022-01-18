@@ -15,7 +15,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
@@ -24,7 +23,6 @@ import com.example.bkskjold.R
  * Set of widgets/views which will be used throughout the application.
  * This is used to increase the code usability.
  */
-
 @Composable
 fun Title(title: String) {
     Text(
@@ -74,7 +72,13 @@ fun Appbar(title: String, action: () -> Unit) {
 }
 
 @Composable
-fun TextFormField(value: String, onValueChange: (String) -> Unit, label: String, keyboardType: KeyboardType, visualTransformation: VisualTransformation) {
+fun TextFormField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    keyboardType: KeyboardType,
+    visualTransformation: VisualTransformation,
+) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
