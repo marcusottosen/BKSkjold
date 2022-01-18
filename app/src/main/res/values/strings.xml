@@ -44,22 +44,30 @@
     <string name="SaveSettings">Gem ændringer</string>
     <string name="ChangeProfilePicture">Skift profilbillede</string>
     <string name="NotAttendingAnyTrainings">Du deltager ikke i nogen træninger!</string>
+    <string name="Subscription">Abonnement</string>
+    <string name="Notifications">Notifikationer</string>
+    <string name="PrivatesAndSecurity">Privatliv og Sikkerhed</string>
+    <string name="AboutAppName">Omkring BKSkjold</string>
+    <string name="ContactUs">Kontakt Os</string>
+    <string name="Invitations">Invitationer</string>
+    <string name="Firstname">Fornavn</string>
+    <string name="Surname">Efternavn</string>
 
     <!-- MapPage -->
     <string name="MapHeader">FS Banekort: Efterår 2021 - tfr</string>
     <string name="ZoomHelp">Zoom ind med to fingre</string>
     <string name="MapOBS">OBS Banerne er flyttet grundet Corona testcenteret - telte og adgangsveje på Blegdamsfælleden.</string>
 
-    <!-- Training -->
+    <!-- Training/Event -->
     <string name="Team">Hold</string>
     <string name="Time">Tidspunkt</string>
     <string name="AllTrainings">Alle Træninger</string>
     <string name="AttendingTrainings">Tilmeldte Træninger</string>
     <string name="FAQs">FAQs</string>
     <string name="Location">lokation</string>
-    <string name="Date">dato</string>
-    <string name="Attending">deltagere</string>
-    <string name="Price">pris</string>
+    <string name="Date">Dato</string>
+    <string name="Attending">Deltagere</string>
+    <string name="Price">Pris</string>
     <string name="AttendCancelTraining">tilmeld/afmeld træning</string>
     <string name="TrainingCreated">Træning oprettet</string>
     <string name="Save">Save</string>
@@ -70,14 +78,33 @@
     <string name="Other">Andet</string>
     <string name="MaxAttending">Max antal deltagere</string>
     <string name="Description">Beskrivelse</string>
-    <string name="Subscription">Abonnement</string>
-    <string name="Notifications">Notifikationer</string>
-    <string name="PrivatesAndSecurity">Privatliv og Sikkerhed</string>
-    <string name="AboutAppName">Omkring BKSkjold</string>
-    <string name="ContactUs">Kontakt Os</string>
-    <string name="Invitations">Invitationer</string>
-    <string name="Firstname">Fornavn</string>
-    <string name="Surname">Efternavn</string>
+    <string name="Header">Overskrift</string>
+    <string name="Placement">Placering</string>
+    <string name="BookField">Book bane</string>
+    <string name="YouHaveComingBookings">Du har følgende bookninger</string>
+    <string name="CreateNewTraining">Opret ny træning</string>
+    <string name="CreateNewEvent">Opret nyt event</string>
+    <string name="CreateNews">Opret nyhed</string>
+
+    <!-- Login/Register -->
+    <string name="Welcome">Velkommen!</string>
+    <string name="CreateGuestUser">Opret en gæstebruger</string>
+    <string name="Email">Email</string>
+    <string name="Password">Adgangskode</string>
+    <string name="RetypePassword">Gentag adgangskode</string>
+    <string name="Optional">Valgfrit</string>
+    <string name="PhoneNumber">Telefonnummer</string>
+    <string name="Address">Adresse</string>
+    <string name="Register">Register</string>
+    <string name="WelcomeBack">Velkommen tilbage!</string>
+    <string name="LogIn">Log ind</string>
+    <string name="Continue"><![CDATA[Fortsæt >]]></string>
+    <string name="ResetPassword">Nulstil adgangskode</string>
+    <string name="FrontPageDescription">Den nemmeste måde at holde styr</string>
+    <string name="FrontPageDescription2">på dine træninger</string>
+    <string name="JoinClubHere">Tilmeld dig klubben her</string>
+    <string name="CreateUser">Opret bruger</string>
+
 
 
 </resources>

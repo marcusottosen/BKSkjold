@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.booking
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -14,18 +14,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
 
 @Composable
-fun AdminPanel(navController: NavController){
+fun AdminPanel(navController: NavController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 25.dp),
-        //verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
@@ -55,7 +55,6 @@ fun AdminPanel(navController: NavController){
             }
         }
         item {
-
             Image(
                 painter = painterResource(id = R.drawable.img_admin_panel),
                 contentScale = ContentScale.FillHeight,
@@ -76,7 +75,7 @@ fun AdminPanel(navController: NavController){
                 )
             ) {
                 Text(
-                    text = "Opret ny træning",
+                    text = stringResource(R.string.CreateNewTraining),
                     color = colorResource(id = R.color.main_background)
                 )
             }
@@ -86,13 +85,13 @@ fun AdminPanel(navController: NavController){
                     .padding(top = 30.dp)
                     .size(320.dp, 50.dp),
                 shape = RoundedCornerShape(12.dp),
-                onClick = {navController.navigate("createEventPage") },
+                onClick = { navController.navigate("createEventPage") },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = colorResource(R.color.primary)
                 )
             ) {
                 Text(
-                    text = "Opret nyt event",
+                    text = stringResource(R.string.CreateNewEvent),
                     color = colorResource(id = R.color.main_background)
                 )
             }
@@ -102,18 +101,17 @@ fun AdminPanel(navController: NavController){
                     .padding(top = 30.dp)
                     .size(320.dp, 50.dp),
                 shape = RoundedCornerShape(12.dp),
-                onClick = {navController.navigate("newNewsPage") },
+                onClick = { navController.navigate("newNewsPage") },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = colorResource(R.color.primary)
                 )
             ) {
                 Text(
-                    text = "Opret nyhed",
+                    text = stringResource(R.string.CreateNews),
                     color = colorResource(id = R.color.main_background)
                 )
             }
             Spacer(modifier = Modifier.padding(bottom = 100.dp))
         }
     }
-
 }

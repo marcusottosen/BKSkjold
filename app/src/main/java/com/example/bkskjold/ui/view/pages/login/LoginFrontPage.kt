@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

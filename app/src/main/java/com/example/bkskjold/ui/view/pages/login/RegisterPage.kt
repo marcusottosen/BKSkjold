@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,114 +22,27 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bkskjold.R
-import com.example.bkskjold.ui.view.reusables.Appbar
-import com.example.bkskjold.ui.view.reusables.Buttons
-import com.example.bkskjold.ui.view.reusables.TextFormField
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 
 /**
  * The Register view which will be helpful for the user to register themselves into
  * our database and go to the home screen to see and send messages.
  */
-
-@Composable
-fun OldRegisterView(
-    home: () -> Unit,
-    back: () -> Unit,
-    registerViewModel: RegisterViewModel = viewModel()
-) {
-    val firstName: String by registerViewModel.firstName.observeAsState("")
-    val lastName: String by registerViewModel.lastName.observeAsState("")
-    val email: String by registerViewModel.email.observeAsState("")
-    val password: String by registerViewModel.password.observeAsState("")
-    val address: String by registerViewModel.address.observeAsState("")
-    val phoneNumber: String by registerViewModel.phoneNumber.observeAsState("")
-
-    val loading: Boolean by registerViewModel.loading.observeAsState(initial = false)
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        if (loading) {
-            CircularProgressIndicator()
-        }
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
-        ) {
-            Appbar(
-                title = "Register",
-                action = back
-            )
-            TextFormField(
-                value = firstName,
-                onValueChange = { registerViewModel.updateFirstName(it) },
-                label = "First Name",
-                keyboardType = KeyboardType.Text,
-                visualTransformation = VisualTransformation.None
-            )
-            TextFormField(
-                value = lastName,
-                onValueChange = { registerViewModel.updateLastName(it) },
-                label = "Last Name",
-                keyboardType = KeyboardType.Text,
-                visualTransformation = VisualTransformation.None
-            )
-            TextFormField(
-                value = email,
-                onValueChange = { registerViewModel.updateEmail(it) },
-                label = "Email",
-                keyboardType = KeyboardType.Email,
-                visualTransformation = VisualTransformation.None
-            )
-            TextFormField(
-                value = password,
-                onValueChange = { registerViewModel.updatePassword(it) },
-                label = "Password",
-                keyboardType = KeyboardType.Password,
-                visualTransformation = PasswordVisualTransformation()
-            )
-            TextFormField(
-                value = phoneNumber,
-                onValueChange = { registerViewModel.updatePhone(it) },
-                label = "Phone",
-                keyboardType = KeyboardType.Number,
-                visualTransformation = VisualTransformation.None
-            )
-            TextFormField(
-                value = address,
-                onValueChange = { registerViewModel.updateAddress(it) },
-                label = "Address",
-                keyboardType = KeyboardType.Text,
-                visualTransformation = VisualTransformation.None
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            Buttons(
-                title = "Register",
-                onClick = { registerViewModel.registerUser(home = home) },
-                backgroundColor = colorResource(R.color.primary_light)
-            )
-        }
-    }
-}
-
 @Composable
 fun RegisterView(
     home: () -> Unit,
     back: () -> Unit,
-    registerViewModel: RegisterViewModel = viewModel()
-)  {
+    registerViewModel: RegisterViewModel = viewModel(),
+) {
 
     val registerBgColor = Brush.verticalGradient(
         listOf(colorResource(R.color.primary), colorResource(R.color.light_green)),
@@ -155,7 +68,7 @@ fun RegisterView(
             .fillMaxSize()
             .background(registerBgColor)
             .padding(20.dp)
-    ){
+    ) {
 
         Box(
             contentAlignment = Alignment.Center,
@@ -170,7 +83,6 @@ fun RegisterView(
                         .fillMaxWidth()
                         .fillMaxHeight(1.0f)
                         .background(Color.Transparent)
-                    //.verticalScroll(state = scrollState)
                 )
                 {
                     item {
@@ -185,12 +97,12 @@ fun RegisterView(
                             }
                         }
                         Text(
-                            text = "Velkommen!",
+                            text = stringResource(R.string.Welcome),
                             fontSize = 16.sp,
                             color = Color.White
                         )
                         Text(
-                            text = "Opret en gæstebruger",
+                            text = stringResource(R.string.CreateGuestUser),
                             fontSize = 28.sp,
                             color = Color.White,
                             fontWeight = FontWeight.Bold
@@ -208,7 +120,7 @@ fun RegisterView(
                             label = null,
                             placeholder = {
                                 Text(
-                                    text = "Fornavn",
+                                    text = stringResource(R.string.Firstname),
                                     color = colorResource(R.color.primary),
 
                                     )
@@ -220,7 +132,7 @@ fun RegisterView(
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Person,
-                                    contentDescription = "Email icon"
+                                    contentDescription = stringResource(R.string.Firstname)
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
@@ -246,7 +158,7 @@ fun RegisterView(
                             label = null,
                             placeholder = {
                                 Text(
-                                    text = "Efternavn",
+                                    text = stringResource(R.string.Surname),
                                     color = colorResource(R.color.primary)
                                 )
                             },
@@ -257,7 +169,7 @@ fun RegisterView(
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Person,
-                                    contentDescription = "Email icon"
+                                    contentDescription = stringResource(R.string.Surname)
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
@@ -268,10 +180,7 @@ fun RegisterView(
                                     focusManager.moveFocus(FocusDirection.Down)
                                 }
                             )
-
                         )
-
-
 
                         Spacer(modifier = Modifier.height(8.dp))
 
@@ -283,7 +192,10 @@ fun RegisterView(
                             value = email,
                             onValueChange = { registerViewModel.updateEmail(it) },
                             label = null,
-                            placeholder = { Text(text = "Email", color = colorResource(R.color.primary)) },
+                            placeholder = {
+                                Text(text = stringResource(R.string.Email),
+                                    color = colorResource(R.color.primary))
+                            },
                             shape = RoundedCornerShape(50),
                             colors = TextFieldDefaults.outlinedTextFieldColors(
                                 focusedBorderColor = Color.Red,
@@ -291,7 +203,7 @@ fun RegisterView(
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Email,
-                                    contentDescription = "Email icon"
+                                    contentDescription = stringResource(R.string.Email)
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
@@ -302,7 +214,6 @@ fun RegisterView(
                                     focusManager.moveFocus(FocusDirection.Down)
                                 }
                             )
-
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -317,7 +228,7 @@ fun RegisterView(
                             label = null,
                             placeholder = {
                                 Text(
-                                    text = "Adgangskode",
+                                    text = stringResource(R.string.Password),
                                     color = colorResource(R.color.primary)
                                 )
                             },
@@ -329,7 +240,7 @@ fun RegisterView(
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Lock,
-                                    contentDescription = "Lock icon"
+                                    contentDescription = stringResource(R.string.Password)
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
@@ -340,7 +251,6 @@ fun RegisterView(
                                     focusManager.moveFocus(FocusDirection.Down)
                                 }
                             )
-
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -355,7 +265,7 @@ fun RegisterView(
                             label = null,
                             placeholder = {
                                 Text(
-                                    text = "Gentag adgangskode",
+                                    text = stringResource(R.string.RetypePassword),
                                     color = colorResource(R.color.primary)
                                 )
                             },
@@ -367,7 +277,7 @@ fun RegisterView(
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Lock,
-                                    contentDescription = "Lock icon"
+                                    contentDescription = stringResource(R.string.Password)
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
@@ -378,7 +288,6 @@ fun RegisterView(
                                     focusManager.clearFocus()
                                 }
                             )
-
                         )
 
                         Box(
@@ -391,11 +300,10 @@ fun RegisterView(
                         ) {
                             Text(
                                 modifier = Modifier.align(Alignment.BottomStart),
-                                text = "Valgfrit",
+                                text = stringResource(R.string.Optional),
                                 fontSize = 12.sp,
                                 color = Color.White,
-
-                                )
+                            )
                         }
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -410,7 +318,7 @@ fun RegisterView(
                             label = null,
                             placeholder = {
                                 Text(
-                                    text = "Telefonnummer",
+                                    text = stringResource(R.string.PhoneNumber),
                                     color = colorResource(R.color.primary)
                                 )
                             },
@@ -421,7 +329,7 @@ fun RegisterView(
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Phone,
-                                    contentDescription = "Phone icon"
+                                    contentDescription = stringResource(R.string.PhoneNumber)
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
@@ -432,7 +340,6 @@ fun RegisterView(
                                     focusManager.clearFocus()
                                 }
                             )
-
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -446,7 +353,7 @@ fun RegisterView(
                             onValueChange = { registerViewModel.updateAddress(it) },
                             label = null,
                             placeholder = {
-                                Text(text = "Adresse",
+                                Text(text = stringResource(R.string.Address),
                                     color = colorResource(R.color.primary))
                             },
                             shape = RoundedCornerShape(50),
@@ -456,7 +363,7 @@ fun RegisterView(
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.LocationOn,
-                                    contentDescription = "Location icon"
+                                    contentDescription = stringResource(R.string.Address)
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
@@ -467,7 +374,6 @@ fun RegisterView(
                                     focusManager.clearFocus()
                                 }
                             )
-
                         )
 
                         Spacer(modifier = Modifier.height(48.dp))
@@ -483,25 +389,17 @@ fun RegisterView(
                             colors = ButtonDefaults.buttonColors(
                                 backgroundColor = Color.Transparent
                             )
-
-
                         ) {
                             Text(
-                                text = "Register",
+                                text = stringResource(R.string.Register),
                                 color = Color.White,
                                 fontSize = 14.sp
                             )
-
                         }
-
                         Spacer(modifier = Modifier.height(150.dp))
                     }
                 }
             }
-
         }
-
     }
-
-
 }

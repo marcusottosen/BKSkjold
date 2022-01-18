@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -28,16 +29,16 @@ import com.example.bkskjold.R
 import com.example.bkskjold.ui.viewmodel.DocumentCreationViewModel
 
 @Composable
-fun NewNewsPage(navController: NavController){
+fun NewNewsPage(navController: NavController) {
     val viewModel = DocumentCreationViewModel()
-    val header =  remember { mutableStateOf(TextFieldValue()) }
-    val description =  remember { mutableStateOf(TextFieldValue()) }
+    val header = remember { mutableStateOf(TextFieldValue()) }
+    val description = remember { mutableStateOf(TextFieldValue()) }
     val context = LocalContext.current
 
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                text = { Text(text = "Save", color = Color.White) },
+                text = { Text(text = stringResource(R.string.Save), color = Color.White) },
                 onClick = {
                     viewModel.newNews(
                         header.value.text,
@@ -46,7 +47,11 @@ fun NewNewsPage(navController: NavController){
                         context = context
                     )
                 },
-                icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
+                icon = {
+                    Icon(Icons.Filled.Check,
+                        stringResource(R.string.Back),
+                        tint = Color.White)
+                },
                 modifier = Modifier.padding(bottom = 60.dp),
                 backgroundColor = colorResource(id = R.color.green)
             )
@@ -89,7 +94,7 @@ fun NewNewsPage(navController: NavController){
                     ) {
                         Column(modifier = Modifier.padding(start = 15.dp)) {
                             Text(
-                                text = "Overskrift",
+                                text = stringResource(R.string.Header),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
@@ -107,7 +112,7 @@ fun NewNewsPage(navController: NavController){
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
                             Text(
-                                text = "Beskrivelse",
+                                text = stringResource(R.string.Description),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)

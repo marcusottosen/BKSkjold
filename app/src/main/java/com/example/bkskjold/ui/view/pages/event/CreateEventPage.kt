@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -33,14 +34,14 @@ import com.vanpra.composematerialdialogs.datetime.time.timepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 
 @Composable
-fun CreateEventPage(navController: NavController){
+fun CreateEventPage(navController: NavController) {
     val viewModel = DocumentCreationViewModel()
 
-    val header =  remember { mutableStateOf(TextFieldValue()) }
-    val description =  remember { mutableStateOf(TextFieldValue()) }
-    val date =  remember { mutableStateOf("Vælg dato") }
-    val startTime =  remember { mutableStateOf("Vælg starttid") }
-    val endTime =  remember { mutableStateOf("Vælg sluttid") }
+    val header = remember { mutableStateOf(TextFieldValue()) }
+    val description = remember { mutableStateOf(TextFieldValue()) }
+    val date = remember { mutableStateOf("Vælg dato") }
+    val startTime = remember { mutableStateOf("Vælg starttid") }
+    val endTime = remember { mutableStateOf("Vælg sluttid") }
     var price = 0
     var location = "A"
 
@@ -54,7 +55,7 @@ fun CreateEventPage(navController: NavController){
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                text = { Text(text = "Save", color = Color.White) },
+                text = { Text(text = stringResource(R.string.Save), color = Color.White) },
                 onClick = {
                     viewModel.newEvent(
                         location = location,
@@ -68,7 +69,11 @@ fun CreateEventPage(navController: NavController){
                         context = context
                     )
                 },
-                icon = { Icon(Icons.Filled.Check, "Back", tint = Color.White) },
+                icon = {
+                    Icon(Icons.Filled.Check,
+                        stringResource(R.string.Back),
+                        tint = Color.White)
+                },
                 modifier = Modifier.padding(bottom = 60.dp),
                 backgroundColor = colorResource(id = R.color.green)
             )
@@ -103,6 +108,7 @@ fun CreateEventPage(navController: NavController){
                             )
                         }
                     }
+
                     Box(modifier = Modifier
                         .wrapContentHeight()
                         .fillMaxWidth()
@@ -111,11 +117,12 @@ fun CreateEventPage(navController: NavController){
                     ) {
                         Column(modifier = Modifier.padding(start = 15.dp)) {
                             Text(
-                                text = "Overskrift",
+                                text = stringResource(R.string.Header),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
                             )
+
                             TextField(
                                 value = header.value,
                                 onValueChange = { header.value = it },
@@ -129,7 +136,7 @@ fun CreateEventPage(navController: NavController){
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
                             Text(
-                                text = "Beskrivelse",
+                                text = stringResource(R.string.Description),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
@@ -147,7 +154,7 @@ fun CreateEventPage(navController: NavController){
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
                             Text(
-                                text = "Placering",
+                                text = stringResource(R.string.Placement),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
@@ -156,9 +163,8 @@ fun CreateEventPage(navController: NavController){
 
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
-
                             Text(
-                                text = "Dato",
+                                text = stringResource(R.string.Date),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
@@ -186,12 +192,13 @@ fun CreateEventPage(navController: NavController){
                             Spacer(modifier = Modifier.padding(top = 40.dp))
 
                             Text(
-                                text = "Tidspunkt",
+                                text = stringResource(R.string.Time),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp)
                             )
-                            Text(text = "Start", fontWeight = FontWeight.Bold)
+                            Text(text = stringResource(R.string.Start),
+                                fontWeight = FontWeight.Bold)
                             Button(
                                 onClick = { startTimeDialogState.show() },
                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
@@ -214,7 +221,7 @@ fun CreateEventPage(navController: NavController){
 
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
-                            Text(text = "Slut", fontWeight = FontWeight.Bold)
+                            Text(text = stringResource(R.string.End), fontWeight = FontWeight.Bold)
                             Button(
                                 onClick = { endTimeDialogState.show() },
                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
@@ -237,13 +244,14 @@ fun CreateEventPage(navController: NavController){
                             Spacer(modifier = Modifier.padding(top = 20.dp))
 
                             Text(
-                                text = "Pris",
+                                text = stringResource(R.string.Price),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 10.dp, top = 20.dp)
                             )
 
-                            price = dropDownMenu(items = viewModel.getPriceList(), menuWidth = 60).toInt()
+                            price = dropDownMenu(items = viewModel.getPriceList(),
+                                menuWidth = 60).toInt()
 
                             Spacer(modifier = Modifier.padding(top = 50.dp))
                         }

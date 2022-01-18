@@ -1,12 +1,14 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -14,31 +16,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bkskjold.R
-import com.example.bkskjold.ui.view.reusables.Buttons
-import com.example.bkskjold.ui.view.reusables.Title
-
-@Composable
-fun OldAuthenticationView(register: () -> Unit, login: () -> Unit) {
-    Surface(color = MaterialTheme.colors.background) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom
-        ) {
-            Title(title = "NemSport")
-            Buttons(title = "Register", onClick = register, backgroundColor = colorResource(R.color.primary))
-            Buttons(title = "Login", onClick = login, backgroundColor = colorResource(R.color.primary_light))
-        }
-    }
-}
 
 @Composable
 fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
@@ -48,13 +31,11 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
         startY = 300.0f,
         endY = 1500.0f
     )
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(frontBgColor)
             .padding(20.dp)
-
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -64,7 +45,6 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
                 .background(Color.Transparent)
         )
         {
-
             Image(
                 frontLoginImage,
                 contentDescription = "login_image",
@@ -76,20 +56,19 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "NemSport",
+                text = stringResource(R.string.app_name),
                 fontSize = 32.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold
             )
-
             Text(
-                text = "Den nemmeste måde at holde styr",
+                text = stringResource(R.string.FrontPageDescription),
                 fontSize = 18.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center
             )
             Text(
-                text = "på dine træninger",
+                text = stringResource(R.string.FrontPageDescription2),
                 fontSize = 18.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center
@@ -98,20 +77,19 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
             Spacer(modifier = Modifier.height(42.dp))
 
             Button(
-                onClick = {/*TODO: Link to website*/},
+                onClick = {/*TODO: Link to website*/ },
                 modifier = Modifier
                     .wrapContentWidth()
                     .height(48.dp),
                 elevation = null,
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Transparent
-                )) {
+                    backgroundColor = Color.Transparent)
+            ) {
                 Text(
-                    text = "Tilmeld dig klubben her",
+                    text = stringResource(R.string.JoinClubHere),
                     fontSize = 12.sp,
                     color = Color.White,
                     textAlign = TextAlign.Center
-
                 )
             }
 
@@ -125,16 +103,12 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.White
                 )
-
-
             ) {
                 Text(
-                    text = "Opret bruger",
+                    text = stringResource(R.string.CreateUser),
                     color = colorResource(R.color.primary),
                     fontSize = 14.sp
                 )
-
-
             }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -150,10 +124,9 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.Transparent
                 )
-
             ) {
                 Text(
-                    text = "Log ind",
+                    text = stringResource(R.string.LogIn),
                     color = Color.White,
                     fontSize = 14.sp
                 )
@@ -161,4 +134,3 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
         }
     }
 }
-

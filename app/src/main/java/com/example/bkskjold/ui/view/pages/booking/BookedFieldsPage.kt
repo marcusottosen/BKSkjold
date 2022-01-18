@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.booking
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,7 +30,7 @@ fun BookedFieldsPage(navController: NavController){
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                text = { Text(text = "Book bane", color = Color.White) },
+                text = { Text(text = stringResource(R.string.BookField), color = Color.White) },
                 onClick = { navController.navigate(NavigationRoute.BookFieldPage.route) },
                 icon = { Icon(Icons.Filled.Add, "", tint = Color.White)},
                 modifier = Modifier.padding(bottom = 60.dp),
@@ -69,7 +70,7 @@ fun BookedFieldsPage(navController: NavController){
                         }
                     }
                     Text(
-                        text = "Du har følgende bookninger",
+                        text = stringResource(R.string.YouHaveComingBookings),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(start = 45.dp, top = 10.dp)

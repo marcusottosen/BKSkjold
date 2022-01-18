@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages
+package com.example.bkskjold.ui.view.pages.event
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -28,18 +28,19 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.dataClass.Event
-import com.example.bkskjold.data.model.firebaseAdapter.*
+import com.example.bkskjold.data.model.firebaseAdapter.getCurrentUserAsCurrentUserModel
+import com.example.bkskjold.data.model.firebaseAdapter.getUsersFromId
+import com.example.bkskjold.data.model.firebaseAdapter.updateEventParticipants
 import com.example.bkskjold.data.util.getDay
 import com.example.bkskjold.data.util.getMonthString
 import com.example.bkskjold.data.util.getTime
 
-//TODO Alt tekst skal hentes fra database! Evt igennem et event objekt?
 @Composable
-fun EventInfoPage(event: Event, navController: NavController) {
-    var event = event
+fun EventInfoPage(events: Event, navController: NavController) {
+    var event = events
 
-    var participantsID = event.participants
-    var participants = getUsersFromId(participantsID)
+    val participantsID = event.participants
+    val participants = getUsersFromId(participantsID)
 
     val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(participantsID.contains(userId)) }
@@ -151,7 +152,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                     contentDescription = null,
                 )
                 Text(
-                    text = "Pris: ${event.price} kr.",
+                    text = "${stringResource(R.string.Price)} ${event.price} kr.",
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }
@@ -189,7 +190,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                         Row() {
                             Icon(
                                 Icons.Outlined.Clear,
-                                contentDescription = "tilmeld/afmeld træning",
+                                contentDescription = stringResource(R.string.AttendCancelTraining),
                                 Modifier.padding(end = 10.dp),
                                 colorResource(id = R.color.main_background)
                             )
@@ -225,7 +226,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                         Row() {
                             Icon(
                                 Icons.Outlined.Check,
-                                contentDescription = "tilmeld/afmeld træning",
+                                contentDescription = stringResource(R.string.AttendCancelTraining),
                                 Modifier.padding(end = 10.dp),
                                 colorResource(id = R.color.main_background)
                             )
@@ -239,7 +240,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
                 }
             }
 
-            //INVITE
+            //Invite
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(15.dp),
@@ -250,10 +251,10 @@ fun EventInfoPage(event: Event, navController: NavController) {
                         .size(120.dp, 50.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary)),
-                    onClick = { /*TODO*/ }
+                    onClick = {}
                 ) {
                     Text(
-                        text = "Inviter",
+                        text = stringResource(R.string.Invite),
                         color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
@@ -271,7 +272,7 @@ fun EventInfoPage(event: Event, navController: NavController) {
             Spacer(modifier = Modifier.height(15.dp))
 
             Text(
-                text = "Deltagere: ${participants.size}",
+                text = "${stringResource(R.string.Attending)}: ${participants.size}",
                 modifier = Modifier.padding(start = 10.dp, bottom = 10.dp),
                 fontWeight = FontWeight.Bold,
                 color = Color.Gray

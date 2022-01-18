@@ -25,10 +25,16 @@ import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.model.updateFAQ
 import com.example.bkskjold.ui.view.pages.*
+import com.example.bkskjold.ui.view.pages.booking.AdminPanel
 import com.example.bkskjold.ui.view.pages.booking.BookFieldPage
+import com.example.bkskjold.ui.view.pages.booking.BookedFieldsPage
 import com.example.bkskjold.ui.view.pages.booking.NewNewsPage
 import com.example.bkskjold.ui.view.pages.event.CreateEventPage
+import com.example.bkskjold.ui.view.pages.event.EventInfoPage
 import com.example.bkskjold.ui.view.pages.event.EventOverview
+import com.example.bkskjold.ui.view.pages.login.AuthenticationView
+import com.example.bkskjold.ui.view.pages.login.LoginView
+import com.example.bkskjold.ui.view.pages.login.RegisterView
 import com.example.bkskjold.ui.view.pages.profile.SettingsPage
 import com.example.bkskjold.ui.view.pages.profile.editProfilePage
 import com.example.bkskjold.ui.view.pages.profile.profileOverview
@@ -103,7 +109,7 @@ fun Navigation(navController: NavHostController) {
         composable(NavigationRoute.EventDetails.route){
             val eventModel = navController.previousBackStackEntry?.arguments?.getParcelable<Event>("event")
             eventModel?.let {
-                EventInfoPage(event = it, navController = navController)
+                EventInfoPage(events = it, navController = navController)
             }
         }
         composable(NavigationRoute.SettingsPage.route){

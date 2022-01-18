@@ -12,8 +12,8 @@ import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.ui.viewmodel.EventOverviewViewModel
 
 @Composable
-fun EventOverview(navController: NavController){
-    Column (
+fun EventOverview(navController: NavController) {
+    Column(
         modifier = Modifier
             .background(color = colorResource(R.color.main_background)),
     )
@@ -22,7 +22,7 @@ fun EventOverview(navController: NavController){
     }
 }
 
-fun gotoEventDetails(event: Event, navController: NavController){
+fun gotoEventDetails(event: Event, navController: NavController) {
     navController.currentBackStackEntry?.arguments?.putParcelable("event", event)
     navController.navigate(NavigationRoute.EventDetails.route)
 }
