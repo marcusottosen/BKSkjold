@@ -12,13 +12,17 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
-import com.example.bkskjold.data.model.firebaseAdapter.NewsModel
 import com.example.bkskjold.data.model.firebaseAdapter.EventDB
+import com.example.bkskjold.data.model.firebaseAdapter.NewsModel
 import com.example.bkskjold.data.model.firebaseAdapter.TrainingModel
 import com.example.bkskjold.data.model.firebaseAdapter.UserDB
 
+/**
+ * Function to load the needed items from the database before homePage is shown.
+ * This is run after login or app-start.
+ */
 @Composable
-fun LoadFromDB(navController: NavController){
+fun LoadFromDB(navController: NavController) {
     val trainings = TrainingModel()
     val trainingsLoading: Boolean by trainings.loading.observeAsState(initial = true)
     trainings.loadTrainingsFromDB()
@@ -35,7 +39,7 @@ fun LoadFromDB(navController: NavController){
     news.loadNewsFromDB()
 
     if (newsLoading && trainingsLoading && usersLoading) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()){
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
             CircularProgressIndicator(color = colorResource(R.color.primary))
         }
     } else {

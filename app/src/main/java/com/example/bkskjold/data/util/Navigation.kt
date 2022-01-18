@@ -24,7 +24,9 @@ import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.model.updateFAQ
-import com.example.bkskjold.ui.view.pages.*
+import com.example.bkskjold.ui.view.pages.FaqPage
+import com.example.bkskjold.ui.view.pages.HomeScreenPage
+import com.example.bkskjold.ui.view.pages.MapPage
 import com.example.bkskjold.ui.view.pages.booking.AdminPanel
 import com.example.bkskjold.ui.view.pages.booking.BookFieldPage
 import com.example.bkskjold.ui.view.pages.booking.BookedFieldsPage
@@ -54,7 +56,6 @@ fun Navigation(navController: NavHostController) {
         NavigationRoute.LoadFromDB.route
     else
         "authenticationOption"
-
     ) {
         // Navbar
         composable(NavigationItem.Home.route) {
@@ -100,28 +101,32 @@ fun Navigation(navController: NavHostController) {
         }
 
         //Subpages
-        composable(NavigationRoute.TrainingDetails.route){
-            val trainingModel = navController.previousBackStackEntry?.arguments?.getParcelable<Training>("training")
-            trainingModel?.let { 
+        composable(NavigationRoute.TrainingDetails.route) {
+            val trainingModel =
+                navController.previousBackStackEntry?.arguments?.getParcelable<Training>("training")
+            trainingModel?.let {
                 TrainingInfoPage(trainings = it, navController = navController)
             }
         }
-        composable(NavigationRoute.EventDetails.route){
-            val eventModel = navController.previousBackStackEntry?.arguments?.getParcelable<Event>("event")
+        composable(NavigationRoute.EventDetails.route) {
+            val eventModel =
+                navController.previousBackStackEntry?.arguments?.getParcelable<Event>("event")
             eventModel?.let {
                 EventInfoPage(events = it, navController = navController)
             }
         }
-        composable(NavigationRoute.SettingsPage.route){
-            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
+        composable(NavigationRoute.SettingsPage.route) {
+            val settingModel =
+                navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
             settingModel?.let {
                 SettingsPage(navController = navController)
             }
         }
-        composable(NavigationRoute.EditProfile.route){
-            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
+        composable(NavigationRoute.EditProfile.route) {
+            val settingModel =
+                navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
             settingModel?.let {
-               editProfilePage(navController = navController)
+                editProfilePage(navController = navController)
             }
         }
         composable(NavigationRoute.BookedFieldsPage.route) {
@@ -152,16 +157,6 @@ fun Navigation(navController: NavHostController) {
 }
 
 /**
- * GUIDE TIL SIMPEL SUB-NAVIGATION
- * 1. lav composable som fx "BookedFieldsPage" ovenfor
- * 2. Ved en knap/clickable skriv: .clickable {navController.navigate("BookedFieldsPage")}
- *      (Hvis Button brug onClick = { navController.navigate("BookedFieldsPage")}
- *
- * Brug onClick = { navController.navigateUp() ved en tilbageknap
- */
-
-
-/**
  * NavBar inspiration from https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
  */
 @Composable
@@ -180,7 +175,11 @@ fun BottomNavigationBar(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
-                icon = { Icon(painterResource(id = item.icon), contentDescription = item.title, modifier = Modifier.size(25.dp)) },
+                icon = {
+                    Icon(painterResource(id = item.icon),
+                        contentDescription = item.title,
+                        modifier = Modifier.size(25.dp))
+                },
                 label = { Text(text = item.title) },
                 selectedContentColor = Color.Black,
                 unselectedContentColor = Color.Black.copy(0.4f),

@@ -1,5 +1,5 @@
 package com.example.bkskjold.data.model.firebaseAdapter
-import android.content.ContentValues
+
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -56,8 +56,8 @@ class TrainingModel {
 fun getSignedUpTrainings(): MutableList<Training> {
     val signedUpTrainings: MutableList<Training> = mutableListOf()
 
-    for (training in trainings){
-        if (training.participants.contains(CurrentUser.id)){
+    for (training in trainings) {
+        if (training.participants.contains(CurrentUser.id)) {
             signedUpTrainings.add(training)
         }
     }
@@ -66,31 +66,28 @@ fun getSignedUpTrainings(): MutableList<Training> {
 
 fun getBookings(): MutableList<Training> {
     val bookings: MutableList<Training> = mutableListOf()
-    for (training in trainings){
-        if (training.participants.contains(CurrentUser.id) && training.userBooking){
+    for (training in trainings) {
+        if (training.participants.contains(CurrentUser.id) && training.userBooking) {
             bookings.add(training)
         }
     }
     return bookings
 }
 
-fun updateParticipants(training: Training, participants: MutableList<String>, userId: String): Training {
+fun updateParticipants(
+    training: Training,
+    participants: MutableList<String>,
+    userId: String,
+): Training {
     val db = Firebase.firestore
     db.collection("trainings")
         .get()
         .addOnSuccessListener { result ->
             for (doc in result) {
-                if (doc["timeStart"] == training.timeStart && doc["location"] == training.location && doc["timeStart"] == training.timeStart){
+                if (doc["timeStart"] == training.timeStart && doc["location"] == training.location && doc["timeStart"] == training.timeStart) {
 
                     //Create a mutable list, so we can add items to it.
                     val mutableParticipants = participants
-
-                    //This if statement is now done in the onclicks calling this method, instead of in this method.
-                    /*if (mutableParticipants.contains(userId)){
-                        mutableParticipants.remove(userId)
-                    }else{
-                        mutableParticipants.add(userId)
-                    }*/
 
                     //map of field to update
                     val updatedTraining = hashMapOf(
@@ -101,7 +98,10 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
                     val updateable = db.collection("trainings").document(doc.id)
                     updateable
                         .set(updatedTraining, SetOptions.merge())
-                        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
+                        .addOnSuccessListener {
+                            Log.d(TAG,
+                                "DocumentSnapshot successfully updated!")
+                        }
                         .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
 
                     //Finally update participant on training object, so it can be returned later in the method
@@ -109,7 +109,7 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
                 }
             }
         }
-        .addOnCompleteListener{
+        .addOnCompleteListener {
             TrainingModel().loadTrainingsFromDB()
         }
         .addOnFailureListener { exception ->
@@ -118,7 +118,7 @@ fun updateParticipants(training: Training, participants: MutableList<String>, us
     return training
 }
 
-fun addTrainingToDB(item: Training, navController: NavController){
+fun addTrainingToDB(item: Training, navController: NavController) {
     val db = Firebase.firestore
     db.collection("trainings")
         .add(item)

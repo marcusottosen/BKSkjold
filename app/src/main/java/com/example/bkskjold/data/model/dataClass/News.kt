@@ -8,4 +8,4 @@ data class News(
     val header: String,
     val description: String,
     val date: com.google.firebase.Timestamp,
-): Parcelable
+) : Parcelable

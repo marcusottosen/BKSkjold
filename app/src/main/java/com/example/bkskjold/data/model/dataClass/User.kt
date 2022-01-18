@@ -16,8 +16,8 @@ data class User(
     val team: String,
     val userType: Int,
     val finishedTrainings: Int,
-    val memberSince: com.google.firebase.Timestamp
-): Parcelable
+    val memberSince: com.google.firebase.Timestamp,
+) : Parcelable
 
 object CurrentUser {
     lateinit var id: String

@@ -11,5 +11,5 @@ data class Event(
     var participants: MutableList<String>,
     val price: Int,
     val header: String,
-    val description: String
-): Parcelable
+    val description: String,
+) : Parcelable

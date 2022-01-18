@@ -45,7 +45,7 @@ class NewsModel() {
     }
 }
 
-fun addNewsToDB(item: News, navController: NavController){
+fun addNewsToDB(item: News, navController: NavController) {
     val db = Firebase.firestore
     db.collection("news")
         .add(item)
