@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.NavigationItem
+import com.example.bkskjold.data.model.NavigationRoute
 
 @Composable
 fun AdminPanel(navController: NavController) {
@@ -69,7 +70,7 @@ fun AdminPanel(navController: NavController) {
                     .padding(top = 10.dp)
                     .size(320.dp, 50.dp),
                 shape = RoundedCornerShape(12.dp),
-                onClick = { navController.navigate("newTrainingPage") },
+                onClick = { navController.navigate(NavigationRoute.NewTrainingPage.route) },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = colorResource(R.color.primary)
                 )
@@ -85,7 +86,7 @@ fun AdminPanel(navController: NavController) {
                     .padding(top = 30.dp)
                     .size(320.dp, 50.dp),
                 shape = RoundedCornerShape(12.dp),
-                onClick = { navController.navigate("createEventPage") },
+                onClick = { navController.navigate(NavigationRoute.CreateEventPage.route) },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = colorResource(R.color.primary)
                 )
@@ -101,7 +102,7 @@ fun AdminPanel(navController: NavController) {
                     .padding(top = 30.dp)
                     .size(320.dp, 50.dp),
                 shape = RoundedCornerShape(12.dp),
-                onClick = { navController.navigate("newNewsPage") },
+                onClick = { navController.navigate(NavigationRoute.NewNewsPage.route) },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = colorResource(R.color.primary)
                 )
