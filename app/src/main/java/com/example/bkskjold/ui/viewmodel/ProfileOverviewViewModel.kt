@@ -1,6 +1,5 @@
 package com.example.bkskjold.ui.viewmodel;
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -19,7 +18,6 @@ import com.example.bkskjold.data.util.getYear
 import com.example.bkskjold.ui.view.reusables.InvitationCard
 
 class ProfileOverviewViewModel {
-    var profile = ProfileInfo().testProfile
 
     @Composable
     fun GetProfileView() {
@@ -31,26 +29,6 @@ class ProfileOverviewViewModel {
             Text(text = "${stringResource(R.string.MemberSince)} ${getDayMonth(CurrentUser.memberSince)} - ${
                 getYear(CurrentUser.memberSince)}")
             Text(text = "${stringResource(R.string.TeamJoined)} ${CurrentUser.team}")
-        }
-    }
-
-    @Composable
-    fun GetPersonView() {
-        Text(text = profile[4])
-        Text(text = profile[5])
-        Text(text = profile[6])
-    }
-
-    @Composable
-    fun GetProfileInvitationView() {
-        val numberOfItems = events.size
-
-        LazyColumn {
-            items(numberOfItems) { i ->
-                InvitationCard(name = events[i].header,
-                    date = events[i].timeStart.toString(),
-                    location = events[i].location)
-            }
         }
     }
 

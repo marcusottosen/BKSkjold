@@ -31,6 +31,7 @@ import com.example.bkskjold.ui.view.pages.booking.AdminPanel
 import com.example.bkskjold.ui.view.pages.booking.BookFieldPage
 import com.example.bkskjold.ui.view.pages.booking.BookedFieldsPage
 import com.example.bkskjold.ui.view.pages.booking.NewNewsPage
+import com.example.bkskjold.ui.view.pages.EditProfilePage
 import com.example.bkskjold.ui.view.pages.event.CreateEventPage
 import com.example.bkskjold.ui.view.pages.event.EventInfoPage
 import com.example.bkskjold.ui.view.pages.event.EventOverview
@@ -38,7 +39,6 @@ import com.example.bkskjold.ui.view.pages.login.AuthenticationView
 import com.example.bkskjold.ui.view.pages.login.LoginView
 import com.example.bkskjold.ui.view.pages.login.RegisterView
 import com.example.bkskjold.ui.view.pages.profile.SettingsPage
-import com.example.bkskjold.ui.view.pages.profile.editProfilePage
 import com.example.bkskjold.ui.view.pages.profile.profileOverview
 import com.example.bkskjold.ui.view.pages.training.NewTrainingPage
 import com.example.bkskjold.ui.view.pages.training.TrainingInfoPage
@@ -115,19 +115,11 @@ fun Navigation(navController: NavHostController) {
                 EventInfoPage(events = it, navController = navController)
             }
         }
-        composable(NavigationRoute.SettingsPage.route) {
-            val settingModel =
-                navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
-            settingModel?.let {
-                SettingsPage(navController = navController)
-            }
+        composable(NavigationRoute.SettingsPage.route){
+            SettingsPage(navController)
         }
-        composable(NavigationRoute.EditProfile.route) {
-            val settingModel =
-                navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
-            settingModel?.let {
-                editProfilePage(navController = navController)
-            }
+        composable(NavigationRoute.EditProfile.route){
+            EditProfilePage(navController)
         }
         composable(NavigationRoute.BookedFieldsPage.route) {
             BookedFieldsPage(navController)

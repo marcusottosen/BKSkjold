@@ -53,6 +53,20 @@
     <string name="Invitations">Invitationer</string>
     <string name="Firstname">Fornavn</string>
     <string name="Surname">Efternavn</string>
+    <string name="firstName">Fornavn</string>
+    <string name="lastName">Efternavn</string>
+    <string name="Invites">Invitationer</string>
+    <string name="Subscribtions">Abonnementer</string>
+    <string name="Privacy">Privatliv og Sikkerhed</string>
+    <string name="aboutUs">Omkring BKSkjold</string>
+    <string name="contactUs">Kontakt Os</string>
+    <string name="saveEdits">Gem ændringer</string>
+    <string name="changeProfilePicture">Skift Profilbillede</string>
+    <string name="editProfile">Rediger Profil</string>
+    <string name="logOut">Log Ud</string>
+
+
+
 
     <!-- MapPage -->
     <string name="MapHeader">FS Banekort: Efterår 2021 - tfr</string>

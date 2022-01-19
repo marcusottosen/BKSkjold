@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.view.pages.profile
+package com.example.bkskjold.ui.view.pages
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,7 +9,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -22,30 +21,23 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
-import com.example.bkskjold.data.model.firebaseAdapter.users
 import com.example.bkskjold.ui.view.reusables.DefaultEditProfileHeader
-
+import com.example.bkskjold.ui.viewmodel.DocumentCreationViewModel
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-
 
 @Composable
-fun editProfilePage(
+fun EditProfilePage(
     navController: NavController,
     registerViewModel: RegisterViewModel = viewModel(),
 ) {
-    val currentUser = users[1]
+    val viewModel = DocumentCreationViewModel()
     val focusManager = LocalFocusManager.current
-    val auth: FirebaseAuth = Firebase.auth
-    val firstName: String by registerViewModel.firstName.observeAsState("")
 
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
         item {
-            DefaultEditProfileHeader(currentUser, navController)
+            DefaultEditProfileHeader(navController)
         }
         item {
             Column(modifier = Modifier
@@ -54,7 +46,7 @@ fun editProfilePage(
             {
                 val firstName = remember { mutableStateOf(CurrentUser.firstName) }
 
-                Text(text = stringResource(R.string.Firstname),
+                Text(text = stringResource(R.string.firstName),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
 
@@ -78,7 +70,7 @@ fun editProfilePage(
             {
                 val lastName = remember { mutableStateOf(CurrentUser.lastName) }
 
-                Text(text = stringResource(R.string.Surname),
+                Text(text = stringResource(R.string.lastName),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
 
@@ -105,7 +97,7 @@ fun editProfilePage(
             {
                 val eMail = remember { mutableStateOf(CurrentUser.email) }
 
-                Text(text = "E-mail",
+                Text(text = stringResource(R.string.Email),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
 
@@ -125,21 +117,19 @@ fun editProfilePage(
                 )
             }
         }
-
         item {
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp)) {
                 var expanded by remember { mutableStateOf(false) }
-                val suggestions = listOf("Senior", "U22", "U16")
-                var selectedText by remember { mutableStateOf("") }
-                val team = remember { mutableStateOf(CurrentUser.team) }
+                val location = viewModel.getTeams()
+                var newText by remember { mutableStateOf("") }
                 var dropDownWidth by remember { mutableStateOf(0) }
 
                 Text(text = stringResource(R.string.Team),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(
-                    value = selectedText,
+                    value = newText,
                     onValueChange = { },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -147,8 +137,9 @@ fun editProfilePage(
                             dropDownWidth = it.width
                         },
                     placeholder = { Text(CurrentUser.team) },
+
                     trailingIcon = {
-                        Icon(Icons.Filled.ArrowDropDown, "contentDescription",
+                        Icon(Icons.Filled.ArrowDropDown, "null",
                             Modifier.clickable { expanded = !expanded })
                     }
                 )
@@ -157,11 +148,11 @@ fun editProfilePage(
                     onDismissRequest = { expanded = false },
                     modifier = Modifier.width(with(LocalDensity.current) { dropDownWidth.toDp() })
                 ) {
-                    suggestions.forEach { label ->
+                    location.forEach { team ->
                         DropdownMenuItem(onClick = {
-                            selectedText = label; registerViewModel.updateTeam(selectedText)
+                            newText = team; registerViewModel.updateTeam(newText)
                         }) {
-                            Text(text = label)
+                            Text(text = team)
                         }
                     }
                 }

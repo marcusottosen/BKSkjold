@@ -1,5 +1,4 @@
 package com.example.bkskjold.ui.view.pages.profile
-
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -21,49 +19,39 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.InvitationData
 import com.example.bkskjold.data.model.NavigationRoute
-import com.example.bkskjold.data.model.dataClass.User
-import com.example.bkskjold.data.model.firebaseAdapter.users
 import com.example.bkskjold.ui.view.reusables.DefaultProfileHeader
 import com.example.bkskjold.ui.view.reusables.InvitationCard
 import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
-
 @Composable
 fun profileOverview(navController: NavController) {
-
-    val currentUser = users[1] //TODO Få CurrentUser igennem en ViewModel!
-
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
         item {
-            DefaultProfileHeader(currentUser, navController)
+            DefaultProfileHeader(navController)
         }
-        item {
-            ProfileOverviewViewModel().GetProfileView()
-            Spacer(modifier = Modifier.height(30.dp))
-        }
+        item { ProfileOverviewViewModel().GetProfileView()
+            Spacer(modifier = Modifier.height(30.dp))}
         val inviInfo = InvitationData().getInvitations()
 
         item {
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp),
+            Column(modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally) {
-
                 OutlinedButton(
                     onClick = { gotoFaqPage(navController) },
                     modifier = Modifier
-                        .border(1.dp, colorResource(R.color.border), RoundedCornerShape(12))
                         .width(340.dp)
-                        .height(60.dp),
-                    shape = RoundedCornerShape(12),
+                        .height(60.dp)
+                        .border(1.dp, Color.Black, RoundedCornerShape(50)),
+                    shape = RoundedCornerShape(50),
                     elevation = null,
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color.Transparent
                     )
+
                 ) {
                     Text(
-                        text = "FAQs",
+                        text = stringResource(R.string.FAQs),
                         color = Color.Black,
                         fontSize = 20.sp
                     )
@@ -71,16 +59,13 @@ fun profileOverview(navController: NavController) {
             }
         }
 
-        item {
-            Text(modifier = Modifier
-                .fillMaxWidth(),
-                text = stringResource(R.string.Invitations),
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
+        item { Text(modifier = Modifier
+            .fillMaxWidth(),
+            text = stringResource(R.string.Invites),
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
+        ) }
         item {
             Column(
                 modifier = Modifier
@@ -88,7 +73,7 @@ fun profileOverview(navController: NavController) {
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.Center)
             ) {
-                for (i in inviInfo.indices) {
+                for (i in inviInfo.indices){
                     InvitationCard(
                         inviInfo[i][0],
                         inviInfo[i][1],
@@ -101,16 +86,12 @@ fun profileOverview(navController: NavController) {
     }
 }
 
-fun gotoSettingsPage(user: User, navController: NavController) {
-    navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
+fun gotoSettingsPage(navController: NavController){
     navController.navigate(NavigationRoute.SettingsPage.route)
 }
-
-fun gotoEditProfilePage(user: User, navController: NavController) {
-    navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
+fun gotoEditProfilePage(navController: NavController){
     navController.navigate(NavigationRoute.EditProfile.route)
 }
-
-fun gotoFaqPage(navController: NavController) {
+fun gotoFaqPage(navController: NavController){
     navController.navigate(NavigationRoute.FaqPage.route)
 }
