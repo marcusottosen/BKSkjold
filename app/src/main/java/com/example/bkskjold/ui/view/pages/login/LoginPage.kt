@@ -47,6 +47,9 @@ import com.example.bkskjold.ui.viewmodel.LoginViewModel
  * home screen to show and send messages to others.
  */
 
+// Inspiration fundet ved:
+// https://pradyotprksh4.medium.com/%EF%B8%8Fflashchat-jetpack-compose-firebase-bd16014b025d
+
 @Composable
 fun OldLoginView(
     home: () -> Unit,

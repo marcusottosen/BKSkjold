@@ -41,6 +41,9 @@ import com.example.bkskjold.ui.viewmodel.RegisterViewModel
  * our database and go to the home screen to see and send messages.
  */
 
+// Inspiration fundet ved:
+// https://pradyotprksh4.medium.com/%EF%B8%8Fflashchat-jetpack-compose-firebase-bd16014b025d
+
 @Composable
 fun OldRegisterView(
     home: () -> Unit,

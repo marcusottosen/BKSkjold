@@ -23,6 +23,9 @@ import com.example.bkskjold.R
 import com.example.bkskjold.ui.view.reusables.Buttons
 import com.example.bkskjold.ui.view.reusables.Title
 
+// Inspiration fundet ved:
+// https://pradyotprksh4.medium.com/%EF%B8%8Fflashchat-jetpack-compose-firebase-bd16014b025d
+
 @Composable
 fun OldAuthenticationView(register: () -> Unit, login: () -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
