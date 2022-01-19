@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,15 +53,14 @@ fun profileOverview(navController: NavController) {
                 OutlinedButton(
                     onClick = { gotoFaqPage(navController) },
                     modifier = Modifier
+                        .border(1.dp, colorResource(R.color.border), RoundedCornerShape(12))
                         .width(340.dp)
-                        .height(60.dp)
-                        .border(1.dp, Color.Black, RoundedCornerShape(50)),
-                    shape = RoundedCornerShape(50),
+                        .height(60.dp),
+                    shape = RoundedCornerShape(12),
                     elevation = null,
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color.Transparent
                     )
-
                 ) {
                     Text(
                         text = "FAQs",
@@ -68,7 +68,6 @@ fun profileOverview(navController: NavController) {
                         fontSize = 20.sp
                     )
                 }
-
             }
         }
 

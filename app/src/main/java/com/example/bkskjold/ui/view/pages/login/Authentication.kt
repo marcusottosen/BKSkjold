@@ -56,7 +56,7 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = stringResource(R.string.app_name),
+                text = stringResource(R.string.in_app_name),
                 fontSize = 32.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold

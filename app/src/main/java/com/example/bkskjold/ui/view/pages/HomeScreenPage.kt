@@ -54,7 +54,7 @@ fun HomeScreenPage(navController: NavController) {
                 ) {
                     Column(Modifier.padding(start = 15.dp, top = 36.dp)) {
                         Text(//Card title
-                            text = stringResource(R.string.app_name),
+                            text = stringResource(R.string.in_app_name),
                             fontSize = 36.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = Color.White
