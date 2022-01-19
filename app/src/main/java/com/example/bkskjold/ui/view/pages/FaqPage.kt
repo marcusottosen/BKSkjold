@@ -43,7 +43,7 @@ fun FaqPage(navController: NavController) {
                     .height(80.dp)
                     .fillMaxWidth())
                 {
-                    Row() {
+                    Row {
                         IconButton(modifier = Modifier.fillMaxHeight(),
                             onClick = { navController.navigateUp() }
                         ) {
@@ -130,7 +130,8 @@ fun ExpandableCard(
                         .rotate(rotationState),
                     onClick = {
                         expandedState = !expandedState
-                    }) {
+                    }
+                ) {
                     Icon(
                         imageVector = Icons.Default.ArrowDropDown,
                         contentDescription = "Drop-Down Arrow"

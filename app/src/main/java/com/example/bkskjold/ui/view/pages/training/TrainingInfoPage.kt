@@ -38,8 +38,7 @@ import com.example.bkskjold.data.util.getTime
 fun TrainingInfoPage(trainings: Training, navController: NavController) {
     var training = trainings
     val participantsID = training.participants
-    val participants = getUsersFromId(participantsID) //TODO: Overholder ikke MVVM
-
+    val participants = getUsersFromId(participantsID)
     val userId = CurrentUser.id
     val isAttending = remember { mutableStateOf(participantsID.contains(userId)) }
 
@@ -73,7 +72,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                 }
             }
 
-            Column() {
+            Column {
                 Row(Modifier.padding(top = 20.dp, bottom = 10.dp)) {
                     Icon(
                         Icons.Outlined.Info,
@@ -140,7 +139,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                     Text(text = ("${training.participants.size}/${training.maxParticipants}" + " " + stringResource(
                         R.string.participating)))
                 }
-                Row() {
+                Row {
                     Icon(
                         Icons.Outlined.ShoppingCart,
                         contentDescription = stringResource(R.string.Price),
@@ -151,7 +150,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
             }
 
             //Description
-            Column() {
+            Column {
                 Text(text = training.description,
                     color = Color.Gray,
                     modifier = Modifier.padding(top = 30.dp, bottom = 20.dp)
@@ -187,7 +186,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                             backgroundColor = colorResource(R.color.red)
                         ),
                     ) {
-                        Row() {
+                        Row {
                             Icon(
                                 Icons.Outlined.Clear,
                                 contentDescription = stringResource(R.string.AttendCancelTraining),
@@ -223,7 +222,7 @@ fun TrainingInfoPage(trainings: Training, navController: NavController) {
                             backgroundColor = colorResource(R.color.green)
                         ),
                     ) {
-                        Row() {
+                        Row {
                             Icon(
                                 Icons.Outlined.Check,
                                 contentDescription = stringResource(R.string.AttendCancelTraining),
