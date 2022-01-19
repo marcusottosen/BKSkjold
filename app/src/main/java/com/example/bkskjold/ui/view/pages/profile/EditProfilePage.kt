@@ -14,14 +14,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
 import com.example.bkskjold.data.model.firebaseAdapter.users
 import com.example.bkskjold.ui.view.reusables.DefaultEditProfileHeader
+import com.example.bkskjold.ui.view.reusables.dropDownMenu
+import com.example.bkskjold.ui.viewmodel.DocumentCreationViewModel
 
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -31,10 +35,9 @@ import com.google.firebase.ktx.Firebase
 
 @Composable
 fun editProfilePage(navController: NavController,registerViewModel: RegisterViewModel = viewModel()) {
-    val currentUser = users[1]
+    val viewModel = DocumentCreationViewModel()
     val focusManager = LocalFocusManager.current
-    val auth: FirebaseAuth = Firebase.auth
-    val firstName: String by registerViewModel.firstName.observeAsState("")
+
 
     LazyColumn(
         //verticalArrangement = Arrangement.spacedBy(30.dp)
@@ -42,7 +45,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
 
     ) {
         item {
-            DefaultEditProfileHeader(currentUser, navController)
+            DefaultEditProfileHeader(navController)
         }
         item {
             Column(modifier = Modifier
@@ -51,7 +54,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
             {
                 val firstName = remember { mutableStateOf(CurrentUser.firstName) }
 
-                Text(text = "Fornavn",
+                Text( text = stringResource(R.string.firstName),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
 
@@ -75,7 +78,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
             {
                 val lastName = remember { mutableStateOf(CurrentUser.lastName) }
 
-                Text(text = "Efternavn",
+                Text( text = stringResource(R.string.lastName),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
 
@@ -102,7 +105,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
             {
                 val eMail = remember { mutableStateOf(CurrentUser.email) }
 
-                Text(text = "E-mail",
+                Text( text = stringResource(R.string.Email),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
 
@@ -128,16 +131,15 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp)) {
                 var expanded by remember { mutableStateOf(false) }
-                val suggestions = listOf("Senior", "U22", "U16")
-                var selectedText by remember { mutableStateOf("") }
-                val team = remember { mutableStateOf(CurrentUser.team) }
+                var location =  viewModel.getTeams()
+                var newText by remember { mutableStateOf("") }
                 var dropDownWidth by remember { mutableStateOf(0) }
 
 
-                Text(text = "Hold",
+                Text( text = stringResource(R.string.Team),
                     Modifier.padding(top = 10.dp))
                 OutlinedTextField(
-                    value = selectedText,
+                    value = newText,
                     onValueChange = { },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -149,7 +151,7 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
                     placeholder = { Text(CurrentUser.team) },
 
                     trailingIcon = {
-                        Icon(Icons.Filled.ArrowDropDown, "contentDescription",
+                        Icon(Icons.Filled.ArrowDropDown, "null",
                             Modifier.clickable { expanded = !expanded })
                     }
                 )
@@ -157,13 +159,12 @@ fun editProfilePage(navController: NavController,registerViewModel: RegisterView
                     expanded = expanded,
                     onDismissRequest = { expanded = false },
                     modifier = Modifier.width(with(LocalDensity.current){dropDownWidth.toDp()})
-                    // .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
                 ) {
-                    suggestions.forEach { label ->
+                    location.forEach { team ->
                         DropdownMenuItem(onClick = {
-                            selectedText = label; registerViewModel.updateTeam(selectedText)
+                            newText = team; registerViewModel.updateTeam(newText)
                         }) {
-                            Text(text = label)
+                            Text(text = team)
                         }
                     }
                 }

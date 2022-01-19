@@ -18,7 +18,6 @@ import com.example.bkskjold.data.util.getYear
 import com.example.bkskjold.ui.view.reusables.InvitationCard
 
 class ProfileOverviewViewModel {
-    var profile = ProfileInfo().testProfile
 
     @Composable
     fun GetProfileView() {
@@ -32,26 +31,6 @@ class ProfileOverviewViewModel {
         }
     }
 
-    @Preview
-    @Composable
-    fun getPersonView() {
-        Text(text = profile[4])
-        Text(text = profile[5])
-        Text(text = profile[6])
-
-    }
-    @Preview
-    @Composable
-    fun getProfileInvitationView() {
-        var numberOfItems = events.size
-
-        LazyColumn(){
-            items(numberOfItems) { i ->
-                InvitationCard(name = events[i].header, date = events[i].timeStart.toString(), location = events[i].location)
-
-            }
-        }
-    }
 
     fun translateMemberType(type: Int): String{
         val translated = when(type){

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,41 +50,41 @@ fun settingsPage(navController: NavController) {
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
                         .padding(start = 20.dp),
-                    text = "Indstillinger",
+                    text = stringResource(R.string.Settings),
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 36.sp,
                     color = Color.White,
                 )
             }}
 
-        SettingsButton(description = "Abonnement",
+        SettingsButton(description = stringResource(R.string.Subscribtions),
             image = R.drawable.icon_subscription,
             onClick = { /*TODO*/},
 
 
             )
-        SettingsButton(description = "Notifikationer",
+        SettingsButton(description = stringResource(R.string.Notifications),
             image = R.drawable.icon_notification_bell,
             onClick = { /*TODO*/},
 
 
             )
 
-        SettingsButton(description = "Privatliv og Sikkerhed",
+        SettingsButton(description = stringResource(R.string.Privacy),
             image = R.drawable.icon_privacy,
             onClick = { /*TODO*/},
 
 
             )
 
-        SettingsButton(description = "Omkring BKSkjold",
+        SettingsButton(description = stringResource(R.string.aboutUs),
             image = R.drawable.icon_about_us,
             onClick = { /*TODO*/},
 
 
             )
 
-        SettingsButton(description = "Kontakt Os",
+        SettingsButton(description = stringResource(R.string.contactUs),
             image = R.drawable.icon_contact_us,
             onClick = { /*TODO*/},
 

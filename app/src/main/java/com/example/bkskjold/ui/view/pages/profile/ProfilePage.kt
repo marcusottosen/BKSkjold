@@ -11,11 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.bkskjold.R
 import com.example.bkskjold.data.model.InvitationData
 import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.User
@@ -27,19 +29,18 @@ import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
 @Composable
 fun profileOverview(navController: NavController) {
 
-    val currentUser = users[1] //TODO Få CurrentUser igennem en ViewModel!
+
 
     LazyColumn(
-        //verticalArrangement = Arrangement.spacedBy(30.dp)
+
         modifier = Modifier.fillMaxSize()
 
     ) {
         item {
-            DefaultProfileHeader(currentUser,navController)
+            DefaultProfileHeader(navController)
         }
         item { ProfileOverviewViewModel().GetProfileView()
             Spacer(modifier = Modifier.height(30.dp))}
-        // item {ProfileOverviewViewModel().getProfileInvitationView()}
         val inviInfo = InvitationData().getInvitations()
 
         item {
@@ -60,7 +61,7 @@ fun profileOverview(navController: NavController) {
 
                 ) {
                     Text(
-                        text = "FAQs",
+                        text = stringResource(R.string.FAQs),
                         color = Color.Black,
                         fontSize = 20.sp
                     )
@@ -71,7 +72,7 @@ fun profileOverview(navController: NavController) {
 
         item { Text(modifier = Modifier
             .fillMaxWidth(),
-            text = "Invitationer",
+            text = stringResource(R.string.Invites),
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold
@@ -97,12 +98,10 @@ fun profileOverview(navController: NavController) {
     }
 }
 
-fun gotoSettingsPage(user: User, navController: NavController){
-    navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
+fun gotoSettingsPage(navController: NavController){
     navController.navigate(NavigationRoute.SettingsPage.route)
 }
-fun gotoEditProfilePage(user: User, navController: NavController){
-    navController.currentBackStackEntry?.arguments?.putParcelable("user", user)
+fun gotoEditProfilePage(navController: NavController){
     navController.navigate(NavigationRoute.EditProfile.route)
 }
 fun gotoFaqPage(navController: NavController){

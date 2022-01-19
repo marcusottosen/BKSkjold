@@ -28,4 +28,25 @@
     <string name="calender">Kalender</string>
     <string name="map">Kort</string>
     <string name="trainingPanel">Trænerpanel</string>
+
+    <!-- ProfilePage -->
+    <string name="firstName">Fornavn</string>
+    <string name="lastName">Efternavn</string>
+    <string name="Team">Hold</string>
+    <string name="Email">E-mail</string>
+    <string name="Settings">Indstillinger</string>
+    <string name="FAQs">FAQs</string>
+    <string name="Invites">Invitationer</string>
+    <string name="Subscribtions">Abonnementer</string>
+    <string name="Notifications">Notifikationer</string>
+    <string name="Privacy">Privatliv og Sikkerhed</string>
+    <string name="aboutUs">Omkring BKSkjold</string>
+    <string name="contactUs">Kontakt Os</string>
+    <string name="Cancel">Annuller</string>
+    <string name="saveEdits">Gem ændringer</string>
+    <string name="changeProfilePicture">Skift Profilbillede</string>
+    <string name="editProfile">Rediger Profil</string>
+    <string name="logOut">Log Ud</string>
+
+
     </resources>

@@ -105,16 +105,11 @@ fun Navigation(navController: NavHostController) {
             }
         }
         composable(NavigationRoute.SettingsPage.route){
-            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
-            settingModel?.let {
-                settingsPage(navController = navController)
-            }
+            settingsPage(navController)
         }
+
         composable(NavigationRoute.EditProfile.route){
-            val settingModel = navController.previousBackStackEntry?.arguments?.getParcelable<User>("user")
-            settingModel?.let {
-               editProfilePage(navController = navController)
-            }
+            editProfilePage(navController)
         }
         composable(NavigationRoute.BookedFieldsPage.route) {
             BookedFieldsPage(navController)
