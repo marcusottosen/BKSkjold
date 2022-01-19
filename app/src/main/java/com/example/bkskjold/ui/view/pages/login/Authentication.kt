@@ -77,7 +77,7 @@ fun AuthenticationView(register: () -> Unit, login: () -> Unit) {
             Spacer(modifier = Modifier.height(42.dp))
 
             Button(
-                onClick = {/*TODO: Link to website*/ },
+                onClick = {},
                 modifier = Modifier
                     .wrapContentWidth()
                     .height(48.dp),

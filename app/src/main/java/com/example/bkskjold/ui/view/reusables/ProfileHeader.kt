@@ -54,7 +54,7 @@ fun ProfileHeader(currentUser: CurrentUser, navController: NavController) {
                         color = White)
                 }
             }
-            //Profile picture TODO Get picture from database
+            //Profile picture
             Box(Modifier.fillMaxWidth()) {
                 Image(painter = painterResource(id = R.drawable.profile_picture),
                     contentDescription = null,
