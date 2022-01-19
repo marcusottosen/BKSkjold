@@ -166,7 +166,6 @@ fun NewTrainingPage(navController: NavController) {
                             ) {
                                 datepicker { dateChosen ->
                                     date.value = dateChosen.toString()
-                                    println(date.value)
                                 }
                             }
 
@@ -196,7 +195,6 @@ fun NewTrainingPage(navController: NavController) {
                             ) {
                                 timepicker { time ->
                                     startTime.value = time.toString()
-                                    println(startTime.value)
                                 }
                             }
 

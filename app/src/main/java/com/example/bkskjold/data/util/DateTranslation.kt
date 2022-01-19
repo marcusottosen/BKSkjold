@@ -46,7 +46,6 @@ fun getMonthString(timestamp: com.google.firebase.Timestamp): String {
     val c: Calendar = Calendar.getInstance()
     c.time = timestamp.toDate()
     val monthNum: Int = c.get(Calendar.MONTH)
-    println(monthNum)
     return getMonthFromNum(monthNum + 1)
 }
 

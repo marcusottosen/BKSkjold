@@ -91,7 +91,6 @@ fun ProfileHeader(currentUser: CurrentUser, navController: NavController) {
                         .clickable { gotoSettingsPage(navController) },
                 ) {
                     Icon(
-//Modifier.size(iconSize),
                         painterResource(id = R.drawable.icon_settings),
                         contentDescription = null,
                         Modifier.size(iconSize),

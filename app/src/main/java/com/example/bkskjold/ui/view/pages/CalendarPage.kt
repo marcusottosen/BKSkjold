@@ -64,7 +64,6 @@ fun CalendarPage(navController: NavController) {
                     views.setOnDateChangeListener { _, _, month, day ->
                         val monthShifted = month + 1
                         date.value = "$day/$monthShifted"
-                        println(date.value)
                     }
                 }
             )
