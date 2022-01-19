@@ -24,14 +24,11 @@ import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.model.dataClass.Training
 import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.model.updateFAQ
-import com.example.bkskjold.ui.view.pages.FaqPage
-import com.example.bkskjold.ui.view.pages.HomeScreenPage
-import com.example.bkskjold.ui.view.pages.MapPage
+import com.example.bkskjold.ui.view.pages.*
 import com.example.bkskjold.ui.view.pages.booking.AdminPanel
 import com.example.bkskjold.ui.view.pages.booking.BookFieldPage
 import com.example.bkskjold.ui.view.pages.booking.BookedFieldsPage
 import com.example.bkskjold.ui.view.pages.booking.NewNewsPage
-import com.example.bkskjold.ui.view.pages.EditProfilePage
 import com.example.bkskjold.ui.view.pages.event.CreateEventPage
 import com.example.bkskjold.ui.view.pages.event.EventInfoPage
 import com.example.bkskjold.ui.view.pages.event.EventOverview
@@ -144,6 +141,9 @@ fun Navigation(navController: NavHostController) {
         }
         composable(NavigationRoute.MapPage.route) {
             MapPage(navController)
+        }
+        composable(NavigationRoute.CalendarPage.route) {
+            CalendarPage(navController)
         }
     }
 }

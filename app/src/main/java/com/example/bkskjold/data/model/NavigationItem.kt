@@ -23,5 +23,6 @@ sealed class NavigationRoute(var route: String) {
     object NewNewsPage : NavigationRoute("newNewsPage")
     object CreateEventPage : NavigationRoute("createEventPage")
     object MapPage : NavigationRoute("mapPage")
+    object CalendarPage : NavigationRoute("calendarPage")
 }
 

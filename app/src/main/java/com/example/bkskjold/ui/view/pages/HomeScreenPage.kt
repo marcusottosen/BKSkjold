@@ -112,7 +112,7 @@ fun HomeScreenPage(navController: NavController) {
                     navController)
                 HomePageCategories(R.drawable.icon_calendarhome,
                     stringResource(R.string.calender),
-                    "bookedFieldsPage",
+                    NavigationRoute.CalendarPage.route,
                     navController)
                 HomePageCategories(R.drawable.icon_map,
                     stringResource(R.string.map),
