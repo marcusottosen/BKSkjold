@@ -22,7 +22,6 @@ import com.example.bkskjold.data.model.NavigationItem
 import com.example.bkskjold.data.model.NavigationRoute
 import com.example.bkskjold.data.model.dataClass.Event
 import com.example.bkskjold.data.model.dataClass.Training
-import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.data.model.updateFAQ
 import com.example.bkskjold.ui.view.pages.*
 import com.example.bkskjold.ui.view.pages.booking.AdminPanel
@@ -36,7 +35,7 @@ import com.example.bkskjold.ui.view.pages.login.AuthenticationView
 import com.example.bkskjold.ui.view.pages.login.LoginView
 import com.example.bkskjold.ui.view.pages.login.RegisterView
 import com.example.bkskjold.ui.view.pages.profile.SettingsPage
-import com.example.bkskjold.ui.view.pages.profile.profileOverview
+import com.example.bkskjold.ui.view.pages.profile.ProfileOverview
 import com.example.bkskjold.ui.view.pages.training.NewTrainingPage
 import com.example.bkskjold.ui.view.pages.training.TrainingInfoPage
 import com.example.bkskjold.ui.view.pages.training.TrainingOverview
@@ -65,7 +64,7 @@ fun Navigation(navController: NavHostController) {
             EventOverview(navController)
         }
         composable(NavigationItem.Profile.route) {
-            profileOverview(navController)
+            ProfileOverview(navController)
             updateFAQ()
         }
 

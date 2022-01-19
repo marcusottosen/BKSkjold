@@ -177,7 +177,7 @@ fun TrainingOverview(navController: NavController) {
                             .background(colorResource(id = R.color.primary)),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        items.forEachIndexed { index, item ->
+                        items.forEachIndexed { _, item ->
                             DropdownMenuItem(
                                 onClick = {
                                     if (item == "Tidspunkt") {
@@ -204,7 +204,7 @@ fun TrainingOverview(navController: NavController) {
                                 .height(170.dp)
                                 .verticalScroll(rememberScrollState(), enabled = true),
                         ) {
-                            times.forEachIndexed { index, time ->
+                            times.forEachIndexed { _, time ->
                                 DropdownMenuItem(
                                     onClick = {
                                         expandedTidspunkt = false
@@ -238,7 +238,7 @@ fun TrainingOverview(navController: NavController) {
                                 .height(170.dp)
                                 .verticalScroll(rememberScrollState(), enabled = true),
                         ) {
-                            teams.forEachIndexed { index, item ->
+                            teams.forEachIndexed { _, item ->
                                 DropdownMenuItem(
                                     onClick = {
                                         expandedTeam = false
@@ -265,7 +265,7 @@ fun TrainingOverview(navController: NavController) {
                         { CalendarView(it) },
                         modifier = Modifier.wrapContentWidth(),
                         update = { views ->
-                            views.setOnDateChangeListener { calendarView, year, month, day ->
+                            views.setOnDateChangeListener { _, _, month, day ->
                                 val monthShifted = month + 1
                                 date.value = "$day/$monthShifted"
                             }

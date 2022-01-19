@@ -1,4 +1,5 @@
 package com.example.bkskjold.ui.view.pages.profile
+
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,23 +20,30 @@ import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.InvitationData
 import com.example.bkskjold.data.model.NavigationRoute
-import com.example.bkskjold.ui.view.reusables.DefaultProfileHeader
 import com.example.bkskjold.ui.view.reusables.InvitationCard
-import com.example.bkskjold.ui.viewmodel.ProfileOverviewViewModel
+import com.example.bkskjold.ui.view.reusables.ProfileHeader
+import com.example.bkskjold.ui.viewmodel.ProfileViewModel
+
 @Composable
-fun profileOverview(navController: NavController) {
+fun ProfileOverview(navController: NavController) {
+    val inviInfo = InvitationData().getInvitations()
+    val viewModel = ProfileViewModel()
+
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
         item {
-            DefaultProfileHeader(navController)
+            ProfileHeader(viewModel.currentUser, navController)
         }
-        item { ProfileOverviewViewModel().GetProfileView()
-            Spacer(modifier = Modifier.height(30.dp))}
-        val inviInfo = InvitationData().getInvitations()
+        item {
+            viewModel.GetProfileView()
+            Spacer(modifier = Modifier.height(30.dp))
+        }
 
         item {
-            Column(modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 OutlinedButton(
                     onClick = { gotoFaqPage(navController) },
@@ -48,7 +56,6 @@ fun profileOverview(navController: NavController) {
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color.Transparent
                     )
-
                 ) {
                     Text(
                         text = stringResource(R.string.FAQs),
@@ -59,13 +66,15 @@ fun profileOverview(navController: NavController) {
             }
         }
 
-        item { Text(modifier = Modifier
-            .fillMaxWidth(),
-            text = stringResource(R.string.Invites),
-            fontSize = 16.sp,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
-        ) }
+        item {
+            Text(modifier = Modifier
+                .fillMaxWidth(),
+                text = stringResource(R.string.Invites),
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
+            )
+        }
         item {
             Column(
                 modifier = Modifier
@@ -73,7 +82,7 @@ fun profileOverview(navController: NavController) {
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.Center)
             ) {
-                for (i in inviInfo.indices){
+                for (i in inviInfo.indices) {
                     InvitationCard(
                         inviInfo[i][0],
                         inviInfo[i][1],
@@ -86,12 +95,14 @@ fun profileOverview(navController: NavController) {
     }
 }
 
-fun gotoSettingsPage(navController: NavController){
+fun gotoSettingsPage(navController: NavController) {
     navController.navigate(NavigationRoute.SettingsPage.route)
 }
-fun gotoEditProfilePage(navController: NavController){
+
+fun gotoEditProfilePage(navController: NavController) {
     navController.navigate(NavigationRoute.EditProfile.route)
 }
-fun gotoFaqPage(navController: NavController){
+
+fun gotoFaqPage(navController: NavController) {
     navController.navigate(NavigationRoute.FaqPage.route)
 }

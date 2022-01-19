@@ -61,14 +61,14 @@ fun CalendarPage(navController: NavController) {
                     .clip(RoundedCornerShape(12.dp))
                     .background(Color.DarkGray),
                 update = { views ->
-                    views.setOnDateChangeListener { calendarView, year, month, day ->
+                    views.setOnDateChangeListener { _, _, month, day ->
                         val monthShifted = month + 1
                         date.value = "$day/$monthShifted"
                         println(date.value)
                     }
                 }
             )
-            
+
             Spacer(modifier = Modifier.height(10.dp))
 
             viewModel.GetOverviewView(navController,

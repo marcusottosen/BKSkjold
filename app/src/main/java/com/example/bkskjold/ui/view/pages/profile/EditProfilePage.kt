@@ -21,7 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
-import com.example.bkskjold.ui.view.reusables.DefaultEditProfileHeader
+import com.example.bkskjold.ui.view.reusables.EditProfileHeader
 import com.example.bkskjold.ui.viewmodel.DocumentCreationViewModel
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 
@@ -37,7 +37,7 @@ fun EditProfilePage(
         modifier = Modifier.fillMaxSize()
     ) {
         item {
-            DefaultEditProfileHeader(navController)
+            EditProfileHeader(navController)
         }
         item {
             Column(modifier = Modifier

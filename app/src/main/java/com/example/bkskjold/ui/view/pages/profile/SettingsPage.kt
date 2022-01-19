@@ -33,7 +33,6 @@ fun SettingsPage(navController: NavController) {
             .fillMaxWidth())
         {
             Row {
-
                 IconButton(modifier = Modifier.fillMaxHeight(),
                     onClick = { navController.navigateUp() }
                 ) {

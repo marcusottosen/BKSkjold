@@ -17,7 +17,8 @@ import com.example.bkskjold.data.util.getDayMonth
 import com.example.bkskjold.data.util.getYear
 import com.example.bkskjold.ui.view.reusables.InvitationCard
 
-class ProfileOverviewViewModel {
+class ProfileViewModel {
+    val currentUser = CurrentUser
 
     @Composable
     fun GetProfileView() {

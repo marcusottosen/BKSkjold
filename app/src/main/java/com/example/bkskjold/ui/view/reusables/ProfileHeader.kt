@@ -1,4 +1,5 @@
 package com.example.bkskjold.ui.view.reusables
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -24,25 +26,18 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.bkskjold.R
 import com.example.bkskjold.data.model.dataClass.CurrentUser
-import com.example.bkskjold.data.model.dataClass.User
 import com.example.bkskjold.ui.view.pages.profile.gotoEditProfilePage
 import com.example.bkskjold.ui.view.pages.profile.gotoSettingsPage
 import com.example.bkskjold.ui.viewmodel.RegisterViewModel
 import com.example.bkskjold.ui.viewmodel.logoutUser
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-
-
 
 
 @Composable
-fun DefaultProfileHeader(navController: NavController){
-
+fun ProfileHeader(currentUser: CurrentUser, navController: NavController) {
     val iconSize = 40.dp
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(painter = painterResource(id = R.drawable.img_profile_header_background, ),
+        Image(painter = painterResource(id = R.drawable.img_profile_header_background),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -56,7 +51,7 @@ fun DefaultProfileHeader(navController: NavController){
                 ) {
                     Text(
                         text = stringResource(R.string.logOut),
-                        color = androidx.compose.ui.graphics.Color.White)
+                        color = White)
                 }
             }
             //Profile picture TODO Get picture from database
@@ -67,7 +62,7 @@ fun DefaultProfileHeader(navController: NavController){
                         .size(140.dp)
                         .border(
                             4.dp,
-                            color = androidx.compose.ui.graphics.Color.Black,
+                            color = Color.Black,
                             shape = CircleShape,
                         )
                         .clip(CircleShape)
@@ -78,11 +73,11 @@ fun DefaultProfileHeader(navController: NavController){
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp),
-                text = (CurrentUser.firstName + " " + CurrentUser.lastName),
+                text = (currentUser.firstName + " " + currentUser.lastName),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                color = androidx.compose.ui.graphics.Color.White
+                color = White
             )
             Row(modifier = Modifier
                 .fillMaxWidth()
@@ -90,12 +85,13 @@ fun DefaultProfileHeader(navController: NavController){
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = CenterHorizontally,
                     modifier = Modifier
                         .padding(start = 50.dp)
                         .clickable { gotoSettingsPage(navController) },
                 ) {
-                    Icon(//Modifier.size(iconSize),
+                    Icon(
+//Modifier.size(iconSize),
                         painterResource(id = R.drawable.icon_settings),
                         contentDescription = null,
                         Modifier.size(iconSize),
@@ -104,11 +100,11 @@ fun DefaultProfileHeader(navController: NavController){
 
                     Text(
                         text = stringResource(R.string.Settings),
-                        color = androidx.compose.ui.graphics.Color.White
+                        color = White
                     )
                 }
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = CenterHorizontally,
                     modifier = Modifier
                         .padding(end = 50.dp)
                         .clickable { gotoEditProfilePage(navController) }
@@ -122,7 +118,7 @@ fun DefaultProfileHeader(navController: NavController){
 
                     Text(
                         text = stringResource(R.string.editProfile),
-                        color = androidx.compose.ui.graphics.Color.White
+                        color = White
                     )
                 }
             }
@@ -131,12 +127,12 @@ fun DefaultProfileHeader(navController: NavController){
 }
 
 @Composable
-fun DefaultEditProfileHeader(navController: NavController, registerViewModel: RegisterViewModel = viewModel()) {
-
-    val auth: FirebaseAuth = Firebase.auth
-    val iconSize = 40.dp
+fun EditProfileHeader(
+    navController: NavController,
+    registerViewModel: RegisterViewModel = viewModel(),
+) {
     Box(modifier = Modifier.fillMaxWidth()) {
-        Image(painter = painterResource(id = R.drawable.img_profile_header_background, ),
+        Image(painter = painterResource(id = R.drawable.img_profile_header_background),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -146,26 +142,27 @@ fun DefaultEditProfileHeader(navController: NavController, registerViewModel: Re
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = CenterHorizontally,
                     modifier = Modifier
                         .padding(start = 20.dp)
                         .clickable { gotoSettingsPage(navController) },
                 ) {
                     TextButton(
-                        onClick = {navController.navigateUp()},
+                        onClick = { navController.navigateUp() },
                         modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
                     ) {
                         Text(
                             text = stringResource(R.string.Cancel),
-                            color = androidx.compose.ui.graphics.Color.White)
-                    } }
+                            color = White)
+                    }
+                }
                 TextButton(
-                    onClick = { registerViewModel.editCurrentUser() ; navController.navigateUp()},
+                    onClick = { registerViewModel.editCurrentUser(); navController.navigateUp() },
                     modifier = Modifier.padding(0.dp, 5.dp, 15.dp, 0.dp)
                 ) {
                     Text(
                         text = stringResource(R.string.saveEdits),
-                        color = androidx.compose.ui.graphics.Color.White)
+                        color = White)
                 }
             }
             Box(Modifier.fillMaxWidth()) {
@@ -175,7 +172,7 @@ fun DefaultEditProfileHeader(navController: NavController, registerViewModel: Re
                         .size(140.dp)
                         .border(
                             4.dp,
-                            color = androidx.compose.ui.graphics.Color.Black,
+                            color = Color.Black,
                             shape = CircleShape,
                         )
                         .clip(CircleShape)
@@ -183,15 +180,14 @@ fun DefaultEditProfileHeader(navController: NavController, registerViewModel: Re
                 )
             }
             TextButton(
-                onClick = {println(registerViewModel.firstName.toString()); println(registerViewModel.firstName) ; println(
-                    CurrentUser.firstName)},
+                onClick = {},
                 modifier = Modifier
                     .align(CenterHorizontally)
 
             ) {
                 Text(
                     text = stringResource(R.string.changeProfilePicture),
-                    color = androidx.compose.ui.graphics.Color.White)
+                    color = White)
             }
         }
     }
