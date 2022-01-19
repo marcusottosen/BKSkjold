@@ -46,7 +46,7 @@ class TrainingOverviewViewModel {
 
         //Filter only if filter is applied
         if (date == "" && timeStart == "" && team == "") {
-            LazyColumn() {
+            LazyColumn {
                 items(trainingsFinal.size) { i ->
                     TrainingCard(trainings = trainingsFinal[i], navController)
                 }
@@ -110,7 +110,7 @@ class TrainingOverviewViewModel {
                         filteredPractices.add(i)
                     }
                 } else if (timeStart != "" && date == "" && team == "") {
-                    if (getTime(i.timeStart).toString() == timeStart) {
+                    if (getTime(i.timeStart) == timeStart) {
                         filteredPractices.add(i)
                     }
                 } else if (team != "" && timeStart == "" && date == "") {

@@ -12,7 +12,7 @@ import com.google.firebase.ktx.Firebase
 
 val news: MutableList<News> = mutableListOf()
 
-class NewsModel() {
+class NewsModel {
     private val _loading = MutableLiveData(true)
     val loading: LiveData<Boolean> = _loading
 

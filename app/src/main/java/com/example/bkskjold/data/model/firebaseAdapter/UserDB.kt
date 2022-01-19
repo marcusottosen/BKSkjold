@@ -46,7 +46,7 @@ fun getCurrentUserAsCurrentUserModel(): User {
 
 //############# Get all users from database ###################
 val users: MutableList<User> = mutableListOf()
-class UserDB() {
+class UserDB {
     private val _loading = MutableLiveData(true)
     val loading: LiveData<Boolean> = _loading
 
@@ -115,7 +115,7 @@ fun getUsersFromId(ids: List<String>): MutableList<User> {
                 for (doc in result) {
 
                     if (doc.id == id) {
-                        var participant = User(
+                        val participant = User(
                             id = doc["id"] as String,
                             firstName = doc["firstName"] as String,
                             lastName = doc["lastName"] as String,

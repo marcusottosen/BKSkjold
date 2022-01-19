@@ -1,6 +1,6 @@
 package com.example.bkskjold.data.model.dataClass
 
-enum class Locations() {
+enum class Locations {
     A,
     B,
     C,
@@ -19,13 +19,13 @@ enum class Locations() {
     K
 }
 
-enum class Teams(val asString: String) {
-    U12("U12"),
-    U13("U13"),
-    U14("U14"),
-    U15("U15"),
-    U16("U16"),
-    U17("U17"),
-    U18("U18"),
-    SENIOR("Senior")
+enum class Teams {
+    U12,
+    U13,
+    U14,
+    U15,
+    U16,
+    U17,
+    U18,
+    SENIOR
 }

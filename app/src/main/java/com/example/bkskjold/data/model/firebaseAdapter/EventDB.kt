@@ -1,21 +1,20 @@
 package com.example.bkskjold.data.model.firebaseAdapter
+
 import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.bkskjold.data.model.dataClass.Event
-import com.example.bkskjold.data.model.dataClass.Training
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
 
 val events: MutableList<Event> = mutableListOf()
 
-class EventDB() {
+class EventDB {
     private val _loading = MutableLiveData(true)
     val loading: LiveData<Boolean> = _loading
 
@@ -48,7 +47,7 @@ class EventDB() {
     }
 }
 
-fun addEventToDB(item: Event, navController: NavController){
+fun addEventToDB(item: Event, navController: NavController) {
     val db = Firebase.firestore
     db.collection("events")
         .add(item)
@@ -69,13 +68,17 @@ fun addEventToDB(item: Event, navController: NavController){
 }
 
 
-fun updateEventParticipants(event: Event, participants: MutableList<String>, userId: String): Event {
+fun updateEventParticipants(
+    event: Event,
+    participants: MutableList<String>,
+    userId: String,
+): Event {
     val db = Firebase.firestore
     db.collection("events")
         .get()
         .addOnSuccessListener { result ->
             for (doc in result) {
-                if (doc["timeStart"] == event.timeStart && doc["location"] == event.location && doc["description"] == event.description){
+                if (doc["timeStart"] == event.timeStart && doc["location"] == event.location && doc["description"] == event.description) {
 
                     //Create a mutable list, so we can add items to it.
                     val mutableParticipants = participants
@@ -96,15 +99,22 @@ fun updateEventParticipants(event: Event, participants: MutableList<String>, use
                     val updateable = db.collection("events").document(doc.id)
                     updateable
                         .set(updatedEvent, SetOptions.merge())
-                        .addOnSuccessListener { Log.d(ContentValues.TAG, "DocumentSnapshot successfully updated!") }
-                        .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error updating document", e) }
+                        .addOnSuccessListener {
+                            Log.d(ContentValues.TAG,
+                                "DocumentSnapshot successfully updated!")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(ContentValues.TAG,
+                                "Error updating document",
+                                e)
+                        }
 
                     //Finally update participant on training object, so it can be returned later in the method
                     event.participants = mutableParticipants
                 }
             }
         }
-        .addOnCompleteListener{
+        .addOnCompleteListener {
             EventDB().loadEventsFromDB()
         }
         .addOnFailureListener { exception ->

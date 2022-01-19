@@ -187,7 +187,7 @@ fun EventInfoPage(events: Event, navController: NavController) {
                             backgroundColor = colorResource(R.color.red)
                         ),
                     ) {
-                        Row() {
+                        Row {
                             Icon(
                                 Icons.Outlined.Clear,
                                 contentDescription = stringResource(R.string.AttendCancelTraining),
@@ -223,7 +223,7 @@ fun EventInfoPage(events: Event, navController: NavController) {
                             backgroundColor = colorResource(R.color.green)
                         ),
                     ) {
-                        Row() {
+                        Row {
                             Icon(
                                 Icons.Outlined.Check,
                                 contentDescription = stringResource(R.string.AttendCancelTraining),

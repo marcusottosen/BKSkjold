@@ -84,7 +84,7 @@ fun BookFieldPage(navController: NavController) {
                     .wrapContentSize(Alignment.TopCenter)
             ) {
                 item {
-                    Box() {
+                    Box {
                         Button(
                             modifier = Modifier
                                 .padding(top = 10.dp)

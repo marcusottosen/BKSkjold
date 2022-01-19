@@ -56,7 +56,7 @@ fun LoginView(
         startY = 0.0f,
         endY = 1000.0f)
 
-    val scrollState = rememberScrollState()
+    rememberScrollState()
     val focusManager = LocalFocusManager.current
 
     val email: String by loginViewModel.email.observeAsState("")

@@ -67,7 +67,7 @@ fun EventsCard(event: Event, navController: NavController, userId: String) {
                         .height(20.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Row() { //time
+                    Row { //time
                         Image(painter = painterResource(id = R.drawable.icon_calendar),
                             contentDescription = null)
                         Text(text = "${getDay(event.timeStart)}. ${getMonthString(event.timeStart)}  kl. ${
@@ -76,7 +76,7 @@ fun EventsCard(event: Event, navController: NavController, userId: String) {
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(10.dp, 1.dp, 0.dp, 0.dp))
                     }
-                    Row() { //location
+                    Row { //location
                         Image(painter = painterResource(id = R.drawable.icon_location),
                             contentDescription = null)
                         Text(text = event.location,

@@ -94,7 +94,7 @@ fun HomeScreenPage(navController: NavController) {
                     trainer = "N/A",
                     description = stringResource(R.string.TrainingDefaultDescription),
                     maxParticipants = 0,
-                    participants = mutableListOf<String>(),
+                    participants = mutableListOf(),
                     userBooking = false
                 )
                 NextTrainingCard(default, navController)

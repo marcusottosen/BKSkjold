@@ -9,14 +9,14 @@ import android.icu.util.Calendar
 //11/1
 fun getDayMonth(timestamp: com.google.firebase.Timestamp): String {
     val c: Calendar = Calendar.getInstance()
-    c.setTime(timestamp.toDate())
+    c.time = timestamp.toDate()
     return "${c.get(Calendar.DAY_OF_MONTH)}/${c.get(Calendar.MONTH) + 1}"
 }
 
 //11 (day in month)
 fun getDay(timestamp: com.google.firebase.Timestamp): String {
     val c: Calendar = Calendar.getInstance()
-    c.setTime(timestamp.toDate())
+    c.time = timestamp.toDate()
     return c.get(Calendar.DAY_OF_MONTH).toString()
 }
 
@@ -52,7 +52,7 @@ fun getMonthString(timestamp: com.google.firebase.Timestamp): String {
 //2022
 fun getYear(timestamp: com.google.firebase.Timestamp): String {
     val c: Calendar = Calendar.getInstance()
-    c.setTime(timestamp.toDate())
+    c.time = timestamp.toDate()
     return "${c.get(Calendar.YEAR)}"
 }
 

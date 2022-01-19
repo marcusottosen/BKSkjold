@@ -1,4 +1,4 @@
-package com.example.bkskjold.ui.viewmodel;
+package com.example.bkskjold.ui.viewmodel
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
